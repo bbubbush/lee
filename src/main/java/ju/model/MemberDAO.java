@@ -1,0 +1,55 @@
+package ju.model;
+import java.util.*;
+import ju.dto.*;
+
+public interface MemberDAO {
+
+	public List<MemberDTO> memberList(int cp, int ls);
+	public List<BanDTO> memberBanList(int cp, int ls);
+	public List<MemberDTO> memberListSearch(int cp, int ls,String mem_name);
+	public MemberDTO memberInfo(String mem_idx);
+	public int banAdd(BanDTO dto, int ban_period);
+	public BanDTO memberBanInfo(String mem_idx);
+	public int banDel(String mem_idx);
+	public BanDTO memberLoanBan(String mem_idx);
+	public int banCount(String mem_idx);
+	public List<LoanDTO> memberLoan(String mem_idx);
+	public int memberDel(String mem_idx);
+	public int getTotlaCnt();
+
+	public int getTotlaCntBan();
+	
+
+	
+	//대원 추가 6월 11일 일 시작
+		public int joinSubmit(MemberDTO dto);
+		public int mailCheck(String mem_id);
+		public int loginForm(String mem_id, String mem_pwd);
+		public MemberDTO loginSubmit(String mem_id, String mem_pwd);
+		
+		public int checkHp(String mem_hp);
+
+		
+		public MemberDTO pwCheck(String mem_idx);
+		
+		public int changeMeSubmit(MemberDTO dto);
+		public List<AboutMyBookDTO> aboutMybookLoan(String mem_idx);
+		public List<AboutMyBookDTO> aboutMybookfedex(String mem_idx);
+		public List<AboutMyBookDTO> aboutMybookYeyak(String mem_idx);
+		public List<AboutMyBookDTO> aboutEbookLoan(String mem_idx);
+
+		
+		public List<AboutMyQnaDTO> memQna(String mem_idx);
+
+	//캘린더 관련
+		public List<HolidayDTO> getHoliday(int yr, int mon);
+		
+		public List<HolidayDTO> getHolidayFC(int yr);
+		
+		public int addHoliday(String memo, String solarDate);
+		
+		public int delHoliday(String memo, String solarDate);
+		public int moveHoliday(String memo, String beforeDate, String afterDate);
+	//대원 추가 6월 11일 일 끝
+}
+

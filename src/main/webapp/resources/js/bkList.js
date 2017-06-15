@@ -1,0 +1,131 @@
+function find(){
+   if($('#lg').val()==0){
+      $('#md').remove();
+      $('.md').append('<select name="bk_md" id="md" class="form-control">');
+      $('#md').append('<option value="all" selected="selected">모두보기</option>');
+      $('#md').append('<option value="0">미학/예술철학</option>');
+      $('#md').append('<option value="1">종교학/신화학</option>');
+      $('#md').append('<option value="2">논리학</option>');
+      $('#md').append('<option value="3">윤리학</option>');
+      $('#md').append('<option value="4">철학/사상</option>');
+      $('#md').append('<option value="5">한국철학</option>');
+      $('#md').append('<option value="6">동양철학</option>');
+      $('#md').append('<option value="7">서양철학</option>');
+      $('.md').append('</select>');
+   }else if($('#lg').val()==1){
+      $('#md').remove();
+      $('.md').append('<select name="bk_md" id="md" class="form-control">');
+      $('#md').append('<option value="all" selected="selected">모두보기</option>');
+      $('#md').append('<option value="0">종교 일반</option>');
+      $('#md').append('<option value="1">기독교(개신교)</option>');
+      $('#md').append('<option value="2">천주교</option>');
+      $('#md').append('<option value="3">불교</option>');
+      $('#md').append('<option value="4">세계종교</option>');
+      $('#md').append('<option value="5">역학/사주</option>');
+      $('.md').append('</select>');
+   }else if($('#lg').val()==2){
+      $('#md').remove();
+      $('.md').append('<select name="bk_md" id="md" class="form-control">');
+      $('#md').append('<option value="all" selected="selected">모두보기</option>');
+      $('#md').append('<option value="0">경제</option>');
+      $('#md').append('<option value="1">경영</option>');
+      $('#md').append('<option value="2">마케팅/세일즈</option>');
+      $('#md').append('<option value="3">투자/재테크</option>');
+      $('#md').append('<option value="4">CEO/비즈니스맨</option>');
+      $('#md').append('<option value="5">인터넷비즈니스</option>');
+      $('#md').append('<option value="6">총람/연감</option>');
+      $('#md').append('<option value="7">정부간행물</option>');
+      $('#md').append('<option value="8">심리</option>');
+      $('#md').append('<option value="9">인문일반</option>');
+      $('#md').append('<option value="10">기호학/언어학</option>');
+      $('.md').append('</select>');
+   }else if($('#lg').val()==3){
+      $('#md').remove();
+      $('.md').append('<select name="bk_md" id="md" class="form-control">');
+      $('#md').append('<option value="all" selected="selected">모두보기</option>');
+      $('#md').append('<option value="0">과학</option>');
+      $('#md').append('<option value="1">수학</option>');
+      $('#md').append('<option value="2">물리학</option>');
+      $('#md').append('<option value="3">화학</option>');
+      $('#md').append('<option value="4">나노과학</option>');
+      $('#md').append('<option value="5">생명과학</option>');
+      $('#md').append('<option value="6">뇌과학</option>');
+      $('#md').append('<option value="7">인체</option>');
+      $('#md').append('<option value="8">천문학</option>');
+      $('#md').append('<option value="9">지구과학</option>');
+      $('#md').append('<option value="10">공학</option>');
+      $('#md').append('<option value="11">농/축/수산학</option>');
+      $('.md').append('</select>');
+   }else if($('#lg').val()==4){
+      $('#md').remove();
+      $('.md').append('<select name="bk_md" id="md" class="form-control">');
+      $('#md').append('<option value="all" selected="selected">모두보기</option>');
+      $('#md').append('<option value="0">예술기행</option>');
+      $('#md').append('<option value="1">예술일반/예술사</option>');
+      $('#md').append('<option value="2">건축</option>');
+      $('#md').append('<option value="3">미술</option>');
+      $('#md').append('<option value="4">음악</option>');
+      $('#md').append('<option value="5">사진</option>');
+      $('#md').append('<option value="6">무용</option>');
+      $('#md').append('<option value="7">대중문화론</option>');
+      $('#md').append('<option value="8">TV/라디오</option>');
+      $('#md').append('<option value="9">연극/공연</option>');
+      $('#md').append('<option value="10">영화/드라마</option>');
+      $('#md').append('<option value="11">대중음악</option>');
+      $('#md').append('<option value="12">아트북</option>');
+      $('#md').append('<option value="13">예술치료</option>');
+      $('.md').append('</select>');
+   }else if($('#lg').val()==5){
+      $('#md').remove();
+      $('.md').append('<select name="bk_md" id="md" class="form-control">');
+      $('#md').append('<option value="all" selected="selected">모두보기</option>');
+      $('#md').append('<option value="0">언어일반</option>');
+      $('#md').append('<option value="1">한국어</option>');
+      $('#md').append('<option value="2">중국어</option>');
+      $('#md').append('<option value="3">일본어 및 기타 아시아어</option>');
+      $('#md').append('<option value="4">영어</option>');
+      $('#md').append('<option value="5">독일어 및 기타 게르만어</option>');
+      $('#md').append('<option value="6">프랑스어</option>');
+      $('#md').append('<option value="7">스페인어</option>');
+      $('#md').append('<option value="8">이탈리어</option>');
+      $('#md').append('<option value="9">기타언어</option>');
+      $('.md').append('</select>');
+   }else if($('#lg').val()==6){
+      $('#md').remove();
+      $('.md').append('<select name="bk_md" id="md" class="form-control">');
+      $('#md').append('<option value="all" selected="selected">모두보기</option>');
+      $('#md').append('<option value="0">소설</option>');
+      $('#md').append('<option value="1">에세이</option>');
+      $('#md').append('<option value="2">역사/장르문학</option>');
+      $('#md').append('<option value="3">테마소설</option>');
+      $('#md').append('<option value="4">고전문학/신화</option>');
+      $('#md').append('<option value="5">시/희곡</option>');
+      $('#md').append('<option value="6">비평/창작/이론</option>');
+      $('.md').append('</select>');
+   }else if($('#lg').val()==7){
+      $('#md').remove();
+      $('.md').append('<select name="bk_md" id="md" class="form-control">');
+      $('#md').append('<option value="all" selected="selected">모두보기</option>');
+      $('#md').append('<option value="0">역사와 문화 교양서</option>');
+      $('#md').append('<option value="1">역사학 이론/비평</option>');
+      $('#md').append('<option value="2">한국사/한국문화</option>');
+      $('#md').append('<option value="3">동양사/동양문화</option>');
+      $('#md').append('<option value="4">서양사/서양문화</option>');
+      $('#md').append('<option value="5">세계사/세계문화</option>');
+      $('#md').append('<option value="6">아프리카/중동/중남비/오세아니아 역사</option>');
+      $('.md').append('</select>');
+   }else if($('#lg').val()==8){
+      $('#md').remove();
+      $('.md').append('<select name="bk_md" id="md" class="form-control">');
+      $('#md').append('<option value="all" selected="selected">모두보기</option>');
+      $('#md').append('<option value="0">국어</option>');
+      $('#md').append('<option value="1">수학</option>');
+      $('#md').append('<option value="2">언어</option>');
+      $('#md').append('<option value="3">한국사</option>');
+      $('#md').append('<option value="4">사회/사회탐구</option>');
+      $('#md').append('<option value="5">과학/과학탐구</option>');
+      $('.md').append('</select>');
+   }else{
+      $('#md').remove();
+   }
+};

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="ju.member">
+ 	<select id="memSELList" resultType="ju.dto.MemberDTO">
+ 		select * from
+		(select rownum as rnum,a.*from
+		(select * from member order by mem_idx desc)a)b
+		where rnum<![CDATA[>=]]>#{startnum} and rnum<![CDATA[<=]]>#{endnum}
+ 	</select>
+ 	
+ 	<select id="memSELSearch" resultType="ju.dto.MemberDTO">
+ 		select * from
+		(select rownum as rnum,a.*from
+		(select * from member where mem_name like #{mem_name} order by mem_idx desc)a)b
+		where rnum<![CDATA[>=]]>#{startnum} and rnum<![CDATA[<=]]>#{endnum}
+ 	</select>
+ 	
+ 	<select id="memSELInfo" resultType="ju.dto.MemberDTO" parameterType="String">
+ 		SELECT * FROM MEMBER where mem_idx=#{mem_idx}
+ 	</select>
+ 	
+ 	<select id="memtotalCnt" resultType="int">
+		SELECT COUNT(*) AS totalCnt FROM MEMBER
+	</select>
+	
+	<select id="memtotalCntBan" resultType="int">
+		SELECT COUNT(*) AS totalCnt FROM BANLIST
+	</select>
+	
+	<select id="banSELList" resultType="ju.dto.BanDTO">
+ 		select * from
+		(select rownum as rnum, b.* from
+		(select member.mem_name, member.mem_id, a.* from
+		(select * from banlist order by ban_start desc)a, member where member.mem_idx = a.mem_idx)b)c
+		where rnum<![CDATA[>=]]>#{startnum} and rnum<![CDATA[<=]]>#{endnum}
+ 	</select>
+ 	
+ 	<select id="banSELInfo" resultType="ju.dto.BanDTO">
+		select a.*,(ban_end-SYSDATE) as ban_day from
+		(select * from banlist where ban_start=(select max(ban_start) from banlist where mem_idx=#{mem_idx}))a,member 
+		where member.mem_idx = a.mem_idx
+ 	</select>
+ 	
+ 	<select id="memSELBan" resultType="ju.dto.BanDTO" parameterType="String">
+ 		select * from banlist where mem_idx = #{mem_idx} and ban_end>SYSDATE
+ 	</select>
+ 	
+ 	<select id="banSELCount" resultType="int" parameterType="String">
+ 		select count(*) from banlist where mem_idx=#{mem_idx}
+ 	</select>
+ 	
+ 	<delete id="memDEL" parameterType="String">
+ 		DELETE member where mem_idx=#{mem_idx}
+ 	</delete>
+ 	
+ 	<select id="memSELLoan" resultType="ju.dto.LoanDTO" parameterType="String">
+ 		select * from loanbook where mem_idx = #{mem_idx} and lb_return=1
+ 	</select>
+ 	
+ 	<insert id="banINSBan" parameterType="MAP">
+ 		INSERT INTO BANLIST VALUES(#{dto.ban_idx},#{dto.mem_idx},SYSDATE,SYSDATE+#{ban_end},#{dto.ban_reason})
+ 	</insert>
+ 	
+ 	<insert id="banUPBan" parameterType="String">
+ 		UPDATE BANLIST SET ban_end=SYSDATE where mem_idx=#{mem_idx} and ban_end>sysdate
+ 		<!-- DELETE FROM BANLIST WHERE mem_idx=#{mem_idx} -->
+ 	</insert>
+ </mapper>

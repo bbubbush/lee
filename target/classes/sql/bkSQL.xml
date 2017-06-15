@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="ju.book">
+ 	<select id="bkSELInfo" resultType="ju.dto.BookDTO" parameterType="String">
+ 		SELECT * FROM BOOK WHERE bk_idx=#{idx}
+ 	</select>
+ 	
+ 	<select id="bkSELReInfo" resultType="ju.dto.BookDTO" parameterType="String">
+ 		select book.*, b.* from
+		(select a.*, member.mem_name from
+		(select * from loanbook where book_idx = #{bk_idx} and lb_return!=0)a,member 
+		where a.mem_idx= member.mem_idx)b, book where b.book_idx = book.bk_idx
+ 	</select>
+ 	
+ 	<select id="bkSELList" resultType="ju.dto.BookDTO">
+		select * from
+		(select rownum as rnum,a.*from
+		(select * from book order by bk_idx desc)a)b
+		where rnum<![CDATA[>=]]>#{startnum} and rnum<![CDATA[<=]]>#{endnum}
+	</select>
+	
+	<select id="bkSELTagDown" resultType="ju.dto.BookDTO">
+		select * from
+		(select rownum as rnum,a.*from
+		(select * from book order by bk_writedate desc)a)b
+		where rnum<![CDATA[>=]]>#{startnum} and rnum<![CDATA[<=]]>#{endnum}
+	</select>
+	
+	<select id="bkSELTagUp" resultType="ju.dto.BookDTO">
+		select * from
+		(select rownum as rnum,a.*from
+		(select * from book order by bk_writedate asc)a)b
+		where rnum<![CDATA[>=]]>#{startnum} and rnum<![CDATA[<=]]>#{endnum}
+	</select>
+	
+	<select id="bktotalCnt" resultType="int">
+		SELECT COUNT(*) AS totalCnt FROM BOOK
+	</select>
+	
+	<select id="bkSELDuple" resultType="int" parameterType="ju.dto.BookDTO">
+		SELECT COUNT(*) FROM book where bk_subject=#{bk_subject}
+	</select>
+	
+	<insert id="bkUPInfo" parameterType="MAP">
+		UPDATE BOOK SET bk_break=#{bk_break} WHERE bk_idx=#{bk_idx}
+	</insert>
+	
+	<insert id="bkINSAdd" parameterType="ju.dto.BookDTO">
+		INSERT INTO BOOK VALUES(#{bk_idx},#{bk_lg},#{bk_md},#{bk_small},#{bk_subject},#{bk_writer},#{bk_isbn},#{bk_publisher},#{bk_writedate},#{bk_url},#{bk_info},0,0)
+	</insert>
+	
+	<insert id="bkDELDel" parameterType="String">
+		DELETE FROM BOOK where bk_idx=#{idx}
+	</insert>
+ </mapper>

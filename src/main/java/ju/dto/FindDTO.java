@@ -1,0 +1,160 @@
+package ju.dto;
+
+public class FindDTO {
+	private String bk_idx;
+	private String bk_lg;
+	private String bk_md;
+	private String bk_small;
+	private String bk_subject;
+	private String bk_writer;
+	private String bk_isbn;
+	private String bk_publisher;
+	private String bk_writedate;
+	private String bk_url;
+	private String bk_info;
+	private int bk_break;
+	private int bk_take;
+	
+	public FindDTO() {
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @param bk_idx
+	 * @param bk_lg
+	 * @param bk_md
+	 * @param bk_small
+	 * @param bk_subject
+	 * @param bk_writer
+	 * @param bk_isbn
+	 * @param bk_publisher
+	 * @param bk_writedate
+	 * @param bk_url
+	 * @param bk_info
+	 * @param bk_break
+	 * @param bk_take
+	 */
+	public FindDTO(String bk_idx, String bk_lg, String bk_md, String bk_small, String bk_subject, String bk_writer, String bk_isbn, String bk_publisher, String bk_writedate, String bk_url, String bk_info, int bk_break, int bk_take) {
+		super();
+		this.bk_idx = bk_idx;
+		this.bk_lg = bk_lg;
+		this.bk_md = bk_md;
+		this.bk_small = bk_small;
+		this.bk_subject = bk_subject;
+		this.bk_writer = bk_writer;
+		this.bk_isbn = bk_isbn;
+		this.bk_publisher = bk_publisher;
+		this.bk_writedate = bk_writedate;
+		this.bk_url = bk_url;
+		this.bk_info = bk_info;
+		this.bk_break = bk_break;
+		this.bk_take = bk_take;
+	}
+
+	public String getBk_idx() {
+		return bk_idx;
+	}
+
+	public void setBk_idx(String bk_idx) {
+		this.bk_idx = bk_idx;
+	}
+
+	public String getBk_lg() {
+		return bk_lg;
+	}
+
+	public void setBk_lg(String bk_lg) {
+		this.bk_lg = bk_lg;
+	}
+
+	public String getBk_md() {
+		return bk_md;
+	}
+
+	public void setBk_md(String bk_md) {
+		this.bk_md = bk_md;
+	}
+
+	public String getBk_small() {
+		return bk_small;
+	}
+
+	public void setBk_small(String bk_small) {
+		this.bk_small = bk_small;
+	}
+
+	public String getBk_subject() {
+		return bk_subject;
+	}
+
+	public void setBk_subject(String bk_subject) {
+		this.bk_subject = bk_subject;
+	}
+
+	public String getBk_writer() {
+		return bk_writer;
+	}
+
+	public void setBk_writer(String bk_writer) {
+		this.bk_writer = bk_writer;
+	}
+
+	public String getBk_isbn() {
+		return bk_isbn;
+	}
+
+	public void setBk_isbn(String bk_isbn) {
+		this.bk_isbn = bk_isbn;
+	}
+
+	public String getBk_publisher() {
+		return bk_publisher;
+	}
+
+	public void setBk_publisher(String bk_publisher) {
+		this.bk_publisher = bk_publisher;
+	}
+
+	public String getBk_writedate() {
+		return bk_writedate;
+	}
+
+	public void setBk_writedate(String bk_writedate) {
+		this.bk_writedate = bk_writedate;
+	}
+
+	public String getBk_url() {
+		return bk_url;
+	}
+
+	public void setBk_url(String bk_url) {
+		this.bk_url = bk_url;
+	}
+
+	public String getBk_info() {
+		return bk_info;
+	}
+
+	public void setBk_info(String bk_info) {
+		this.bk_info = bk_info;
+	}
+
+	public int getBk_break() {
+		return bk_break;
+	}
+
+	public void setBk_break(int bk_break) {
+		this.bk_break = bk_break;
+	}
+
+	public int getBk_take() {
+		return bk_take;
+	}
+
+	public void setBk_take(int bk_take) {
+		this.bk_take = bk_take;
+	}
+
+	
+	
+}

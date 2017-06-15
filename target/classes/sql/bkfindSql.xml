@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="ju.bkFind">
+  	<select id="bkList" parameterType="java.util.Map" resultType="ju.dto.FindDTO">
+  		${sql}
+  	</select>
+  	
+  	<select id="bkView" parameterType="String" resultType="ju.dto.FindDTO">
+  		select * from book where bk_subject=#{bk_subject}
+  	</select>
+  	
+  	<select id="totalPages" parameterType="java.util.Map" resultType="Integer">
+  		${sql}
+  	</select>
+  	
+  	<select id="sumBktake" parameterType="String" resultType="Integer">
+  		SELECT sum(bk_take) FROM book where bk_subject=#{bk_subject}
+  	</select>
+  	
+  	<select id="countBkSubject" parameterType="String" resultType="Integer">
+  		SELECT count(bk_subject) FROM book where bk_subject=#{bk_subject}
+  	</select>
+  	
+  	<select id="bkRefresh" parameterType="String" resultType="Integer">
+  		SELECT sum(bk_take), count(bk_subject) FROM book where bk_subject=#{bk_subject}
+  	</select>
+  	
+  	<insert id="bkYeyak" parameterType="java.util.Map">
+  		insert into yeyakbook values('${ye_idx}', 
+  		(select bk_isbn from book where bk_idx='${bk_idx}'), 
+  		(select mem_idx from member where mem_id='${mem_id}'), sysdate, ${ye_sunbun})
+  	</insert>
+  	
+  	<select id="chkYeyak" parameterType="java.util.Map" resultType="Integer">
+  		select count(*) from yeyakbook where mem_idx = (select mem_idx from member where mem_id='${mem_id}') and bk_isbn=(select bk_isbn from book where bk_idx='${bk_idx}')
+  	</select>
+  	
+  	<select id="chkBook" parameterType="String" resultType="String">
+  		select bk_idx from book where bk_subject=#{bk_subejct}
+  	</select>
+  	
+  	<select id="yeyakSunbun" parameterType="String" resultType="Integer">
+  		select count(*) from yeyakbook where bk_isbn=(select bk_isbn from book where bk_idx=#{bk_idx})
+  	</select>
+  	
+  	<select id="getCountYeyak" parameterType="String" resultType="Integer">
+  		select count(*) from yeyakbook where mem_idx = (select mem_idx from member where mem_id=#{mem_id})
+  	</select>
+  	
+  	<select id="getTotalCountLoan" parameterType="String" resultType="Integer">
+  		select count(*)a from fedex where mem_idx = (select mem_idx from member where mem_id=#{mem_id}) and fedex_num=9
+  	</select>
+  	
+  	<select id="getTotalCountLoan2" parameterType="String" resultType="Integer">
+  		select count(*)a from loanbook where mem_idx =(select mem_idx from member where mem_id=#{mem_id}) and lb_return = 0
+  	</select>
+  	
+  	<select id="chkLoanbook" parameterType="String" resultType="Integer">
+  		SELECT count(*) FROM loanbook where book_idx=#{bk_idx} and lb_return = 0
+  	</select>
+  	
+  	<select id="chkFedexbook" parameterType="String" resultType="Integer">
+  		SELECT count(*) FROM fedex where bk_idx=#{bk_idx}
+  	</select>
+  	
+  	<insert id="bkFedex" parameterType="java.util.Map">
+  		insert into fedex values('${fedex_idx}', (select mem_idx from member where mem_id='${mem_id}'), '${bk_idx}', 9, 'N')
+  	</insert>
+  	
+  	
+  </mapper>

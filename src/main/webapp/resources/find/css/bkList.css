@@ -1,0 +1,21 @@
+.padding1{
+	padding: 10px;
+}
+.padding2{
+	padding: 20px;
+}
+.padding3{
+	padding: 30px;
+}
+.padding4{
+	padding: 40px;
+}
+.padding5{
+	padding: 50px;
+}
+
+.pagination>li>a, 
+.pagination>li>span{
+	cursor: pointer;
+}
+

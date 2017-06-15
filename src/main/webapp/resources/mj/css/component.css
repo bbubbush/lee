@@ -1,0 +1,108 @@
+/* General styles for all menus */
+.cbp-spmenu {
+	padding:0;
+	color:#FFFEFF;
+	background: #0BD392;
+	position: fixed;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+}
+
+.footermain{
+	position: relative;
+	z-index:1000; 
+	color:#FFFEFF;
+	background: #1AA4AC;	
+	text-align: center;
+}
+
+/* 
+.cbp-spmenu p {
+	color: #FFFEFF;
+	font-size: 1.9em;
+	padding: 20px;
+	margin: 0;
+	font-weight: 300;
+	background: #965117;
+}
+ */
+ 
+.cbp-spmenu a {
+	display: block;
+	color: #FFFEFF;
+	font-size: 1.1em;
+	font-weight: 300;
+}
+
+.cbp-spmenu a:hover {
+	background: #09BD8D;
+}
+
+.cbp-spmenu a:active {
+	background: #3CDBDE;
+	color: #FFFEFF;
+}
+
+.cbp-spmenu ul{
+	list-style-type: none;
+}
+/* Orientation-dependent styles for the content of the menu */
+
+.cbp-spmenu-horizontal {
+	width: 90%;
+	height: 150px;
+	
+	overflow: hidden;
+	z-index:3;
+}
+/* 
+.cbp-spmenu-horizontal p {
+	height: 100%;
+	width: 24%;
+	float: left;
+}
+ */
+.footerM {
+	float: left;
+	width: 20%;
+}
+
+/* Horizontal menu that slides from the top or bottom */
+
+/*이벤트 발생안했을때 spmenu 숨겨주는 것*/
+.cbp-spmenu-bottom {
+	bottom: -150px;
+}
+/* 이벤트 발생시 spmenu 나오게 하는 것 */
+.cbp-spmenu-bottom.cbp-spmenu-open {
+	bottom: 60px;
+	
+}
+
+
+/* Transitions */
+
+.cbp-spmenu{
+	
+}
+
+/* Example media queries */
+@MEDIA (max-width: 767px){
+
+	#cbp-spmenu-s4{
+		display: none;
+	}
+}
+@media screen and (max-width: 5.1875em){
+
+	.cbp-spmenu-top {
+		top: -110px;
+	}
+
+	.cbp-spmenu-bottom {
+		bottom: -110px;
+	}
+
+}
+

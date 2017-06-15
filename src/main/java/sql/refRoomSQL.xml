@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ju.booking">
+	<insert id="bigINSrrBook" parameterType="ju.dto.RefRoomDTO">
+		INSERT INTO
+			refroom
+		VALUES(
+			#{rr_idx},
+			#{rr_cate},
+			#{rr_seatno},
+			#{mem_idx},
+			#{rr_start},
+			#{rr_start}+(1/12),
+			#{rr_add},
+			#{rr_start}
+		)
+	</insert>
+	<select id="bigSELrrCheck" resultType="ju.dto.RefRoomDTO">
+		SELECT *
+		FROM refroom
+		WHERE rr_end <![CDATA[>]]> sysdate
+		AND rr_cate = #{cate}
+	</select>
+	<select id="bigSELloginCheck" resultType="ju.dto.RefRoomDTO" parameterType="String">
+		SELECT *
+		FROM refroom
+		WHERE rr_end <![CDATA[>]]> sysdate
+		AND mem_idx=#{mem_idx}
+
+	</select>
+	<update id="bigUPreturnSeat" parameterType="String">
+		UPDATE refroom
+		SET rr_end = sysdate
+		WHERE rr_idx = #{rr_idx}
+	</update>
+	<update id="bigUPaddTime" parameterType="java.util.Map">
+		UPDATE refroom
+		SET rr_end = rr_end+(1/12),
+			rr_add = #{rr_add}
+		WHERE rr_idx = #{rr_idx}
+	</update>
+	
+	<insert id="bigINSadminSeatDisabled" parameterType="ju.dto.RefRoomDTO">
+		INSERT INTO
+			refroom
+		VALUES(
+			#{rr_idx},
+			#{rr_cate},
+			#{rr_seatno},
+			'admin',
+			#{rr_start},
+			#{rr_start}+10000,
+			'0~3',
+			#{rr_start}
+		)
+	</insert>
+	<select id="bigSELadminSeatInfo" parameterType="int" resultType="ju.dto.RefRoomDTO">
+		SELECT *
+		FROM refroom
+		WHERE rr_seatno = #{seatno}
+		AND rr_cate = #{cate}
+		AND rr_end <![CDATA[>]]> sysdate
+	</select>
+	<select id="bigSELbarcodeLogin" parameterType="String" resultType="ju.dto.MemberDTO">
+		SELECT * FROM
+		member
+		WHERE mem_idx=#{mem_idx} 
+	</select>
+	<select id="bigSELcheckStartTime" resultType="String" parameterType="String">
+		SELECT TO_CHAR(rr_start,'YYYY-MM-DD HH24:MI:SS') as "rr_start"
+		FROM refroom
+		WHERE rr_end <![CDATA[>]]> sysdate
+		AND mem_idx = #{mem_idx}
+	</select>
+	<select id="bigSELcheckEndTime" resultType="String" parameterType="String">
+		SELECT TO_CHAR(rr_end,'YYYY-MM-DD HH24:MI:SS') as "rr_end"
+		FROM refroom
+		WHERE rr_end <![CDATA[>]]> sysdate
+		AND mem_idx = #{mem_idx}
+
+	</select>
+</mapper>

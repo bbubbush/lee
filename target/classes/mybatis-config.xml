@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<mappers>
+		<mapper resource="sql/memberSQL.xml"/>
+		<mapper resource="sql/bkfindSql.xml"/>
+		<mapper resource="sql/bkSQL.xml"/>
+		<mapper resource="sql/memSQL.xml"/>
+		<mapper resource="sql/classSQL.xml"/>
+		<mapper resource="sql/loanSQL.xml"/>
+		<mapper resource="sql/refRoomSQL.xml"/>
+		<mapper resource="sql/studyRoomSQL.xml"/>
+		<mapper resource="sql/elib.xml"/>
+		<mapper resource="sql/audiobook.xml"/>
+		<mapper resource="sql/helpSQL.xml"/>
+	</mappers>
+</configuration>
