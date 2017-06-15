@@ -1,0 +1,32 @@
+에러 페이지 처리를 위해서
+tomcat서버 내의 web.xml에 추가가 필요합니다.
+파일 경로는
+Servers / Tomcat v7.0...~ / web.xml
+<web-app> </web-app>태그 사이에 추가해주세요
+
+
+<!-- error-page -->
+	<error-page>
+		<exception-type>java.lang.Exception</exception-type>
+		<location>/test.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>400</error-code>
+		<location>/test.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>401</error-code>
+		<location>/test.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/test.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/test.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/test.jsp</location>
+	</error-page>
