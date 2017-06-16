@@ -50,10 +50,10 @@
 								<div class="col-md-4">작성일 : ${dto.missing_date}</div>
 								<div class="col-md-4">조회수 : ${dto.missing_readnum}</div>
 								<div class="col-md-2">
-									<a href="missingChange.ju?nt_idx=${dto.missing_idx}">글 수정</a>
+									<a href="missingChange.ju?missing_idx=${dto.missing_idx}">글 수정</a>
 								</div>
 								<div class="col-md-2">
-									<a href="deleteMsg.ju?nt_idx=${dto.missing_idx}">글 삭제</a>
+									<a href="deleteMsg.ju?missing_idx=${dto.missing_idx}">글 삭제</a>
 								</div>
 							</div>
 						</td>
