@@ -23,4 +23,8 @@ public interface AudioDAO {
 
 	public int upAudioInfo(ElibDTO dto);
 
+	public int audioReco(String mem_idx, String el_idx);
+	
+	public List<ElibDTO> recommendList(int page, int listSize);
+
 }

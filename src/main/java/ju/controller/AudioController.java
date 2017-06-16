@@ -67,6 +67,10 @@ public class AudioController {
 		
 		List<ElibDTO> list = audioDao.selectImg(page,listSize);
 		
+		if(!(order.equals("new"))){ //추천순
+			list = audioDao.recommendList(page,listSize);
+		}
+		
 		mav.addObject("page",pagNum);
 		
 		mav.addObject("ebArr", list);
@@ -113,6 +117,8 @@ public class AudioController {
 		cateMd="99".equals(cateMd)?"":"el_md='" + cateMd + "' ";
 		
 		/*System.out.println("cateMd:"+cateMd);*/
+		
+		
 		
 		if(!"".equals(detailSubject)) {
 			where+=detailSubject;
@@ -163,6 +169,10 @@ public class AudioController {
 		System.out.println("where:"+where);*/
 		List<ElibDTO> abArr = audioDao.serchDetail(where, orderName, page, listSize);
 		
+		if(!(orderName.equals("new"))){ //추천순
+			abArr = audioDao.serchDetail(where, orderName, page, listSize);
+		}
+		
 		mav.addObject("ebArr", abArr);
 		mav.setViewName("juJson");
 		return mav;
@@ -185,6 +195,11 @@ public class AudioController {
 		String pagNum = ju.audio.module.ModulePage.guestPageMake("eAudio.ju", totalCnt, page, pageSize, listSize);
 
 		List<ElibDTO> absArr = audioDao.simpleSerch(simpleSearchText, orderName, page, listSize); 
+		
+		if(!(orderName.equals("new"))){ //추천순
+			absArr = audioDao.simpleSerch(simpleSearchText, orderName, page, listSize); 
+		}
+		
 		mav.addObject("page",pagNum);
 		mav.addObject("ebArr", absArr);
 		mav.setViewName("juJson");
@@ -202,7 +217,39 @@ public class AudioController {
 		
 		//세션 idx 넘어오는지 확인
 		System.out.println("memidx:"+mem_idx);
+		//el_idx 로 검색해서 디비 가져오기
+		ElibDTO dto = audioDao.selContent(el_idx);
 		
+		String el_recommend=dto.getEl_recommend();
+		
+		System.out.println("~ : "+dto.getEl_recommend());
+		
+		//최초 추천버튼 눌렀을 경우
+		if("~".equals(dto.getEl_recommend())){
+			System.out.println("최초?");
+			audioDao.audioReco(mem_idx, el_idx);
+			
+		}else{
+			//최초 추천한 사람 다음 부터..
+			int memReco = el_recommend.indexOf(mem_idx);
+			System.out.println(memReco);
+			
+			if(memReco==-1){
+				//중복 처리 memReco-1 추천 안하것!
+				System.out.println("-1");
+				audioDao.audioReco(dto.getEl_recommend()+"~"+mem_idx, el_idx);
+				String recommend="추천하셨습니다.";
+				mav.addObject("recommend",recommend);
+				
+			}else{//중복 됬을 경우
+				String dupl="이미 추천하셨습니다.";
+				mav.addObject("dupl",dupl);
+				
+			}
+			
+		}
+		int recoCount= audioDao.selContent(el_idx).getEl_recocount();
+		mav.addObject("recoCount", recoCount);
 		mav.setViewName("juJson");
 		return mav;
 	}

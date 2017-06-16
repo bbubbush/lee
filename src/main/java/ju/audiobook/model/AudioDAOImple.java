@@ -84,5 +84,24 @@ public class AudioDAOImple implements AudioDAO {
 		List<ElibDTO> list = sqlMap.selectList("abSELlist");
 		return list;
 	}
+	
+	public int audioReco(String mem_idx, String el_idx) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("mem_idx", mem_idx);
+		map.put("el_idx", el_idx);
+		
+		sqlMap.update("abUPrecommend", map);
+		
+		return 0;
+	}
+	
+	public List<ElibDTO> recommendList(int page, int listSize) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("cp", page);
+		map.put("ls", listSize);
+		List<ElibDTO> list = sqlMap.selectList("abSELrecolist",map);
+		System.out.println(list.get(0).getEl_recocount());
+		return list;
+	}
 
 }
