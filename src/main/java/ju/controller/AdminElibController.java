@@ -447,9 +447,10 @@ public class AdminElibController {
 		}
 		
 		int resultCount=elibDAO.elibUpdate(el_idx, el_lg, el_md, el_subject, el_writer, el_pub, el_info, el_path, change_idx);
+		List<ElibDTO> elibArrNew=elibDAO.elibViewer(el_idx);
 		
 		ModelAndView mav=new ModelAndView();
-		mav.addObject("change_idx", change_idx);
+		mav.addObject("elibArr", elibArrNew.get(0));
 		mav.addObject("resultCount", resultCount);
 		mav.setViewName("juJson");
 		return mav;

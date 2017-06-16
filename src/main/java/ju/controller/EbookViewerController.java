@@ -170,10 +170,6 @@ public class EbookViewerController{
 		) {
 		HttpSession session=request.getSession();
 		String mem_idx=(String) session.getAttribute("sidx");
-		System.out.println("mem_idx : " + mem_idx);
-		System.out.println("endPage : " + endPage);
-		System.out.println("el_idx : " + el_idx);
-		System.out.println("lb_idx : " + lb_idx);
 		if(mem_idx==null){
 			mem_idx="";
 		}
@@ -183,7 +179,7 @@ public class EbookViewerController{
 			List<OriginalLoanDTO> loanArr=loandao.loanInfo(lb_idx);
 			if(loanArr.get(0).getLb_etc().indexOf("~")!=-1){
 				String[] etcArr=loanArr.get(0).getLb_etc().split("~");
-				lb_etc=etcArr[0];
+				lb_etc=endPage;
 				for(int i=1 ; i<etcArr.length ; i++){
 					lb_etc+="~"+etcArr[i];
 				}

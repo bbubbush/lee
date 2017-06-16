@@ -233,6 +233,7 @@
 			$("#pagegoSub").click(
 				function() {
 					var page=$("#pagego").val();
+					$("#pagego").val("");
 					if(page%2==0){
 						page=parseInt(page)+1;
 					}
