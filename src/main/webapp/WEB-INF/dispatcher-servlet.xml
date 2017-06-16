@@ -71,8 +71,10 @@
 	<bean id="missingDao" class="ju.missing.model.MissingDAOImple">
 		<constructor-arg  ref="sqlSessionTemplate" />
 	</bean>
-
 	<bean id="qnaDao" class="ju.quest.model.QnaDAOImple">
+		<constructor-arg  ref="sqlSessionTemplate" />
+	</bean>
+	<bean id="reviewDao" class="ju.review.model.ReviewDAOImple">
 		<constructor-arg  ref="sqlSessionTemplate" />
 	</bean>
 

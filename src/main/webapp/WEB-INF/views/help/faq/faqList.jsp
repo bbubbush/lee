@@ -1,25 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Insert title here</title>
-
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="/lee/resources/bootstrapk/css/bootstrap.min.css">
-<style type="text/css">
-</style>
-
-<script type="text/javascript"
-	src="/lee/resources/js/jquery-3.2.1.min.js"></script>
-<script type="text/javascript"
-	src="/lee/resources/bootstrapk/js/bootstrap.min.js"></script>
-<script type="text/javascript">
+	<title>Insert title here</title>
 	
-</script>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/lee/resources/bootstrapk/css/bootstrap.min.css">
+	<style type="text/css">
+	</style>
+    
+	<script type="text/javascript" src="/lee/resources/js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="/lee/resources/bootstrapk/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	</script>
 </head>
 
 <body>
@@ -32,14 +29,8 @@
 		</div>
 		<div class="col-md-9">
 			<div class="row">
-				<div class="col-md-7">
+				<div class="col-md">
 					<h2>FAQ 게시판</h2>
-				</div>
-				<div class="col-md-3" style="text-align: center;">
-					<a class="btn btn-default" type="submit" href="noticeWrite.ju">
-						<span class="glyphicon glyphicon-pencil" aria-hidden="true">
-							공지쓰기(오른쪽)</span>
-					</a>
 				</div>
 			</div>
 			<div class="row">
@@ -53,47 +44,32 @@
 								<th>작성일</th>
 								<th>조회수</th>
 							</tr>
+						</thead>
+						<tbody>
 							<tr>
-								<td>1</td>
-								<td>조회수많은게시물1</td>
-								<td>관리자</td>
-								<td>2017-05-30</td>
-								<td>99999</td>
+								<c:if test="${empty list}">
+									<td colspan="6" align="left">등록된 FAQ가 없습니다.</td>
+								</c:if>
 							</tr>
-							<tr>
-								<td>2</td>
-								<td>조회수많은게시물2</td>
-								<td>관리자</td>
-								<td>2017-05-30</td>
-								<td>2</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>조회수많은게시물3</td>
-								<td>관리자</td>
-								<td>2017-05-30</td>
-								<td>2</td>
-							</tr>
-							<tr>
-								<td>4</td>
-								<td>조회수많은게시물4</td>
-								<td>관리자</td>
-								<td>2017-05-30</td>
-								<td>2</td>
-							</tr>
-							<tr>
-								<td>5</td>
-								<td>조회수많은게시물5</td>
-								<td>관리자</td>
-								<td>2017-05-30</td>
-								<td>2</td>
-							</tr>
+							<c:forEach var="dto" items="${list}">
+								<tr>
+									<td>${dto.qu_cate}</td>
+									<td><a href="faqContent.ju?qu_idx=${dto.qu_idx}">${dto.qu_subject}</a></td>
+									<td>${dto.mem_idx}</td>
+									<td>${dto.qu_date}</td>
+									<td>${dto.qu_readnum}</td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
 	</div>
-
+	<script type="text/javascript">
+	function submit(){
+		$('#frm').submit();
+	}
+	</script>
 </body>
 </html>
