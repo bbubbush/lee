@@ -21,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ju.dto.ElibDTO;
 import ju.elib.model.ElibDAO;
-import ju.model.LoanDAO;
 import ju.modul.BookCateModul;
 import ju.modul.ElibPaging;
 
@@ -30,8 +29,6 @@ public class AdminElibController {
 	
 	@Autowired
 	private ElibDAO elibDAO;
-	@Autowired
-	private LoanDAO loandao;
 	
 	/**업로드 최초 로딩*/
 	@RequestMapping(value="elibUpload.ju")
@@ -175,7 +172,6 @@ public class AdminElibController {
 		
 		BookCateModul bcm=new BookCateModul();
 		ArrayList<String> cateLg=new ArrayList<String>();
-		ArrayList<String> members=new ArrayList<String>();
 		for(int i=0 ; i<elibArr.size() ; i++){
 			if(elibArr.get(i).getEl_idx().indexOf("EB")==0){
 				cateLg.add(bcm.BookLgSelectId(0, 7, false, Integer.toString(i)));
@@ -189,7 +185,6 @@ public class AdminElibController {
 			if("~".equals(elibArr.get(i).getEl_recommend())){
 				elibArr.get(i).setEl_recommend("");
 			}
-			members.add(loandao.elibLoanMembers(elibArr.get(i).getEl_idx()));
 		}
 		ArrayList<String> cateMd=new ArrayList<String>();
 		for(int i=0 ; i<cateLg.size() ; i++){
@@ -207,11 +202,8 @@ public class AdminElibController {
 			cateMd.add(select);
 			
 		}
-		
-		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("elibArr", elibArr);
-		mav.addObject("members", members);
 		mav.addObject("cateLg", cateLg);
 		mav.addObject("cateMd", cateMd);
 		mav.addObject("paging", paging);
@@ -235,9 +227,9 @@ public class AdminElibController {
 			
 			String where="";
 			
-			el_subject="".equals(el_subject)?"":"UPPER(el_subject) LIKE UPPER('%" + el_subject + "%') ";
-			el_writer="".equals(el_writer)?"":"UPPER(el_writer) LIKE UPPER('%" + el_writer + "%') ";
-			el_pub="".equals(el_pub)?"":"UPPER(el_pub) LIKE UPPER('%" + el_pub + "%') ";
+			el_subject="".equals(el_subject)?"":"el_subject LIKE '%" + el_subject + "%' ";
+			el_writer="".equals(el_writer)?"":"el_writer LIKE '%" + el_writer + "%' ";
+			el_pub="".equals(el_pub)?"":"el_pub LIKE '%" + el_pub + "%' ";
 			el_lg="99".equals(el_lg)?"":"el_lg='" + el_lg + "' ";
 			el_md="99".equals(el_md)?"":"el_md='" + el_md + "' ";
 			
@@ -261,7 +253,6 @@ public class AdminElibController {
 			if(!"".equals(where)){
 				where="WHERE "+where;
 			}
-			System.out.println(where);
 			
 			int startNum=(page-1)*ElibPaging.CONTENTSIZE+1;
 			int endNum=startNum+ElibPaging.CONTENTSIZE-1;
@@ -272,7 +263,6 @@ public class AdminElibController {
 			
 			BookCateModul bcm=new BookCateModul();
 			ArrayList<String> cateLg=new ArrayList<String>();
-			ArrayList<String> members=new ArrayList<String>();
 			for(int i=0 ; i<elibArr.size() ; i++){
 				if(elibArr.get(i).getEl_idx().indexOf("EB")==0){
 					cateLg.add(bcm.BookLgSelectId(0, 7, false, Integer.toString(i)));
@@ -286,7 +276,6 @@ public class AdminElibController {
 				if("~".equals(elibArr.get(i).getEl_recommend())){
 					elibArr.get(i).setEl_recommend("");
 				}
-				members.add(loandao.elibLoanMembers(elibArr.get(i).getEl_idx()));
 			}
 			ArrayList<String> cateMd=new ArrayList<String>();
 			for(int i=0 ; i<cateLg.size() ; i++){
@@ -307,7 +296,6 @@ public class AdminElibController {
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("elibArr", elibArr);
-		mav.addObject("members", members);
 		mav.addObject("cateLg", cateLg);
 		mav.addObject("cateMd", cateMd);
 		mav.addObject("paging", paging);

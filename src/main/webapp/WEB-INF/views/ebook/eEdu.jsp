@@ -110,9 +110,9 @@
 						var arr=data.elibArr;
 						var intoHTML="";
 						if(arr.length==0){
-							intoHTML+='<tr data-idx="none">';
+							intoHTML+='<tr>';
 							intoHTML+='	<td class="text-center">';
-							intoHTML+='		<div class="alert alert-warning" role="alert">검색 결과가 없습니다.</div>';
+							intoHTML+='검색 결과가 없습니다.';
 							intoHTML+='	</td>';
 							intoHTML+='</tr>';
 						}
@@ -149,9 +149,7 @@
 						$("#contentTbody").html(intoHTML);
 						$("#pagingNav").html(data.paging);
 						$("#pagingNav").removeClass().addClass("simple");
-						if($("#contentTbody>tr").eq(0).data("idx")!="none"){
-							contentClick();
-						}
+						contentClick();
 						
 						$("#pagingNav>ul>li").removeClass("active");
 						var pagingLength=$("#pagingNav>ul>li").length;
@@ -223,9 +221,9 @@
 						var arr=data.elibArr;
 						var intoHTML="";
 						if(arr.length==0){
-							intoHTML+='<tr data-idx="none">';
+							intoHTML+='<tr>';
 							intoHTML+='	<td class="text-center">';
-							intoHTML+='		<div class="alert alert-warning" role="alert">검색 결과가 없습니다.</div>';
+							intoHTML+='검색 결과가 없습니다.';
 							intoHTML+='	</td>';
 							intoHTML+='</tr>';
 						}
@@ -262,9 +260,7 @@
 						$("#contentTbody").html(intoHTML);
 						$("#pagingNav").html(data.paging);
 						$("#pagingNav").removeClass().addClass("detail");
-						if($("#contentTbody>tr").eq(0).data("idx")!="none"){
-							contentClick();
-						}
+						contentClick();
 						
 						$("#pagingNav>ul>li").removeClass("active");
 						var pagingLength=$("#pagingNav>ul>li").length;
@@ -361,9 +357,9 @@
 					var arr=data.elibArr;
 					var intoHTML="";
 					if(arr.length==0){
-						intoHTML+='<tr data-idx="none">';
+						intoHTML+='<tr>';
 						intoHTML+='	<td class="text-center">';
-						intoHTML+='		<div class="alert alert-warning" role="alert">검색 결과가 없습니다.</div>';
+						intoHTML+='검색 결과가 없습니다.';
 						intoHTML+='	</td>';
 						intoHTML+='</tr>';
 					}
@@ -400,9 +396,7 @@
 					$("#contentTbody").html(intoHTML);
 					$("#pagingNav").html(data.paging);
 					$("#pagingNav").removeClass().addClass("noSearch");
-					if($("#contentTbody>tr").eq(0).data("idx")!="none"){
-						contentClick();
-					}
+					contentClick();
 					
 					$("#pagingNav>ul>li").removeClass("active");
 					var pagingLength=$("#pagingNav>ul>li").length;

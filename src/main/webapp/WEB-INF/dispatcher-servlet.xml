@@ -12,7 +12,7 @@
 						http://www.springframework.org/schema/mvc/spring-mvc.xsd
 						http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd">
 
-	<context:component-scan base-package="schedule.controller"/>
+	<!-- <context:component-scan base-package="my.schedule"/> -->
 	<task:annotation-driven/>
 	
 	<context:component-scan base-package="ju.*" use-default-filters="false">
@@ -71,10 +71,8 @@
 	<bean id="missingDao" class="ju.missing.model.MissingDAOImple">
 		<constructor-arg  ref="sqlSessionTemplate" />
 	</bean>
+
 	<bean id="qnaDao" class="ju.quest.model.QnaDAOImple">
-		<constructor-arg  ref="sqlSessionTemplate" />
-	</bean>
-	<bean id="reviewDao" class="ju.review.model.ReviewDAOImple">
 		<constructor-arg  ref="sqlSessionTemplate" />
 	</bean>
 

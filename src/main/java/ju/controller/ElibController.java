@@ -146,9 +146,9 @@ public class ElibController {
 		
 		String where="";
 		
-		detailSubject="".equals(detailSubject)?"":"UPPER(el_subject) LIKE UPPER('%" + detailSubject + "%') ";
-		detailWrite="".equals(detailWrite)?"":"UPPER(el_writer) LIKE UPPER('%" + detailWrite + "%') ";
-		detailPub="".equals(detailPub)?"":"UPPER(el_pub) LIKE UPPER('%" + detailPub + "%') ";
+		detailSubject="".equals(detailSubject)?"":"el_subject LIKE '%" + detailSubject + "%' ";
+		detailWrite="".equals(detailWrite)?"":"el_writer LIKE '%" + detailWrite + "%' ";
+		detailPub="".equals(detailPub)?"":"el_pub LIKE '%" + detailPub + "%' ";
 		cateLg="99".equals(cateLg)?"":"el_lg='" + cateLg + "' ";
 		cateMd="99".equals(cateMd)?"":"el_md='" + cateMd + "' ";
 		
@@ -201,7 +201,7 @@ public class ElibController {
 		List<ElibDTO> elibArr=elibDAO.elibContent(el_idx);
 		ModelAndView mav=new ModelAndView();
 		
-		mav.addObject("elibArr", elibArr.size()==0?"":elibArr.get(0));
+		mav.addObject("elibArr", elibArr.get(0));
 		mav.addObject("mem", mem);
 		mav.setViewName("juJson");
 		return mav;

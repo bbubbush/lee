@@ -16,5 +16,4 @@ public interface QnaDAO {
 	public String makeIdx(String tableName);
 	public QnaDTO qnaPreInfo(String qna_idx);
 	public QnaDTO qnaNextInfo(String qna_idx);
-	public List<QnaDTO> topTenQna(String sql);
 }

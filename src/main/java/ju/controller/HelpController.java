@@ -12,11 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 import ju.dto.MissingDTO;
 import ju.dto.NoticeDTO;
 import ju.dto.QnaDTO;
-import ju.dto.ReviewDTO;
 import ju.missing.model.MissingDAO;
 import ju.notice.model.NoticeDAO;
 import ju.quest.model.QnaDAO;
-import ju.review.model.ReviewDAO;
 
 
 
@@ -33,8 +31,6 @@ public class HelpController {
    private MissingDAO missingDao;
    @Autowired
    private QnaDAO qnaDao;
-   @Autowired
-   private ReviewDAO reviewDao;
 
    
    
@@ -303,93 +299,20 @@ public class HelpController {
 		return mav;
 	}
 	
-	@RequestMapping("/questChange.ju")
-	public ModelAndView questChange(@RequestParam(value="qu_idx") String qu_idx){
-		QnaDTO dto=qnaDao.qnaChange(qu_idx);
-		ModelAndView mav=new ModelAndView("help/quest/questChange","dto",dto);
-		return mav;
-	}
 	
-	@RequestMapping("/questChangeOk.ju")
-	public ModelAndView questChangeOk(QnaDTO dto){
-		int result=qnaDao.qnaChangeOk(dto);
-		String msg=result>0?"게시물 수정 성공":"게시물 수정 실패";
-		ModelAndView mav=new ModelAndView("help/quest/changeMsg","msg",msg);
-		return mav;
-	}
 	
-	/*FAQ 게시판 */
+	
+	
+	
+	
+	
+	
+	
+	//FaQ 게시판 관련 메소드
 	@RequestMapping("/faqList.ju")
 	public ModelAndView faqList(){
-		String sql = "select a.* from(select qu_idx, qu_qidx, qu_cate, qu_subject, qu_content, mem_idx, qu_date, qu_readnum, RANK() over(order by qu_readnum desc)as rank from quest)a where a.rank<10";
-		List<QnaDTO> list = qnaDao.topTenQna(sql);
 		ModelAndView mav=new ModelAndView();
 		mav.setViewName("help/faq/faqList");
-		mav.addObject("list",list);
-		return mav;
-	}	
-	
-	@RequestMapping(value="/faqContent.ju")
-	public ModelAndView faqContent(String qu_idx){
-		QnaDTO dto=qnaDao.qnaContent(qu_idx);
-		ModelAndView mav=new ModelAndView("help/faq/faqContent","dto",dto);
-		return mav;
-		
-	}
-	
-	
-	/* 책추천 */
-	@RequestMapping("/reviewList.ju")
-	public ModelAndView reviewList(@RequestParam(value="type", defaultValue="review_subject")String type,
-			@RequestParam(value="query", defaultValue="")String query,
-			@RequestParam(value="page", defaultValue="1")int page){
-		int totalCount = reviewDao.reviewTotalCount(); // 총 게시물
-		int totalPage = totalCount/COUNTLIST; // 전체 페이지 수
-		if(totalCount % COUNTLIST > 0){ // 정확한 페이지 수 계산
-			totalPage++;
-		}
-		
-		if(page>totalPage && totalPage!=0){ // 페이지가 총 페이지를 넘어가면 마지막 페이지로 돌림 
-			page = totalPage;
-		}else if(page < 1){  // 페이지가 1보다 작으면 1로 유지
-			page = 1;
-		}
-		
-		int startPage = ((page-1)/COUNTPAGE)*COUNTPAGE+1;	// 시작 페이지
-		int endPage = startPage + COUNTPAGE -1; // 끝 페이지
-		if(endPage > totalPage){  // 끝 페이지가 총페이지보다 크면 마지막으로 초기화
-			endPage = totalPage;
-		}			
-		String sql = "select b.* from (select rownum as rnum, a.* from(select review_idx, review_cate, review_subject, mem_idx, review_date, review_readnum from review where "+ type +" like '%" + query + "%' order by review_date desc)a)b WHERE b.rnum >= "+((page-1)*COUNTLIST+1)+" and b.rnum <= "+(page*COUNTLIST);
-		List<ReviewDTO> list=reviewDao.reviewList(sql); //DTO 그릇에 DAO에있는 리스트를 담아서
-		ModelAndView mav=new ModelAndView("help/review/reviewList","list",list); //이 페이지로 보낸다 리스트를같이
-		mav.addObject("page", page);
-		mav.addObject("startPage", startPage);
-		mav.addObject("endPage", endPage);
-		
-		return mav;
-	}
-	
-	@RequestMapping("/reviewWrite.ju")
-	public ModelAndView reviewWrite(HttpSession session){
-		String sid = (String)session.getAttribute("sid");
-		ModelAndView mav=new ModelAndView();
-		mav.setViewName("help/review/reviewWrite");
-		mav.addObject("sid", sid);
-		return mav;
-	}
-	
-	@RequestMapping("/reviewWriteOk.ju")
-	public ModelAndView reviewWriteOk(ReviewDTO dto, HttpSession session){
-		String mem_idx = (String)session.getAttribute("sidx");
-		mem_idx = "aa"; // 임시
-		dto.setMem_idx(mem_idx);
-		dto.setReview_idx(reviewDao.makeIdx("RE"));
-		int result = reviewDao.reviewWrite(dto);
-		String msg=result>0?"게시물등록성공":"게시물등록실패";		
-		ModelAndView mav=new ModelAndView();
-		mav.addObject("msg", msg);
-		mav.setViewName("help/review/reviewWriteOk");
 		return mav;
 	}
 	
@@ -413,6 +336,7 @@ public class HelpController {
 		return mav;
 	}
 	
+<<<<<<< HEAD
 	@RequestMapping("/reviewChange.ju")
 	public ModelAndView reviewChange(@RequestParam(value="review_idx") String review_idx){
 		ReviewDTO dto=reviewDao.reviewChange(review_idx);
@@ -431,6 +355,8 @@ public class HelpController {
 
 	
 	
+=======
+>>>>>>> e3a3dff0e8cf3d3007c662bea87150bca12911d0
 	//희망도서 요청 게시판 관련 메소드
 	@RequestMapping("/orderBkList.ju")
 	public ModelAndView orderbkList(){
@@ -439,7 +365,14 @@ public class HelpController {
 		return mav;
 	}
 	
-
+	
+	//책추천 감상평 게시판 관련 메소드
+	@RequestMapping("/reviewList.ju")
+	public ModelAndView reviewList(){
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("help/review/reviewList");
+		return mav;
+	}
 
 
    
