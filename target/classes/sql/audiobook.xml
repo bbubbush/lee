@@ -12,6 +12,10 @@
   		UPDATE elib SET el_lg=#{el_lg}, el_md=#{el_md}, el_subject=#{el_subject}, el_writer=#{el_writer}, el_pub=#{el_pub}, el_info=#{el_info} where el_idx=#{el_idx}
   	</update>
   	
+  	<update id="abUPrecommend" parameterType="ju.dto.ElibDTO">
+  		UPDATE elib set el_recocount=el_recocount+1, el_recommend=#{mem_idx} where el_idx like 'AB%' and el_idx=#{el_idx}
+  	</update>
+  	
   	<select id="abSELlist" parameterType="String" resultType="ju.dto.ElibDTO">
   		SELECT * FROM elib WHERE el_idx like 'AB%'
   	</select>
@@ -53,6 +57,15 @@
   	
   	<select id="abSELcnt" resultType="Integer">
   		select count(*) from elib where el_idx like 'AB%'
+  	</select>
+  	
+  	<select id="abSELrecolist" resultType="ju.dto.ElibDTO">
+  		<![CDATA[
+  			select * from 
+			(select rownum as rnum, a.* from 
+			(select * from elib where el_idx like 'AB%' order by el_recocount desc )a)b 
+			where rnum>=(#{cp} -1) * #{ls} +1 and rnum <= #{cp} * #{ls}
+		]]>	
   	</select>
   	
 </mapper>

@@ -537,7 +537,7 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 							intoBodyHTML+='					<div class="row">';
 							intoBodyHTML+='						<div class="col-md-2">저자</div><div class="col-md-10">'+data.ebArr.el_writer+'</div>';
 							intoBodyHTML+='						<div class="col-md-2">출판사</div><div class="col-md-10">'+data.ebArr.el_pub+'</div>';
-							intoBodyHTML+='						<div class="col-md-2">추천수</div><div class="col-md-10">'+data.ebArr.el_recocount+'</div>';
+							intoBodyHTML+='						<div class="col-md-2">추천수</div><div class="col-md-10 reCount">'+data.ebArr.el_recocount+'</div>';
 							intoBodyHTML+='					</div>';
 							intoBodyHTML+='				</div>';
 							intoBodyHTML+='				<div class="col-md-12 text-right">';
@@ -577,7 +577,12 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 				, data : {el_idx : el_idx}
 				, dataType : "json"
 				, success: function(data){
-					alert(data.recommend);
+					if(data.dupl){
+						alert(data.dupl);//중복 메세지
+					}else{
+						alert(data.recommend);
+					}
+					$(".reCount").text(data.recoCount);
 				}
 			})
 		}
