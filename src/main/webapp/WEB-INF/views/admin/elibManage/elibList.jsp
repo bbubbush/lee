@@ -331,6 +331,11 @@
 							
 							$(".btn-success").eq(num).prop("disabled", "disabled");
 							$(".btn-warning").eq(num).text("수정");
+							alertify.alert("안내", "수정 모드 취소"
+								, function() {
+									alertify.message("전자도서 수정 취소");
+								}
+							);
 						}
 					} // warning function
 				); // warning click
@@ -691,6 +696,11 @@
 							
 							$(".btn-success").eq(num).prop("disabled", "disabled");
 							$(".btn-warning").eq(num).text("수정");
+							alertify.alert("안내", "수정 모드 취소"
+								, function() {
+									alertify.message("전자도서 수정 취소");
+								}
+							);
 						}
 					} // warning function
 				); // warning click
