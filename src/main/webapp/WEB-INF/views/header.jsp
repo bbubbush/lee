@@ -176,9 +176,7 @@
 				</li>
 				<li><a href="/lee/bookingIndex.ju">이용예약</a>
 					<ul>
-						<li><a href="/lee/rrBook.ju">열람실</a></li>
-						<li><a href="/lee/srBook.ju">스터디룸</a></li>
-						<li><a href="/lee/crBook.ju">자료실예약</a></li>
+						<li><a href="/lee/srBook.ju">스터디룸 예약</a></li>
 					</ul>
 				</li>
 				<li><a href="/lee/learningIndex.ju">평생교육</a></li>

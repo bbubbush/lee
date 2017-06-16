@@ -15,6 +15,7 @@ import ju.dto.RegistDTO;
 import ju.dto.SubjectDTO;
 import ju.learning.model.LearningDAO;
 import ju.model.SubjectDAO;
+import ju.model.TeacherDAO;
 
 @Controller
 public class LearningController {
@@ -23,6 +24,14 @@ public class LearningController {
 	
 	@Autowired
 	LearningDAO ligdao;
+	
+	@Autowired
+	TeacherDAO teacherdao;
+	
+	@RequestMapping("/getTeacherInfo.ju")
+	public ModelAndView getTeacherInfo(){
+		return new ModelAndView("juJson","teacherInfo",teacherdao.teacherList());
+	}
 	
 	@RequestMapping(value="/duplicateRegist.ju", method=RequestMethod.POST)
 	public ModelAndView duplRegist(String mem_idx){

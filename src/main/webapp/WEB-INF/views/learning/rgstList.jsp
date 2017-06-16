@@ -45,6 +45,10 @@
    
    
 }
+table{
+	margin-top: 20px;
+}
+
 </style>
 </head>
 <body>
@@ -62,14 +66,14 @@
             </div>      
             <!-- 컨텐츠 실영역 -->
             <h3></h3>
-            <div style="background-color: #1AA4AC; opacity:0.5; height:950px;width:100%;">
+            <div style="width:100%;">
             <c:choose>
                <c:when test="${empty mylist }">
                   신청한 강의가 없습니다.
                </c:when>
                <c:when test="${mylist ne null }">
                   <c:forEach items="${mylist }" var="list">
-                     <table>
+                     <table class="table table-bordered">
                         <thead>
                            <tr>
                               <th style="width: 40%">강의명</th>

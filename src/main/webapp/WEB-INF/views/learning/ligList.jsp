@@ -27,6 +27,31 @@
             }
          }
       });
+      
+      $.ajax({
+          url : "getTeacherInfo.ju"
+          , type : "GET"
+          , dataType : "json" 
+          , success : function(gti){
+        	
+             for(var i = 0; i<gti.teacherInfo.length;i++){
+           		var tcdiv = $(".tInfo");
+           		console.log(tcdiv[0]);
+            	for (var j = 0; j<tcdiv.length;j++){
+            		var tInfoid = $(".tInfo").eq(j).attr("id");
+            		console.log(gti.teacherInfo[i].tc_idx);
+            		if(tInfoid==gti.teacherInfo[i].tc_idx){
+            			console.log(gti.teacherInfo[i]);
+		                $("#"+gti.teacherInfo[i].tc_idx).html(
+		                "강사 명 : " + gti.teacherInfo[i].tc_name + 
+		                "<br>연락처 : " + gti.teacherInfo[i].tc_hp + 
+		                "<br>강사소개 : " + gti.teacherInfo[i].tc_sum);
+            		}
+            	}
+             }
+          }
+       });
+      
    });
 </script>
 <style>
@@ -60,6 +85,17 @@
 #report>tbody>tr>td{
    margin-bottom: 20px;
 }
+
+.subjectInfoHead>td{
+	font-size: 130%;
+	text-align: center;
+}
+
+th{
+	text-align: center;
+}
+
+
 </style>
 </head>
 <body>
@@ -83,12 +119,12 @@
             <table class="table table-hover" id="report">
                <thead>
                   <tr>
-                     <th style="width: 10%">번호</th>
                      <th style="width: 35%">강의명</th>
                      <th style="width: 10%">강사명</th>
                      <th style="width: 20%">강의일시</th>
                      <th style="width: 15%">강의시간</th>
                      <th style="width: 10%">모집정원(명)</th>
+                     <th style="width: 10%">신청인원</th>
                   </tr>
                </thead>
                <tbody>
@@ -96,36 +132,43 @@
                   <c:choose>
                      <c:when test="${empty slist}">
                         <tr>
-                           <td colspan="5">등록된 수강목록이 없습니다.</td>
+                           <td colspan="5" style="text-align: center;">등록된 수강목록이 없습니다.</td>
                         </tr>
                      </c:when>
                      <c:when test="${slist ne null}">
                         <c:forEach items="${slist}" var="list">
-                           <tr>
-                              <td>${list.sj_num }</td>
+                           <tr class="subjectInfoHead success">
                               <td>${list.sj_name }</td>
                               <td>${list.tc_name}</td>
                               <td>${list.sj_sday } ~ ${list.sj_eday}</td>
                               <td>${list.sj_st } ~ ${list.sj_et}</td>
                               <td>${list.sj_max }</td>
+                              <td>${list.sj_num }</td>
                            </tr>
                            <tr>
-                              <td colspan="6">
+                              <td colspan="3">
+                                 <h4 style="text-align: center;">강의정보</h4>
                                  <hr>
-                                 <h4>강의정보</h4>
-                                 <hr>
-                                 강의 설명 : ${list.sj_sum}<br>
-                                 강사명 : ${list.tc_name }<br>
-                                 강의 일시 : ${list.sj_sday }~${list.sj_eday}<br>
-                                 강의 시간 : ${list.sj_st }~${list.sj_et}<br>
-                                 강의 정원 : ${list.sj_max }<br>
-                                 현재 신청 인원 : ${list.sj_num }<br>
+					                                 강의 설명 : ${list.sj_sum}<br>
+					                                 강사명 : ${list.tc_name }<br>
+					                                 강의 일시 : ${list.sj_sday }~${list.sj_eday}<br>
+					                                 강의 시간 : ${list.sj_st }~${list.sj_et}<br>
+					                                 강의 정원 : ${list.sj_max }<br>
+					                                 현재 신청 인원 : ${list.sj_num }<br>
                                  <c:if test="${list.sj_max gt list.sj_num }">
                                     <c:url var="rgst" value="/rgst.ju">
                                        <c:param name="sj_idx" value="${list.sj_idx }"/>
                                     </c:url>
                                     <button type="button" id="${list.sj_idx }" class="btn btn-info btn-lg" onclick="javascript:location.href='${rgst}'">신청하기</button>
                                  </c:if>
+                                 <c:if test="${list.sj_max eq list.sj_num }">
+                                    <button type="button" class="btn btn-danger btn-lg" disabled="disabled">마감</button>
+                                 </c:if>
+                              </td>
+                              <td colspan="3">
+                              	<div id="${list.tc_idx }" class="tInfo">
+                              		
+                              	</div>
                               </td>
                            </tr>
                         </c:forEach>
