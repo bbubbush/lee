@@ -283,10 +283,10 @@ public class ElibController {
 				mav.addObject("endDate", endDate);
 			}
 			else{
-				String msg="\n";
-				if(memCount>=5){ msg+="\n - 회원 최대 대여수를 초과하였습니다."; }
-				if(ebookCount>=5){ msg+="\n - 모두 대여되어 더이상 대여 할 수 없습니다."; }
-				if(ebookOverlap==1){ msg+="\n - 중복 도서를 대출 신청 하였습니다."; }
+				String msg="<br>";
+				if(memCount>=5){ msg+="<br> - 회원 최대 대여수를 초과하였습니다."; }
+				if(ebookCount>=5){ msg+="<br> - 모두 대여되어 더이상 대여 할 수 없습니다."; }
+				if(ebookOverlap==1){ msg+="<br> - 중복 도서를 대출 신청 하였습니다."; }
 				mav.addObject("msg", msg);
 			}
 		}

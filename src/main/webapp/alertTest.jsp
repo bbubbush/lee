@@ -66,8 +66,14 @@
 						alertify.error("에러 메시지");
 						alertify.warning("워닝 메시지");
 						alertify.message("노말 메시지");
-					} // cancel function
+					} // alert function
 				);
+			}
+		); //click 4
+		
+		$("button").eq(4).click(
+			function() {
+				alertify.alert("", "제목 없는 버전");
 			}
 		); //click 4
 		
@@ -84,6 +90,8 @@
 	<button class="btn btn-default">Prompt</button>
 	<br><br>
 	<button class="btn btn-default">우측 하단 메세지</button>
+	<br><br>
+	<button class="btn btn-default">제목 없음</button>
 
 </body>
 </html>
