@@ -118,7 +118,7 @@
     <!-- 기본 출력 설정 -->
     <root>
         <level value="DEBUG" />
-        <appender-ref ref="console" />
+<!--         <appender-ref ref="console" /> -->
 <!--         <appender-ref ref="errFile"/> -->
 <!--         <appender-ref ref="rollingFile"/> -->
     </root>

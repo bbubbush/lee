@@ -393,8 +393,40 @@ public class HelpController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/reviewContent.ju")
+	public ModelAndView reviewContent(String review_idx){
+		ReviewDTO dto=reviewDao.reviewContent(review_idx);
+		ReviewDTO preInfo = reviewDao.reviewPreInfo(review_idx);
+		ReviewDTO nextInfo = reviewDao.reviewNextInfo(review_idx);
+		ModelAndView mav=new ModelAndView("help/review/reviewContent","dto",dto);
+		mav.addObject("pre", preInfo);
+		mav.addObject("next", nextInfo);
+		return mav;
+		
+	}
 	
+	@RequestMapping("/reviewDelete.ju")
+	public ModelAndView reviewDelete(@RequestParam(value="review_idx") String review_idx ){
+		int result=reviewDao.reviewDelete(review_idx);
+		String msg=result>0?"게시물 삭제 성공":"게시물 삭제 실패";
+		ModelAndView mav=new ModelAndView("help/review/deleteMsg","msg",msg);
+		return mav;
+	}
 	
+	@RequestMapping("/reviewChange.ju")
+	public ModelAndView reviewChange(@RequestParam(value="review_idx") String review_idx){
+		ReviewDTO dto=reviewDao.reviewChange(review_idx);
+		ModelAndView mav=new ModelAndView("help/review/reviewChange","dto",dto);
+		return mav;
+	}
+	
+	@RequestMapping("/reviewChangeOk.ju")
+	public ModelAndView reviewChangeOk(ReviewDTO dto){
+		int result=reviewDao.reviewChangeOk(dto);
+		String msg=result>0?"게시물 수정 성공":"게시물 수정 실패";
+		ModelAndView mav=new ModelAndView("help/review/changeMsg","msg",msg);
+		return mav;
+	}
 	
 
 	

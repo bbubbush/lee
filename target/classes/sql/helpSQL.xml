@@ -183,9 +183,37 @@
       0,0,0,0)
    </insert>
    
+   <select id="reviewContent" parameterType="String" resultType="ju.dto.ReviewDTO">
+      select * from review
+      where review_idx=#{review_idx}
+   </select>
    
+   <select id="reviewPreInfo" parameterType="String" resultType="ju.dto.ReviewDTO">
+      <![CDATA[
+      select * from review where review_idx=(select max(review_idx)as review_idx from review where review_idx < #{review_idx})
+      ]]>
+   </select>
    
+   <select id="reviewNextInfo" parameterType="String" resultType="ju.dto.ReviewDTO">
+      <![CDATA[
+      select * from review where review_idx=(select min(review_idx)as review_idx from review where review_idx > #{review_idx})
+      ]]>
+   </select>
    
+   <delete id="reviewDelete" parameterType="String">
+      delete from review where review_idx=#{review_idx}
+   </delete>
+   
+   <select id="reviewChange" parameterType="String" resultType="ju.dto.ReviewDTO">
+      select * from review where review_idx=#{review_idx}
+   </select>
+   
+   <update id="reviewChangeOk" parameterType="ju.dto.ReviewDTO"> 
+      update review set
+      review_subject=#{review_subject},
+      review_content=#{review_content} 
+      where review_idx=#{review_idx}
+   </update>
    
    
    

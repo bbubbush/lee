@@ -134,6 +134,10 @@
  		]]> 
  	</select>
  	
- 	
+ 	<update id="elibUPDschedule">
+ 		<![CDATA[
+ 			UPDATE loanbook SET lb_return=0 WHERE book_idx LIKE 'EB%' AND lb_return=1 AND lb_ed<sysdate
+ 		]]> 
+ 	</update>
  	
  </mapper>

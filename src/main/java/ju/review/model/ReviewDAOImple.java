@@ -34,7 +34,6 @@ public class ReviewDAOImple implements ReviewDAO{
 		String idx=tableName+unixTime;  
 		return idx;
 	}
-	
 	public int reviewWrite(ReviewDTO dto) {
 		// TODO Auto-generated method stub
 		int result = sqlMap.insert("reviewWrite", dto);
@@ -42,28 +41,31 @@ public class ReviewDAOImple implements ReviewDAO{
 	}
 	public ReviewDTO reviewContent(String review_idx) {
 		// TODO Auto-generated method stub
-		return null;
+		ReviewDTO dto = sqlMap.selectOne("reviewContent", review_idx);
+		return dto;
+	}
+	public int reviewDelete(String review_idx) {
+		int count=sqlMap.delete("reviewDelete",review_idx);
+		return count;
 	}
 	public ReviewDTO reviewChange(String review_idx) {
 		// TODO Auto-generated method stub
-		return null;
+		ReviewDTO dto = sqlMap.selectOne("reviewChange", review_idx);
+		return dto;
 	}
-	
 	public int reviewChangeOk(ReviewDTO dto) {
 		// TODO Auto-generated method stub
-		return 0;
+		int count = sqlMap.update("reviewChangeOk", dto);
+		return count;
 	}
-	public int reviewDelete(String review_idx) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
 	public ReviewDTO reviewNextInfo(String review_idx) {
-		// TODO Auto-generated method stub
-		return null;
+		ReviewDTO dto = sqlMap.selectOne("reviewPreInfo", review_idx);
+		return dto;
 	}
 	public ReviewDTO reviewPreInfo(String review_idx) {
-		// TODO Auto-generated method stub
-		return null;
+		ReviewDTO dto = sqlMap.selectOne("reviewNextInfo", review_idx);
+		return dto;
 	}
 	
 	

@@ -60,7 +60,7 @@
 							<c:forEach var="dto" items="${list}">
 								<tr>
 									<td>${dto.review_cate}</td>
-									<td><a href="reviewContent.ju?qu_idx=${dto.review_idx}">${dto.review_subject}</a></td>
+									<td><a href="reviewContent.ju?review_idx=${dto.review_idx}">${dto.review_subject}</a></td>
 									<td>${dto.mem_idx}</td>
 									<td>${dto.review_date}</td>
 									<td>${dto.review_readnum}</td>
