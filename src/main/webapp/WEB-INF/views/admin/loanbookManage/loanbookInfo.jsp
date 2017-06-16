@@ -7,9 +7,9 @@
 </head>
 <body>
 <form name="check">
-         <table>
+         <table class="table">
 				<tr>
-					<td rowspan="6" width="300px"><img src="${dto.bk_url}" width="300px"><input type="hidden" id="mem_idx" name="mem_idx" value="${dto.mem_idx}"></td>
+					<td rowspan="6" width="200px"><img src="${dto.bk_url}" width="200px"><input type="hidden" id="mem_idx" name="mem_idx" value="${dto.mem_idx}"></td>
 					<th>도서코드</th>
 					<td>${dto.bk_idx}<input type="hidden" name="bk_idx" id="bk_idx" value="${dto.bk_idx}"></td>
 				</tr>
@@ -32,8 +32,8 @@
 			</table>
 			<table>
 				<tr>
-					<th>설명</th>
-					<td>${dto.bk_info}</td>
+					<th width="10%">설명</th>
+					<td width="90%">${dto.bk_info}</td>
 				</tr>
 			</table>
 			<span id="button"></span>
@@ -42,8 +42,8 @@
 var state = ${dto.bk_take};
 var bt = document.getElementById('button')
 switch(state){
-	case 0 : bt.innerHTML = '<input type="button" value="대출" onclick="checkOutGo()">'; break;
-	case 1 : bt.innerHTML = '<input type="button" value="반납" onclick="checkInGo()">'; break;
+	case 0 : bt.innerHTML = '<input type="button" value="대출" onclick="checkOutGo()" class="btn btn-primary">'; break;
+	case 1 : bt.innerHTML = '<input type="button" value="반납" onclick="checkInGo()" class="btn btn-danger">'; break;
 }
 
 function checkOutGo(){

@@ -60,6 +60,17 @@ public class MemberDAOImple implements MemberDAO {
 		return list;
 	}
 	
+	/*public List<BanDTO> memberBanListSearch(int cp, int ls,String mem_name){
+		int startnum=(cp-1)*ls+1;
+		int endnum = cp*ls;
+		Map map = new HashMap();
+		map.put("startnum", startnum);
+		map.put("endnum", endnum);
+		map.put("mem_name", mem_name+"%");
+		List<BanDTO> list = sqlMap.selectList("banSELSearch",map);
+		return list;
+	}*/
+	
 	public MemberDTO memberInfo(String mem_idx){
 		MemberDTO dto = sqlMap.selectOne("memSELInfo",mem_idx);
 		return dto;

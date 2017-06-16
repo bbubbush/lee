@@ -8,36 +8,40 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <!-- 부가적인 테마 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="/lee/resources/sideMenu/css/adminTable.css">
 </head>
 <script type="text/javascript" src="resources/js/jquery-3.2.1.min.js"></script>
 <style>
 body{
 	width: 90%;
 }
+table>thead>tr>th{
+	font-size: 140%;
+	text-align: center;
+}
 table>tbody>tr>td{
-	font-size: 150%;
+	font-size: 120%;
 }
 </style>
-<body id="memList">
+<body id="memBanList">
 <%@include file="/WEB-INF/views/admin/adminHeader.jsp" %>
 <div class="row">
 	<div class="col-md-2">
 		<%@include file="/WEB-INF/views/admin/adminSideMenu.jsp"%>
 	</div>
 	
-	<div class="col-md-7">
+	<div class="col-md-9">
 		<h2>회원 정지 리스트</h2>
 		<c:set var="dto" value="${dto}"/>
-		<table border="1" cellspacing="1" id="listtable">
+		<table cellspacing="1" class="table table-hover">
 			<thead>
 				<tr>
 					<th width="14%">회원번호</th>
 					<th width="8%">회원이름</th>
 					<th width="15%">ID</th>
-					<th width="33%">정지사유</th>
+					<th width="23%">정지사유</th>
 					<th width="15%">정지일</th>
 					<th width="15%">해제일</th>
+					<th width="10%">정지상태</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -56,6 +60,7 @@ table>tbody>tr>td{
 						<td>${dto.ban_str}</td>
 						<td>${dto.ban_sday}</td>
 						<td>${dto.ban_eday}</td>
+						<td>${dto.ban_state}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -81,24 +86,26 @@ table>tbody>tr>td{
 			</tr>
 			</tfoot>
 		</table>
-		<form name="memSearch">
-			<input type="text" id="mem_name">&nbsp;
-			<input type="button" value="검색" id="mem_search">
-		</form>
+			<form name="memSearch">
+				<input type="text" id="mem_name">&nbsp;
+				<input type="button" value="검색" id="mem_search">
+			</form>
 		</div>
 	</div>
 <script>
 $("#memberList").addClass('open').children('ul').show();
 $("#memberList2").addClass('open').children('ul').show();
+
+
 $(document).on('click','#mem_search',function() {
 	var params = new Object();
 	params.mem_name = document.getElementById('mem_name').value;
 	$.ajax({
 		type : "POST",
-		url : "memberList.ju",
+		url : "memberBanList.ju",
 		data : params,
 		success : function(args) {
-			document.getElementById("memList").innerHTML=args;
+			document.getElementById("memBanList").innerHTML=args;
 		}
 	});
 });

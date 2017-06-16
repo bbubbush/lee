@@ -148,7 +148,7 @@ body{
 		<%@include file="/WEB-INF/views/admin/adminSideMenu.jsp"%>
 	</div>
 	
-	<div class="col-md-4" >
+	<div class="col-md-9" >
 		
 		<h2>반납 페이지</h2>
 		<form name="wrapper" class="form-wrapper cf">

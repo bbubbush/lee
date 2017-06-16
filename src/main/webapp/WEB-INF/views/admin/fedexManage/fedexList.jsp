@@ -9,6 +9,18 @@
 <script src="resources/js/jquery-3.2.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
+<style>
+body{
+	width:90%;
+}
+table>thead>tr>th{
+	font-size: 140%;
+	text-align: center;
+}
+table>tbody>tr>td{
+	font-size: 120%;
+}
+</style>
 <body>
 
 <div class="container" id="modalForm">
@@ -38,7 +50,7 @@
 		<%@include file="/WEB-INF/views/admin/adminSideMenu.jsp"%>
 	</div>
 	
-	<div class="col-md-8" >
+	<div class="col-md-9" >
 		<form name="fedex">
 		<h2>택배대출 신청확인 페이지</h2>
 			<table class="table">
@@ -63,7 +75,7 @@
 						<td>${dto.bk_subject}<input type="hidden" id="bkIdx" value="${dto.bk_idx}"></td>
 						<td>${dto.mem_addr}<input type="hidden" id="fdIdx" value="${dto.fedex_idx}"></td>
 						<td>${dto.mem_hp}</td>
-						<td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onclick="modalOpen('${dto.bk_idx}')" id="fedexInfo">정보 확인</button></td>
+						<td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" onclick="modalOpen('${dto.bk_idx}')" id="fedexInfo">정보 확인</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>

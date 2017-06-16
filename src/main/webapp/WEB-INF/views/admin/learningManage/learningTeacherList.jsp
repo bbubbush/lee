@@ -9,6 +9,18 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
+<style>
+body{
+	width:90%;
+}
+table>thead>tr>th{
+	font-size: 140%;
+	text-align: center;
+}
+table>tbody>tr>td{
+	font-size: 120%;
+}
+</style>
 <body>
 
 <div class="container" id="modalForm">
@@ -31,6 +43,26 @@
   </div>
 </div>
 
+<div class="container" id="modalForm">
+  <!-- Modal -->
+  <div class="modal fade" id="modalB" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">선생님 추가</h4>
+        </div>
+        <div class="Bmodal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <%@include file="/WEB-INF/views/admin/adminHeader.jsp" %>
 
 <div class="row">
@@ -41,13 +73,10 @@
 	<div class="col-md-9" >
 
 		<h2>선생님 리스트</h2>
-		<ul>
-			<li><a href="learningList.ju">수업 리스트</a></li>
-			<li><a href="learningTeacherList.ju">강사 관리</a></li>
-		</ul>
+		
 		<c:set var="dto" value="${dto}"/>
 		<form name="teacherList" action="learningTeacherAdd.ju" method="get">
-		<table>
+		<table class="table">
 		<thead>
 			<tr>
 				<th>강사 이름</th>
@@ -82,7 +111,7 @@
 			</c:forEach>
 		</tbody>
 		</table>
-		<input type="button" value="강사 등록" onclick="teacherAdd()">
+		<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalB" onclick="modalBdd()">강사등록</button>
 		</form>
 		</div>
 	</div>
@@ -102,9 +131,17 @@ function modalOpen(idx){
 	})
 }
 
-function teacherAdd(){
-	location.href="learningTeacherAdd.ju";
+function modalBdd(){
+	var params = new Object();
+	$.ajax({
+		type : "GET",
+		url : "learningTeacherAdd.ju",
+		success : function(args) {
+			$(".Bmodal-body").html(args);
+		}
+	})
 }
+
 </script>
 </body>
 </html>

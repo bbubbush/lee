@@ -133,7 +133,7 @@ body{
 		<%@include file="/WEB-INF/views/admin/adminSideMenu.jsp"%>
 	</div>
 	
-	<div class="col-md-7">
+	<div class="col-md-9">
 		<h2 align="center">일반도서 등록</h2>
 		<form name="wrapper" class="form-wrapper cf" action="bookAddForm.ju">
 		     <input type="text" name="query" id="query" placeholder="ISBN을 입력해 주세요" required>

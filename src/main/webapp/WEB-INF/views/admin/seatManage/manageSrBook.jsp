@@ -149,12 +149,7 @@
 
 </script>
 <style type="text/css">
-<<<<<<< HEAD
-body{
-	width: 90%;
-}
-=======
->>>>>>> youngju
+
 .modal-body {
 	width: 350px;
 	height: 400px;
@@ -189,20 +184,15 @@ body{
 </style>
 </head>
 <body>
-<<<<<<< HEAD
+<%@include file="/WEB-INF/views/admin/adminHeader.jsp" %>
 
 	<form name="sr_form" action="adminRoomDisabled.ju" method="post">
 	<input type="hidden" name="sr_roomno" id="sr_roomno">
 	<input type="hidden" name="resdate" id="resdate" value="">
 	<div id='calendar' style="width:50%;"></div>
 	<div style="width:40%;">
-=======
-	<form name="sr_form" action="adminRoomDisabled.ju" method="post">
-	<input type="hidden" name="sr_roomno" id="sr_roomno">
-	<input type="hidden" name="resdate" id="resdate" value="">
-	<div id='calendar'></div>
-	<div>
->>>>>>> youngju
+
+
 		<h2 id="selectedDate"></h2>
 		<table class="table" border="1" id="roomStatus" style="display:none;">
 			<thead>

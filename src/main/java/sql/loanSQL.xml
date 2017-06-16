@@ -36,7 +36,7 @@
  	</select>
  	
  	<insert id="yeUPSun" parameterType="String">
- 		UPDATE YEYAKBOOK SET ye_sunbun=ye_sunbun-1 where bk_isbn=#{bk_isbn} and ye_sunbun>0
+ 		UPDATE YEYAKBOOK SET ye_sunbun = ye_sunbun-1 where bk_isbn=#{bk_isbn} and ye_sunbun>0
  	</insert>
  	
  	<insert id="yeDEL" parameterType="String">

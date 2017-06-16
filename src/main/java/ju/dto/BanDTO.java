@@ -15,13 +15,14 @@ public class BanDTO {
 	private String ban_sday;
 	private String ban_eday;
 	private String ban_str;
+	private String ban_state;
 	
 	public BanDTO() {
 		super();
 	}
 
 	public BanDTO(String ban_idx, String mem_idx, Date ban_start, Date ban_end, int ban_reason, int ban_day,
-			int ban_period, String mem_name, String mem_id, String ban_sday, String ban_eday, String ban_str) {
+			int ban_period, String mem_name, String mem_id, String ban_sday, String ban_eday, String ban_str, String ban_state) {
 		super();
 		this.ban_idx = ban_idx;
 		this.mem_idx = mem_idx;
@@ -35,6 +36,7 @@ public class BanDTO {
 		this.ban_sday = ban_sday;
 		this.ban_eday = ban_eday;
 		this.ban_str = ban_str;
+		this.ban_state = ban_state;
 	}
 
 	public String getBan_idx() {
@@ -131,6 +133,14 @@ public class BanDTO {
 
 	public void setBan_str(String ban_str) {
 		this.ban_str = ban_str;
+	}
+
+	public String getBan_state() {
+		return ban_state;
+	}
+
+	public void setBan_state(String ban_state) {
+		this.ban_state = ban_state;
 	}
 	
 	

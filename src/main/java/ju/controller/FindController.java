@@ -138,7 +138,6 @@ public class FindController {
 	public ModelAndView bkYeyak(@RequestParam(value="bk_subject")String bk_subject,
 			HttpSession session){
 		String sid = (String)session.getAttribute("sid");
-		sid = "gift8128@gmail.com";// 임시
 		int countYeyak = FindDao.getCountYeyak(sid);
 		int count = 0;
 		int ye_sunbun = 9;
@@ -178,7 +177,6 @@ public class FindController {
 	public ModelAndView bkFedex(@RequestParam(value="bk_subject")String bk_subject,
 			HttpSession session){
 		String sid = (String)session.getAttribute("sid");
-		sid = "gift8128@gmail.com";// 임시
 		int getTotalCountLoan = FindDao.getTotalCountLoan(sid);
 		
 		int count = 0;//실패

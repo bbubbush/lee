@@ -18,6 +18,14 @@
 		where rnum<![CDATA[>=]]>#{startnum} and rnum<![CDATA[<=]]>#{endnum}
  	</select>
  	
+ 	<!-- <select id="banSELSearch" resultType="ju.dto.BanDTO">
+ 		select * from
+		(select rownum as rnum,b.*from
+		(select a.*, member.mem_name from
+		(select * from banlist)a, member where member.mem_idx = a.mem_idx and member.mem_name like #{mem_name} order by ban_start desc)b)c
+		where rnum<![CDATA[>=]]>#{startnum} and rnum<![CDATA[<=]]>#{endnum}
+ 	</select> -->
+ 	
  	<select id="memSELInfo" resultType="ju.dto.MemberDTO" parameterType="String">
  		SELECT * FROM MEMBER where mem_idx=#{mem_idx}
  	</select>
@@ -33,7 +41,7 @@
 	<select id="banSELList" resultType="ju.dto.BanDTO">
  		select * from
 		(select rownum as rnum, b.* from
-		(select member.mem_name, member.mem_id, a.* from
+		(select member.mem_name, member.mem_id, a.*, ban_end-SYSDATE as ban_day from
 		(select * from banlist order by ban_start desc)a, member where member.mem_idx = a.mem_idx)b)c
 		where rnum<![CDATA[>=]]>#{startnum} and rnum<![CDATA[<=]]>#{endnum}
  	</select>

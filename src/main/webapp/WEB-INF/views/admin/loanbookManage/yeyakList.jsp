@@ -8,7 +8,7 @@
 </head>
 <body id="yeyakList">
 <form name="yeList">
-<table>
+<table class="table">
 	<thead>
 		<tr>
 			<th>순번</th>

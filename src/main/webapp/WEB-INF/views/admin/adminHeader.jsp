@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="resources/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/lee/resources/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="/lee/resources/mainMenu/jquery.smartmenus.min.js"></script>
 <link rel="stylesheet" href="/lee/resources/mainMenu/css/sm-core-css.css">
 <link rel="stylesheet" href="/lee/resources/mainMenu/css/sm-clean/sm-clean.css">
@@ -132,7 +132,7 @@
 </head>
 <body>
 <p class="text-left"/>
-	<h2>도서관로고</h2>
+	<img src="/lee/resources/img/adlogo.png" style=" width:250px;">
 	
 <div class="row">
 		<nav id="main-nav" role="navigation">
@@ -145,9 +145,9 @@
 				<li><a href="index.ju"><img src="resources/img/lib.png" height="40px"><br>도서관 홈으로</a></li>
 				<li><a href="memberList.ju"><img src="resources/img/member.png" height="40px"><br>회원관리</a></li>
 				<li><a href="bookList.ju"><img src="resources/img/book.png" height="40px"><br>일반도서관리</a></li>
-				<li><a><img src="resources/img/ebook.png" height="40px"><br>전자도서관리</a></li>
+				<li><a href="elibList.ju"><img src="resources/img/ebook.png" height="40px"><br>전자도서관리</a></li>
 				<li><a href="loanbookList.ju"><img src="resources/img/loan.png" height="40px"><br>대출도서관리</a></li>
-				<li><a href="adminSeatManage.ju"><img src="resources/img/seat.png" height="40px"><br>자리예약관리</a></li>
+				<li><a href="adminSeatManage.ju"><img src="resources/img/seat.png" height="40px"><br>이용시설관리</a></li>
 				<li><a href="learningList.ju"><img src="resources/img/learn.png" height="40px"><br>교육관리</a></li>
 				<li><a href="fedexList.ju"><img src="resources/img/fedex.png" height="40px"><br>택배대출관리</a></li>
 				<li><a href="calendar.ju"><img src="resources/img/calendar.png" height="40px"><br>캘린더관리</a></li>

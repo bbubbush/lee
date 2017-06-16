@@ -7,6 +7,7 @@ public interface MemberDAO {
 	public List<MemberDTO> memberList(int cp, int ls);
 	public List<BanDTO> memberBanList(int cp, int ls);
 	public List<MemberDTO> memberListSearch(int cp, int ls,String mem_name);
+	/*public List<BanDTO> memberBanListSearch(int cp, int ls,String mem_name);*/
 	public MemberDTO memberInfo(String mem_idx);
 	public int banAdd(BanDTO dto, int ban_period);
 	public BanDTO memberBanInfo(String mem_idx);

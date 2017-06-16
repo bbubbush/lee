@@ -25,7 +25,7 @@
 
 <h2>책 등록 페이지</h2>
 <form name="bookAddForm" action="bookAdd.ju" method="post">
-          	<table border="1" cellspacing="1" style="width: 800px">
+          	<table cellspacing="1" class="table" style="width: 800px">
           		<tr>
 					<td rowspan="8" width="300px">
 						<img src="${image}" width="300px" height="300px">

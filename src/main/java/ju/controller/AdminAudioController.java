@@ -162,7 +162,7 @@ public class AdminAudioController {
 			String cate = bcm.BookLgSelect(0, 7, true);
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("bookLgSelect",cate);
-			mav.setViewName("ebook/eAudio/eAudioAdmin/eAudioListAdmin");
+			mav.setViewName("admin/elibManage/eAudioListAdmin");
 			return mav;
 		}
 		

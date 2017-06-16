@@ -8,15 +8,18 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <!-- 부가적인 테마 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="/lee/resources/sideMenu/css/adminTable.css">
 </head>
 <script type="text/javascript" src="resources/js/jquery-3.2.1.min.js"></script>
 <style>
 body{
 	width: 90%;
 }
-table>tbody>tr>td{
+table>thead>tr>th{
 	font-size: 140%;
+	text-align: center;
+}
+table>tbody>tr>td{
+	font-size: 120%;
 }
 </style>
 <body id="memList">
@@ -26,10 +29,10 @@ table>tbody>tr>td{
 		<%@include file="/WEB-INF/views/admin/adminSideMenu.jsp"%>
 	</div>
 	
-	<div class="col-md-7">
+	<div class="col-md-9">
 		<h2>회원 전체 리스트</h2>
 		<c:set var="dto" value="${dto}"/>
-		<table border="1" cellspacing="1" id="listtable">
+		<table cellspacing="1" class="table table-hover" width="1000px">
 			<thead>
 				<tr>
 					<th width="14%">회원번호</th>

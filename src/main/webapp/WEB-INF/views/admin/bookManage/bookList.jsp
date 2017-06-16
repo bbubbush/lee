@@ -8,15 +8,18 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <!-- 부가적인 테마 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="/lee/resources/sideMenu/css/adminTable.css">
 
 </head>
 <style>
 body{
 	width:90%;
 }
-table>tbody>tr>td{
+table>thead>tr>th{
 	font-size: 140%;
+	text-align: center;
+}
+table>tbody>tr>td{
+	font-size: 120%;
 }
 </style>
 <script type="text/javascript" src="resources/js/jquery-3.2.1.min.js"></script>
@@ -30,9 +33,9 @@ table>tbody>tr>td{
 	
 	<div class="col-md-9" >
 		<h2>도서관리 페이지</h2>
-		<span style="margin-left:84em">
+		<span style="margin-left:83em">
 		<select name="bk_tag" id="bk_tag">
-			<option>===선택===</option>
+			<option>====선택====</option>
 			<option value="0">등록순</option>
 			<option value="1">출간일 오름차순</option>
 			<option value="2">출간일 내림차순</option>
@@ -40,15 +43,15 @@ table>tbody>tr>td{
 		</span>
 		
 		<form name="listForm">
-		<table border="1" cellspacing="0" id="listtable">
+		<table cellspacing="0" class="table table-hover" width="1000px">
 		<thead>
 			<tr>
 				<th width="13%">도서코드</th>
 				<th width="25%">도서명</th>
 				<th width="30%">저자명</th>
-				<th width="15%">출판사</th>
+				<th width="12%">출판사</th>
 				<th width="10%">출간일</th>
-				<th width="7%">파손상태</th>
+				<th width="10%">파손상태</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -93,7 +96,7 @@ table>tbody>tr>td{
 			</tr>
 		</tfoot>
 		</table>
-		<input type="button" value="도서등록" onclick="bookAddForm()">
+		<input type="button" value="도서등록" onclick="bookAddForm()" class="btn btn-default btn-lg">
 		</form>
 		<span id="tagBookTable"></span>
 	</div>

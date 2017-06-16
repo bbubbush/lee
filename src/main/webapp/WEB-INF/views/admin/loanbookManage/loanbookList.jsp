@@ -90,7 +90,7 @@ table>tbody>tr>td{
 			</c:forEach>
 		</tbody>
 		</table>	
-		<input type="button" value="메일보내기" onclick="mailSend('${dto.mem_id}')">
+		<input type="button" value="메일보내기" onclick="mailSend('${dto.mem_id}')" class="btn btn-primary btn-lg">
 		</form>
 		
 		<hr>

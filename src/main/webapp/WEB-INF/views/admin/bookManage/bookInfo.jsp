@@ -14,6 +14,14 @@
 <script src="/lee/resources/member/barcode2/code128-base2.js" type="text/javascript"></script>
 <script src="/lee/resources/member/barcode2/get.js" type="text/javascript"></script>
 </head>
+<style>
+table>tbody>tr>th{
+	font-size: 140%;
+}
+table>tbody>tr>td{
+	font-size: 120%;
+}
+</style>
 <%@include file="/WEB-INF/views/admin/adminHeader.jsp" %>
 
 <body>
@@ -75,15 +83,15 @@
 		<%@include file="/WEB-INF/views/admin/adminSideMenu.jsp"%>
 	</div>
 	
-	<div class="col-md-9" >
+	<div class="col-md-9" align="center">
 
 		<h2>일반도서 정보</h2>
 		<form name="bookInfo">
-		<table width="800px">
+		<table class="table table-striped">
 			<tr>
 				<td rowspan="6" width="300px"><img src="${dto.bk_url}" width="300px"></td>
 				<th>도서코드</th>
-				<td>${dto.bk_idx}</td>
+				<td>${dto.bk_idx}<input type="hidden" name="barcode" id="barcode_input" value="${dto.bk_idx}"></td>
 			</tr>
 			<tr>
 				<th>도서명</th>
@@ -103,21 +111,19 @@
 			</tr>
 			<tr>
 				<th>파손상태</th>
-				<td><span id="breakZone"></span><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">파손 수정</button></td>
+				<td><span id="breakZone"></span>
+				<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">파손 수정</button></td>
 			</tr>
 		</table>
-		<table width="800px">
+		<table width="800px" class="table">
 			<tr>
-				<th>설명</th>
-				<td>${dto.bk_info}</td>
+				<th width="10%">설명</th>
+				<td width="90%">${dto.bk_info}</td>
 			</tr>
 		</table>
-		<input type="button" value="전체 목록으로" onclick="bookListBack()">
-		<input type="button" value="도서삭제" onclick="bookDel('${dto.bk_idx}')">
-		</form>
-		<form name="barcode2">
-		<input type="hidden" name="barcode" id="barcode_input" value="${dto.bk_idx}">
+		<input type="button" value="전체 목록으로" onclick="bookListBack()" class="btn btn-default btn-lg">
 		<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#barcode" id="barcodeGo">바코드 발급</button>
+		<input type="button" value="도서삭제" onclick="bookDel('${dto.bk_idx}')" class="btn btn-danger btn-lg">
 		</form>
 	</div>
 </div>

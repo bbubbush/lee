@@ -17,6 +17,7 @@ p{
 table th{
 	text-align: center;
 }
+
 </style>
 <body>
 <c:set var="dto" value="${dto}"/>
@@ -76,11 +77,11 @@ table th{
 <%@include file="/WEB-INF/views/admin/adminHeader.jsp" %>
 
 <div class="row">
-	<div class="col-md-3">
+	<div class="col-md-2">
 		<%@include file="/WEB-INF/views/admin/adminSideMenu.jsp"%>
 	</div>
 	
-	<div class="col-md-8" >
+	<div class="col-md-9" align="center">
 	<h2>회원정보 페이지</h2>
 		<h3>${dto.mem_name}님 회원정보</h3>
 		<table class="table" style = width:800px;>
@@ -145,7 +146,7 @@ table th{
 			<h3><span id="banDay"></span></h3><p>${count}회 정지</p><br>
 		<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="btBan" disabled="disabled">회원정지하기</button> &nbsp;
 		<input type="button" class="btn btn-info btn-lg" data-toggle="modal" value="회원정지풀기" id="btUnBan" disabled="disabled" onclick="unban()"> &nbsp;
-		<input type="button" value="회원강제탈퇴" onclick="memDel()">
+		<input type="button" value="회원강제탈퇴" onclick="memDel()" class="btn btn-danger btn-lg">
 		</div>
 	</div>
 <script>

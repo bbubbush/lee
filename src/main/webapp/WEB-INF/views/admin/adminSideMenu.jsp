@@ -81,7 +81,7 @@
 			   	 	</ul>
 			   </li>
 			   
-			   <li id="abList"><a href='/lee/eAudio.ju'>이용실 관리</a><!-- 1단 --></li>
+			   <li id="abList"><a href='/lee/adminSeatManage.ju'>이용시설 관리</a><!-- 1단 --></li>
 			   
 			   <li id="calendar"><a href='/lee/calendar.ju'>캘린더 관리</a><!-- 1단 --></li>
 			</ul>

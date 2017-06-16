@@ -11,7 +11,7 @@
 <h3>${dto.mem_name}님 회원정보</h3>
 
 <form name="fedexForm">
-<table>
+<table class="table">
 	<tr>
 		<th>회원코드</th>
 		<td colspan="3">${dto.mem_idx}<input type="hidden" id="mem_idx" value="${dto.mem_idx}"></td>
@@ -35,9 +35,9 @@
 </table>
 <h2>도서정보</h2>
 <c:set var="dto2" value="${dto2}"></c:set>
-<table>
+<table class="table">
 	<tr>
-		<td rowspan="6"><img src="${dto2.bk_url}" width="300px"></td>
+		<td rowspan="6" width="200px"><img src="${dto2.bk_url}" width="200px"></td>
 		<th>도서코드</th>
 		<td>${dto2.bk_idx}<input type="hidden" id="bk_idx" value="${dto2.bk_idx}"></td>
 	</tr>
@@ -60,8 +60,8 @@
 </table>
 <table>
 	<tr>
-		<th>설명</th>
-		<td>${dto2.bk_info}</td>
+		<th width="10%">설명</th>
+		<td width="90%">${dto2.bk_info}</td>
 	</tr>
 </table>
 <button type="button" class="btn btn-success" id="fedexGo">Fedex</button>
