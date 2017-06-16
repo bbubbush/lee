@@ -67,8 +67,53 @@
 	
 }
 </style>
+<script>
+var tbx;
+function trackbook(tcode){
+	alert('택배추적!'+tcode);
+	$.ajax({
+		url:"http://tracking.sweettracker.net/tracking",
+		type:"get",
+		data:{"t_key":"lEe3wbrNRikejA5XajFc0A","t_code":"08","t_invoice":"103169729913"},
+		dataType:"xml",
+		success: function(xmldata){
+			if(xmldata){
+				console.log(xmldata);
+				tbx = xmldata;
+				
+				
+			}
+			else{
+				console.log('값 못받아옴....ㅠㅜ');
+			}
+		},error: function(request,status,error){
+			console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+	});
+	
+}
+</script>
 </head>
 <body>
+<!-- 배송추적 Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">배송추적</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 	<%@include file="../header.jsp"%>
 	<div class="row">
 	
@@ -148,7 +193,9 @@
 					        </p>
 					        <p>
 					       		<a href="#" class="btn btn-primary" role="button">택배취소</a>
-					        	<a href="#" class="btn btn-primary" role="button">택배추적</a>
+					        	<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick='trackbook(${list.fedex_num})'>
+  								배송추적
+								</button>
 					        	<a href="#" class="btn btn-primary" role="button">대출연장</a>
 					        </p>
 					        </div>
