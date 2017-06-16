@@ -940,7 +940,6 @@
 	
 	<div class="text-center" id="pagingDiv">
 	</div>
-	<!-- 테스트용 -->
-	<div>테스트용으로 만든 줄</div>
+	
 </body>
 </html>
