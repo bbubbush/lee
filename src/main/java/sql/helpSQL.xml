@@ -141,7 +141,7 @@
       update quest set
       qu_subject=#{qu_subject},
       qu_content=#{qu_content} 
-      where qu_idx=#{qn_idx}
+      where qu_idx=#{qu_idx}
    </update>
       
    <select id="qnaPreInfo" parameterType="String" resultType="ju.dto.QnaDTO">

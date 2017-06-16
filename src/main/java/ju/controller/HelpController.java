@@ -299,6 +299,20 @@ public class HelpController {
 		return mav;
 	}
 	
+	@RequestMapping("/questChange.ju")
+	public ModelAndView questChange(@RequestParam(value="qu_idx") String qu_idx){
+		QnaDTO dto=qnaDao.qnaChange(qu_idx);
+		ModelAndView mav=new ModelAndView("help/quest/questChange","dto",dto);
+		return mav;
+	}
+	
+	@RequestMapping("/questChangeOk.ju")
+	public ModelAndView questChangeOk(QnaDTO dto){
+		int result=qnaDao.qnaChangeOk(dto);
+		String msg=result>0?"게시물 수정 성공":"게시물 수정 실패";
+		ModelAndView mav=new ModelAndView("help/quest/changeMsg","msg",msg);
+		return mav;
+	}
 	
 	
 	
