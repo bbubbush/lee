@@ -110,6 +110,23 @@
 			
 			$("input[name=el_idx]").val(readyIdx);
 			changeGrup();
+			
+			/*길이 제한 걸기*/
+			$("input[type=text]").keyup(
+				function(event) {
+					if($(this).val().length > 30) {
+						$(this).val($(this).val().substring(0, 30));
+					}
+				}
+			);
+			$("textarea").keyup(
+				function(event) {
+					if($(this).val().length > 1000) {
+						$(this).val($(this).val().substring(0, 1000));
+					}
+				}
+			);
+			
 		}); //기본함수
 		
 		var readyIdx=Math.floor(new Date().getTime());

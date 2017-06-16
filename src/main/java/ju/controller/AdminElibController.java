@@ -235,9 +235,9 @@ public class AdminElibController {
 			
 			String where="";
 			
-			el_subject="".equals(el_subject)?"":"el_subject LIKE '%" + el_subject + "%' ";
-			el_writer="".equals(el_writer)?"":"el_writer LIKE '%" + el_writer + "%' ";
-			el_pub="".equals(el_pub)?"":"el_pub LIKE '%" + el_pub + "%' ";
+			el_subject="".equals(el_subject)?"":"UPPER(el_subject) LIKE UPPER('%" + el_subject + "%') ";
+			el_writer="".equals(el_writer)?"":"UPPER(el_writer) LIKE UPPER('%" + el_writer + "%') ";
+			el_pub="".equals(el_pub)?"":"UPPER(el_pub) LIKE UPPER('%" + el_pub + "%') ";
 			el_lg="99".equals(el_lg)?"":"el_lg='" + el_lg + "' ";
 			el_md="99".equals(el_md)?"":"el_md='" + el_md + "' ";
 			
@@ -261,6 +261,7 @@ public class AdminElibController {
 			if(!"".equals(where)){
 				where="WHERE "+where;
 			}
+			System.out.println(where);
 			
 			int startNum=(page-1)*ElibPaging.CONTENTSIZE+1;
 			int endNum=startNum+ElibPaging.CONTENTSIZE-1;
