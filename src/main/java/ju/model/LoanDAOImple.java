@@ -140,4 +140,10 @@ public class LoanDAOImple implements LoanDAO {
 		}
 		return member;
 	}
+	
+	/**(schedule) 시간 지난 전자도서 자동 반납*/
+	public int elibLoanScheduleReturn() {
+		int resultCount=sqlMap.update("elibUPDschedule");
+		return resultCount;
+	}
 }

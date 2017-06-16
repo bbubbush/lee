@@ -30,5 +30,7 @@ public interface LoanDAO {
 	public List<OriginalLoanDTO> elibLoanInfo(String el_idx, String mem_idx);
 	/**전자도서 빌린 회원 IDX (~ 구분자)*/
 	public String elibLoanMembers(String el_idx);
+	/**(schedule) 시간 지난 전자도서 자동 반납*/
+	public int elibLoanScheduleReturn();
 	
 }

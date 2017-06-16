@@ -201,7 +201,7 @@ public class ElibController {
 		List<ElibDTO> elibArr=elibDAO.elibContent(el_idx);
 		ModelAndView mav=new ModelAndView();
 		
-		mav.addObject("elibArr", elibArr.get(0));
+		mav.addObject("elibArr", elibArr.size()==0?"":elibArr.get(0));
 		mav.addObject("mem", mem);
 		mav.setViewName("juJson");
 		return mav;
