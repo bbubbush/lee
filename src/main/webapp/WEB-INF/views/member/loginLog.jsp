@@ -133,9 +133,9 @@
 							</c:if>
 							<c:forEach begin="0" end="${fn:length(date)}" step="1" varStatus="i">
 							<tr>
-								<td>${date[fn:length(date)-i]}</td>
-								<td>${ip[fn:length(date)-i]}</td>
-								<td>${country[fn:length(date)-i]}</td>
+								<td>${date[i.index]}</td>
+								<td>${ip[i.index]}</td>
+								<td>${country[i.index]}</td>
 							</tr>
 							</c:forEach>
 						</table>

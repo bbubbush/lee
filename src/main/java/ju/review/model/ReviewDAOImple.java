@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
-import ju.dto.QnaDTO;
 import ju.dto.ReviewDTO;
 
 public class ReviewDAOImple implements ReviewDAO{

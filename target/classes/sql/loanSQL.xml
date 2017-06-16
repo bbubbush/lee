@@ -128,19 +128,4 @@
  		]]> 
  	</select>
  	
-<<<<<<< HEAD
- 	<select id="elibLoanMember" parameterType="String" resultType="String">
- 		<![CDATA[
- 			SELECT mem_idx FROM loanbook WHERE book_idx=#{el_idx} AND lb_return=1 AND lb_ed>sysdate 
- 		]]> 
- 	</select>
- 	
- 	<update id="elibUPDschedule">
- 		<![CDATA[
- 			UPDATE loanbook SET lb_return=0 WHERE book_idx LIKE 'EB%' AND lb_return=1 AND lb_ed<sysdate
- 		]]> 
- 	</update>
- 	
-=======
->>>>>>> e3a3dff0e8cf3d3007c662bea87150bca12911d0
  </mapper>

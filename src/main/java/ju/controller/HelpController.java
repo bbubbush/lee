@@ -12,9 +12,11 @@ import org.springframework.web.servlet.ModelAndView;
 import ju.dto.MissingDTO;
 import ju.dto.NoticeDTO;
 import ju.dto.QnaDTO;
+import ju.dto.ReviewDTO;
 import ju.missing.model.MissingDAO;
 import ju.notice.model.NoticeDAO;
 import ju.quest.model.QnaDAO;
+import ju.review.model.ReviewDAO;
 
 
 
@@ -31,6 +33,8 @@ public class HelpController {
    private MissingDAO missingDao;
    @Autowired
    private QnaDAO qnaDao;
+   @Autowired
+   private ReviewDAO reviewDao;
 
    
    
@@ -316,27 +320,8 @@ public class HelpController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/reviewContent.ju")
-	public ModelAndView reviewContent(String review_idx){
-		ReviewDTO dto=reviewDao.reviewContent(review_idx);
-		ReviewDTO preInfo = reviewDao.reviewPreInfo(review_idx);
-		ReviewDTO nextInfo = reviewDao.reviewNextInfo(review_idx);
-		ModelAndView mav=new ModelAndView("help/review/reviewContent","dto",dto);
-		mav.addObject("pre", preInfo);
-		mav.addObject("next", nextInfo);
-		return mav;
-		
-	}
 	
-	@RequestMapping("/reviewDelete.ju")
-	public ModelAndView reviewDelete(@RequestParam(value="review_idx") String review_idx ){
-		int result=reviewDao.reviewDelete(review_idx);
-		String msg=result>0?"게시물 삭제 성공":"게시물 삭제 실패";
-		ModelAndView mav=new ModelAndView("help/review/deleteMsg","msg",msg);
-		return mav;
-	}
 	
-<<<<<<< HEAD
 	@RequestMapping("/reviewChange.ju")
 	public ModelAndView reviewChange(@RequestParam(value="review_idx") String review_idx){
 		ReviewDTO dto=reviewDao.reviewChange(review_idx);
@@ -355,8 +340,6 @@ public class HelpController {
 
 	
 	
-=======
->>>>>>> e3a3dff0e8cf3d3007c662bea87150bca12911d0
 	//희망도서 요청 게시판 관련 메소드
 	@RequestMapping("/orderBkList.ju")
 	public ModelAndView orderbkList(){
