@@ -260,7 +260,7 @@
 						}
 					}
 				);
-				
+
 				// 삭제 후 다시 자기 페이지로
 				$(".btn-danger").click(
 					function() {
@@ -940,6 +940,7 @@
 	
 	<div class="text-center" id="pagingDiv">
 	</div>
-	
+	<!-- 테스트용 -->
+	<div>테스트용으로 만든 줄</div>
 </body>
 </html>
