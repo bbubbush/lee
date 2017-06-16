@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ju.dto.ElibDTO;
 import ju.elib.model.ElibDAO;
+import ju.model.LoanDAO;
 import ju.modul.BookCateModul;
 import ju.modul.ElibPaging;
 
@@ -29,6 +30,8 @@ public class AdminElibController {
 	
 	@Autowired
 	private ElibDAO elibDAO;
+	@Autowired
+	private LoanDAO loandao;
 	
 	/**업로드 최초 로딩*/
 	@RequestMapping(value="elibUpload.ju")
@@ -172,6 +175,7 @@ public class AdminElibController {
 		
 		BookCateModul bcm=new BookCateModul();
 		ArrayList<String> cateLg=new ArrayList<String>();
+		ArrayList<String> members=new ArrayList<String>();
 		for(int i=0 ; i<elibArr.size() ; i++){
 			if(elibArr.get(i).getEl_idx().indexOf("EB")==0){
 				cateLg.add(bcm.BookLgSelectId(0, 7, false, Integer.toString(i)));
@@ -185,6 +189,7 @@ public class AdminElibController {
 			if("~".equals(elibArr.get(i).getEl_recommend())){
 				elibArr.get(i).setEl_recommend("");
 			}
+			members.add(loandao.elibLoanMembers(elibArr.get(i).getEl_idx()));
 		}
 		ArrayList<String> cateMd=new ArrayList<String>();
 		for(int i=0 ; i<cateLg.size() ; i++){
@@ -202,8 +207,11 @@ public class AdminElibController {
 			cateMd.add(select);
 			
 		}
+		
+		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("elibArr", elibArr);
+		mav.addObject("members", members);
 		mav.addObject("cateLg", cateLg);
 		mav.addObject("cateMd", cateMd);
 		mav.addObject("paging", paging);
@@ -263,6 +271,7 @@ public class AdminElibController {
 			
 			BookCateModul bcm=new BookCateModul();
 			ArrayList<String> cateLg=new ArrayList<String>();
+			ArrayList<String> members=new ArrayList<String>();
 			for(int i=0 ; i<elibArr.size() ; i++){
 				if(elibArr.get(i).getEl_idx().indexOf("EB")==0){
 					cateLg.add(bcm.BookLgSelectId(0, 7, false, Integer.toString(i)));
@@ -276,6 +285,7 @@ public class AdminElibController {
 				if("~".equals(elibArr.get(i).getEl_recommend())){
 					elibArr.get(i).setEl_recommend("");
 				}
+				members.add(loandao.elibLoanMembers(elibArr.get(i).getEl_idx()));
 			}
 			ArrayList<String> cateMd=new ArrayList<String>();
 			for(int i=0 ; i<cateLg.size() ; i++){
@@ -296,6 +306,7 @@ public class AdminElibController {
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("elibArr", elibArr);
+		mav.addObject("members", members);
 		mav.addObject("cateLg", cateLg);
 		mav.addObject("cateMd", cateMd);
 		mav.addObject("paging", paging);
