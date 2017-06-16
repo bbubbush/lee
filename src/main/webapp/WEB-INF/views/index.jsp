@@ -603,7 +603,7 @@ table {
 	<c:set var="eliblist" value="${eliblist}"/>
 	<c:choose>
 		<c:when test="${empty eliblist}">
-					<div class="item active">
+					<div class="item active" style="display:inline-block;">
 							<img src="/lee/resources/index/button.gif" alt="">
 							<div class="carousel-caption" style="background-color: rgba(0,0,0,0.7);">
 							<h3>추천도서가 없습니다.</h3>
