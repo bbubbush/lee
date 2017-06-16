@@ -1,15 +1,14 @@
 package ju.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ju.dto.RegistDTO;
@@ -20,7 +19,7 @@ import ju.model.SubjectDAO;
 @Controller
 public class LearningController {
 	@Autowired
-	SubjectDAO subjectdao;
+	public SubjectDAO subjectDao;
 	
 	@Autowired
 	LearningDAO ligdao;
@@ -35,12 +34,15 @@ public class LearningController {
 	public ModelAndView libList(HttpSession session){
 		ModelAndView mav = new ModelAndView();
 		
-		List<SubjectDTO> list = ligdao.checkSubjectList();
-		for(int i = 0; i<list.size();i++){
-			list.get(i).setSj_sd(list.get(i).getSj_sd().substring(0, 11));
-			list.get(i).setSj_ed(list.get(i).getSj_ed().substring(0, 11));
+		List<SubjectDTO> list = subjectDao.classList();
+		String dateFormat="yyyy-MM-dd";
+		SimpleDateFormat sdf=new SimpleDateFormat(dateFormat);
+		for(int i=0; i<list.size(); i++){
+			String sdDay = sdf.format(list.get(i).getSj_sd());
+			list.get(i).setSj_sday(sdDay);
+			String edDay = sdf.format(list.get(i).getSj_ed());
+			list.get(i).setSj_eday(edDay);
 		}
-		
 		mav.addObject("sublist", list);
 		mav.setViewName("learning/ligList");
 		return mav;
@@ -49,10 +51,14 @@ public class LearningController {
 	@RequestMapping("/rgstList.ju")
 	public ModelAndView rgstList(HttpSession session){
 		String mem_idx = (String)session.getAttribute("sidx");
-		List<SubjectDTO> list = ligdao.checkMyRgstList(mem_idx);
-		for(int i = 0; i<list.size();i++){
-			list.get(i).setSj_sd(list.get(i).getSj_sd().substring(0, 11));
-			list.get(i).setSj_ed(list.get(i).getSj_ed().substring(0, 11));
+		List<SubjectDTO> list = subjectDao.classList();
+		String dateFormat="yyyy-MM-dd";
+		SimpleDateFormat sdf=new SimpleDateFormat(dateFormat);
+		for(int i=0; i<list.size(); i++){
+			String sdDay = sdf.format(list.get(i).getSj_sd());
+			list.get(i).setSj_sday(sdDay);
+			String edDay = sdf.format(list.get(i).getSj_ed());
+			list.get(i).setSj_eday(edDay);
 		}
 		return new ModelAndView("learning/rgstList","mylist",list);
 	}

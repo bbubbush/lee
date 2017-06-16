@@ -83,7 +83,7 @@
                            <tr>
                               <td>${list.sj_name }</td>
                               <td>${list.tc_name }</td> 
-                              <td>${list.sj_sd } ~ ${list.sj_ed }</td>
+                              <td>${list.sj_sday } ~ ${list.sj_eday }</td>
                               <td>${list.sj_st } ~ ${list.sj_et }</td>
                               <td>${list.sj_max }</td>
                            </tr>

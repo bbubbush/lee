@@ -105,7 +105,7 @@
                               <td>${list.sj_num }</td>
                               <td>${list.sj_name }</td>
                               <td>${list.tc_name}</td>
-                              <td>${list.sj_sd } ~ ${list.sj_ed}</td>
+                              <td>${list.sj_sday } ~ ${list.sj_eday}</td>
                               <td>${list.sj_st } ~ ${list.sj_et}</td>
                               <td>${list.sj_max }</td>
                            </tr>
@@ -116,7 +116,7 @@
                                  <hr>
                                  강의 설명 : ${list.sj_sum}<br>
                                  강사명 : ${list.tc_name }<br>
-                                 강의 일시 : ${list.sj_sd }~${list.sj_ed}<br>
+                                 강의 일시 : ${list.sj_sday }~${list.sj_eday}<br>
                                  강의 시간 : ${list.sj_st }~${list.sj_et}<br>
                                  강의 정원 : ${list.sj_max }<br>
                                  현재 신청 인원 : ${list.sj_num }<br>
