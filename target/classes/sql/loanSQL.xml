@@ -128,4 +128,12 @@
  		]]> 
  	</select>
  	
+ 	<select id="elibLoanMember" parameterType="String" resultType="String">
+ 		<![CDATA[
+ 			SELECT mem_idx FROM loanbook WHERE book_idx=#{el_idx} AND lb_return=1 AND lb_ed>sysdate 
+ 		]]> 
+ 	</select>
+ 	
+ 	
+ 	
  </mapper>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -515,14 +516,14 @@ table {
 <!-- 세번째줄 -->
 <div id="favorbook" class="container-fluid bg-3 text-center">
 
+
   <div class="row" style="width:100%; height:400px;">
-  
+	  
 	    <div class="col-md-8" style="text-align:center; height:100%;">
 	      <div class="thumbnail" style="text-align:center; height:100%;">
 	        <h4>이달의 추천도서</h4>
-
-						<div id="carousel-example-generic" class="carousel slide"
-							data-ride="carousel" style="background-color:rgba(26, 164, 172, 0.5 );height:356px; border-radius: 10px;">
+	        <div id="carousel-example-generic" class="carousel slide"
+							data-ride="carousel" style="background-color:rgba(11, 211, 146, 0.5 );height:356px; border-radius: 10px;">
 							<!-- Indicators -->
 							<ol class="carousel-indicators">
 								<li data-target="#carousel-example-generic" data-slide-to="0"
@@ -533,31 +534,49 @@ table {
 	
 							<!-- Wrapper for slides -->
 							<div class="carousel-inner" role="listbox" style="text-align:center;">
+	<c:set var="bklist" value="${bklist}"/>
+	<c:choose>
+		<c:when test="${empty bklist}">
+		
+							
 								<div class="item active" style="padding-left:23%; padding-top:10px;">
 									<img src="/lee/resources/index/button.gif" alt="">
 									<div class="carousel-caption">
-									<h3>책1</h3>
-	    							<p>책1입니다</p>
+									<h3>추천도서</h3>
+	    							<p>추천도서가 없습니다.</p>
 									</div>
 								</div>
 								
-								<!-- <div class="item">
-									<img src="/lee/resources/index/button.gif" alt="">
-									<div class="carousel-caption">
-									<h3>책2</h3>
-	    							<p>책2입니다</p>
+							
+							
+		</c:when>
+		<c:when test="${bklist ne null }">
+			<c:forEach	items="${bklist }" var="list" begin="0" end="0">
+								<div class="item active" style="padding-left:23%; padding-top:10px;">
+									<img src="${list.bk_url}" alt="" style="height:310px;">
+									<div class="carousel-caption" style="background-color: rgba(0,0,0,0.7);">
+									<h3>${list.bk_subject}</h3>
+	    							<p>${list.bk_writer}</p>
+									</div>
+								</div>
+			</c:forEach>
+			<c:forEach	items="${bklist }" var="list" begin="1" end="2">
+			
+							
+								<div class="item" style="padding-left:23%; padding-top:10px;">
+									<img src="${list.bk_url}" alt="" style="height:310px;">
+									<div class="carousel-caption" style="background-color: rgba(0,0,0,0.7);">
+									<h3>${list.bk_subject}</h3>
+	    							<p>${list.bk_writer}</p>
 									</div>
 								</div>
 								
-								<div class="item">
-									<img src="/lee/resources/index/button.gif" alt="">
-									<div class="carousel-caption">
-									<h3>책3</h3>
-	    							<p>책3입니다</p>
-									</div>
-								</div> -->
-								
-							</div>
+							
+			</c:forEach>		
+		</c:when>
+	</c:choose>
+	</div>
+						
 	
 							<!-- Controls -->
 							<a class="left carousel-control" href="#carousel-example-generic"
@@ -573,21 +592,40 @@ table {
 
 				</div>
 	    </div>
+
 	    
 	    <div class="col-md-4" style="text-align:center; height:100%;">
 	      <div class="thumbnail" style="text-align:center; height:100%;">
 	        <h4>전자도서관 추천 자료</h4>
 	        
-	        <div class="thumbnail" style=" height:356px; border-radius: 10px; background-color:rgba(26, 164, 172, 0.5 );">
+	        <div class="thumbnail" style=" height:356px; border-radius: 10px; background-color:rgba(11, 211, 146, 0.5 );">
 		    		 <div class="carousel-inner" role="listbox" style="text-align:center;">
-						<div class="item active">
+	<c:set var="eliblist" value="${eliblist}"/>
+	<c:choose>
+		<c:when test="${empty eliblist}">
+					<div class="item active">
 							<img src="/lee/resources/index/button.gif" alt="">
-							<div class="carousel-caption">
-							<h3>책1</h3>
+							<div class="carousel-caption" style="background-color: rgba(0,0,0,0.7);">
+							<h3>추천도서가 없습니다.</h3>
    							<p>책1입니다</p>
 							</div>
-							<p>반갑습니다.</p>
+							
 					</div>
+		</c:when>
+		<c:when test="${eliblist ne null }">
+			<c:forEach items="${eliblist}" var="list" begin="0" end="0">
+						<div class="item active">
+							<img src="${list.el_path}" alt="" style="height:310px;">
+							<div class="carousel-caption" style="background-color: rgba(0,0,0,0.7);">
+							<h3>${list.el_subject}</h3>
+   							<p>${list.el_writer}</p>
+							</div>
+							
+						</div>
+				</c:forEach>
+		</c:when>
+	</c:choose>	    		 
+						
    			</div>
    			 	
 	      </div>
@@ -596,7 +634,7 @@ table {
   </div>
 </div><br>
 
-
+</div>
     
 <!-- <footer class="container-fluid text-center">
   

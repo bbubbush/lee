@@ -28,5 +28,7 @@ public interface LoanDAO {
 	public int elibLoanCheck(String el_idx, String mem_idx);
 	/**전자도서 빌린책 정보*/
 	public List<OriginalLoanDTO> elibLoanInfo(String el_idx, String mem_idx);
+	/**전자도서 빌린 회원 IDX (~ 구분자)*/
+	public String elibLoanMembers(String el_idx);
 	
 }

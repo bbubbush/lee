@@ -126,4 +126,18 @@ public class LoanDAOImple implements LoanDAO {
 		return loanArr;
 	}
 	
+	/**전자도서 빌린 회원 IDX (~ 구분자)*/
+	public String elibLoanMembers(String el_idx){
+		HashMap<String, String> hmap=new HashMap<String, String>();
+		hmap.put("el_idx", el_idx);
+		List<String> loanArr=sqlMap.selectList("elibLoanMember", hmap);
+		String member="";
+		for(int i=0 ; i<loanArr.size() ; i++){
+			member+=loanArr.get(i)+"~";
+		}
+		if(!"".equals(member)){
+			member=member.substring(0, member.length()-1);
+		}
+		return member;
+	}
 }
