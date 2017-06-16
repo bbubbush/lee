@@ -179,7 +179,9 @@ public class EbookViewerController{
 			List<OriginalLoanDTO> loanArr=loandao.loanInfo(lb_idx);
 			if(loanArr.get(0).getLb_etc().indexOf("~")!=-1){
 				String[] etcArr=loanArr.get(0).getLb_etc().split("~");
+				System.out.println(endPage);
 				lb_etc=endPage;
+				System.out.println(lb_etc);
 				for(int i=1 ; i<etcArr.length ; i++){
 					lb_etc+="~"+etcArr[i];
 				}
