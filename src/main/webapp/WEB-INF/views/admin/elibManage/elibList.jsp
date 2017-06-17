@@ -428,6 +428,9 @@
 								$("#cateMd_"+num).prop("disabled", "disabled");
 								$("#tdLg_"+num).data("md", data.elibArr.el_md);
 								$("#tdMd_"+num).data("md", data.elibArr.el_md);
+								
+								$(".contentTable:eq("+num+")>tbody>tr>td:eq(10)").html(data.members);
+								
 								cateLg=$("#tdLg_"+num).html();
 								cateMd=$("#tdMd_"+num).html();
 								

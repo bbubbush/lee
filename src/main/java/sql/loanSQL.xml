@@ -140,4 +140,8 @@
  		]]> 
  	</update>
  	
+ 	<delete id="loanDEL" parameterType="String">
+ 		DELETE FROM loanbook WHERE book_idx=#{el_idx}
+ 	</delete>
+ 	
  </mapper>
