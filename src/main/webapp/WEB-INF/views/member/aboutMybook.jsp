@@ -87,6 +87,7 @@
   } */
 }
 </style>
+
 <script>
 
 
@@ -210,6 +211,7 @@ function trackbook(tcode){
   </div>
 </div>
 
+
 	<%@include file="../header.jsp"%>
 	<div class="row">
 	
@@ -280,7 +282,7 @@ function trackbook(tcode){
 					     </div>
 					      <div class="caption">
 					        <h3>책제목 대출2</h3>
-					       
+ 
 					        	<c:if test="${empty list.fedex_num}">
 						        		 <p>
 									       	대출일 : ${list.lb_sd}<br>
@@ -308,7 +310,7 @@ function trackbook(tcode){
 										</p>
 					       		</c:if>
 					        	
-					        
+					       
 					        </div>
 					    </div>
 					  </div>

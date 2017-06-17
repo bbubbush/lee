@@ -19,6 +19,11 @@
     
 	<script type="text/javascript" src="/lee/resources/js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="/lee/resources/bootstrapk/js/bootstrap.min.js"></script>
+	
+	<script type="text/javascript" src="/lee/resources/js/alertifyjs/alertify.min.js"></script>
+	<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/alertify.min.css">
+	<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/themes/default.min.css">
+	
 	<script type="text/javascript">
 	$(function() {
 		var el_subject="";
@@ -101,6 +106,7 @@
 			, dataType : "json"
 			, success: function(data){
 				var elibArr=data.elibArr;
+				var members=data.members;
 				var intoHTML="";
 				if(elibArr.length==0){
 					intoHTML='<div class="alert alert-warning text-center" role="alert">등록 자료가 없습니다.</div>';
@@ -179,11 +185,15 @@
 					intoHTML+='						</tr>';
 					intoHTML+='						<tr>';
 					intoHTML+='							<th>추천인 IDX</th>';
-					intoHTML+='							<td>' + elibArr[i].el_recommend.replace("~", "\n") + '</td>';
+					intoHTML+='							<td>' + elibArr[i].el_recommend.split("~").join("<br>") + '</td>';
 					intoHTML+='						</tr>';
 					intoHTML+='						<tr>';
 					intoHTML+='							<th>추천수</th>';
 					intoHTML+='							<td>' + elibArr[i].el_recocount + '</td>';
+					intoHTML+='						</tr>';
+					intoHTML+='						<tr>';
+					intoHTML+='							<th>대여 회원 IDX</th>';
+					intoHTML+='							<td>' + members[i].split("~").join("<br>") + '</td>';
 					intoHTML+='						</tr>';
 					intoHTML+='					</table>';
 					intoHTML+='				</div> <!-- table 위 div -->';
@@ -235,25 +245,51 @@
 					} // click function
 				); // 페이징 click
 				
+				/*길이 제한 걸기*/
+				$("input[type=text]").keyup(
+					function(event) {
+						if($(this).val().length > 30) {
+							$(this).val($(this).val().substring(0, 30));
+						}
+					}
+				);
+				$("textarea").keyup(
+					function(event) {
+						if($(this).val().length > 1000) {
+							$(this).val($(this).val().substring(0, 1000));
+						}
+					}
+				);
+
 				// 삭제 후 다시 자기 페이지로
 				$(".btn-danger").click(
 					function() {
 						var page=$("#pagingDiv>ul>li.active").data("page");
 						var num=$(".btn-danger").index(this);
 						var el_idx=$(".contentTable:eq("+num+")>tbody>tr>td:eq(0)>input").val();
-						if(confirm("해당 전자도서가 삭제됩니다. \n삭제 하시겠습니까?")){
-							$.ajax({
-								type : "GET"
-								, url : "elibDelete.ju"
-								, data : {el_idx : el_idx}
-								, dataType : "json"
-								, success: function(data){
-									noList(page);
-									alert("삭제가 완료 되었습니다.");
-								}
-							});
-						}
-						else{ /*취소함*/ }
+						
+						alertify.confirm("안내", "해당 전자도서가 삭제됩니다. <br>삭제 하시겠습니까?",
+							function(){
+								$.ajax({
+									type : "GET"
+									, url : "elibDelete.ju"
+									, data : {el_idx : el_idx}
+									, dataType : "json"
+									, success: function(data){
+										noList(page);
+										alertify.alert("타이틀", "삭제가 완료 되었습니다."
+											, function() {
+												alertify.warning("전자도서를 삭제 완료");
+											}
+										);
+									} // success function
+								}); // ajax 끝
+							}, // ok function
+							function(){
+								alertify.message("전자도서 삭제 취소");
+							} // cancel function
+						); // confirm
+						
 					} // danger function
 				); // danger click
 				
@@ -277,8 +313,11 @@
 							$(".contentTable:eq("+num+")>tbody>tr>td:eq(4)>textarea").removeAttr("disabled");
 							cateLg=$("#tdLg_"+num).html();
 							cateMd=$("#tdMd_"+num).html();
-							alert("수정모드");
-							
+							alertify.alert("안내", "수정 모드"
+								, function(){
+									alertify.message("전자도서 수정 모드");
+								}
+							);
 						}
 						else if(text=="취소"){
 							$(".contentTable:eq("+num+")>tbody>tr>td:eq(1)>input")
@@ -312,6 +351,11 @@
 							
 							$(".btn-success").eq(num).prop("disabled", "disabled");
 							$(".btn-warning").eq(num).text("수정");
+							alertify.alert("안내", "수정 모드 취소"
+								, function() {
+									alertify.message("전자도서 수정 취소");
+								}
+							);
 						}
 					} // warning function
 				); // warning click
@@ -331,22 +375,38 @@
 						var el_md=$("#cateMd_"+num).val();
 
 						if(el_subject.length==0){
-							alert("제목을 입력하지 않으셨습니다.");
+							alertify.alert("Error", "제목을 입력하지 않으셨습니다."
+								, function() {
+									alertify.message("제목을 입력 하세요.");
+								}
+							);
 							$(".contentTable:eq("+num+")>tbody>tr>td:eq(1)>input").focus();
 							return null;
 						}
 						if(el_writer.length==0){
-							alert("저자를 입력하지 않으셨습니다.");
+							alertify.alert("Error", "저자를 입력하지 않으셨습니다."
+								, function() {
+									alertify.message("저자를 입력 하세요.");
+								}
+							);
 							$(".contentTable:eq("+num+")>tbody>tr>td:eq(2)>input").focus();
 							return null;
 						}
 						if(el_pub.length==0){
-							alert("출판사를 입력하지 않으셨습니다.");
+							alertify.alert("Error", "출판사를 입력하지 않으셨습니다."
+								, function() {
+									alertify.message("출판사를 입력 하세요.");
+								}
+							);
 							$(".contentTable:eq("+num+")>tbody>tr>td:eq(3)>input").focus();
 							return null;
 						}
 						if(el_info.length==0){
-							alert("책정보를 입력하지 않으셨습니다.");
+							alertify.alert("Error", "책정보를 입력하지 않으셨습니다."
+								, function() {
+									alertify.message("책정보를 입력 하세요.");
+								}
+							);
 							$(".contentTable:eq("+num+")>tbody>tr>td:eq(4)>textarea").focus();
 							return null;
 						}
@@ -357,17 +417,25 @@
 							, data : {el_idx : el_idx, el_subject : el_subject, el_writer : el_writer, el_pub : el_pub, el_info : el_info, groupNum : groupNum, el_lg : el_lg, el_md : el_md}
 							, dataType : "json"
 							, success: function(data){
-								$(".panel-title:eq(" +num+ ")>a").text(el_subject);
-								$(".contentTable:eq("+num+")>tbody>tr>td:eq(0)>input").val(data.change_idx).data("idx", data.change_idx);
-								$(".contentTable:eq("+num+")>tbody>tr>td:eq(1)>input").prop("disabled", "disabled");
-								$(".contentTable:eq("+num+")>tbody>tr>td:eq(2)>input").prop("disabled", "disabled");
-								$(".contentTable:eq("+num+")>tbody>tr>td:eq(3)>input").prop("disabled", "disabled");
-								$(".contentTable:eq("+num+")>tbody>tr>td:eq(4)>textarea").prop("disabled", "disabled");
+								$(".panel-title:eq(" +num+ ")>a").text(data.elibArr.el_subject);
+								$(".contentTable:eq("+num+")>tbody>tr>td:eq(0)>input").val(data.elibArr.el_idx).data("idx", data.elibArr.el_idx);
+								$(".contentTable:eq("+num+")>tbody>tr>td:eq(1)>input").prop("disabled", "disabled").val(data.elibArr.el_subject).data("subject", data.elibArr.el_subject);
+								$(".contentTable:eq("+num+")>tbody>tr>td:eq(2)>input").prop("disabled", "disabled").val(data.elibArr.el_writer).data("writer", data.elibArr.el_writer);
+								$(".contentTable:eq("+num+")>tbody>tr>td:eq(3)>input").prop("disabled", "disabled").val(data.elibArr.el_pub).data("pub", data.elibArr.el_pub);
+								$(".contentTable:eq("+num+")>tbody>tr>td:eq(4)>textarea").prop("disabled", "disabled").val(data.elibArr.el_info).data("info", data.elibArr.el_info);
 								$(".contentTable:eq("+num+")>tbody>tr>td:eq(5)>label>input[name=contentGroup_"+num+"]:checked").prop("disabled", "disabled");
 								$("#cateLg_"+num).prop("disabled", "disabled");
 								$("#cateMd_"+num).prop("disabled", "disabled");
+								$("#tdLg_"+num).data("md", data.elibArr.el_md);
+								$("#tdMd_"+num).data("md", data.elibArr.el_md);
+								cateLg=$("#tdLg_"+num).html();
+								cateMd=$("#tdMd_"+num).html();
 								
-								alert("수정완료");
+								alertify.alert("안내", "해당 전자도서 수정이 완료 되었습니다."
+									, function() {
+										alertify.success("전자도서 수정 완료");
+									}
+								);
 								
 								$(".btn-warning").eq(num).text("수정");
 								$(".btn-success").eq(num).prop("disabled", "disabled");
@@ -442,6 +510,7 @@
 			, dataType : "json"
 			, success: function(data){
 				var elibArr=data.elibArr;
+				var members=data.members;
 				var intoHTML="";
 				if(elibArr.length==0){
 					intoHTML='<div class="alert alert-warning text-center" role="alert">검색 결과가 없습니다.</div>';
@@ -520,11 +589,15 @@
 					intoHTML+='						</tr>';
 					intoHTML+='						<tr>';
 					intoHTML+='							<th>추천인 IDX</th>';
-					intoHTML+='							<td>' + elibArr[i].el_recommend.replace("~", "\n") + '</td>';
+					intoHTML+='							<td>' + elibArr[i].el_recommend.split("~").join("<br>") + '</td>';
 					intoHTML+='						</tr>';
 					intoHTML+='						<tr>';
 					intoHTML+='							<th>추천수</th>';
 					intoHTML+='							<td>' + elibArr[i].el_recocount + '</td>';
+					intoHTML+='						</tr>';
+					intoHTML+='						<tr>';
+					intoHTML+='							<th>대여 회원 IDX</th>';
+					intoHTML+='							<td>' + members[i].split("~").join("<br>") + '</td>';
 					intoHTML+='						</tr>';
 					intoHTML+='					</table>';
 					intoHTML+='				</div> <!-- table 위 div -->';
@@ -576,25 +649,51 @@
 					} // click function
 				); // 페이징 click
 				
+				/*길이 제한 걸기*/
+				$("input[type=text]").keyup(
+					function(event) {
+						if($(this).val().length > 30) {
+							$(this).val($(this).val().substring(0, 30));
+						}
+					}
+				);
+				$("textarea").keyup(
+					function(event) {
+						if($(this).val().length > 1000) {
+							$(this).val($(this).val().substring(0, 1000));
+						}
+					}
+				);
+				
 				// 삭제 후 다시 자기 페이지로
 				$(".btn-danger").click(
 					function() {
 						var page=$("#pagingDiv>ul>li.active").data("page");
 						var num=$(".btn-danger").index(this);
 						var el_idx=$(".contentTable:eq("+num+")>tbody>tr>td:eq(0)>input").val();
-						if(confirm("해당 전자도서가 삭제됩니다. \n삭제 하시겠습니까?")){
-							$.ajax({
-								type : "GET"
-								, url : "elibDelete.ju"
-								, data : {el_idx : el_idx}
-								, dataType : "json"
-								, success: function(data){
-									noList(page);
-									alert("삭제가 완료 되었습니다.");
-								}
-							});
-						}
-						else{ /*취소함*/ }
+						
+						alertify.confirm("안내", "해당 전자도서가 삭제됩니다. <br>삭제 하시겠습니까?",
+							function(){
+								$.ajax({
+									type : "GET"
+									, url : "elibDelete.ju"
+									, data : {el_idx : el_idx}
+									, dataType : "json"
+									, success: function(data){
+										noList(page);
+										alertify.alert("타이틀", "삭제가 완료 되었습니다."
+											, function() {
+												alertify.warning("전자도서를 삭제 완료");
+											}
+										);
+									} // success function
+								}); // ajax 끝
+							}, // ok function
+							function(){
+								alertify.message("전자도서 삭제 취소");
+							 } // cancel function
+						); // confirm
+						
 					} // danger function
 				); // danger click
 				
@@ -618,7 +717,11 @@
 							$(".contentTable:eq("+num+")>tbody>tr>td:eq(4)>textarea").removeAttr("disabled");
 							cateLg=$("#tdLg_"+num).html();
 							cateMd=$("#tdMd_"+num).html();
-							alert("수정모드");
+							alertify.alert("안내", "수정 모드"
+								, function() {
+									alertify.message("전자도서 수정 모드");
+								}
+							);
 							
 						}
 						else if(text=="취소"){
@@ -653,6 +756,11 @@
 							
 							$(".btn-success").eq(num).prop("disabled", "disabled");
 							$(".btn-warning").eq(num).text("수정");
+							alertify.alert("안내", "수정 모드 취소"
+								, function() {
+									alertify.message("전자도서 수정 취소");
+								}
+							);
 						}
 					} // warning function
 				); // warning click
@@ -671,22 +779,38 @@
 						var el_lg=$("#cateLg_"+num).val();
 						var el_md=$("#cateMd_"+num).val();
 						if(el_subject.length==0){
-							alert("제목을 입력하지 않으셨습니다.");
+							alertify.alert("Error", "제목을 입력하지 않으셨습니다."
+								, function() {
+									alertify.message("제목을 입력 하세요.");
+								}
+							);
 							$(".contentTable:eq("+num+")>tbody>tr>td:eq(1)>input").focus();
 							return null;
 						}
 						if(el_writer.length==0){
-							alert("저자를 입력하지 않으셨습니다.");
+							alertify.alert("Error", "저자를 입력하지 않으셨습니다."
+								, function() {
+									alertify.message("저자를 입력 하세요.");
+								}
+							);
 							$(".contentTable:eq("+num+")>tbody>tr>td:eq(2)>input").focus();
 							return null;
 						}
 						if(el_pub.length==0){
-							alert("출판사를 입력하지 않으셨습니다.");
+							alertify.alert("Error", "출판사를 입력하지 않으셨습니다."
+								, function() {
+									alertify.message("출판사를 입력 하세요.");
+								}
+							);
 							$(".contentTable:eq("+num+")>tbody>tr>td:eq(3)>input").focus();
 							return null;
 						}
 						if(el_info.length==0){
-							alert("책정보를 입력하지 않으셨습니다.");
+							alertify.alert("Error", "책정보를 입력하지 않으셨습니다."
+								, function() {
+								alertify.message("책정보를 입력 하세요.");
+								}
+							);
 							$(".contentTable:eq("+num+")>tbody>tr>td:eq(4)>textarea").focus();
 							return null;
 						}
@@ -697,17 +821,25 @@
 							, data : {el_idx : el_idx, el_subject : el_subject, el_writer : el_writer, el_pub : el_pub, el_info : el_info, groupNum : groupNum, el_lg : el_lg, el_md : el_md}
 							, dataType : "json"
 							, success: function(data){
-								$(".panel-title:eq(" +num+ ")>a").text(el_subject);
-								$(".contentTable:eq("+num+")>tbody>tr>td:eq(0)>input").val(data.change_idx).data("idx", data.change_idx);
-								$(".contentTable:eq("+num+")>tbody>tr>td:eq(1)>input").prop("disabled", "disabled");
-								$(".contentTable:eq("+num+")>tbody>tr>td:eq(2)>input").prop("disabled", "disabled");
-								$(".contentTable:eq("+num+")>tbody>tr>td:eq(3)>input").prop("disabled", "disabled");
-								$(".contentTable:eq("+num+")>tbody>tr>td:eq(4)>textarea").prop("disabled", "disabled");
+								$(".panel-title:eq(" +num+ ")>a").text(data.elibArr.el_subject);
+								$(".contentTable:eq("+num+")>tbody>tr>td:eq(0)>input").val(data.elibArr.el_idx).data("idx", data.elibArr.el_idx);
+								$(".contentTable:eq("+num+")>tbody>tr>td:eq(1)>input").prop("disabled", "disabled").val(data.elibArr.el_subject).data("subject", data.elibArr.el_subject);
+								$(".contentTable:eq("+num+")>tbody>tr>td:eq(2)>input").prop("disabled", "disabled").val(data.elibArr.el_writer).data("writer", data.elibArr.el_writer);
+								$(".contentTable:eq("+num+")>tbody>tr>td:eq(3)>input").prop("disabled", "disabled").val(data.elibArr.el_pub).data("pub", data.elibArr.el_pub);
+								$(".contentTable:eq("+num+")>tbody>tr>td:eq(4)>textarea").prop("disabled", "disabled").val(data.elibArr.el_info).data("info", data.elibArr.el_info);
 								$(".contentTable:eq("+num+")>tbody>tr>td:eq(5)>label>input[name=contentGroup_"+num+"]:checked").prop("disabled", "disabled");
 								$("#cateLg_"+num).prop("disabled", "disabled");
 								$("#cateMd_"+num).prop("disabled", "disabled");
+								$("#tdLg_"+num).data("md", data.elibArr.el_md);
+								$("#tdMd_"+num).data("md", data.elibArr.el_md);
+								cateLg=$("#tdLg_"+num).html();
+								cateMd=$("#tdMd_"+num).html();
 								
-								alert("수정완료");
+								alertify.alert("안내", "해당 전자도서 수정이 완료 되었습니다."
+									, function() {
+										alertify.success("전자도서 수정 완료");
+									}
+								);
 								
 								$(".btn-warning").eq(num).text("수정");
 								$(".btn-success").eq(num).prop("disabled", "disabled");

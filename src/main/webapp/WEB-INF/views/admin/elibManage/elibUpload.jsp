@@ -42,6 +42,11 @@
 	
 	<script type="text/javascript" src="/lee/resources/js/jquery.form.js"></script>
 	<script type="text/javascript" src="/lee/resources/js/jquery.ajax-progress.js"></script>
+	
+	<script type="text/javascript" src="/lee/resources/js/alertifyjs/alertify.min.js"></script>
+	<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/alertify.min.css">
+	<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/themes/default.min.css">
+	
 	<script type="text/javascript">
 		$(function(){
 			$(".fileinput-button").click(
@@ -60,7 +65,6 @@
 			/*폼 넘기기*/
 			$("#formSubmit").click(
 				function() {
-					alert("?");
 					/*유효성 검사*/
 					var el_subjectLength=$("input[name=el_subject]").val().length;
 					var el_writerLength=$("input[name=el_writer]").val().length;
@@ -68,36 +72,37 @@
 					var el_infoLength=$("textarea[name=el_info]").val().length;
 					var coverLength=$("input[name=cover]").val().length;
 					if(el_subjectLength==0){
-						alert("제목을 입력하지 않으셨습니다.");
+						alertify.alert("Error", "제목을 입력하지 않으셨습니다.");
 						$("input[name=el_subject]").focus();
 						return null;
 					}
 					if(el_writerLength==0){
-						alert("저자를 입력하지 않으셨습니다.");
+						alertify.alert("Error", "저자를 입력하지 않으셨습니다.");
 						$("input[name=el_writer]").focus();
 						return null;
 					}
 					if(el_pubLength==0){
-						alert("출판사를 입력하지 않으셨습니다.");
+						alertify.alert("Error", "출판사를 입력하지 않으셨습니다.");
 						$("input[name=el_pub]").focus();
 						return null;
 					}
 					if(el_infoLength==0){
-						alert("책정보를 입력하지 않으셨습니다.");
+						alertify.alert("Error", "책정보를 입력하지 않으셨습니다.");
 						$("input[name=el_info]").focus();
 						return null;
 					}
 					if(coverLength==0){
-						alert("표지를 등록하지 않으셨습니다.");
+						alertify.alert("Error", "표지를 등록하지 않으셨습니다.");
 						return null;
 					}
 					if(objArr.length==0){
-						alert("내용을 등록하지 않으셨습니다.");
+						alertify.alert("Error", "내용을 등록하지 않으셨습니다.");
 						return null;
 					}
 					
 					if(true){
 						allUpload();
+						alertify.alert("안내", "도서가 등록 되었습니다.");
 						$("form").submit();
 					}
 				}
@@ -105,6 +110,23 @@
 			
 			$("input[name=el_idx]").val(readyIdx);
 			changeGrup();
+			
+			/*길이 제한 걸기*/
+			$("input[type=text]").keyup(
+				function(event) {
+					if($(this).val().length > 30) {
+						$(this).val($(this).val().substring(0, 30));
+					}
+				}
+			);
+			$("textarea").keyup(
+				function(event) {
+					if($(this).val().length > 1000) {
+						$(this).val($(this).val().substring(0, 1000));
+					}
+				}
+			);
+			
 		}); //기본함수
 		
 		var readyIdx=Math.floor(new Date().getTime());
@@ -207,7 +229,6 @@
 		            	} , 500);
 				}
 				, error: function(data) {
-	            	alert('error : ' +data);
 	            	console.log(data);
 	            }
 			});
@@ -344,7 +365,7 @@
 					}
 				}
 				else{
-					alert("업로드 할 수 없는 파일입니다.");
+					alertify.alert("Error", "업로드 할 수 없는 파일입니다.");
 					$("input[name=cover]").val("");
 				}
 				
@@ -400,7 +421,7 @@
 						<input type="file" name="cover" accept=".gif, .jpg, .png" onChange="mainCover(this)">
 						<br>
 						<div id="coverDiv">
-							<img id="imgCover" style="width: 50px; height: 80px;">
+							<img id="imgCover" style="width: 150px;">
 						</div>
 					</td>
 				</tr>
