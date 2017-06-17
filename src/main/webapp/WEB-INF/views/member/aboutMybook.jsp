@@ -18,6 +18,7 @@
 	<script type="text/javascript"
 	src="/lee/resources/sideMenu/sideScript.js"></script>
 	
+	
 <link rel="stylesheet" href="/lee/resources/sideMenu/css/sideStyle.css">
 <style type="text/css">
 	.btn-primary{
@@ -67,14 +68,14 @@
 	
 }
 
-#tarrow {
+/* #tarrow {
   animation-duration: 2s;
   animation-name: slidein;
   animation-iteration-count: infinite;
   animation-direction: reverse;
-}
+} */
 
-@keyframes slidein {
+/* @keyframes slidein {
   from {
     padding-left:400px;
     padding-right:0px;
@@ -83,18 +84,21 @@
   to {
     padding-left:0px;
     padding-right:400px;
-  }
+  } */
 }
 </style>
 <script>
+
+
 var tbx;
 var tdetail ="";
+var pt;
 function trackbook(tcode){
 	
 	$.ajax({
 		url:"http://tracking.sweettracker.net/tracking",
 		type:"get",
-		data:{"t_key":"lEe3wbrNRikejA5XajFc0A","t_code":"08","t_invoice":"103169729913"},
+		data:{"t_key":"lEe3wbrNRikejA5XajFc0A","t_code":"08","t_invoice":tcode},
 		dataType:"xml",
 		success: function(xmldata){
 			if(xmldata){
@@ -103,7 +107,8 @@ function trackbook(tcode){
 				var tlevelarr = tbx.getElementsByTagName('level');
 				var tlevel = parseInt(tlevelarr[0].innerHTML)*16 + 4;
 				tdetail = tbx.getElementsByTagName('tracking_details');
-				$("#tprogresspt").text("배송진행률 : "+tlevel + "%");
+				pt = tlevel*4+70;
+				$("#tprogresspt").html("<h3>배송진행률 : "+tlevel + "%</h3>");
 				$("#tprogress").css("width",tlevel+"%");
 				
 				var thtml ="";
@@ -121,6 +126,13 @@ function trackbook(tcode){
 					
 				}
 				$("#tracking-info").html(thtml);
+				$(function() {
+				    function swing() {
+				        $('#tarrow').animate({'padding-left':'70px'},600).animate({'padding-left':pt+'px'},1000,swing);
+				        $('#tarrow').css('padding-left','70px');
+				    }
+				    swing();
+				});
 			}
 			else{
 				console.log('값 못받아옴....ㅠㅜ');
@@ -143,24 +155,56 @@ function trackbook(tcode){
         <h1 class="modal-title" id="myModalLabel">배송추적</h1>
         <h1>
         
-        <span class="glyphicon glyphicon-gift" aria-hidden="true"></span>
-      <span class="glyphicon glyphicon-arrow-right" id="tarrow" aria-hidden="true" style="padding-left:200px;padding-right:200px;"></span>
-      <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-gift" aria-hidden="true"style="left:40px;position:absolute;top:83px;"></span>
+      <span class="glyphicon glyphicon-arrow-right" id="tarrow" aria-hidden="true"></span>
+      
+      <span class="glyphicon glyphicon-home" aria-hidden="true" style="right:30px;position:absolute;top:83px;"></span>
       
       	</h1>
         	<div id="tprogresspt"></div>
-	        <div class="progress">
-			  <div class="progress-bar progress-bar-success progress-bar-striped active" id="tprogress" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
-			    <span class="sr-only"></span>
+	        
+      </div>
+      <!-- 상세정보 아코디언 -->
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+			  <div class="panel panel-default">
+			    <div class="panel-heading" role="tab" id="headingOne" >
+			      <h4 class="panel-title">
+			        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+			        	  <h3> <span class="glyphicon glyphicon glyphicon-zoom-in" aria-hidden="true"></span> 상세정보</h3>
+			        </a>
+			      </h4>
+			    </div>
+			    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+			      <div class="panel-body">
+			        	<div class="progress">
+						  <div class="progress-bar progress-bar-success progress-bar-striped active" id="tprogress" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+						    <span class="sr-only"></span>
+						  </div>
+						</div>
+			        <div class="modal-body" id="tracking-info">
+			      </div>
+			      </div>
+			    </div>
 			  </div>
-			</div>
-      </div>
-      <h3> <span class="glyphicon glyphicon glyphicon-zoom-in" aria-hidden="true"></span> 상세정보</h3>
-      <div class="modal-body" id="tracking-info">
-      </div>
+</div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    
+      
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>

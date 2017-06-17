@@ -54,7 +54,7 @@ public class AboutMyBookDTO {
 	//택배
 	private String fedex_idx;
 
-	private int fedex_num;
+	private long fedex_num;
 	
 	public AboutMyBookDTO() {
 		super();
@@ -122,7 +122,7 @@ public class AboutMyBookDTO {
 	public AboutMyBookDTO(String bk_idx, String bk_lg, String bk_md, String bk_small, String bk_subject,
 			String bk_writer, String bk_isbn, String bk_publisher, String bk_writedate, String bk_url, String bk_info,
 			int bk_break, int bk_take, String mem_idx, String bk_breakStr, String lb_idx, String book_idx, Date lb_sd,
-			Date lb_ed, String lb_etc, int lb_return, int lb_delay, String fedex_idx, int fedex_num) {
+			Date lb_ed, String lb_etc, int lb_return, int lb_delay, String fedex_idx, long fedex_num) {
 		super();
 		this.bk_idx = bk_idx;
 		this.bk_lg = bk_lg;
@@ -436,12 +436,12 @@ public class AboutMyBookDTO {
 	}
 
 
-	public int getFedex_num() {
+	public long getFedex_num() {
 		return fedex_num;
 	}
 
 
-	public void setFedex_num(int fedex_num) {
+	public void setFedex_num(long fedex_num) {
 		this.fedex_num = fedex_num;
 	}
 	

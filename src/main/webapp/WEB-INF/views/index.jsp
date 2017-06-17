@@ -30,175 +30,17 @@
 		  
 	      $("#search-statusBar").css("display","inline");
 	  });
+	  
+	  $(".scroll").click(function(event){            
+          event.preventDefault();
+          $('html,body').animate({scrollTop:$(this.hash).offset().top}, 2000);
   });
+  });
+  
+  
   </script>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  
-  <style>
-  body {
-	font-family: Arial, Helvetica, sans-serif;
-}
-table {
-	font-size: 1em;
-}
-.ui-draggable, .ui-droppable {
-	background-position: top;
-}
-/* 패럴관련 css */
-@MEDIA (min-width: 992px){
- #parallax_illustration {
-        display: block;
-        margin: 0 auto;
-        width: 940px;
-        height: 500px;
-        position: relative;
-        overflow: hidden;
-        clear: both;
-      }
-}      
-@MEDIA (max-width: 991px){
-	#parallax_illustration{
-		display:none;
-	}
-}
-	
- #parallax_wrapper {
-        position: relative;
-        z-index: 0;
-        -webkit-transition: all 0.25s ease-in;
-        transition: all 0.25s ease-in;
-      }
-      #parallax_field {
-        overflow: hidden;
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 700px;
-        width: 100%;
-      }
-      #parallax_field #parallax_bg {
-        position: absolute;
-        top: -150px;
-        /* left: -20px; */
-        width: 120%;
-        height: 150%;
-        z-index: 1;
-      }
-     
-      #parallax_illustration img {
-        position: absolute;
-      }
-      #parallax_illustration #parallax_error_text {
-        top: 72px;
-        left: 72px;
-        z-index: 10;
-      }
-      #parallax_illustration #parallax_octocat {
-        top: 94px;
-        left: 306px;
-        z-index: 9;
-      }
-      #parallax_illustration #parallax_speeder {
-        top: 50px;
-        left: 532px;
-        z-index: 8;
-      }
-      #parallax_illustration #parallax_octocatshadow {
-        top: 357px;
-        left: 211px;
-        z-index: 7;
-      }
-      #parallax_illustration #parallax_speedershadow {
-        top: 363px;
-        left: 802px;
-        z-index: 6;
-      }
-      #parallax_illustration #parallax_building_1 {
-        top: 383px;
-        left: 467px;
-        z-index: 5;
-      }
-      #parallax_illustration #parallax_building_2 {
-        top: 103px;
-        left: 762px;
-        z-index: 4;
-      }
-  
-  </style>
-</head>
-<body>
-<%@include file="header.jsp" %>
-<!-- 검색 컨테이너 -->
-<div class="jumbotron">
-<div id="parallax_wrapper">
-<div id="imgg">    
-      <div id="parallax_field">
-        <img alt="" class="js-plaxify" data-invert="true" data-xrange="0" data-yrange="20" height="100%" id="parallax_bg" width="940"
-        src="/lee/resources/index/main04.png">
-      </div>
-      <div id="parallax_illustration">
-        <div id="auth"></div>
-
-        <img alt="404 &ldquo;This is not the web page you are looking for&rdquo;" class="js-plaxify" data-xrange="20" data-yrange="10" height="90" id="parallax_error_text" width=""
-        src="/lee/resources/index/i/i1.png">
-
-        <img alt="" class="js-plaxify" data-xrange="10" data-yrange="10" height="90" id="parallax_octocat" width=""
-        src="/lee/resources/index/i/i2.png">
-
-        <img alt="" class="js-plaxify" data-xrange="10" data-yrange="10" height="90" id="parallax_speeder" width=""
-        src="/lee/resources/index/i/i3.png">
-
-        <img alt="" class="js-plaxify" data-xrange="10" data-yrange="10" height="90" id="parallax_octocatshadow" width=""
-        src="/lee/resources/index/i/i4.png">
-
-        <img alt="" class="js-plaxify" data-xrange="10" data-yrange="10" height="90" id="parallax_speedershadow" width=""
-        src="/lee/resources/index/i/i5.png">
-
-        <img alt="" class="js-plaxify" data-invert="true" data-xrange="50" data-yrange="20" height="90" id="parallax_building_1" width=""
-        src="/lee/resources/index/i/i6.png">
-
-        <img alt="" class="js-plaxify" data-invert="true" data-xrange="75" data-yrange="30" height="90" id="parallax_building_2" width=""
-        src="/lee/resources/index/i/i7.png">
-      </div>
-</div>
-</div>
- <!-- <img id="imgg" src="/lee/resources/index/main.png" > -->
- <div class="container text-center">
-		 <div id="searchbar" style="position: relative 50%;">   
-			    <div class="input-group input-group-lg">
-				 	 <span class="input-group-addon" id="sizing-addon1">
-					 	 <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-					 	 </span>
-				 	 <input id="search-input" type="text" class="form-control" placeholder="검색어 입력" aria-describedby="sizing-addon1">
-				 	 <span id="search-statusBar">
-				 	 	<span id="search-status" class="glyphicon glyphicon-search btn-lg"></span>
-				 	 </span> 
-				</div> 
-		 </div>
- </div>
-</div>
-  
-  <!-- 첫번째줄 -->
-<div class="container-fluid bg-3 text-center">    
-  <!-- <h3>Some of my Work</h3><br> -->
-  
-  <div class="row">
-  	
-    <div id="notice-bbs" class="col-sm-8" style="height:400px; ">
-    <div class="thumbnail" style="text-align:center; height:100%; width:100%; margin-bottom:0px;">
-     		 <h4>공지사항</h4>
-      <!-- <img src="/lee/resources/index/bbs.png" class="img-responsive" style="width:100%; height:100%;" alt="Image"> -->
-      	
-          
-      
-      
-      </div>
-      
-    </div>
-    
-    <div id="calen" class="col-sm-4 sidenav" style="height:400px; ">
-      
-      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
       
       <script>
       
@@ -284,7 +126,7 @@ table {
 				            		if(datedata[k].memo){
 				            			document.getElementById("datepickerdetail").innerText = document.getElementById("datepickerdetail").innerText +"\n"+ datedata[k].memo;
 				            		}else{
-					   					document.getElementById("datepickerdetail").innerText = day_s[2]+"년"+day_s[0]+"월"+day_s[1]+"일";
+					   					/* document.getElementById("datepickerdetail").innerText = day_s[2]+"년"+day_s[0]+"월"+day_s[1]+"일"; */
 					   					
 					   				}
 				            		
@@ -460,6 +302,239 @@ table {
         });
    
         </script>
+  <style>
+  body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+table {
+	font-size: 1em;
+}
+.ui-draggable, .ui-droppable {
+	background-position: top;
+}
+/* 패럴관련 css */
+@MEDIA (min-width: 992px){
+ #parallax_illustration {
+        display: block;
+        margin: 0 auto;
+        width: 940px;
+        height: 500px;
+        position: relative;
+        overflow: hidden;
+        clear: both;
+      }
+}      
+@MEDIA (max-width: 991px){
+	#parallax_illustration{
+		display:none;
+	}
+}
+	
+ #parallax_wrapper {
+        position: relative;
+        z-index: 0;
+        -webkit-transition: all 0.25s ease-in;
+        transition: all 0.25s ease-in;
+      }
+      #parallax_field {
+        overflow: hidden;
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 700px;
+        width: 100%;
+      }
+      #parallax_field #parallax_bg {
+        position: absolute;
+        top: -150px;
+        /* left: -20px; */
+        width: 120%;
+        height: 150%;
+        z-index: 1;
+      }
+     
+      #parallax_illustration img {
+        position: absolute;
+      }
+      #parallax_illustration #parallax_error_text {
+        top: 72px;
+        left: 72px;
+        z-index: 10;
+      }
+      #parallax_illustration #parallax_octocat {
+        top: 94px;
+        left: 306px;
+        z-index: 9;
+      }
+      #parallax_illustration #parallax_speeder {
+        top: 50px;
+        left: 532px;
+        z-index: 8;
+      }
+      #parallax_illustration #parallax_octocatshadow {
+        top: 357px;
+        left: 211px;
+        z-index: 7;
+      }
+      #parallax_illustration #parallax_speedershadow {
+        top: 363px;
+        left: 802px;
+        z-index: 6;
+      }
+      #parallax_illustration #parallax_building_1 {
+        top: 383px;
+        left: 467px;
+        z-index: 5;
+      }
+      #parallax_illustration #parallax_building_2 {
+        top: 103px;
+        left: 762px;
+        z-index: 4;
+      }
+  
+		  .wrap {
+		    width: 100%;
+		    height: 100%;
+		    margin: 0 auto;
+		}
+		.wrap .section {
+		    height: 69px;
+		    padding: 100px 0;
+		    background: #000;
+		   display: block;
+		}
+		.wrap .section p {
+		   display: block;
+		   color: #fff;
+		   text-align: center;
+		   font-size: 22px;
+		}
+		.down {
+		   position: relative;
+		   margin: 0 auto;
+		   cursor: pointer;
+		   width: 0;
+		   height: 0;
+		   border-right: 17px solid transparent;  
+		   border-left: 17px solid transparent; 
+		   border-top: 25px solid #fff;
+		} 
+  </style>
+</head>
+<body>
+<%@include file="header.jsp" %>
+<!-- 검색 컨테이너 -->
+<div class="jumbotron">
+<div id="parallax_wrapper">
+<div id="imgg">    
+      <div id="parallax_field">
+        <img alt="" class="js-plaxify" data-invert="true" data-xrange="0" data-yrange="20" height="100%" id="parallax_bg" width="940"
+        src="/lee/resources/index/main04.png">
+      </div>
+      <div id="parallax_illustration">
+        <div id="auth"></div>
+<a href="#favorbook" class="scroll">
+        <img alt="404 &ldquo;This is not the web page you are looking for&rdquo;" class="js-plaxify" data-xrange="20" data-yrange="10" height="90" id="parallax_error_text" width=""
+        src="/lee/resources/index/i/i1.png">
+</a>
+<a href="#favorbook" class="scroll">
+        <img alt="" class="js-plaxify" data-xrange="10" data-yrange="10" height="90" id="parallax_octocat" width=""
+        src="/lee/resources/index/i/i2.png">
+</a>
+<a href="#favorbook" class="scroll">
+        <img alt="" class="js-plaxify" data-xrange="10" data-yrange="10" height="90" id="parallax_speeder" width=""
+        src="/lee/resources/index/i/i3.png">
+</a>
+<a href="#favorbook" class="scroll">
+        <img alt="" class="js-plaxify" data-xrange="10" data-yrange="10" height="90" id="parallax_octocatshadow" width=""
+        src="/lee/resources/index/i/i4.png">
+</a>
+<a href="#favorbook" class="scroll">
+        <img alt="" class="js-plaxify" data-xrange="10" data-yrange="10" height="90" id="parallax_speedershadow" width=""
+        src="/lee/resources/index/i/i5.png">
+</a>
+<a href="#favorbook" class="scroll">
+        <img alt="" class="js-plaxify" data-invert="true" data-xrange="50" data-yrange="20" height="90" id="parallax_building_1" width=""
+        src="/lee/resources/index/i/i6.png">
+</a>
+<a href="#favorbook" class="scroll">
+        <img alt="" class="js-plaxify" data-invert="true" data-xrange="75" data-yrange="30" height="90" id="parallax_building_2" width=""
+        src="/lee/resources/index/i/i7.png">
+</a>
+      </div>
+</div>
+</div>
+ <!-- <img id="imgg" src="/lee/resources/index/main.png" > -->
+ <div class="container text-center">
+		 <div id="searchbar" style="position: relative 50%;">   
+			    <div class="input-group input-group-lg">
+				 	 <span class="input-group-addon" id="sizing-addon1">
+					 	 <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+					 	 </span>
+				 	 <input id="search-input" type="text" class="form-control" placeholder="검색어 입력" aria-describedby="sizing-addon1">
+				 	 <span id="search-statusBar">
+				 	 	<span id="search-status" class="glyphicon glyphicon-search btn-lg"></span>
+				 	 </span> 
+				</div> 
+		 </div>
+		 
+		 
+ </div>
+ 
+</div>
+  
+  <!-- 첫번째줄 -->
+<div class="container-fluid bg-3 text-center">    
+  <!-- <h3>Some of my Work</h3><br> -->
+  
+  <div class="row">
+  	
+    <div id="notice-bbs" class="col-sm-8" style="height:400px; ">
+    <div class="thumbnail" style="text-align:center; height:100%; width:100%; margin-bottom:0px;">
+     		 <h4>공지사항</h4>
+  	<c:set var="notilist" value="${notilist}"/>
+  	
+	<table style="width:100%;">
+					<thead>
+						<tr>
+							<th style="width:70%">제목</th>
+							<th style="width:20%">작성일</th>
+							<th style="width:10%">조회수</th>
+						</tr>
+					</thead>
+		<tbody>
+		
+			<c:choose>
+				<c:when test="${empty notilist}">
+					<tr>
+						<td colspan="3">공지사항이 없습니다.</td>
+					</tr>
+				</c:when>
+				<c:when test="${notilist ne null}">
+					<c:forEach items="${notilist}" var="list">
+								<tr>
+									<td>${list.nt_subject}</td>
+									<td>${list.nt_date}</td>
+									<td> ${list.nt_readnum}</td>
+								</tr>
+							
+						
+					</c:forEach>
+				</c:when>
+			</c:choose>
+	
+     	</tbody> 	
+    </table>
+				      
+      
+      
+      </div>
+      
+    </div>
+    
+    <div id="calen" class="col-sm-4 sidenav" style="height:400px; ">
+      
+      
       <div class="thumbnail" style="text-align:center; height:100%; padding:0px;">
      		 <h4>캘린더</h4>
       	<div id="datepicker" style="display:inline-block;"></div>
