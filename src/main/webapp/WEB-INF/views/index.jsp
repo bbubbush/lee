@@ -516,7 +516,7 @@ table {
 									<td>${list.nt_subject}</td>
 									<td>${list.nt_date}</td>
 									<td> ${list.nt_readnum}</td>
-								</tr>
+							</tr>
 							
 						
 					</c:forEach>
