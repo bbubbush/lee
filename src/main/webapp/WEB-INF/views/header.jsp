@@ -127,8 +127,9 @@
 	<div class="row">
 
 		<div id="mainImg" class="col-md-3"> 
-			<img src="/lee/resources/index/logo2.png" style=" width:250px;">
-
+		<a href="index.ju">
+			<img src="/lee/resources/index/logo2.png" style=" width:250px;" >
+		</a>
 		</div>
 		<div class="col-md-2 col-md-offset-7 loginClass">		
 				<c:set var="sid" value="${sessionScope.sid}"/>

@@ -43,8 +43,8 @@
 		
 	}
 	#submenulabel{
-	width: 675px;
-	height: 134px;
+	width: 1030px;
+	height: 276px;
 	}
 	
 	
@@ -66,11 +66,31 @@
 	
 	
 }
+
+#tarrow {
+  animation-duration: 2s;
+  animation-name: slidein;
+  animation-iteration-count: infinite;
+  animation-direction: reverse;
+}
+
+@keyframes slidein {
+  from {
+    padding-left:400px;
+    padding-right:0px;
+  }
+
+  to {
+    padding-left:0px;
+    padding-right:400px;
+  }
+}
 </style>
 <script>
 var tbx;
+var tdetail ="";
 function trackbook(tcode){
-	alert('택배추적!'+tcode);
+	
 	$.ajax({
 		url:"http://tracking.sweettracker.net/tracking",
 		type:"get",
@@ -80,8 +100,27 @@ function trackbook(tcode){
 			if(xmldata){
 				console.log(xmldata);
 				tbx = xmldata;
+				var tlevelarr = tbx.getElementsByTagName('level');
+				var tlevel = parseInt(tlevelarr[0].innerHTML)*16 + 4;
+				tdetail = tbx.getElementsByTagName('tracking_details');
+				$("#tprogresspt").text("배송진행률 : "+tlevel + "%");
+				$("#tprogress").css("width",tlevel+"%");
 				
-				
+				var thtml ="";
+				for(var i=0 ; i<tdetail.length ; i++){
+					
+					
+					thtml += "상태 : "+tdetail[i].getElementsByTagName('trans_kind')[0].innerHTML+"<br>";
+					thtml += "위치 : "+tdetail[i].getElementsByTagName('trans_where')[0].innerHTML+"<br>";
+					thtml += "지점번호 : "+tdetail[i].getElementsByTagName('trans_telno')[0].innerHTML+"<br>";
+					thtml += "처리일시 : "+tdetail[i].getElementsByTagName('trans_time')[0].innerHTML+"<br>";
+					
+					if(i!=(tdetail.length-1)){
+						thtml += "<span class='glyphicon glyphicon-arrow-down' aria-hidden='true'></span><br>"
+					};
+					
+				}
+				$("#tracking-info").html(thtml);
 			}
 			else{
 				console.log('값 못받아옴....ㅠㅜ');
@@ -101,10 +140,23 @@ function trackbook(tcode){
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">배송추적</h4>
+        <h1 class="modal-title" id="myModalLabel">배송추적</h1>
+        <h1>
+        
+        <span class="glyphicon glyphicon-gift" aria-hidden="true"></span>
+      <span class="glyphicon glyphicon-arrow-right" id="tarrow" aria-hidden="true" style="padding-left:200px;padding-right:200px;"></span>
+      <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+      
+      	</h1>
+        	<div id="tprogresspt"></div>
+	        <div class="progress">
+			  <div class="progress-bar progress-bar-success progress-bar-striped active" id="tprogress" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+			    <span class="sr-only"></span>
+			  </div>
+			</div>
       </div>
-      <div class="modal-body">
-        ...
+      <h3> <span class="glyphicon glyphicon glyphicon-zoom-in" aria-hidden="true"></span> 상세정보</h3>
+      <div class="modal-body" id="tracking-info">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -126,8 +178,8 @@ function trackbook(tcode){
 				<!-- 컨텐츠 입력 -->
 				<!-- 커넨츠 상단 바 -->
 				<div id="submenulabel" style="background-image:url('/lee/resources/member/img/sul.png')">
-					<div style="width:100%; height:100%; marg in:0px; padding:50px; background-color: rgba(26, 164, 172, 0.5 );">
-						<h2 style="color:white;">대출 / 예약</h2>
+					<div style="width:100%; height:100%; marg in:0px; padding:50px;  background-color: rgba(0, 0, 0, 0.3 );">
+						<h1 style="color:white;">대출 / 예약</h1>
 					</div>
 				</div>
 				<!-- 컨텐츠 실영역 -->
@@ -184,20 +236,35 @@ function trackbook(tcode){
 					     </div>
 					      <div class="caption">
 					        <h3>책제목 대출2</h3>
-					        <p>
-					       	대출일 : ${list.lb_sd}<br>
-					        반납예정일 : ${list.lb_ed}<br>
-					        기타사항 : ${list.lb_etc }<br>
-					        연장횟수 : ${list.lb_delay}<br>
-					        운송장번호 : ${list.fedex_num}<br>
-					        </p>
-					        <p>
-					       		<a href="#" class="btn btn-primary" role="button">택배취소</a>
-					        	<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick='trackbook(${list.fedex_num})'>
-  								배송추적
-								</button>
-					        	<a href="#" class="btn btn-primary" role="button">대출연장</a>
-					        </p>
+					       
+					        	<c:if test="${empty list.fedex_num}">
+						        		 <p>
+									       	대출일 : ${list.lb_sd}<br>
+									        반납예정일 : ${list.lb_ed}<br>
+									        기타사항 : ${list.lb_etc }<br>
+									        연장횟수 : ${list.lb_delay}<br>
+						       
+							        	</p>
+							        	<p>
+							        		<a href="#" class="btn btn-primary" role="button">택배취소</a>
+						        		</p>
+					        	</c:if>
+					       		<c:if test="${list.fedex_num ne null}">
+							       		 <p>
+										       	대출일 : ${list.lb_sd}<br>
+										        반납예정일 : ${list.lb_ed}<br>
+										        기타사항 : ${list.lb_etc }<br>
+										        연장횟수 : ${list.lb_delay}<br>
+										        운송장번호 : ${list.fedex_num}<br>
+							        	</p>
+							        	<p>
+							       			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick='trackbook(${list.fedex_num})'>
+		  									배송추적
+											</button>
+										</p>
+					       		</c:if>
+					        	
+					        
 					        </div>
 					    </div>
 					  </div>

@@ -51,8 +51,8 @@
 		
 	}
 	#submenulabel{
-	width: 675px;
-	height: 134px;
+width: 1030px;
+	height: 276px;
 	}
 	
 	
@@ -87,9 +87,9 @@
 				style="padding: 0; background-color: ">
 						
 				<!-- 컨텐츠 입력 -->
-					<div id="submenulabel" style="width:675px; height:134px;  background-image:url('/lee/resources/member/img/sul.png')">
-					<div style="width:100%; height:100%; margin:0px; padding:50px; background-color: rgba(26, 164, 172, 0.5 );">
-						<h2 style="color:white;">나의 문의</h2>
+					<div id="submenulabel" style="  background-image:url('/lee/resources/member/img/sul.png')">
+					<div style="width:100%; height:100%; margin:0px; padding:50px; background-color: rgba(0, 0, 0, 0.3 );">
+						<h1 style="color:white;">나의 문의</h1>
 					</div>
 				</div>
 				<!-- 컨텐츠 실영역 -->

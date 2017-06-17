@@ -100,8 +100,8 @@ if(qs.barcode) {
 		
 	}
 	#submenulabel{
-	width: 675px;
-	height: 134px;
+	width: 1030px;
+	height: 276px;
 	padding:0px;
 	}
 	#memberIdcardDiv{
@@ -165,8 +165,8 @@ if(qs.barcode) {
 					<div class="col-md-12" id="submenulabel"
 						style=" background-image: url('/lee/resources/member/img/sul.png')">
 						<div
-							style="width: 100%; height: 100%; margin: 0px; padding: 50px; background-color: rgba(26, 164, 172, 0.5);">
-							<h2 style="color: white;">도서관 카드</h2>
+							style="width: 100%; height: 100%; margin: 0px; padding: 50px;  background-color: rgba(0, 0, 0, 0.3 );">
+							<h1 style="color: white;">도서관 카드</h1>
 						</div>
 					</div>
 					
@@ -192,11 +192,7 @@ if(qs.barcode) {
 						<div id="memberIdcard" style="margin:10px; padding:50px; ">
 						</div>
 					</div>
-<<<<<<< HEAD
-				</div>	
-			<div class="col-md-12" style="margin: 50px;">
-			</div>
-=======
+
 					
 					
 					
@@ -205,7 +201,6 @@ if(qs.barcode) {
 					
 					</div>
 			
->>>>>>> youngju
 		</div>
 	</div>
 	

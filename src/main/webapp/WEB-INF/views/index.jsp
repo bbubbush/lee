@@ -134,7 +134,7 @@ table {
 <div id="imgg">    
       <div id="parallax_field">
         <img alt="" class="js-plaxify" data-invert="true" data-xrange="0" data-yrange="20" height="100%" id="parallax_bg" width="940"
-        src="/lee/resources/index/main.png">
+        src="/lee/resources/index/main04.png">
       </div>
       <div id="parallax_illustration">
         <div id="auth"></div>
@@ -483,10 +483,12 @@ table {
 
   <div class="row" style="width:100%;">
   <div class="indexbt1row">
+  		
 	    <div class="col-sm-3">
-	      <h3>회원증</h3>
+	      <h3>마이페이지</h3>
 	      <a href="/lee/myCard.ju">
-	      <img src="/lee/resources/index/qbutton/mycard01.png" class="img-responsive" style="width:100%" alt="Image">
+	      <img src="/lee/resources/index/qbutton/mypage.png" id="mypageimg" class="img-responsive" style="width:100%" alt="Image">
+	      <img src="/lee/resources/index/qbutton/mycard01.png" id="mycardimg" class="img-responsive" style="width:100%" alt="Image">
 	      </a>
 	    </div>
 	    <div class="col-sm-3"> 
@@ -552,9 +554,9 @@ table {
 		</c:when>
 		<c:when test="${bklist ne null }">
 			<c:forEach	items="${bklist }" var="list" begin="0" end="0">
-								<div class="item active" style="padding-left:23%; padding-top:10px;">
+								<div class="item active" style="padding-left:15%;padding-top:10px; ">
 									<img src="${list.bk_url}" alt="" style="height:310px;">
-									<div class="carousel-caption" style="background-color: rgba(0,0,0,0.7);">
+									<div class="carousel-caption" style="background-color: rgba(0,0,0,0.7); margin-left:30%;width:250px">
 									<h3>${list.bk_subject}</h3>
 	    							<p>${list.bk_writer}</p>
 									</div>
@@ -563,9 +565,9 @@ table {
 			<c:forEach	items="${bklist }" var="list" begin="1" end="2">
 			
 							
-								<div class="item" style="padding-left:23%; padding-top:10px;">
+								<div class="item" style="padding-left:15%;padding-top:10px; ">
 									<img src="${list.bk_url}" alt="" style="height:310px;">
-									<div class="carousel-caption" style="background-color: rgba(0,0,0,0.7);">
+									<div class="carousel-caption" style="background-color: rgba(0,0,0,0.7); margin-left:30%;width:250px">
 									<h3>${list.bk_subject}</h3>
 	    							<p>${list.bk_writer}</p>
 									</div>
