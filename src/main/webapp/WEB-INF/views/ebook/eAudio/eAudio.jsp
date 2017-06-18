@@ -9,6 +9,24 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+		<script type="text/javascript" src="/lee/resources/js/jquery-3.2.1.min.js?ver=1.1"></script>
+		<script type="text/javascript" src="/lee/resources/bootstrapk/js/bootstrap.min.js"></script>
+
+		<!-- 음성 인식 JS CSS -->
+		<script src="/lee/resources/audio/voice/audioMain/js/mainAudio.js?ver=1.1"></script>
+		<script src="/lee/resources/audio/voice/audioMain/js/highlight.min.js"></script>
+		<script src="/lee/resources/audio/voice/audioMain/js/DetectRTC.js"></script>
+		<script src="/lee/resources/audio/voice/audioMain/js/global.js?ver=1.0"></script>
+		
+		<script type="text/javascript" src="/lee/resources/js/alertifyjs/alertify.min.js"></script>
+		<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/alertify.min.css">
+		<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/themes/default.min.css">
+	
+		<!-- <script src="/lee/resources/audio/voice/audioMain/js/aujquery.js?ver=1.0"></script> -->
+		<link href="/lee/resources/audio/voice/audioMain/css/style.css" type="text/css" rel="stylesheet">
+		<link href="/lee/resources/audio/voice/audioMain/css/github-gist.css" type="text/css" rel="stylesheet">
+		<link href="/lee/resources/audio/voice/audioMain/css/main.css" rel="stylesheet" type="text/css" />
+
 <link rel="stylesheet" href="/lee/resources/bootstrapk/css/bootstrap.min.css">
 <style type="text/css">
 #detailFind>h4>a {
@@ -41,11 +59,6 @@
 	}
 }
 </style>
-
-<script type="text/javascript"
-	src="/lee/resources/js/jquery-3.2.1.min.js"></script>
-<script type="text/javascript"
-	src="/lee/resources/bootstrapk/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 
 function aPlayer(el_idx){//오디오플레이어 팝업
@@ -56,6 +69,7 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 		$(function() {
 			
 			$("#ttip").tooltip();
+			$("#tttip").tooltip();
 			
 			/*사이드바*/
 			$("#emList").removeClass("has-sub");
@@ -492,10 +506,10 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 							intoBodyHTML+='					</div>';
 							intoBodyHTML+='				</div>';
 							intoBodyHTML+='				<div class="col-md-12 text-right">';
-							intoBodyHTML+='					<span data-toggle="tooltip" data-placement="top" title="로그인 하셔야 합니다.">';
-							intoBodyHTML+='						<button type="button" id="ttip" class="btn btn-default" disabled="disabled">추천하기</button>';
+							intoBodyHTML+='					<span data-toggle="tooltip" data-placement="top" title="로그인 하십시요.">';
+							intoBodyHTML+='						<button type="button" id="tip" class="btn btn-default" disabled="disabled">추천하기</button>';
 							intoBodyHTML+='					</span>';
-							intoBodyHTML+='					<span  data-toggle="tooltip" data-placement="top" title="로그인 하셔야 합니다.">';
+							intoBodyHTML+='					<span data-toggle="tooltip" data-placement="top" title="로그인 하십시오.">';
 							intoBodyHTML+='						<button type="button" id="ttip" class="btn btn-default" disabled="disabled">재생하기</button>';
 							intoBodyHTML+='					</span>';
 							intoBodyHTML+='				</div>';
@@ -514,7 +528,8 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 							intoBodyHTML+='	</table>';
 							intoBodyHTML+='</div>';
 							$(".modal-body").html(intoBodyHTML);
-							$('#ttip').parent().tooltip();
+							$("#tip").parent().tooltip();
+							$("#ttip").parent().tooltip();
 						}else if(data.mem_idx){
 							intoBodyHTML+='<div class="panel panel-default" >';
 							intoBodyHTML+='	<div class="row">';
@@ -531,8 +546,8 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 							intoBodyHTML+='					</div>';
 							intoBodyHTML+='				</div>';
 							intoBodyHTML+='				<div class="col-md-12 text-right">';
-							intoBodyHTML+='					<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Tooltip on top" onClick="eAudioRecommend(\''+idx+'\')">추천하기</button>';
-							intoBodyHTML+='					<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Tooltip on top" onClick="aPlayer(\''+idx+'\')">재생하기</button>';
+							intoBodyHTML+='					<button type="button" class="btn btn-default reco" data-toggle="tooltip" data-placement="top" onClick="eAudioRecommend(\''+idx+'\')">추천하기</button>';
+							intoBodyHTML+='					<button type="button" class="btn btn-default play" data-toggle="tooltip" data-placement="top" onClick="aPlayer(\''+idx+'\')">재생하기</button>';
 							intoBodyHTML+='				</div>';
 							intoBodyHTML+='			</div>';
 							intoBodyHTML+='		</div>';
@@ -548,15 +563,28 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 							intoBodyHTML+='		</tr>';
 							intoBodyHTML+='	</table>';
 							intoBodyHTML+='</div>';
+							intoBodyHTML+='<div class="wrap">';
+						//	intoBodyHTML+='<div id="result">';
+						//	intoBodyHTML+='		<span class="final" id="final_span"></span> ';
+						//	intoBodyHTML+='		<span class="interim" id="interim_span"></span>';
+						//	intoBodyHTML+='</div>';
+							intoBodyHTML+='		<button id="btn-mic" class="off">';
+							intoBodyHTML+='		마이크 <span></span>';
+							intoBodyHTML+='		</button>';
+							intoBodyHTML+='</div>';
+							
 							$(".modal-body").html(intoBodyHTML);
 						}
 							
 							$(".modal-header").html(intoHeaderHTML);
+								
 						}
 					});
 					$("#myModal").modal("show");
+					
 				}
 			);
+			
 		}
 
 		//추천하기
@@ -568,14 +596,15 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 				, dataType : "json"
 				, success: function(data){
 					if(data.dupl){
-						alert(data.dupl);//중복 메세지
+							alertify.alert("", data.dupl);
 					}else{
-						alert(data.recommend);
+							alertify.alert("", data.recommend);
 					}
 					$(".reCount").text(data.recoCount);
 				}
 			})
 		}
+		
 		
 	</script>
 
@@ -699,9 +728,10 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 						</tr>
 					</tfoot>
 				</table>
-				<div><a href="/lee/eAudioAdd.ju">임시 오디오 관리</a></div>
+			<!-- 	<div><a href="/lee/eAudioAdd.ju">임시 오디오 관리</a></div>
 				<div><a href="/lee/eAudioVoice.ju">임시 오디오 인식</a></div>
 				<div><a href="/lee/eAudioListAdmin.ju">임시 오디오 수정 관리</a></div>
+				<div><a href="/lee/alertTest.ju">임시 오디오 alert 테스트</a></div> -->
 			</div>
 			<!-- 검색리스트 End-->
 		</div>

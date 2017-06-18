@@ -12,6 +12,10 @@
 <script src="/lee/resources/audio/js/jquery.form.min.js"></script>
 <!-- jQuery MultiFile Plugin import -->
 <script src="/lee/resources/audio/js/jquery.MultiFile.js"></script>
+
+<script type="text/javascript" src="/lee/resources/js/alertifyjs/alertify.min.js"></script>
+<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/alertify.min.css">
+<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/themes/default.min.css">
 <style type="text/css">
 
 </style>
@@ -166,20 +170,20 @@ $(function(){
        //보내기전 validation check가 필요할경우
        beforeSubmit: function (data, frm, opt) {
 	      // console.log(data);
-	       alert("전송중");
+	       alertify.alert("", "전송중");
            return true;
        },
        //submit이후의 처리
        success: function(data){
     	   
-    	   alert("전송성공!!");
+    	   alertify.alert("", "전송 성공");
           // console.log(data); //응답받은 데이터 콘솔로 출력         
             
            output(data); //받은 정보를 화면 출력하는 함수 호출
        },
        //ajax error
        error: function(e){
-    	   alert("전송 실패");
+    	   alertify.alert("", "전송실패");
            console.log(e);
        }                               
 	});

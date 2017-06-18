@@ -2,9 +2,11 @@
  *
  * WebRTC Lab 
  * @author dodortus (codejs.co.kr / dodortus@gmail.com)
- *
+ * 장애인을 위한 제이쿼리 음성 인식 메인
  */
 $(function() {
+	$('#myModal').on('shown.bs.modal', function (e) {
+		//alert("모달창 킴?");
   if (typeof webkitSpeechRecognition != 'function') {
     alert('크롬에서만 동작 합니다.');
     return false;
@@ -26,8 +28,7 @@ $(function() {
     isRecognizing = true;
     $btnMic.attr('class', 'on');
   };
-  
-//onend
+
   recognition.onend = function() {
     console.log('onend', arguments);
     isRecognizing = false;
@@ -52,7 +53,6 @@ $(function() {
     }
 
   };
-  
 
   recognition.onresult = function(event) {
     console.log('onresult', event);
@@ -73,63 +73,37 @@ $(function() {
     }
 
     finalTranscript = capitalize(finalTranscript);
-/*    final_span.innerHTML = linebreak(finalTranscript);
-    interim_span.innerHTML = linebreak(interimTranscript);*/
+/*  final_span.innerHTML = linebreak(finalTranscript);
+   interim_span.innerHTML = linebreak(interimTranscript);*/
+
     console.log('finalTranscript', finalTranscript);
     console.log('interimTranscript', interimTranscript);
     fireCommand(interimTranscript);
   };
 
   function fireCommand(string) {
-    if (string.endsWith('이전') || string.endsWith('이 전')) {
-    	$('#btnPrev').click();
- 	} else if (string.endsWith('다음 고') || string.endsWith('다음')) {
-  		$('#btnNext').click();
-  	} else if (string.endsWith('재생') || string.endsWith('재 생')) {
-  		$('.voicePlay').click();
-  		$iconMusic.addClass('visible');
-  	} else if (string.endsWith('정지') || string.endsWith('정 지')) {
-  		//audio.pause();
-  		$('.voicePause').click();
-  		$iconMusic.removeClass('visible');
-  	} else if (string.endsWith('업') || string.endsWith('볼 륨 업')) {
-  		audio1.volume += 0.2;
-  	} else if (string.endsWith('다운') || string.endsWith('볼륨다운')) {
-  		audio1.volume -= 0.2;
-  	} else if (string.endsWith('스피치') || string.endsWith('말해줘') || string.endsWith('말 해 줘')) {
-  	  textToSpeech($('#final_span').text() || '전 음성 인식된 글자를 읽습니다.');
-  	}
-    for(var i=0;i<4;i++){
-    	if (string.endsWith(''+i+'번')||string.endsWith(''+i+'')||string.endsWith('처음')) {
-    		if(string.endsWith('처음')){
-    			$('#plList li:eq(0)').click();
-    			break;
-    		}
-    		i--;
-    		console.log(i);
-    		$('#plList li:eq(' + i + ')').click();
-    		break;
-    	}
-    }
+	  console.log("음성 들어감?");
+    if (string.endsWith('재생')) {
+    	$('.play').click();
+ 	} 
   }
+		
+		textToSpeech('재생을 원하신다면, 재.생. 이라 말씀해주세요.');
+	
 
   recognition.onerror = function(event) {
     console.log('onerror', event);
 
     if (event.error == 'no-speech') {
       ignoreOnend = true;
-      textToSpeech("마이크가 꺼졌습니다.다시 실행해 주세요.")
     } else if (event.error == 'audio-capture') {
       ignoreOnend = true;
     } else if (event.error == 'not-allowed') {
       ignoreOnend = true;
     }
 
-   var btn= $btnMic.attr('class', 'off');
-    
+    $btnMic.attr('class', 'off');
   };
-
- 
 
   var two_line = /\n\n/g;
   var one_line = /\n/g;
@@ -147,7 +121,7 @@ $(function() {
 
   function start(event) {
     if (isRecognizing) {
-     recognition.stop();
+      recognition.stop();
       return;
     }
     recognition.lang = 'ko-KR';
@@ -155,8 +129,8 @@ $(function() {
     ignoreOnend = false;
 
     finalTranscript = '';
-   /* final_span.innerHTML = '';
-    interim_span.innerHTML = '';*/
+   // final_span.innerHTML = '';
+    //interim_span.innerHTML = '';
 
   }
 
@@ -204,15 +178,15 @@ $(function() {
   /**
    * init
    */
-  function clickTest(){
-	  //location.reload();
-  }
   $btnMic.click(start);
+  
+  //마이크 활성확인용
   if($('#btn-mic').click()){
-	  textToSpeech('오디오북이 켜졌습니다. 재.생. 이라 말씀해주세요.');
+	  //textToSpeech('마이크 활성 확인');
   }
+  
   $('#btn-tts').click(function() {
     textToSpeech($('#final_span').text() || 'mic.');
   });
+	})
 });
-
