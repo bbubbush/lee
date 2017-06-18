@@ -27,7 +27,7 @@
 
 	<div class="row">
 		<div class="col-md-3">
-			<jsp:include page="/WEB-INF/views/service/elibSide.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/views/help/helpSide.jsp"></jsp:include>
 		</div>
 		<div class="col-md-7">
 			<h2>QnA게시판 쓰기</h2>
@@ -35,28 +35,30 @@
 				<form name="qnaWrite" action="questWriteOk.ju">
 					<table class="table table-striped table table-hover" border="1">
 						<tr>
-							<th class="text-center">제목</th>
+							<th style="text-align: center; vertical-align: middle;">제목</th>
 							<td><input type="text" class="form-control"
 								name="qu_subject" placeholder="제목을 입력하세요"></td>
 
 						</tr>
 						<tr>
-							<th class="text-center">작성자</th>
+							<th style="text-align: center; vertical-align: middle;">작성자</th>
 							<td class="text-center">${sid}</td>
 						</tr>
 						<tr>
-							<th class="text-center">카테고리</th>
+							<th style="text-align: center; vertical-align: middle;">카테고리</th>
 							<td>
 								<div class="radio">
-									<label><input type="radio" name="qu_cate" value="0" checked> 수정해 여기 </label> 
-									<label><input type="radio" name="qu_cate" value="1"> 도서관이용인지 전자책인지 etc인지 </label>
+									<label><input type="radio" name="qu_cate" value="0" checked>도서관이용</label> 
+									<label><input type="radio" name="qu_cate" value="1">전자책이용</label>
+									<label><input type="radio" name="qu_cate" value="2">열람실/세미나실이용</label>
+									<label><input type="radio" name="qu_cate" value="3">홈페이지</label>
 								</div>
 							</td>
 
 						</tr>
 
 						<tr>
-							<th class="text-center">내용</th>
+							<th style="text-align: center; vertical-align: middle;">내용</th>
 							<td><textarea class="form-control" rows="10"
 									name="qu_content" placeholder="내용을 입력하세요"></textarea></td>
 						</tr>

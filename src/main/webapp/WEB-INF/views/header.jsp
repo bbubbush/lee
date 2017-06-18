@@ -186,7 +186,7 @@
 						<li><a href="/lee/missingList.ju">분실물</a></li>
 						<li><a href="/lee/faqList.ju">FAQ</a></li>
 						<li><a href="/lee/questList.ju">QnA</a></li>
-						<li><a href="/lee/orderBkList.ju">희망도서신청</a></li>
+						<li><a href="/lee/orderbookList.ju">희망도서신청</a></li>
 						<li><a href="/lee/reviewList.ju">책추천 및 감상평</a></li>
 					</ul>
 				</li>

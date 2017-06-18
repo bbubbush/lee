@@ -25,7 +25,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-3">
-			<jsp:include page="/WEB-INF/views/service/elibSide.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/views/help/helpSide.jsp"></jsp:include>
 		</div>
 		<div class="col-md-9">
 			<div class="row">

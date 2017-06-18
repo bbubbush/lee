@@ -25,19 +25,20 @@
 	</div>
 	<div class="row">
 		<div class="col-md-3">
-			<jsp:include page="/WEB-INF/views/service/elibSide.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/views/help/helpSide.jsp"></jsp:include>
 		</div>
 		<div class="col-md-9">
 			<div class="row">
 				<div class="col-md-7">
 					<h2>책추천 및 감상평 게시판</h2>
 				</div>
-				<div class="col-md-3" style="text-align: center;">
-					<a class="btn btn-default" type="submit" href="reviewWrite.ju">
-						<span class="glyphicon glyphicon-pencil" aria-hidden="true">
-							책신청, 감상평하기</span>
-					</a>
-				</div>
+				<c:if test="${chk}">
+					<div class="col-md-3" style="text-align: center;">
+						<a class="btn btn-default" type="submit" href="reviewWrite.ju">
+							<span class="glyphicon glyphicon-pencil" aria-hidden="true"> 글쓰기</span>
+						</a>
+					</div>
+				</c:if>
 			</div>
 			<div class="row">
 				<div class="col-md-10">
@@ -59,8 +60,15 @@
 							</tr>
 							<c:forEach var="dto" items="${list}">
 								<tr>
-									<td>${dto.review_cate}</td>
-									<td><a href="reviewContent.ju?qu_idx=${dto.review_idx}">${dto.review_subject}</a></td>
+									<c:choose>
+										<c:when test="${dto.review_cate==0}">
+											<td>책추천</td>
+										</c:when>
+										<c:when test="${dto.review_cate==1}">
+											<td>감상평</td>
+										</c:when>
+									</c:choose>
+									<td><a href="reviewContent.ju?review_idx=${dto.review_idx}">${dto.review_subject}</a></td>
 									<td>${dto.mem_idx}</td>
 									<td>${dto.review_date}</td>
 									<td>${dto.review_readnum}</td>

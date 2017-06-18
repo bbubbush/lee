@@ -29,19 +29,21 @@
 	</div>
 	<div class="row">
 		<div class="col-md-3">
-			<jsp:include page="/WEB-INF/views/service/elibSide.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/views/help/helpSide.jsp"></jsp:include>
 		</div>
 		<div class="col-md-9">
 			<div class="row">
 				<div class="col-md-7">
 					<h2>공지사항 게시판</h2>
 				</div>
-				<div class="col-md-3" style="text-align: center;">
-					<a class="btn btn-default" type="submit" href="noticeWrite.ju">
-						<span class="glyphicon glyphicon-pencil" aria-hidden="true">
-							공지쓰기</span>
-					</a>
-				</div>
+				<c:if test="${chk}">
+					<div class="col-md-3" style="text-align: center;">
+						<a class="btn btn-default" type="submit" href="noticeWrite.ju">
+							<span class="glyphicon glyphicon-pencil" aria-hidden="true">
+								공지쓰기</span>
+						</a>
+					</div>
+				</c:if>
 			</div>
 			<div class="row">
 				<div class="col-md-10">
@@ -49,7 +51,6 @@
 						<thead>
 							<tr>
 								<th>번호</th>
-								<th>분류</th>
 								<th>제목</th>
 								<th>작성자</th>
 								<th>작성일</th>
@@ -62,10 +63,9 @@
 									<td colspan="6" align="left">등록된 공지사항이 없습니다.</td>
 								</c:if>
 							</tr>
-							<c:forEach var="dto" items="${list}">
+							<c:forEach var="dto" items="${list}" varStatus="i">
 								<tr>
-									<td>${dto.nt_idx}</td>
-									<td>${dto.nt_cate}</td>
+									<td>${(page-1)*10+i.index+1}</td>
 									<td><a href="noticeContent.ju?nt_idx=${dto.nt_idx}">${dto.nt_subject}</a></td>
 									<td>${dto.mem_idx}</td>
 									<td>${dto.nt_date}</td>

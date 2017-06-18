@@ -49,6 +49,7 @@ public class QnaDAOImple implements QnaDAO{
 		int count = sqlMap.selectOne("qnaTotalCount");
 		return count;
 	}
+	
 	public String makeIdx(String tableName) {
 		// TODO Auto-generated method stub
 		Long unixTime=System.currentTimeMillis();
@@ -69,5 +70,9 @@ public class QnaDAOImple implements QnaDAO{
 		map.put("sql", sql);
 		List<QnaDTO> list=sqlMap.selectList("topTenQna", map); 
 		return list;
+	}
+	public int qnaRead(String qna_idx) {
+		int count = sqlMap.update("qnaRead", qna_idx);
+		return count;
 	}
 }

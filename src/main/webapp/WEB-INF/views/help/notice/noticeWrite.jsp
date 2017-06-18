@@ -26,7 +26,7 @@
 	<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 	<div class="row">
 		<div class="col-md-3">
-			<jsp:include page="/WEB-INF/views/service/elibSide.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/views/help/helpSide.jsp"></jsp:include>
 		</div>
 		<div class="col-md-7">
 			<h2>공지사항 쓰기</h2>
@@ -35,7 +35,7 @@
 					<table class="table table-striped table table-hover" border="1">
 						<thead>
 							<tr>
-								<th class="text-center col-md-2">제목</th>
+								<th style="text-align: center; vertical-align: middle;">제목</th>
 								<td>
 									<div class="form-group">
 										<input type="text" name="nt_subject" class="form-control" placeholder="제목을 입력하세요">
@@ -43,7 +43,7 @@
 								</td>
 							</tr>
 							<tr>
-								<th class="text-center col-md-2">내용</th>
+								<th style="text-align: center; vertical-align: middle;">내용</th>
 								<td>
 									<div class="form-group">
 										<textarea class="form-control col-sm-5" name="nt_content" rows="10" placeholder="내용을 입력하세요"></textarea>
@@ -54,7 +54,7 @@
 								<td colspan="2">
 									<div class="form-group"></div>
 									<button type="submit" class="btn btn-default">등록</button>
-									<a class="btn btn-default" href="notice/noticeList.ju" role="button">취소</a>
+									<a class="btn btn-default" href="noticeList.ju" role="button">취소</a>
 								</td>
 							</tr>
 					</table>

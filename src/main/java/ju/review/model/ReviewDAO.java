@@ -13,6 +13,7 @@ public interface ReviewDAO {
 	public ReviewDTO reviewChange(String review_idx);
 	public int reviewChangeOk(ReviewDTO dto);
 	public int reviewTotalCount();
+	public int reviewRead(String review_idx);
 	public String makeIdx(String tableName);
 	public ReviewDTO reviewPreInfo(String review_idx);
 	public ReviewDTO reviewNextInfo(String review_idx);

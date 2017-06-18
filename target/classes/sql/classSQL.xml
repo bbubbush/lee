@@ -59,7 +59,7 @@
  	</insert>
  	<select id="classSELcheckMyRgstList" parameterType="String" resultType="ju.dto.SubjectDTO">
 	 	select
-			rownum as rnum, b.sj_idx, b.sj_name, c.tc_name, b.sj_sd, b.sj_ed, b.sj_st, b.sj_et, b.sj_sum
+			rownum as rnum, b.sj_idx, b.sj_name, c.tc_name, b.sj_sd, b.sj_ed, b.sj_st, b.sj_et, b.sj_loc, b.sj_sum
 		from
 			(select * from regist where mem_idx=#{mem_idx})a, subject b, teacher c
 		where
@@ -78,6 +78,12 @@
  		SELECT sj_idx
  		FROM regist
  		WHERE mem_idx = #{mem_idx}
-
+ 	</select>
+ 	<select id="classSELmyClass" resultType="ju.dto.SubjectDTO" parameterType="String">
+ 		SELECT SUBJECT.*,A.MEMBERNUM AS sj_num, TEACHER.tc_name
+		FROM SUBJECT,TEACHER,(SELECT STUDENT.sj_idx,COUNT(MEMNUM) AS MEMBERNUM
+		FROM (SELECT * FROM SUBJECT LEFT JOIN (SELECT sj_idx AS MEMNUM FROM REGIST WHERE mem_idx = #{mem_idx})A ON SUBJECT.sj_idx=A.MEMNUM)STUDENT
+		GROUP BY SJ_IDX)A
+		WHERE SUBJECT.tc_idx=TEACHER.tc_idx AND SUBJECT.sj_idx=A.sj_idx
  	</select>
  </mapper>
