@@ -64,19 +64,9 @@
 	}
 </script>
 <style type="text/css">
-.modal-body {
-	width: 350px;
-	height: 400px;
-}
 
 .rdiv {
 	float: left;
-}
-
-.rdiv2 {
-	float: right;
-	width: 100px;
-	height: 200px;
 }
 
 .tab {
@@ -96,16 +86,16 @@
 		<input type="hidden" name="rr_start_str" id="rr_start">
 		<input type="hidden" name="rr_end_str" id="rr_end">
 		<div class="container">
-			<h2>열람실 이용</h2>
+			<h2 class="rrSub">열람실 이용</h2>
 			<!-- Trigger the modal with a button -->
-			<button type="button" class="btn btn-info btn-lg" data-toggle="modal"
+			<button type="button" class="btn btn-info btn-lg rrBbtn" data-toggle="modal"
 				data-target="#rrBook">이용하기</button>
 			<!-- Modal -->
 			<div class="modal fade" id="rrBook" role="dialog">
-				<div class="modal-dialog">
+				<div class="modal-dialog modal-fullsize">
 
 					<!-- Modal content-->
-					<div class="modal-content" id="seat">
+					<div class="modal-content modal-fullsize" id="seat">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 							<input type="radio" name="rr_cate" id="r1" checked value="1">room1
@@ -156,14 +146,6 @@
 										</tr>
 									</c:forEach>
 								</table>
-							</div>
-							<div class="rdiv2">
-								이름 :
-								<div id="rdiv2name"></div>
-								<br> 열람실 :
-								<div id="rdiv2cate"></div>
-								<br> 좌석번호 :
-								<div id="rdiv2seatno"></div>
 							</div>
 						</div>
 						<div class="modal-footer">

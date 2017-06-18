@@ -18,7 +18,7 @@
 					수강목록</a>
 				</li>
 				<li class="" id="aboutMybook">
-					<a href='rgstList.ju'>
+					<a href='rgstList.ju' id="rgstList">
 					<span class="glyphicon glyphicon-education" aria-hidden="true"></span>
 					나의 수업</a>
 				</li>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -14,19 +15,29 @@
 <script src='/lee/resources/fullcalendar/lib/moment.min.js'></script>
 <script src='/lee/resources/fullcalendar/fullcalendar.min.js'></script>
 <script type="text/javascript" src="/lee/resources/sideMenu/sideScript.js"></script>
+<script type="text/javascript" src="/lee/resources/js/alertifyjs/alertify.min.js"></script>
+<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/alertify.min.css">
+<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/themes/default.min.css">
 <link rel="stylesheet" href="/lee/resources/sideMenu/css/sideStyle.css">
+
 <script type="text/javascript">
 	$(document).ready(function() {
+		<c:if test="${empty sessionScope.sidx }">
+			alertify.alert("CAUTION", "로그인 후 이용이 가능합니다.", function(){
+				location.href="/lee/login.ju";
+			});
+		</c:if>
+	
 		var roomName, timeName;
 		
 		var now = new Date();
 		var nowDate = now.getFullYear();
 		nowDate += (now.getMonth() + 1)>9?"-"+(now.getMonth() + 1):"-0"+(now.getMonth() + 1);
 		nowDate += now.getDate()>9?"-"+now.getDate():"-0"+now.getDate();
-		
+				
 		$('#calendar').fullCalendar({
 			header: {
-			left: '',
+			left: 'prev,next today',
 			center: 'title',
 			right: ''
 		},
@@ -49,12 +60,44 @@
 						$("#resdate").val(startDate); 
 						$("#selectedDate").text(startDate); 
 						
-			            if(startDate.substr(8,2)<=nowDate.substr(8,2)||startDate.substr(8,2)>(parseInt(nowDate.substr(8,2))+14)){
+						var startMonth = startDate.substr(5,2);
+						var startDay = startDate.substr(8,2);
+						var nowMonth = nowDate.substr(5,2);
+						var nowDay = nowDate.substr(8,2);
+						
+						if(startMonth < nowMonth){
+							//선택한 날짜의 month가 현재시간 month보다 적은 경우
 							$("#srBooking").attr("disabled",true);
 							jQuery('#roomStatus').hide();
 							jQuery('.sdiv').hide();
 							return;
-			            }
+						}else if(startMonth > nowMonth){
+							//선택한 날짜의 month가 현재시간 month보다 큰 경우
+							if(startMonth-nowMonth>1){
+								$("#srBooking").attr("disabled",true);
+								jQuery('#roomStatus').hide();
+								jQuery('.sdiv').hide();
+								return;	
+							}else{
+								startDay = parseInt(startDay)+16;
+								if(startDay>nowDay){
+									$("#srBooking").attr("disabled",true);
+									jQuery('#roomStatus').hide();
+									jQuery('.sdiv').hide();
+									return;
+								}
+							}
+						}else if(startMonth == nowMonth){
+							//선택한 날짜의 month가 현재시간 month와 같은 경우
+							if(startDay<=nowDay||startDay>(parseInt(nowDay)+14)){
+								$("#srBooking").attr("disabled",true);
+								jQuery('#roomStatus').hide();
+								jQuery('.sdiv').hide();
+								return;
+				            }	
+						}
+						
+			            
 			            
 			            $.ajax({
 							url:"srCal.ju",
@@ -70,7 +113,7 @@
 			                        	$(".rt_check>.time"+i+">.room"+j).removeClass("using myBig");
 									}
 								}
-			                       
+			                    
 								for(var i = 0; i<cal.srarr.length;i++){
 									var rn = cal.srarr[i].sr_roomno;
 			                     	var tn = cal.srarr[i].sr_time;
@@ -87,7 +130,7 @@
 						});
 			            $('#calendar').fullCalendar('unselect');
 					}else{
-						alert("숨쉬는 날입니다.");
+						//휴관일
 						return;
 					}   
 				},
@@ -107,13 +150,13 @@
 					url : "getHolidayFC.ju",
 					type: "get",
 					data : {"yr":calendar.format('YYYY')},
-					dataType:"json",      
+					dataType:"json",
 					success : function(responseData){
         	            $("#ajax").remove();
 						datedata = responseData.hdto;
-        	            console.log(datedata)
 						if(!datedata){
-							alert("데이터를 받지 못함");
+							//데이터안들어옴
+							console.log(에러발생);
 						}else{
 							var events = [];
 							for(var i=0 ; i < datedata.length ; i++){       
@@ -131,7 +174,7 @@
 						}   
 					},
 					error: function(request,status,error){
-						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error); 
+						console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 					}
 				});
 			}

@@ -14,9 +14,6 @@
 <script type="text/javascript" src="/lee/resources/sideMenu/sideScript.js"></script>
 <link rel="stylesheet" href="/lee/resources/sideMenu/css/sideStyle.css">
 <script type="text/javascript">
-   function rrCheckMJ(){
-      alert('쳌');
-   }
 </script>
 <style type="text/css">
 #guideTable>thead>tr>th{
@@ -33,6 +30,32 @@
 }
 ul{
 	list-style: none;
+}
+@media ( min-width :769px) {
+   #changeForm {
+      width: 100%;
+   }
+   #submenulabel {
+      width: 675px;
+      height: 134px;
+   }
+}
+
+@media ( max-width :1250px) {
+	#cssmenu {
+		width: 100%;
+	}
+	#changeForm {
+		width: 100%;
+	}
+	#guideTable {
+		width: 100%;
+		height: 134px;
+	}
+	.bookingdiv{
+		width: 100%;
+		height: 120px;
+	}
 }
 </style>
 </head>

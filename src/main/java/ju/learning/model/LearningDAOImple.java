@@ -40,4 +40,5 @@ public class LearningDAOImple implements LearningDAO {
 		return sql.selectList("classSELcheckMyRgst", mem_idx);
 	}
 
+
 }
