@@ -34,12 +34,12 @@
 			   	  </ul>
 			   	 
 			   	  <ul>
-			   	  	<li class='has-sub' id="bkList2"><a href="#" onclick="return false" data-lg="1">전자도서 관리</a> <!-- 2단 -->
+			   	  	<li class='has-sub' id="bkList3"><a href="#" onclick="return false" data-lg="1">전자도서 관리</a> <!-- 2단 -->
 				   		<ul>
-				   			<li><a href="#" onclick="return false" data-md="0" class="subpro">전자도서 리스트</a></li> <!-- 3단 -->
-				   			<li><a href="#" onclick="return false" data-md="1" class="subpro">전자도서 등록</a></li>
-				   			<li><a href="#" onclick="return false" data-md="2" class="subpro">오디오북 리스트</a></li>
-				   			<li><a href="#" onclick="return false" data-md="3" class="subpro">오디오북 등록</a></li>
+				   			<li><a href="/lee/elibList.ju"  data-md="0" class="subpro">전자도서 리스트</a></li> <!-- 3단 -->
+				   			<li><a href="/lee/elibUpload.ju"  data-md="1" class="subpro">전자도서 등록</a></li>
+				   			<li><a href="#"  data-md="2" class="subpro">오디오북 리스트</a></li>
+				   			<li><a href="#"  data-md="3" class="subpro">오디오북 등록</a></li>
 				   		</ul>
 			   		 </li>
 			   	  </ul>
