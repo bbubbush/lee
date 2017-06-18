@@ -150,7 +150,7 @@
 <script type="text/javascript">
 	$(function() {
 		
-		
+		startvoid();
 		
 		$('#main-menu').smartmenus(
 			{
@@ -163,6 +163,17 @@
 	
 	
 	}); 
+	
+	function startvoid(){
+		var sid = "${sid}";
+		if(sid==null || sid==""){
+			$("#btn-mic").trigger('click');
+			$('#btn-mic').popover('show');
+			
+		}else{
+			$("#btn-mic").trigger('click');
+		}
+	}
 </script>
 
 <header>
@@ -181,7 +192,7 @@
 					    	</div>
 					    	
 					    <button type="button" id="btn-mic" class="btn off" data-container="body" data-toggle="popover" title="잠깐!"
-					    data-placement="bottom" data-content="장애인분들을 위한 배려입니다. 마이크를 끄시거나 버튼을눌러 음성인식을 꺼주세요.">마이크 <span></span></button>
+					    data-placement="bottom" data-content="장애인분들을 위한 배려입니다. 불편하시더라도 로그인 하시거나 혹은 마이크를 끄시거나 버튼을눌러 음성인식을 꺼주세요.">마이크 <span></span></button>
 					    <button class="btn" id="btn-tts" style="margin-top:15px;">Text to speech</button>
 					  </div>
 					</div>
