@@ -315,7 +315,7 @@
 					detailPub=$("#detailPub").val();
 					cateLg=$("#cateLg").val();
 					if(cateLg==99){
-						cateMd="";
+						cateMd="99";
 					}
 					else{
 						cateMd=$("#cateMd").val();

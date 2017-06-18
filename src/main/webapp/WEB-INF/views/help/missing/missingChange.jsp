@@ -28,7 +28,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-3">
-			<jsp:include page="/WEB-INF/views/service/elibSide.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/views/help/helpSide.jsp"></jsp:include>
 		</div>
 		<div class="col-md-9">
 			<div class="row">
@@ -44,14 +44,11 @@
 							<td>${dto.missing_date}</td>
 						</tr>
 						<tr>
-							<td>첨부</td>
-							<td><input type="text" name="missing_idx" value="${dto.missing_idx}" readonly="readonly"></td>
-							<td>${dto.missing_readnum}</td>
-						</tr>
-						<tr>
 							<td colspan="3"><div class="col-md-12">
-									<textarea class="form-control col-sm-5" rows="10" name="missing_content" value="${dto.missing_content}">${dto.missing_content}</textarea>
-								</div></td>
+									<textarea class="form-control col-sm-5" rows="10" name="missing_content">${dto.missing_content}</textarea>
+								</div>
+								<input type="hidden" name="missing_idx" value="${dto.missing_idx}"/>
+								</td>
 						</tr>
 						<tr>
 							<td colspan="3">

@@ -146,4 +146,12 @@ public class LoanDAOImple implements LoanDAO {
 		int resultCount=sqlMap.update("elibUPDschedule");
 		return resultCount;
 	}
+	
+	/**전자도서 삭제시 모든 대출 정보 삭제*/
+	public int loanDelete(String el_idx){
+		HashMap<String, String> hmap=new HashMap<String, String>();
+		hmap.put("el_idx", el_idx);
+		int resultCount=sqlMap.update("loanDEL", hmap);
+		return resultCount;
+	}
 }

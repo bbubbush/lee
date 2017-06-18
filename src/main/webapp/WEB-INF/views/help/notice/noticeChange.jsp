@@ -28,7 +28,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-3">
-			<jsp:include page="/WEB-INF/views/service/elibSide.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/views/help/helpSide.jsp"></jsp:include>
 		</div>
 		<div class="col-md-9">
 			<div class="row">
@@ -44,14 +44,11 @@
 							<td>${dto.nt_date}</td>
 						</tr>
 						<tr>
-							<td>첨부</td>
-							<td><input type="text" name="nt_idx" value="${dto.nt_idx}" readonly="readonly"></td>
-							<td>${dto.nt_readnum}</td>
-						</tr>
-						<tr>
 							<td colspan="3"><div class="col-md-12">
-									<textarea class="form-control col-sm-5" rows="10" name="nt_content" value="${dto.nt_content}">${dto.nt_content}</textarea>
-								</div></td>
+									<textarea class="form-control col-sm-5" rows="10" name="nt_content">${dto.nt_content}</textarea>
+								</div>
+								<input type="hidden" name="nt_idx" value="${dto.nt_idx}"/>
+								</td>
 						</tr>
 						<tr>
 							<td colspan="3">

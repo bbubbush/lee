@@ -6,7 +6,7 @@ public class FedexDTO {
 	private String fedex_idx;
 	private String mem_idx; //from성윤
 	private String bk_idx;
-	private int fedex_num;
+	private long fedex_num;
 	private String lb_idx;
 	private String mem_name;
 	private String bk_subject;
@@ -22,7 +22,7 @@ public class FedexDTO {
 		super();
 	}
 
-	public FedexDTO(String fedex_idx, String mem_idx, String bk_idx, int fedex_num, String lb_idx, String mem_name,
+	public FedexDTO(String fedex_idx, String mem_idx, String bk_idx, long fedex_num, String lb_idx, String mem_name,
 			String bk_subject, String mem_addr, String mem_hp, Date lb_sd, Date lb_ed, String dto2, String lb_sday,
 			String lb_eday) {
 		super();
@@ -66,11 +66,11 @@ public class FedexDTO {
 		this.bk_idx = bk_idx;
 	}
 
-	public int getFedex_num() {
+	public long getFedex_num() {
 		return fedex_num;
 	}
 
-	public void setFedex_num(int fedex_num) {
+	public void setFedex_num(long fedex_num) {
 		this.fedex_num = fedex_num;
 	}
 

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +18,7 @@
 	<script type="text/javascript" src="/lee/resources/bootstrapk/js/bootstrap.min.js"></script>
 	<script type="text/javascript"
 	src="/lee/resources/sideMenu/sideScript.js"></script>
+	
 	
 <link rel="stylesheet" href="/lee/resources/sideMenu/css/sideStyle.css">
 <style type="text/css">
@@ -43,8 +45,8 @@
 		
 	}
 	#submenulabel{
-	width: 675px;
-	height: 134px;
+	width: 1030px;
+	height: 276px;
 	}
 	
 	
@@ -66,9 +68,151 @@
 	
 	
 }
+
+/* #tarrow {
+  animation-duration: 2s;
+  animation-name: slidein;
+  animation-iteration-count: infinite;
+  animation-direction: reverse;
+} */
+
+/* @keyframes slidein {
+  from {
+    padding-left:400px;
+    padding-right:0px;
+  }
+
+  to {
+    padding-left:0px;
+    padding-right:400px;
+  } */
+}
 </style>
+
+<script>
+
+
+var tbx;
+var tdetail ="";
+var pt;
+function trackbook(tcode){
+	
+	$.ajax({
+		url:"http://tracking.sweettracker.net/tracking",
+		type:"get",
+		data:{"t_key":"lEe3wbrNRikejA5XajFc0A","t_code":"08","t_invoice":tcode},
+		dataType:"xml",
+		success: function(xmldata){
+			if(xmldata){
+				console.log(xmldata);
+				tbx = xmldata;
+				var tlevelarr = tbx.getElementsByTagName('level');
+				var tlevel = parseInt(tlevelarr[0].innerHTML)*16 + 4;
+				tdetail = tbx.getElementsByTagName('tracking_details');
+				pt = tlevel*4+70;
+				$("#tprogresspt").html("<h3>배송진행률 : "+tlevel + "%</h3>");
+				$("#tprogress").css("width",tlevel+"%");
+				
+				var thtml ="";
+				for(var i=0 ; i<tdetail.length ; i++){
+					
+					
+					thtml += "상태 : "+tdetail[i].getElementsByTagName('trans_kind')[0].innerHTML+"<br>";
+					thtml += "위치 : "+tdetail[i].getElementsByTagName('trans_where')[0].innerHTML+"<br>";
+					thtml += "지점번호 : "+tdetail[i].getElementsByTagName('trans_telno')[0].innerHTML+"<br>";
+					thtml += "처리일시 : "+tdetail[i].getElementsByTagName('trans_time')[0].innerHTML+"<br>";
+					
+					if(i!=(tdetail.length-1)){
+						thtml += "<span class='glyphicon glyphicon-arrow-down' aria-hidden='true'></span><br>"
+					};
+					
+				}
+				$("#tracking-info").html(thtml);
+				$(function() {
+				    function swing() {
+				        $('#tarrow').animate({'padding-left':'70px'},600).animate({'padding-left':pt+'px'},1000,swing);
+				        $('#tarrow').css('padding-left','70px');
+				    }
+				    swing();
+				});
+			}
+			else{
+				console.log('값 못받아옴....ㅠㅜ');
+			}
+		},error: function(request,status,error){
+			console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+	});
+	
+}
+</script>
 </head>
 <body>
+<!-- 배송추적 Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h1 class="modal-title" id="myModalLabel">배송추적</h1>
+        <h1>
+        
+        <span class="glyphicon glyphicon-gift" aria-hidden="true"style="left:40px;position:absolute;top:83px;"></span>
+      <span class="glyphicon glyphicon-arrow-right" id="tarrow" aria-hidden="true"></span>
+      
+      <span class="glyphicon glyphicon-home" aria-hidden="true" style="right:30px;position:absolute;top:83px;"></span>
+      
+      	</h1>
+        	<div id="tprogresspt"></div>
+	        
+      </div>
+      <!-- 상세정보 아코디언 -->
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+			  <div class="panel panel-default">
+			    <div class="panel-heading" role="tab" id="headingOne" >
+			      <h4 class="panel-title">
+			        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+			        	  <h3> <span class="glyphicon glyphicon glyphicon-zoom-in" aria-hidden="true"></span> 상세정보</h3>
+			        </a>
+			      </h4>
+			    </div>
+			    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+			      <div class="panel-body">
+			        	<div class="progress">
+						  <div class="progress-bar progress-bar-success progress-bar-striped active" id="tprogress" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+						    <span class="sr-only"></span>
+						  </div>
+						</div>
+			        <div class="modal-body" id="tracking-info">
+			      </div>
+			      </div>
+			    </div>
+			  </div>
+</div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 	<%@include file="../header.jsp"%>
 	<div class="row">
 	
@@ -81,8 +225,8 @@
 				<!-- 컨텐츠 입력 -->
 				<!-- 커넨츠 상단 바 -->
 				<div id="submenulabel" style="background-image:url('/lee/resources/member/img/sul.png')">
-					<div style="width:100%; height:100%; marg in:0px; padding:50px; background-color: rgba(26, 164, 172, 0.5 );">
-						<h2 style="color:white;">대출 / 예약</h2>
+					<div style="width:100%; height:100%; marg in:0px; padding:50px;  background-color: rgba(0, 0, 0, 0.3 );">
+						<h1 style="color:white;">대출 / 예약</h1>
 					</div>
 				</div>
 				<!-- 컨텐츠 실영역 -->
@@ -92,7 +236,7 @@
 <div class="row" id="loanbook">
 <c:choose>
     <c:when test="${empty loanlist}">
-        대출하신 책이 없습니다.    
+        <div style="width:400px; height:400px;text-align:center;">대출하신 책이 없습니다.</div>
     </c:when>
     <c:when test="${loanlist ne null}">
             <c:forEach items="${loanlist}" var="list">
@@ -105,8 +249,8 @@
 					      <div class="caption ">
 					        <h3>${list.bk_subject}</h3>
 					        <p>
-					        대출일 : ${list.lb_sd}<br>
-					        반납예정일 : ${list.lb_ed}<br>
+					        대출일 : <fmt:formatDate pattern = "yyyy-MM-dd" value = "${list.lb_sd}" /> <br>
+					        반납예정일 : <fmt:formatDate pattern = "yyyy-MM-dd" value = "${list.lb_ed}" /> <br>
 					        기타사항 : ${list.lb_etc }<br>
 					        연장횟수 : ${list.lb_delay}<br>
 					        </p>
@@ -119,7 +263,7 @@
     
 </c:choose>
 </div>
-
+<hr>
 
 <!-- 택배대출 -->
 		<h3>택배대출</h3>
@@ -127,7 +271,7 @@
 <div class="row" id="fedexbook">
 <c:choose>
    <c:when test="${empty fedexlist}">
-        대출하신 책이 없습니다.    
+        <div style="width:400px; height:400px;text-align:center;">택배대출하신 책이 없습니다.</div>
    </c:when>
     <c:when test="${fedexlist ne null}">
             <c:forEach items="${fedexlist}" var="list">
@@ -139,18 +283,35 @@
 					     </div>
 					      <div class="caption">
 					        <h3>책제목 대출2</h3>
-					        <p>
-					       	대출일 : ${list.lb_sd}<br>
-					        반납예정일 : ${list.lb_ed}<br>
-					        기타사항 : ${list.lb_etc }<br>
-					        연장횟수 : ${list.lb_delay}<br>
-					        운송장번호 : ${list.fedex_num}<br>
-					        </p>
-					        <p>
-					       		<a href="#" class="btn btn-primary" role="button">택배취소</a>
-					        	<a href="#" class="btn btn-primary" role="button">택배추적</a>
-					        	<a href="#" class="btn btn-primary" role="button">대출연장</a>
-					        </p>
+ 
+					        	<c:if test="${empty list.fedex_num}">
+						        		 <p>
+									       	대출일 : <fmt:formatDate pattern = "yyyy-MM-dd" value = "${list.lb_sd}" /><br>
+									        반납예정일 : <fmt:formatDate pattern = "yyyy-MM-dd" value = "${list.lb_ed}" /><br>
+									        기타사항 : ${list.lb_etc }<br>
+									        연장횟수 : ${list.lb_delay}<br>
+						       
+							        	</p>
+							        	<p>
+							        		<a href="#" class="btn btn-primary" role="button">택배취소</a>
+						        		</p>
+					        	</c:if>
+					       		<c:if test="${list.fedex_num ne null}">
+							       		 <p>
+										       	대출일 : <fmt:formatDate pattern = "yyyy-MM-dd" value = "${list.lb_sd}" /><br>
+									       		반납예정일 : <fmt:formatDate pattern = "yyyy-MM-dd" value = "${list.lb_ed}" /><br>
+										        기타사항 : ${list.lb_etc }<br>
+										        연장횟수 : ${list.lb_delay}<br>
+										        운송장번호 : ${list.fedex_num}<br>
+							        	</p>
+							        	<p>
+										<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick='trackbook(${list.fedex_num})'>
+		  									배송추적
+										</button>
+										</p>
+					       		</c:if>
+					        	
+					       
 					        </div>
 					    </div>
 					  </div>
@@ -168,7 +329,8 @@
 <div class="row" id="yeyakbook">
 <c:choose>
    <c:when test="${empty yylist}">
-        대출하신 책이 없습니다.    
+   <div style="width:400px; height:400px;text-align:center;">예약하신 책이 없습니다.    </div>  
+        
    </c:when>
    <c:when test="${yylist ne null}">
 	   <c:forEach items="${yylist}" var="list">
@@ -219,9 +381,7 @@
 	
 		</div>
 	</div>
-	<div class="col-md-12">
-	<%@include file="../footer.jsp"%>
-	</div>
+	
 </div>
 </body>
 </html>

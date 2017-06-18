@@ -113,8 +113,8 @@
 					<div class="col-md-12" id="submenulabel"
 						style=" background-image: url('/lee/resources/member/img/sul.png')">
 						<div
-							style="width: 100%; height: 100%; margin: 0px; padding: 50px; background-color: rgba(26, 164, 172, 0.5);">
-							<h2 style="color: white;">로그인 정보 확인</h2>
+							style="width: 100%; height: 100%; margin: 0px; padding: 50px;  background-color: rgba(0, 0, 0, 0.3 );">
+							<h1 style="color: white;">로그인 정보 확인</h1>
 						</div>
 					</div>
 					

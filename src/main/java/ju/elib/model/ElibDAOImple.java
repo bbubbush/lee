@@ -22,7 +22,7 @@ public class ElibDAOImple implements ElibDAO {
 		return resultCount;
 	}
 	
-	/**eEdu 최초 접근*/
+	/**최초 접근*/
 	public List<ElibDTO> elibFirst(String orderName, int startNum, int endNum, String idxParam) {
 		HashMap<String, String> hmap=new HashMap<String, String>(); 
 		hmap.put("orderName", orderName);
@@ -33,7 +33,7 @@ public class ElibDAOImple implements ElibDAO {
 		return eEduArr;
 	}
 	
-	/**eEdu 최초 접근 갯수*/
+	/**최초 접근 갯수*/
 	public int elibFirstCount(String idxParam) {
 		HashMap<String, String> hmap=new HashMap<String, String>();
 		hmap.put("idxParam", idxParam);
@@ -41,13 +41,13 @@ public class ElibDAOImple implements ElibDAO {
 		return contentMax;
 	}
 	
-	/**eEdu 컨텐츠 선택*/
+	/**컨텐츠 선택*/
 	public List<ElibDTO> elibContent(String el_idx) {
 		List<ElibDTO> eEduArr=sqlMap.selectList("elibSELcon", el_idx);
 		return eEduArr;
 	}
 	
-	/**eEdu 단순 검색*/
+	/**단순 검색*/
 	public List<ElibDTO> elibSimple(String simpleSearchText, String orderName, int startNum, int endNum, String idxParam) {
 		HashMap<String, String> hmap=new HashMap<String, String>();
 		hmap.put("simpleSearchText", simpleSearchText);
@@ -59,7 +59,7 @@ public class ElibDAOImple implements ElibDAO {
 		return eEduArr;
 	}
 	
-	/**eEdu 단순 검색 갯수*/
+	/**단순 검색 갯수*/
 	public int elibSimpleCount(String simpleSearchText, String orderName, String idxParam) {
 		HashMap<String, String> hmap=new HashMap<String, String>();
 		hmap.put("simpleSearchText", simpleSearchText);
@@ -69,7 +69,7 @@ public class ElibDAOImple implements ElibDAO {
 		return contentMax;
 	}
 	
-	/**eEdie 상세검색*/
+	/**상세검색*/
 	public List<ElibDTO> elibDetail(String where, String orderName, int startNum, int endNum, String idxParam) {
 		HashMap<String, String> hmap=new HashMap<String, String>();
 		hmap.put("where", where);
@@ -81,7 +81,7 @@ public class ElibDAOImple implements ElibDAO {
 		return elibArr;
 	}
 	
-	/**eEdie 상세검색 갯수*/
+	/**상세검색 갯수*/
 	public int elibDetailCount(String where, String orderName, String idxParam) {
 		HashMap<String, String> hmap=new HashMap<String, String>();
 		hmap.put("where", where);
@@ -91,12 +91,21 @@ public class ElibDAOImple implements ElibDAO {
 		return contentMax;
 	}
 	
-	/**eEdu 뷰어*/
+	/**뷰어*/
 	public List<ElibDTO> elibViewer(String el_idx) {
 		HashMap<String, String> hmap=new HashMap<String, String>();
 		hmap.put("el_idx", el_idx);
 		List<ElibDTO> elibArr=sqlMap.selectList("elibSELview", hmap);
 		return elibArr;
+	}
+	
+	/**추천*/
+	public int elibRecommend(String el_idx, String el_recommend) {
+		HashMap<String, String> hmap=new HashMap<String, String>();
+		hmap.put("el_idx", el_idx);
+		hmap.put("el_recommend", el_recommend);
+		int resultCount=sqlMap.update("elibUPDrec",  hmap);
+		return resultCount;
 	}
 	
 	/**관리자 검색없는 리스트 보기*/
@@ -154,17 +163,6 @@ public class ElibDAOImple implements ElibDAO {
 		HashMap<String, String> hmap=new HashMap<String, String>();
 		hmap.put("where", where);
 		int resultCount=sqlMap.selectOne("elibSELadminSearchCount",  hmap);
-		return resultCount;
-	}
-	
-	/**추천*/
-	public int elibRecommend(String el_idx, String el_recommend) {
-		HashMap<String, String> hmap=new HashMap<String, String>();
-		hmap.put("el_idx", el_idx);
-		hmap.put("el_recommend", el_recommend);
-		System.out.println(el_idx);
-		System.out.println(el_recommend);
-		int resultCount=sqlMap.update("elibUPDrec",  hmap);
 		return resultCount;
 	}
 	

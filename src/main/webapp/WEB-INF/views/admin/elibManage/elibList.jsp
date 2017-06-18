@@ -60,7 +60,7 @@
 					$.ajax({
 						type : "GET"
 						, url : "elibGrupLg.ju"
-						, data : {groupNum : groupNum}
+						, data : {groupNum : groupNum, admin : "list"}
 						, dataType : "json"
 						, success: function(data){
 							$("#cateMd").parent().parent().children("td").eq(0).html(data.cateLg);
@@ -85,12 +85,14 @@
 					, success: function(data){
 						var cateMdArr=data.cateMd;
 						var cateMdOption="<optgroup><option value='99'>전체</option></optgroup><optgroup>"
-						for(var i=0 ; i<cateMdArr.length ; i++){
-							cateMdOption+="<option value='" + i + "'>" + cateMdArr[i] + "</option>";
-						}
-							cateMdOption+="</optgroup>";
+						if(cateMdArr!=null){
+							for(var i=0 ; i<cateMdArr.length ; i++){
+								cateMdOption+="<option value='" + i + "'>" + cateMdArr[i] + "</option>";
+							}
+						} // null if
+						cateMdOption+="</optgroup>";
 						$("#cateMd").html(cateMdOption);
-					}
+					} // success function
 				});
 			}
 		);
@@ -129,38 +131,38 @@
 					intoHTML+='				<div class="col-md-9">';
 					intoHTML+='					<table class="table table-bordered table-hover contentTable">';
 					intoHTML+='						<tr>';
-					intoHTML+='							<th>IDX</th>';
-					intoHTML+='							<td>';
+					intoHTML+='							<th class="col-md-3">IDX</th>';
+					intoHTML+='							<td class="col-md-8">';
 					intoHTML+='								<input type="text" class="form-control" value="'+ elibArr[i].el_idx + '" disabled="disabled" data-idx="' +elibArr[i].el_idx+ '">'; 
 					intoHTML+='							</td>';
 					intoHTML+='						</tr>';
 					intoHTML+='						<tr>';
-					intoHTML+='							<th>제목</th>';
-					intoHTML+='							<td>';
+					intoHTML+='							<th class="col-md-3">제목</th>';
+					intoHTML+='							<td class="col-md-8">';
 					intoHTML+='								<input type="text" class="form-control" value="'+ elibArr[i].el_subject + '" disabled="disabled" data-subject="' +elibArr[i].el_subject+ '">'; 
 					intoHTML+='							</td>';
 					intoHTML+='						</tr>';
 					intoHTML+='						<tr>';
-					intoHTML+='							<th>저자</th>';
-					intoHTML+='							<td>';
+					intoHTML+='							<th class="col-md-3">저자</th>';
+					intoHTML+='							<td class="col-md-8">';
 					intoHTML+='								<input type="text" class="form-control" value="'+ elibArr[i].el_writer + '" disabled="disabled" data-writer="' +elibArr[i].el_writer+ '">'; 
 					intoHTML+='							</td>'; 
 					intoHTML+='						</tr>';
 					intoHTML+='						<tr>';
-					intoHTML+='							<th>출판사</th>';
-					intoHTML+='							<td>';
+					intoHTML+='							<th class="col-md-3">출판사</th>';
+					intoHTML+='							<td class="col-md-8">';
 					intoHTML+='								<input type="text" class="form-control" value="'+ elibArr[i].el_pub + '" disabled="disabled" data-pub="' +elibArr[i].el_pub+ '">'; 
 					intoHTML+='							</td>'; 
 					intoHTML+='						</tr>';
 					intoHTML+='						<tr>';
-					intoHTML+='							<th>간략소개</th>';
-					intoHTML+='							<td>';
+					intoHTML+='							<th class="col-md-3">간략소개</th>';
+					intoHTML+='							<td class="col-md-8">';
 					intoHTML+='								<textarea class="form-control" rows="3"" disabled="disabled" data-info="' +elibArr[i].el_info+ '">' +elibArr[i].el_info+ '</textarea>';
 					intoHTML+='							</td>'; 
 					intoHTML+='						</tr>';
 					intoHTML+='						<tr>';
-					intoHTML+='							<th>구분</th>';
-					intoHTML+='							<td>';
+					intoHTML+='							<th class="col-md-3">구분</th>';
+					intoHTML+='							<td class="col-md-8">';
 					intoHTML+='								<label class="checkbox-inline">';
 					if(elibArr[i].el_idx.indexOf("EB")=="0"){intoHTML+='<input type="radio" class="group" name="contentGroup_' +i+ '"  value="7" checked="checked"> 전자도서';}
 					else {												intoHTML+='<input type="radio" class="group" name="contentGroup_' +i+ '"  value="7" > 전자도서'; }	
@@ -176,20 +178,29 @@
 					intoHTML+='							</td>';
 					intoHTML+='						</tr>';
 					intoHTML+='						<tr>';
-					intoHTML+='							<td id="tdLg_'+i+'" data-lg="' +elibArr[i].el_lg+ '">';
+					intoHTML+='							<td id="tdLg_'+i+'" data-lg="' +elibArr[i].el_lg+ '" class="col-md-3">';
 					intoHTML+=data.cateLg[i];
 					intoHTML+='							</td>';
-					intoHTML+='							<td id="tdMd_'+i+'" data-md="' +elibArr[i].el_md+ '">';
+					intoHTML+='							<td id="tdMd_'+i+'" data-md="' +elibArr[i].el_md+ '" class="col-md-8">';
 					intoHTML+=data.cateMd[i];
 					intoHTML+='							</td>';
 					intoHTML+='						</tr>';
 					intoHTML+='						<tr>';
+<<<<<<< HEAD
+					intoHTML+='							<th class="col-md-3">추천인 IDX</th>';
+					intoHTML+='							<td class="col-md-8">' + elibArr[i].el_recommend.split("~").join("<br>") + '</td>';
+=======
 					intoHTML+='							<th>추천인 IDX</th>';
 					intoHTML+='							<td>' + elibArr[i].el_recommend.split("~").join("<br>") + '</td>';
+>>>>>>> 7a5c6140c7e2cd754c632f04abd7e83b4f64aa42
 					intoHTML+='						</tr>';
 					intoHTML+='						<tr>';
-					intoHTML+='							<th>추천수</th>';
-					intoHTML+='							<td>' + elibArr[i].el_recocount + '</td>';
+					intoHTML+='							<th class="col-md-3">추천수</th>';
+					intoHTML+='							<td class="col-md-8">' + elibArr[i].el_recocount + '</td>';
+					intoHTML+='						</tr>';
+					intoHTML+='						<tr>';
+					intoHTML+='							<th class="col-md-3">대여 회원 IDX</th>';
+					intoHTML+='							<td class="col-md-8">' + members[i].split("~").join("<br>") + '</td>';
 					intoHTML+='						</tr>';
 					intoHTML+='						<tr>';
 					intoHTML+='							<th>대여 회원 IDX</th>';
@@ -428,6 +439,12 @@
 								$("#cateMd_"+num).prop("disabled", "disabled");
 								$("#tdLg_"+num).data("md", data.elibArr.el_md);
 								$("#tdMd_"+num).data("md", data.elibArr.el_md);
+<<<<<<< HEAD
+								
+								$(".contentTable:eq("+num+")>tbody>tr>td:eq(10)").html(data.members);
+								
+=======
+>>>>>>> 7a5c6140c7e2cd754c632f04abd7e83b4f64aa42
 								cateLg=$("#tdLg_"+num).html();
 								cateMd=$("#tdMd_"+num).html();
 								
@@ -866,80 +883,90 @@
 </head>
 <body>
 	
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th class="text-center" colspan="2">전자 도서 검색</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<th>제목</th>
-				<td>
-					<input type="text" class="form-control" placeholder="제목" name="el_subject">
-				</td>
-			</tr>
-			<tr>
-				<th>저자</th>
-				<td>
-					<input type="text" class="form-control" placeholder="저자" name="el_writer">
-				</td>
-			</tr>
-			<tr>
-				<th>출판사</th>
-				<td>
-					<input type="text" class="form-control" placeholder="출판사" name="el_pub">
-				</td>
-			</tr>
-			<tr>
-				<th>구분</th>
-				<td>
-					<label class="checkbox-inline">
-						<input type="radio" name="group"  value="0"> 전체
-					</label>
-					<label class="checkbox-inline">
-						<input type="radio" name="group"  value="7"> 전자도서
-					</label>
-					<label class="checkbox-inline">
-						<input type="radio" name="group" value="8"> 전자잡지
-					</label>
-					<label class="checkbox-inline">
-						<input	type="radio" name="group" value="9"> e-교육
-					</label>
-				</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>
-					<select id="cateMd" name="cateMd" class="form-control"></select>
-				</td>
-			</tr>
-			<tr>
-				<th>정렬</th>
-				<td>
-					<label class="checkbox-inline">
-						<input type="radio" name="order"  checked="checked"  value="new"> 등록순
-					</label>
-					<label class="checkbox-inline">
-						<input type="radio" name="order" value="recommend"> 추천순
-					</label>
-				</td>
-			</tr>
-		</tbody>
-		<tfoot>
-			<tr>
-				<th class="text-center" colspan="2">
-					<button type="button" class="btn btn-default" id="searchButton">검색</button>
-				</th>
-			</tr>
-		</tfoot>
-	</table>
-
-	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-	</div> <!-- 아코디언 -->
+	<!-- 헤더 -->
 	
-	<div class="text-center" id="pagingDiv">
-	</div>
+	<div class="row">
+		<div class="col-md-3">
+			<!-- 사이드바 부분 -->
+		</div>
+	
+		<div class="col-md-8">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th class="text-center" colspan="2">전자 도서 검색</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th class="col-md-2">제목</th>
+						<td class="col-md-4">
+							<input type="text" class="form-control" placeholder="제목" name="el_subject">
+						</td>
+					</tr>
+					<tr>
+						<th class="col-md-2">저자</th>
+						<td class="col-md-4">
+							<input type="text" class="form-control" placeholder="저자" name="el_writer">
+						</td>
+					</tr>
+					<tr>
+						<th class="col-md-2">출판사</th>
+						<td class="col-md-4">
+							<input type="text" class="form-control" placeholder="출판사" name="el_pub">
+						</td>
+					</tr>
+					<tr>
+						<th class="col-md-2">구분</th>
+						<td class="col-md-4">
+							<label class="checkbox-inline">
+								<input type="radio" name="group"  value="0"> 전체
+							</label>
+							<label class="checkbox-inline">
+								<input type="radio" name="group"  value="7"> 전자도서
+							</label>
+							<label class="checkbox-inline">
+								<input type="radio" name="group" value="8"> 전자잡지
+							</label>
+							<label class="checkbox-inline">
+								<input	type="radio" name="group" value="9"> e-교육
+							</label>
+						</td>
+					</tr>
+					<tr>
+						<td class="col-md-2"></td>
+						<td class="col-md-4">
+							<select id="cateMd" name="cateMd" class="form-control"></select>
+						</td>
+					</tr>
+					<tr>
+						<th class="col-md-2">정렬</th>
+						<td class="col-md-4">
+							<label class="checkbox-inline">
+								<input type="radio" name="order"  checked="checked"  value="new"> 등록순
+							</label>
+							<label class="checkbox-inline">
+								<input type="radio" name="order" value="recommend"> 추천순
+							</label>
+						</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<th class="text-center" colspan="2">
+							<button type="button" class="btn btn-default" id="searchButton">검색</button>
+						</th>
+					</tr>
+				</tfoot>
+			</table>
+		
+			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+			</div> <!-- 아코디언 -->
+			
+			<div class="text-center" id="pagingDiv">
+			</div>
+		</div> <!-- col-md-8 -->
+	</div> <!-- row -->
 	
 </body>
 </html>

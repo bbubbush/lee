@@ -57,7 +57,11 @@
 }
 
 .rrbtn {
-	width: 50px;
+	width: 250px;
+	height:100px;
+}
+#crtd{
+	width:100px;
 }
 </style>
 </head>
@@ -67,16 +71,16 @@
 		<input type="hidden" name="mem_idx" id="crmem_idx" value="${sessionScope.normalMember}">
 		<input type="hidden" name="rr_cate" value="3">
 		<div class="container">
-			<h2>자료실 이용</h2>
+			<h2 class="rrSub">자료실 이용</h2>
 			<!-- Trigger the modal with a button -->
-			<button type="button" class="btn btn-info btn-lg" data-toggle="modal"
+			<button type="button" class="btn btn-info btn-lg rrBbtn" data-toggle="modal"
 				data-target="#crBook">이용하기</button>
 			<!-- Modal -->
 			<div class="modal fade" id="crBook" role="dialog">
-				<div class="modal-dialog">
+				<div class="modal-dialog modal-fullsize">
 
 					<!-- Modal content-->
-					<div class="modal-content" id="seat">
+					<div class="modal-content modal-fullsize" id="seat">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 							<h4 class="modal-title" id="modal-title">자료실 이용하기</h4>
@@ -104,14 +108,6 @@
 										</tr>
 									</c:forEach>
 								</table>
-							</div>
-							<div class="cdiv2">
-								이름 :
-								<div id="cdiv2name"></div><br>
-								열람실 : 
-								<div id="cdiv2cate"></div><br>
-								좌석번호 :
-								<div id="cdiv2seatno"></div>
 							</div>
 						</div>
 						<div class="modal-footer">

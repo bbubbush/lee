@@ -16,7 +16,6 @@ public class MissingDAOImple implements MissingDAO{
 	public MissingDAOImple(SqlSessionTemplate sqlMap) {
 		this.sqlMap = sqlMap;
 	}
-	
 	public List<MissingDTO> missingList(String sql) {
 		// TODO Auto-generated method stub
 		Map<String , Object> map = new HashMap<String, Object>();
@@ -66,5 +65,12 @@ public class MissingDAOImple implements MissingDAO{
 		MissingDTO dto = sqlMap.selectOne("missingNextInfo", missing_idx);
 		return dto;
 	}
-	
+	public int missingRead(String missing_idx) {
+		int count = sqlMap.update("missingRead", missing_idx);
+		return count;
+	}
+	public String findName(String mem_idx) {
+		String result = sqlMap.selectOne("findName", mem_idx);
+		return result;
+	}
 }

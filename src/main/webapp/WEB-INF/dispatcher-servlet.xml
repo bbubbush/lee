@@ -77,6 +77,12 @@
 	<bean id="reviewDao" class="ju.review.model.ReviewDAOImple">
 		<constructor-arg  ref="sqlSessionTemplate" />
 	</bean>
+	<bean id="orderbookDao" class="ju.orderbook.model.OrderbookDAOImple">
+		<constructor-arg  ref="sqlSessionTemplate" />
+	</bean>
+	<bean id="replyDao" class="ju.reply.model.ReplyDAOImple">
+		<constructor-arg  ref="sqlSessionTemplate" />
+	</bean>
 
 
 	<!-- Spring and MyBatis linkage -->

@@ -32,5 +32,7 @@ public interface LoanDAO {
 	public String elibLoanMembers(String el_idx);
 	/**(schedule) 시간 지난 전자도서 자동 반납*/
 	public int elibLoanScheduleReturn();
+	/**전자도서 삭제시 모든 대출 정보 삭제*/
+	public int loanDelete(String el_idx);
 	
 }

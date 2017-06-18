@@ -18,9 +18,7 @@ function jsonTest(){
 		, dataType: "json"
 		, success : function(data){
 			var idx = data.elIdx;
-			console.log(idx);
 			var audios= data.audios;
-			console.log(audios);
 			 if (supportsAudio) {
 			     var index = 0,
 			         playing = false,
@@ -107,10 +105,8 @@ function jsonTest(){
 			         };
 			     extension = audio.canPlayType('audio/mpeg') ? '.mp3' : audio.canPlayType('audio/ogg') ? '.ogg' : '';
 			     loadTrack(index);
-			     console.log(mediaPath);
 			 }
 			}
-		
 	});	
 }
 

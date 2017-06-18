@@ -2,11 +2,19 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
+<!-- 하위 3개를 적어야 가능, JQ, 부트스트랩 밑에 작성 할 것 -->
+	<script type="text/javascript" src="/lee/resources/js/alertifyjs/alertify.min.js"></script>
+	<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/alertify.min.css">
+	<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/themes/default.min.css">
+	<link rel="stylesheet" href="/lee/resources/index/index.css">
 <c:choose>
 	<c:when test="${empty sidx}">
 		<script>
-		alert('로그인이 필요한 서비스 입니다.');
-		window.location.href="index.ju";
+		alertify.alert("",'로그인이 필요한 서비스 입니다.',
+				function(){
+					window.location.href="index.ju";
+				}
+		);
 		</script>
 		
 	</c:when>

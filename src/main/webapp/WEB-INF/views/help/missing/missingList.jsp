@@ -25,18 +25,20 @@
 	</div>
 	<div class="row">
 		<div class="col-md-3">
-			<jsp:include page="/WEB-INF/views/service/elibSide.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/views/help/helpSide.jsp"></jsp:include>
 		</div>
 		<div class="col-md-9">
 			<div class="row">
 				<div class="col-md-7">
 					<h2>분실물 발생/발견 게시판</h2>
 				</div>
-				<div class="col-md-3" style="text-align: center;">
-					<a class="btn btn-default" type="submit" href="missingWrite.ju">
-						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-					</a>
-				</div>
+				<c:if test="${chk}">
+					<div class="col-md-3" style="text-align: center;">
+						<a class="btn btn-default" type="submit" href="missingWrite.ju">
+							<span class="glyphicon glyphicon-pencil" aria-hidden="true"> 글쓰기</span>
+						</a>
+					</div>
+				</c:if>
 			</div>
 			<div class="row">
 				<div class="col-md-10">
@@ -57,10 +59,17 @@
 									<td colspan="6" align="left">등록된 분실물이 없습니다.</td>
 								</c:if>
 							</tr>
-							<c:forEach var="dto" items="${list}">
+							<c:forEach var="dto" items="${list}" varStatus="i">
 								<tr>
-									<td>${dto.missing_idx}</td>
-									<td>${dto.missing_cate}</td>
+									<td>${(page-1)*10+i.index+1}</td>
+									<c:choose>
+										<c:when test="${dto.missing_cate==0}">
+											<td>잃어버렸어요</td>
+										</c:when>
+										<c:when test="${dto.missing_cate==1}">
+											<td>발견했어요</td>
+										</c:when>
+									</c:choose>
 									<td><a href="missingContent.ju?missing_idx=${dto.missing_idx}">${dto.missing_subject}</a></td>
 									<td>${dto.mem_idx}</td>
 									<td>${dto.missing_date}</td>
@@ -109,11 +118,7 @@
 												<li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a>
 											</c:when>
 											<c:otherwise>
-<<<<<<< HEAD
 												<li><a href="missingList.ju?page=${page+1}"><span class="glyphicon glyphicon-chevron-right"></span></a>
-=======
-												<li><a href="noticeList.ju?page=${page+1}"><span class="glyphicon glyphicon-chevron-right"></span></a>
->>>>>>> master-merge
 											</c:otherwise>
 									</c:choose>
 								</ul>

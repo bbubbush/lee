@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import ju.dto.HolidayDTO;
 import ju.dto.MemberDTO;
 import ju.dto.RefRoomDTO;
 import ju.dto.StudyRoomDTO;
@@ -143,6 +144,11 @@ public class BookingDAOImple implements BookingDAO {
 		m.put("sr_time", time);
 		m.put("sr_resdate", resdate);
 		return sql.selectOne("bigSELadminRoomInfo",m);
+	}
+
+	public List<HolidayDTO> bigGetHoliday(String solar_date) {
+		// TODO Auto-generated method stub
+		return sql.selectList("bigSELgetHoliday", solar_date);
 	}
 
 }

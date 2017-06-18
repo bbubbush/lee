@@ -123,8 +123,11 @@ public class FindDAOImple implements FindDAO{
 		return count+count2;
 	}
 	
-	public int chkFedexbook(String bk_idx) {
-		int count = sqlMap.selectOne("chkFedexbook", bk_idx);
+	public int chkFedexbook(String bk_idx, String sid) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("mem_id", sid);
+		map.put("bk_idx", bk_idx);
+		int count = sqlMap.selectOne("chkFedexbook", map);
 		return count;
 	}
 	

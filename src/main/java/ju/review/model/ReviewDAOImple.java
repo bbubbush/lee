@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
-import ju.dto.QnaDTO;
 import ju.dto.ReviewDTO;
 
 public class ReviewDAOImple implements ReviewDAO{
@@ -34,7 +33,6 @@ public class ReviewDAOImple implements ReviewDAO{
 		String idx=tableName+unixTime;  
 		return idx;
 	}
-	
 	public int reviewWrite(ReviewDTO dto) {
 		// TODO Auto-generated method stub
 		int result = sqlMap.insert("reviewWrite", dto);
@@ -42,30 +40,36 @@ public class ReviewDAOImple implements ReviewDAO{
 	}
 	public ReviewDTO reviewContent(String review_idx) {
 		// TODO Auto-generated method stub
-		return null;
+		ReviewDTO dto = sqlMap.selectOne("reviewContent", review_idx);
+		return dto;
+	}
+	public int reviewDelete(String review_idx) {
+		int count=sqlMap.delete("reviewDelete",review_idx);
+		return count;
 	}
 	public ReviewDTO reviewChange(String review_idx) {
 		// TODO Auto-generated method stub
-		return null;
+		ReviewDTO dto = sqlMap.selectOne("reviewChange", review_idx);
+		return dto;
 	}
-	
 	public int reviewChangeOk(ReviewDTO dto) {
 		// TODO Auto-generated method stub
-		return 0;
-	}
-	public int reviewDelete(String review_idx) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	public ReviewDTO reviewNextInfo(String review_idx) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	public ReviewDTO reviewPreInfo(String review_idx) {
-		// TODO Auto-generated method stub
-		return null;
+		int count = sqlMap.update("reviewChangeOk", dto);
+		return count;
 	}
 	
+	public ReviewDTO reviewNextInfo(String review_idx) {
+		ReviewDTO dto = sqlMap.selectOne("reviewPreInfo", review_idx);
+		return dto;
+	}
+	public ReviewDTO reviewPreInfo(String review_idx) {
+		ReviewDTO dto = sqlMap.selectOne("reviewNextInfo", review_idx);
+		return dto;
+	}
+	public int reviewRead(String review_idx) {
+		int count = sqlMap.update("reviewRead", review_idx);
+		return count;
+	}
 	
 	
 }

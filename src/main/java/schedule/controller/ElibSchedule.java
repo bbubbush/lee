@@ -24,8 +24,8 @@ public class ElibSchedule {
 	
 	@Scheduled(cron="0 0 0/1 * * *")
 	public void elibSchedule() {
-		@SuppressWarnings("unused")
 		int resultCount=loandao.elibLoanScheduleReturn();
+		System.out.println("반납 처리 된 수 : " + resultCount);
 	}
 
 }
