@@ -31,6 +31,15 @@
 			<div class="row">
 				<div class="col-md-7">
 					<h2>책추천 및 감상평 게시판</h2>
+<<<<<<< HEAD
+=======
+				</div>
+				<div class="col-md-3" style="text-align: center;">
+					<a class="btn btn-default" type="submit" href="reviewWrite.ju">
+						<span class="glyphicon glyphicon-pencil" aria-hidden="true">
+							책신청, 감상평하기</span>
+					</a>
+>>>>>>> 7a5c6140c7e2cd754c632f04abd7e83b4f64aa42
 				</div>
 				<c:if test="${chk}">
 					<div class="col-md-3" style="text-align: center;">
@@ -60,6 +69,7 @@
 							</tr>
 							<c:forEach var="dto" items="${list}">
 								<tr>
+<<<<<<< HEAD
 									<c:choose>
 										<c:when test="${dto.review_cate==0}">
 											<td>책추천</td>
@@ -69,6 +79,10 @@
 										</c:when>
 									</c:choose>
 									<td><a href="reviewContent.ju?review_idx=${dto.review_idx}">${dto.review_subject}</a></td>
+=======
+									<td>${dto.review_cate}</td>
+									<td><a href="reviewContent.ju?qu_idx=${dto.review_idx}">${dto.review_subject}</a></td>
+>>>>>>> 7a5c6140c7e2cd754c632f04abd7e83b4f64aa42
 									<td>${dto.mem_idx}</td>
 									<td>${dto.review_date}</td>
 									<td>${dto.review_readnum}</td>

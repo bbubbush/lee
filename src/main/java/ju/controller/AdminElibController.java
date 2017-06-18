@@ -263,6 +263,7 @@ public class AdminElibController {
 			if(!"".equals(where)){
 				where="WHERE "+where;
 			}
+			System.out.println(where);
 			
 			int startNum=(page-1)*ElibPaging.CONTENTSIZE+1;
 			int endNum=startNum+ElibPaging.CONTENTSIZE-1;
@@ -455,6 +456,7 @@ public class AdminElibController {
 		
 		int resultCount=elibDAO.elibUpdate(el_idx, el_lg, el_md, el_subject, el_writer, el_pub, el_info, el_path, change_idx);
 		List<ElibDTO> elibArrNew=elibDAO.elibViewer(change_idx);
+
 		
 		ArrayList<String> members=new ArrayList<String>();
 		members.add(loandao.elibLoanMembers(el_idx).replaceAll("~", "<br>"));
@@ -462,6 +464,7 @@ public class AdminElibController {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("elibArr", elibArrNew.get(0));
 		mav.addObject("members", members);
+
 		mav.addObject("resultCount", resultCount);
 		mav.setViewName("juJson");
 		return mav;

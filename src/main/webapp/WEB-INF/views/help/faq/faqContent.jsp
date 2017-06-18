@@ -28,7 +28,11 @@
 	</div>
 	<div class="row">
 		<div class="col-md-3">
+<<<<<<< HEAD
 			<jsp:include page="/WEB-INF/views/help/helpSide.jsp"></jsp:include>
+=======
+			<jsp:include page="/WEB-INF/views/service/elibSide.jsp"></jsp:include>
+>>>>>>> 7a5c6140c7e2cd754c632f04abd7e83b4f64aa42
 		</div>
 		<div class="col-md-9">
 			<div class="row">
@@ -38,6 +42,7 @@
 				</div>
 			</div>
 			<div class="col-md-11">
+<<<<<<< HEAD
 				<table class="table table-condensed">
 					<tr>
 						<td><div class="col-md-8"> <strong> 제목 : ${dto.qu_subject}</strong></div>
@@ -93,6 +98,23 @@
 						<td><a href="#">수정</a></td>
 						<td><a href="#">삭제</a></td>
 						<td colspan="2">
+=======
+				<table class="table table-striped table table-hover" border="1">
+					<tr>
+						<td colspan="2">${dto.qu_subject}</td>
+						<td>${dto.qu_idx}</td>
+						<td>${dto.qu_date}</td>
+					</tr>
+					<tr>
+						<td colspan="2">첨부</td>
+						<td>${dto.mem_idx}</td>
+						<td>5</td>
+					</tr>
+					<tr>
+						<td colspan="4"><div class="col-md-12">
+								${dto.qu_content}
+							</div></td>
+>>>>>>> 7a5c6140c7e2cd754c632f04abd7e83b4f64aa42
 					</tr>
 				</table>
 			</div>

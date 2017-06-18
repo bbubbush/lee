@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <HTML>
@@ -17,3 +18,11 @@ location.href='questList.ju';
 </script>
 </body>
 </HTML>
+=======
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<script>
+window.alert('${msg}');
+location.href='questList.ju';
+</script>
+>>>>>>> 7a5c6140c7e2cd754c632f04abd7e83b4f64aa42

@@ -237,13 +237,7 @@
         $("body").ready(function(){
         	text='저희 립서비스에 오신 당신을 환영합니다.흐흐. 현재위치는 첫화면입니다. 오디오북을 읽으시려면 오디오북 실행 이라고 말씀해 주세요.'
         	speechSynthesis.speak(new SpeechSynthesisUtterance(text));
-        	$('#btn-mic').trigger('click',function(){
-        		$('#btn-mic').popover('show');
-        	});
         	
-        		
-        	
-        	 
         	wwidthc = $(window).width()/2;
             wheightc = $(window).height()/2;
             top01 = parseInt($("#parallax_octocat").css('top'), 10);

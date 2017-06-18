@@ -32,6 +32,7 @@
 				<div class="col-md-7">
 					<h2>QnA 게시판</h2>
 				</div>
+<<<<<<< HEAD
 				<c:if test="${chk}">
 					<div class="col-md-3" style="text-align: center;">
 						<a class="btn btn-default" type="submit" href="questWrite.ju">
@@ -39,6 +40,14 @@
 						</a>
 					</div>
 				</c:if>
+=======
+				<div class="col-md-3" style="text-align: center;">
+					<a class="btn btn-default" type="submit" href="questWrite.ju">
+						<span class="glyphicon glyphicon-pencil" aria-hidden="true">
+							질문하기</span>
+					</a>
+				</div>
+>>>>>>> 7a5c6140c7e2cd754c632f04abd7e83b4f64aa42
 			</div>
 			<div class="row">
 				<div class="col-md-10">

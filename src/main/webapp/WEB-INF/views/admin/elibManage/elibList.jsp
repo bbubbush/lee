@@ -186,8 +186,13 @@
 					intoHTML+='							</td>';
 					intoHTML+='						</tr>';
 					intoHTML+='						<tr>';
+<<<<<<< HEAD
 					intoHTML+='							<th class="col-md-3">추천인 IDX</th>';
 					intoHTML+='							<td class="col-md-8">' + elibArr[i].el_recommend.split("~").join("<br>") + '</td>';
+=======
+					intoHTML+='							<th>추천인 IDX</th>';
+					intoHTML+='							<td>' + elibArr[i].el_recommend.split("~").join("<br>") + '</td>';
+>>>>>>> 7a5c6140c7e2cd754c632f04abd7e83b4f64aa42
 					intoHTML+='						</tr>';
 					intoHTML+='						<tr>';
 					intoHTML+='							<th class="col-md-3">추천수</th>';
@@ -196,6 +201,10 @@
 					intoHTML+='						<tr>';
 					intoHTML+='							<th class="col-md-3">대여 회원 IDX</th>';
 					intoHTML+='							<td class="col-md-8">' + members[i].split("~").join("<br>") + '</td>';
+					intoHTML+='						</tr>';
+					intoHTML+='						<tr>';
+					intoHTML+='							<th>대여 회원 IDX</th>';
+					intoHTML+='							<td>' + members[i].split("~").join("<br>") + '</td>';
 					intoHTML+='						</tr>';
 					intoHTML+='					</table>';
 					intoHTML+='				</div> <!-- table 위 div -->';
@@ -430,9 +439,12 @@
 								$("#cateMd_"+num).prop("disabled", "disabled");
 								$("#tdLg_"+num).data("md", data.elibArr.el_md);
 								$("#tdMd_"+num).data("md", data.elibArr.el_md);
+<<<<<<< HEAD
 								
 								$(".contentTable:eq("+num+")>tbody>tr>td:eq(10)").html(data.members);
 								
+=======
+>>>>>>> 7a5c6140c7e2cd754c632f04abd7e83b4f64aa42
 								cateLg=$("#tdLg_"+num).html();
 								cateMd=$("#tdMd_"+num).html();
 								
