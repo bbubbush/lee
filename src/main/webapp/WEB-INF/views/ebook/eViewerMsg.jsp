@@ -13,11 +13,20 @@
     
 	<script type="text/javascript" src="/lee/resources/js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="/lee/resources/bootstrapk/js/bootstrap.min.js"></script>
+	
+	<!-- alert -->
+	<script type="text/javascript" src="/lee/resources/js/alertifyjs/alertify.min.js"></script>
+	<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/alertify.min.css">
+	<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/themes/default.min.css">
+	
 	<script type="text/javascript">
 		$(function() {
 			window.moveTo(0,0);
-			alert($("body").data("msg"));
-			window.self.close();
+			alertify.alert("뷰어 안내", $("body").data("msg")
+				, function(){
+					window.self.close();
+			  	}
+			);
 		});
 	</script>
 	

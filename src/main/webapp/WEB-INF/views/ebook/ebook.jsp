@@ -36,6 +36,12 @@
     
 	<script type="text/javascript" src="/lee/resources/js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="/lee/resources/bootstrapk/js/bootstrap.min.js"></script>
+	
+	<!-- alert -->
+	<script type="text/javascript" src="/lee/resources/js/alertifyjs/alertify.min.js"></script>
+	<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/alertify.min.css">
+	<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/themes/default.min.css">
+	
 	<script type="text/javascript">
 		$(function() {
 			/*사이드바*/
@@ -115,9 +121,9 @@
 						var arr=data.elibArr;
 						var intoHTML="";
 						if(arr.length==0){
-							intoHTML+='<tr>';
+							intoHTML+='<tr data-idx="none">';
 							intoHTML+='	<td class="text-center">';
-							intoHTML+='검색 결과가 없습니다.';
+							intoHTML+='		<div class="alert alert-warning" role="alert">검색 결과가 없습니다.</div>';
 							intoHTML+='	</td>';
 							intoHTML+='</tr>';
 						}
@@ -154,7 +160,9 @@
 						$("#contentTbody").html(intoHTML);
 						$("#pagingNav").html(data.paging);
 						$("#pagingNav").removeClass().addClass("simple");
-						contentClick();
+						if($("#contentTbody>tr").eq(0).data("idx")!="none"){
+							contentClick();
+						}
 						
 						$("#pagingNav>ul>li").removeClass("active");
 						var pagingLength=$("#pagingNav>ul>li").length;
@@ -223,9 +231,9 @@
 						var arr=data.elibArr;
 						var intoHTML="";
 						if(arr.length==0){
-							intoHTML+='<tr>';
+							intoHTML+='<tr data-idx="none">';
 							intoHTML+='	<td class="text-center">';
-							intoHTML+='검색 결과가 없습니다.';
+							intoHTML+='		<div class="alert alert-warning" role="alert">검색 결과가 없습니다.</div>';
 							intoHTML+='	</td>';
 							intoHTML+='</tr>';
 						}
@@ -262,7 +270,9 @@
 						$("#contentTbody").html(intoHTML);
 						$("#pagingNav").html(data.paging);
 						$("#pagingNav").removeClass().addClass("detail");
-						contentClick();
+						if($("#contentTbody>tr").eq(0).data("idx")!="none"){
+							contentClick();
+						}
 						
 						$("#pagingNav>ul>li").removeClass("active");
 						var pagingLength=$("#pagingNav>ul>li").length;
@@ -305,7 +315,7 @@
 					detailPub=$("#detailPub").val();
 					cateLg=$("#cateLg").val();
 					if(cateLg==99){
-						cateMd="";
+						cateMd="99";
 					}
 					else{
 						cateMd=$("#cateMd").val();
@@ -359,9 +369,9 @@
 					var arr=data.elibArr;
 					var intoHTML="";
 					if(arr.length==0){
-						intoHTML+='<tr>';
+						intoHTML+='<tr data-idx="none">';
 						intoHTML+='	<td class="text-center">';
-						intoHTML+='검색 결과가 없습니다.';
+						intoHTML+='		<div class="alert alert-warning" role="alert">검색 결과가 없습니다.</div>';
 						intoHTML+='	</td>';
 						intoHTML+='</tr>';
 					}
@@ -398,7 +408,9 @@
 					$("#contentTbody").html(intoHTML);
 					$("#pagingNav").html(data.paging);
 					$("#pagingNav").removeClass().addClass("noSearch");
-					contentClick();
+					if($("#contentTbody>tr").eq(0).data("idx")!="none"){
+						contentClick();
+					}
 					
 					$("#pagingNav>ul>li").removeClass("active");
 					var pagingLength=$("#pagingNav>ul>li").length;
@@ -542,11 +554,11 @@
 				, success: function(data){
 					var resultCount=data.resultCount;
 					if(resultCount==0){
-						alert("대출이 불가능 합니다."+data.msg);
+						alertify.alert("대출 신청", "대출이 불가능 합니다."+data.msg);
 					}
 					else if(resultCount>0){
 						ebookRefresh(el_idx);
-						alert("대여기간은 " + data.endDate + "까지 입니다.");
+						alertify.alert("대출 신청", "대여기간은 " + data.endDate + "까지 입니다.");
 					}
 				} // success: function
 			});
@@ -563,7 +575,7 @@
 					var recommend=data.recommend;
 					if(resultCount>=1){
 						$("#reco").text(recommend);
-						alert("추천 되었습니다.");
+						alertify.alert("추천", "추천 되었습니다.");
 						var num=$("#contentTbody>tr").length;
 						for(var i=0 ; i<num ; i++){
 							if($("#contentTbody>tr").eq(i).data("idx")==el_idx){
@@ -572,7 +584,7 @@
 						}
 					}
 					else{
-						alert("이미 추천 했습니다.");
+						alertify.alert("추천", "이미 추천 했습니다.");
 					}
 				}
 			}); // success: function

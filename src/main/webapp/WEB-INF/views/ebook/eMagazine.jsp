@@ -36,6 +36,12 @@
     
 	<script type="text/javascript" src="/lee/resources/js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="/lee/resources/bootstrapk/js/bootstrap.min.js"></script>
+	
+	<!-- alert -->
+	<script type="text/javascript" src="/lee/resources/js/alertifyjs/alertify.min.js"></script>
+	<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/alertify.min.css">
+	<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/themes/default.min.css">
+	
 	<script type="text/javascript">
 		$(function() {
 			/*사이드바*/
@@ -104,9 +110,9 @@
 						var arr=data.elibArr;
 						var intoHTML="";
 						if(arr.length==0){
-							intoHTML+='<tr>';
+							intoHTML+='<tr data-idx="none">';
 							intoHTML+='	<td class="text-center">';
-							intoHTML+='검색 결과가 없습니다.';
+							intoHTML+='		<div class="alert alert-warning" role="alert">검색 결과가 없습니다.</div>';
 							intoHTML+='	</td>';
 							intoHTML+='</tr>';
 						}
@@ -142,7 +148,9 @@
 						}
 						$("#contentTbody").html(intoHTML);
 						$("#pagingNav").html(data.paging);
-						contentClick();
+						if($("#contentTbody>tr").eq(0).data("idx")!="none"){
+							contentClick();
+						}
 						
 						$("#pagingNav>ul>li").removeClass("active");
 						var pagingLength=$("#pagingNav>ul>li").length;
@@ -214,9 +222,9 @@
 						var arr=data.elibArr;
 						var intoHTML="";
 						if(arr.length==0){
-							intoHTML+='<tr>';
+							intoHTML+='<tr data-idx="none">';
 							intoHTML+='	<td class="text-center">';
-							intoHTML+='검색 결과가 없습니다.';
+							intoHTML+='		<div class="alert alert-warning" role="alert">검색 결과가 없습니다.</div>';
 							intoHTML+='	</td>';
 							intoHTML+='</tr>';
 						}
@@ -252,7 +260,9 @@
 						}
 						$("#contentTbody").html(intoHTML);
 						$("#pagingNav").html(data.paging);
-						contentClick();
+						if($("#contentTbody>tr").eq(0).data("idx")!="none"){
+							contentClick();
+						}
 						
 						$("#pagingNav>ul>li").removeClass("active");
 						var pagingLength=$("#pagingNav>ul>li").length;
@@ -351,7 +361,7 @@
 					if(arr.length==0){
 						intoHTML+='<tr>';
 						intoHTML+='	<td class="text-center">';
-						intoHTML+='검색 결과가 없습니다.';
+						intoHTML+='		<div class="alert alert-warning" role="alert">검색 결과가 없습니다.</div>';
 						intoHTML+='	</td>';
 						intoHTML+='</tr>';
 					}
@@ -505,7 +515,7 @@
 					var recommend=data.recommend;
 					if(resultCount>=1){
 						$("#reco").text(recommend);
-						alert("추천 되었습니다.");
+						alertify.alert("추천", "추천 되었습니다.");
 						var num=$("#contentTbody>tr").length;
 						for(var i=0 ; i<num ; i++){
 							if($("#contentTbody>tr").eq(i).data("idx")==el_idx){
@@ -514,7 +524,7 @@
 						}
 					}
 					else{
-						alert("이미 추천 했습니다.");
+						alertify.alert("추천", "이미 추천 했습니다.");
 					}
 				}
 			}); // success: function
@@ -636,15 +646,6 @@
 						<tr>
 							<td>
 								<nav id="pagingNav" class="noSearch">
-									<!-- <ul class="pagination">
-										<li data-page="before"><a href="#" onclick="return false" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-										<li data-page="1"><a href="#" onclick="return false">1</a></li>
-										<li data-page="2"><a href="#" onclick="return false">2</a></li>
-										<li data-page="3"><a href="#" onclick="return false">3</a></li>
-										<li data-page="4" class="disabled"><a href="#" onclick="return false">4</a></li>
-										<li data-page="5"><a href="#" onclick="return false">5</a></li>
-										<li data-page="after"><a href="#" onclick="return false" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>	</li>
-									</ul> -->
 								</nav>
 							</td>
 						</tr>

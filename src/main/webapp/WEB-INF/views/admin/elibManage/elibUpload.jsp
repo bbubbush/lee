@@ -42,6 +42,11 @@
 	
 	<script type="text/javascript" src="/lee/resources/js/jquery.form.js"></script>
 	<script type="text/javascript" src="/lee/resources/js/jquery.ajax-progress.js"></script>
+	
+	<script type="text/javascript" src="/lee/resources/js/alertifyjs/alertify.min.js"></script>
+	<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/alertify.min.css">
+	<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/themes/default.min.css">
+	
 	<script type="text/javascript">
 		$(function(){
 			$(".fileinput-button").click(
@@ -60,7 +65,6 @@
 			/*폼 넘기기*/
 			$("#formSubmit").click(
 				function() {
-					alert("?");
 					/*유효성 검사*/
 					var el_subjectLength=$("input[name=el_subject]").val().length;
 					var el_writerLength=$("input[name=el_writer]").val().length;
@@ -68,36 +72,37 @@
 					var el_infoLength=$("textarea[name=el_info]").val().length;
 					var coverLength=$("input[name=cover]").val().length;
 					if(el_subjectLength==0){
-						alert("제목을 입력하지 않으셨습니다.");
+						alertify.alert("Error", "제목을 입력하지 않으셨습니다.");
 						$("input[name=el_subject]").focus();
 						return null;
 					}
 					if(el_writerLength==0){
-						alert("저자를 입력하지 않으셨습니다.");
+						alertify.alert("Error", "저자를 입력하지 않으셨습니다.");
 						$("input[name=el_writer]").focus();
 						return null;
 					}
 					if(el_pubLength==0){
-						alert("출판사를 입력하지 않으셨습니다.");
+						alertify.alert("Error", "출판사를 입력하지 않으셨습니다.");
 						$("input[name=el_pub]").focus();
 						return null;
 					}
 					if(el_infoLength==0){
-						alert("책정보를 입력하지 않으셨습니다.");
+						alertify.alert("Error", "책정보를 입력하지 않으셨습니다.");
 						$("input[name=el_info]").focus();
 						return null;
 					}
 					if(coverLength==0){
-						alert("표지를 등록하지 않으셨습니다.");
+						alertify.alert("Error", "표지를 등록하지 않으셨습니다.");
 						return null;
 					}
 					if(objArr.length==0){
-						alert("내용을 등록하지 않으셨습니다.");
+						alertify.alert("Error", "내용을 등록하지 않으셨습니다.");
 						return null;
 					}
 					
 					if(true){
 						allUpload();
+						alertify.alert("안내", "도서가 등록 되었습니다.");
 						$("form").submit();
 					}
 				}
@@ -105,6 +110,23 @@
 			
 			$("input[name=el_idx]").val(readyIdx);
 			changeGrup();
+			
+			/*길이 제한 걸기*/
+			$("input[type=text]").keyup(
+				function(event) {
+					if($(this).val().length > 30) {
+						$(this).val($(this).val().substring(0, 30));
+					}
+				}
+			);
+			$("textarea").keyup(
+				function(event) {
+					if($(this).val().length > 1000) {
+						$(this).val($(this).val().substring(0, 1000));
+					}
+				}
+			);
+			
 		}); //기본함수
 		
 		var readyIdx=Math.floor(new Date().getTime());
@@ -207,7 +229,6 @@
 		            	} , 500);
 				}
 				, error: function(data) {
-	            	alert('error : ' +data);
 	            	console.log(data);
 	            }
 			});
@@ -295,7 +316,7 @@
 					$.ajax({
 						type : "GET"
 						, url : "elibGrupLg.ju"
-						, data : {groupNum : groupNum}
+						, data : {groupNum : groupNum, admin : "upload"}
 						, dataType : "json"
 						, success: function(data){
 							$("#cateMd").parent().parent().children("td").eq(0).html(data.cateLg);
@@ -344,7 +365,7 @@
 					}
 				}
 				else{
-					alert("업로드 할 수 없는 파일입니다.");
+					alertify.alert("Error", "업로드 할 수 없는 파일입니다.");
 					$("input[name=cover]").val("");
 				}
 				
@@ -355,80 +376,90 @@
 </head>
 <body>
 
-	<br><br><br><br>
-	<form action="elibList.ju" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="el_idx">
-		<table class="table">
-			<tbody>
-				<tr>
-					<th>책 이름</th>
-					<td><input type="text" class="form-control" placeholder="책이름" name="el_subject"></td>
-				</tr>
-				<tr>
-					<th>저자</th>
-					<td><input type="text" class="form-control" placeholder="저자" name="el_writer"></td>
-				</tr>
-				<tr>
-					<th>출판사</th>
-					<td><input type="text" class="form-control" placeholder="출판사" name="el_pub"></td>
-				</tr>
-				<tr>
-					<td colspan="2" class="text-center">
-						<label class="checkbox-inline">
-							<input type="radio" name="group" value="7"> 전자도서
-						</label>
-						<label class="checkbox-inline">
-							<input type="radio" name="group" value="8"> 전자잡지
-						</label>
-						<label class="checkbox-inline">
-							<input type="radio" name="group" value="9"> E-교육
-						</label>
-					</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td><select id="cateMd" name="cateMd" class="form-control"></select></td>
-				</tr>
-				<tr>
-					<th>책 정보</th>
-					<td><textarea class="form-control" rows="3" name="el_info"></textarea></td>
-				</tr>
-				<tr>
-					<th>표지</th>
-					<td>
-						<button type="button" class="btn btn-success">메인 이미지</button>
-						<input type="file" name="cover" accept=".gif, .jpg, .png" onChange="mainCover(this)">
-						<br>
-						<div id="coverDiv">
-							<img id="imgCover" style="width: 50px; height: 80px;">
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<span class="btn btn-success fileinput-button">
-							<i	class="glyphicon glyphicon-plus"></i> <span>파일 추가</span> 
-						</span>
-						<input type="file" name="files" accept=".gif, .jpg, .png" multiple="multiple" onchange="addFiles(this)">
-						<button type="button" class="btn btn-primary start" onClick="allUpload()">
-							<i class="glyphicon glyphicon-upload"></i> <span>전부 업로드</span>
-						</button>
-						<button type="button" class="btn btn-warning cancel" onClick="allCancel()">
-							<i class="glyphicon glyphicon-ban-circle"></i> <span>전부 취소</span>
-						</button>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</form>
+	<!-- 헤더 -->
 	
-	<table role="presentation" class="table table-striped">
-		<tbody class="files">
-		</tbody>
-	</table>
+	<div class="row">
+		<div class="col-md-3">
+			<!-- 사이드바 부분 -->
+		</div>
 	
-	<div class="text-center">
-		<button type="button" class="btn btn-default" id="formSubmit">도서 만들기</button>
-	</div>
+		<div class="col-md-8">
+			<form action="elibList.ju" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="el_idx">
+				<table class="table">
+					<tbody>
+						<tr>
+							<th class="col-md-2">책 이름</th>
+							<td class="col-md-4"><input type="text" class="form-control" placeholder="책이름" name="el_subject"></td>
+						</tr>
+						<tr>
+							<th class="col-md-2">저자</th>
+							<td class="col-md-4"><input type="text" class="form-control" placeholder="저자" name="el_writer"></td>
+						</tr>
+						<tr>
+							<th class="col-md-2">출판사</th>
+							<td class="col-md-4"><input type="text" class="form-control" placeholder="출판사" name="el_pub"></td>
+						</tr>
+						<tr>
+							<td colspan="2" class="text-center">
+								<label class="checkbox-inline">
+									<input type="radio" name="group" value="7"> 전자도서
+								</label>
+								<label class="checkbox-inline">
+									<input type="radio" name="group" value="8"> 전자잡지
+								</label>
+								<label class="checkbox-inline">
+									<input type="radio" name="group" value="9"> E-교육
+								</label>
+							</td>
+						</tr>
+						<tr>
+							<td class="col-md-2"></td>
+							<td class="col-md-4"><select id="cateMd" name="cateMd" class="form-control"></select></td>
+						</tr>
+						<tr>
+							<th class="col-md-2">책 정보</th>
+							<td class="col-md-4"><textarea class="form-control" rows="3" name="el_info"></textarea></td>
+						</tr>
+						<tr>
+							<th class="col-md-2">표지</th>
+							<td class="col-md-4">
+								<button type="button" class="btn btn-success">메인 이미지</button>
+								<input type="file" name="cover" accept=".gif, .jpg, .png" onChange="mainCover(this)">
+								<br>
+								<div id="coverDiv">
+									<img id="imgCover" style="width: 150px;">
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<span class="btn btn-success fileinput-button">
+									<i	class="glyphicon glyphicon-plus"></i> <span>파일 추가</span> 
+								</span>
+								<input type="file" name="files" accept=".gif, .jpg, .png" multiple="multiple" onchange="addFiles(this)">
+								<button type="button" class="btn btn-primary start" onClick="allUpload()">
+									<i class="glyphicon glyphicon-upload"></i> <span>전부 업로드</span>
+								</button>
+								<button type="button" class="btn btn-warning cancel" onClick="allCancel()">
+									<i class="glyphicon glyphicon-ban-circle"></i> <span>전부 취소</span>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+			
+			<table role="presentation" class="table table-striped">
+				<tbody class="files">
+				</tbody>
+			</table>
+			
+			<div class="text-center">
+				<button type="button" class="btn btn-default" id="formSubmit">도서 만들기</button>
+			</div>
+		</div> <!-- col-md-8 -->
+	</div> <!-- row -->
+
 </body>
 </html>

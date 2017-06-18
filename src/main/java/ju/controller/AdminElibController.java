@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ju.dto.ElibDTO;
 import ju.elib.model.ElibDAO;
+import ju.model.LoanDAO;
 import ju.modul.BookCateModul;
 import ju.modul.ElibPaging;
 
@@ -29,6 +30,8 @@ public class AdminElibController {
 	
 	@Autowired
 	private ElibDAO elibDAO;
+	@Autowired
+	private LoanDAO loandao;
 	
 	/**업로드 최초 로딩*/
 	@RequestMapping(value="elibUpload.ju")
@@ -40,11 +43,15 @@ public class AdminElibController {
 
 	/**그룹에 따른 대분류 가져오기 업로드용*/
 	@RequestMapping(value="elibGrupLg.ju")
-	public ModelAndView adminElibGrupLg(@RequestParam(value="groupNum", defaultValue="7")int groupNum){
+	public ModelAndView adminElibGrupLg(
+		@RequestParam(value="groupNum", defaultValue="7")int groupNum
+		, @RequestParam(value="admin", defaultValue="upload")String admin
+		){
 		BookCateModul bcm=new BookCateModul();
 		String cateLg=null;
 		if(groupNum==7){
-			cateLg=bcm.BookLgSelect(0, 7, false);
+			if("upload".equals(admin)){ cateLg=bcm.BookLgSelect(0, 7, false); }
+			else if("list".equals(admin)){ cateLg=bcm.BookLgSelect(0, 7, true); }
 		}
 		else{
 			cateLg=bcm.BookLgSelect(groupNum, groupNum, false);
@@ -172,6 +179,7 @@ public class AdminElibController {
 		
 		BookCateModul bcm=new BookCateModul();
 		ArrayList<String> cateLg=new ArrayList<String>();
+		ArrayList<String> members=new ArrayList<String>();
 		for(int i=0 ; i<elibArr.size() ; i++){
 			if(elibArr.get(i).getEl_idx().indexOf("EB")==0){
 				cateLg.add(bcm.BookLgSelectId(0, 7, false, Integer.toString(i)));
@@ -185,6 +193,7 @@ public class AdminElibController {
 			if("~".equals(elibArr.get(i).getEl_recommend())){
 				elibArr.get(i).setEl_recommend("");
 			}
+			members.add(loandao.elibLoanMembers(elibArr.get(i).getEl_idx()));
 		}
 		ArrayList<String> cateMd=new ArrayList<String>();
 		for(int i=0 ; i<cateLg.size() ; i++){
@@ -200,10 +209,11 @@ public class AdminElibController {
 			}
 			select+="</select>";
 			cateMd.add(select);
-			
 		}
+		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("elibArr", elibArr);
+		mav.addObject("members", members);
 		mav.addObject("cateLg", cateLg);
 		mav.addObject("cateMd", cateMd);
 		mav.addObject("paging", paging);
@@ -227,9 +237,9 @@ public class AdminElibController {
 			
 			String where="";
 			
-			el_subject="".equals(el_subject)?"":"el_subject LIKE '%" + el_subject + "%' ";
-			el_writer="".equals(el_writer)?"":"el_writer LIKE '%" + el_writer + "%' ";
-			el_pub="".equals(el_pub)?"":"el_pub LIKE '%" + el_pub + "%' ";
+			el_subject="".equals(el_subject)?"":"UPPER(el_subject) LIKE UPPER('%" + el_subject + "%') ";
+			el_writer="".equals(el_writer)?"":"UPPER(el_writer) LIKE UPPER('%" + el_writer + "%') ";
+			el_pub="".equals(el_pub)?"":"UPPER(el_pub) LIKE UPPER('%" + el_pub + "%') ";
 			el_lg="99".equals(el_lg)?"":"el_lg='" + el_lg + "' ";
 			el_md="99".equals(el_md)?"":"el_md='" + el_md + "' ";
 			
@@ -263,6 +273,7 @@ public class AdminElibController {
 			
 			BookCateModul bcm=new BookCateModul();
 			ArrayList<String> cateLg=new ArrayList<String>();
+			ArrayList<String> members=new ArrayList<String>();
 			for(int i=0 ; i<elibArr.size() ; i++){
 				if(elibArr.get(i).getEl_idx().indexOf("EB")==0){
 					cateLg.add(bcm.BookLgSelectId(0, 7, false, Integer.toString(i)));
@@ -276,6 +287,7 @@ public class AdminElibController {
 				if("~".equals(elibArr.get(i).getEl_recommend())){
 					elibArr.get(i).setEl_recommend("");
 				}
+				members.add(loandao.elibLoanMembers(elibArr.get(i).getEl_idx()));
 			}
 			ArrayList<String> cateMd=new ArrayList<String>();
 			for(int i=0 ; i<cateLg.size() ; i++){
@@ -296,6 +308,7 @@ public class AdminElibController {
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("elibArr", elibArr);
+		mav.addObject("members", members);
 		mav.addObject("cateLg", cateLg);
 		mav.addObject("cateMd", cateMd);
 		mav.addObject("paging", paging);
@@ -334,10 +347,12 @@ public class AdminElibController {
 		}
 		imgFolder.delete();
 		
-		int resultCount=elibDAO.elibDelete(el_idx);
+		@SuppressWarnings("unused")
+		int resultCountElib=elibDAO.elibDelete(el_idx);
+		@SuppressWarnings("unused")
+		int resultCountLoan=loandao.loanDelete(el_idx);
 		
 		ModelAndView mav=new ModelAndView();
-		mav.addObject("resultCount", resultCount);
 		mav.setViewName("juJson");
 		return mav;
 	}
@@ -383,6 +398,10 @@ public class AdminElibController {
 		}
 		else if(groupNum==9){
 			change_idx="EE"+el_idx.substring(2);
+		}
+		if("EB".equals(el_idx.substring(0, 2)) && groupNum!=7){
+			@SuppressWarnings("unused")
+			int resultCountLoan=loandao.loanDelete(el_idx);
 		}
 		String el_path="/lee\\resources\\elib\\cover\\"+change_idx+"."+exe[exe.length-1];
 		if(!elibArr.get(0).getEl_idx().equals(change_idx)){
@@ -435,9 +454,14 @@ public class AdminElibController {
 		}
 		
 		int resultCount=elibDAO.elibUpdate(el_idx, el_lg, el_md, el_subject, el_writer, el_pub, el_info, el_path, change_idx);
+		List<ElibDTO> elibArrNew=elibDAO.elibViewer(change_idx);
+		
+		ArrayList<String> members=new ArrayList<String>();
+		members.add(loandao.elibLoanMembers(el_idx).replaceAll("~", "<br>"));
 		
 		ModelAndView mav=new ModelAndView();
-		mav.addObject("change_idx", change_idx);
+		mav.addObject("elibArr", elibArrNew.get(0));
+		mav.addObject("members", members);
 		mav.addObject("resultCount", resultCount);
 		mav.setViewName("juJson");
 		return mav;

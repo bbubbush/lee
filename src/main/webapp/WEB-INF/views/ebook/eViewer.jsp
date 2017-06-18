@@ -35,6 +35,11 @@
 	<script type="text/javascript" src="/lee/resources/js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="/lee/resources/bootstrapk/js/bootstrap.min.js"></script>
 	
+	<!-- alert -->
+	<script type="text/javascript" src="/lee/resources/js/alertifyjs/alertify.min.js"></script>
+	<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/alertify.min.css">
+	<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/themes/default.min.css">
+	
 	<!-- booklet -->
 	<link rel="stylesheet" href="/lee/resources/eViewer/booklet/jquery.booklet.latest.css" type="text/css" media="screen, projection, tv">
 	<script type="text/javascript" src="/lee/resources/eViewer/booklet/jquery-ui-1.10.4.min.js"></script>
@@ -115,10 +120,9 @@
 				bookMakerDelet();
 			}
 			
-			//수정?
 			var param=document.location.search.split("=");
 			var idxName=param[1].slice(0, 2).toUpperCase();
-			if(idxName!="EB"){
+			if(idxName!="EB" || $("body").data("loan")==""){
 				$("#bookmarker").parent().remove();
 				$("#bookMarkUl").remove();
 			}
@@ -139,13 +143,13 @@
 					var thisPage="#"+thisPages[1];
 					var buttonEven=$(".form-group>button:even");
 					if(buttonEven.length>=6){//6으로 변경할 것
-						alert("북마크 최대는 6개 입니다.");
+						alertify.alert("북마크", "북마크 최대는 6개 입니다.");
 						return null;
 					}
 					else{
 						for(var i=0 ; i<buttonEven.length ; i++){
 							if(buttonEven.eq(i).data("maker")==thisPage){
-								alert("이미 추가된 페이지 입니다.");
+								alertify.alert("북마크", "이미 추가된 페이지 입니다.");
 								return null;
 							}
 						}
@@ -156,7 +160,11 @@
 			    			, data : {page : thisPage, el_idx : el_idx, lb_idx : lb_idx}
 			    			, dataType : "json"
 			    			, success: function(data){
-								alert("현재 페이지가 북마크에 추가 되었습니다.");
+			    				alertify.alert("북마크", "현재 페이지가 북마크에 추가 되었습니다."
+			    					, function() {
+				    					alertify.success("북마크가 등록 되었습니다.");
+									}
+			    				);
 								bookMakerLi(thisPage);
 			    			} // success
 						}); // ajax
@@ -181,18 +189,21 @@
 						
 						var deletMakerNum=$(".btn-link").index(this);
 						var thisPage=$(".form-group:eq(" + deletMakerNum + ")>button").eq(0).data("maker");
-						var deletBoolean=confirm("해당 북마크가 삭제 됩니다.\n삭제하시겠습니까?");
-						if(deletBoolean){
-							$.ajax({
-								type : "GET"
-				    			, url : "eViewerBookMakerDel.ju"
-				    			, data : {page : thisPage, el_idx : el_idx, lb_idx : lb_idx}
-				    			, dataType : "json"
-				    			, success: function(data){
-									$(".form-group").eq(deletMakerNum).remove();
-				    			} // success
-							}); // ajax
-						} // if
+						alertify.confirm("북마크", "해당 북마크가 삭제 됩니다.\n삭제하시겠습니까?",
+							function(){
+								$.ajax({
+									type : "GET"
+								 			, url : "eViewerBookMakerDel.ju"
+								 			, data : {page : thisPage, el_idx : el_idx, lb_idx : lb_idx}
+								 			, dataType : "json"
+								 			, success: function(data){
+										$(".form-group").eq(deletMakerNum).remove();
+								 			} // success
+								}); // ajax
+								alertify.warning("북마크가 삭제 되었습니다.");
+							}, // ok function
+							function(){} // cancel function
+						);
 					} // function
 				);
 			}
@@ -221,6 +232,7 @@
 			$("#pagegoSub").click(
 				function() {
 					var page=$("#pagego").val();
+					$("#pagego").val("");
 					if(page%2==0){
 						page=parseInt(page)+1;
 					}
