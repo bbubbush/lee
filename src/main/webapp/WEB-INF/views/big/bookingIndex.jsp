@@ -16,21 +16,6 @@
 <script type="text/javascript">
 </script>
 <style type="text/css">
-#guideTable>thead>tr>th{
-   text-align: center;
-   vertical-align: middle; 
-}
-#guideTable>tbody>tr>th{
-   text-align: center;
-   vertical-align: middle;
-}
-#guideTable>tbody>tr>td{
-   text-align: center;
-   vertical-align: middle;
-}
-ul{
-	list-style: none;
-}
 @media ( min-width :769px) {
    #changeForm {
       width: 100%;
@@ -57,10 +42,28 @@ ul{
 		height: 120px;
 	}
 }
+#guideTable>thead>tr>th{
+   text-align: center;
+   vertical-align: middle; 
+}
+#guideTable>tbody>tr>th{
+   text-align: center;
+   vertical-align: middle;
+}
+#guideTable>tbody>tr>td{
+   text-align: center;
+   vertical-align: middle;
+}
+ul{
+	list-style: none;
+}
+
+
 </style>
 </head>
 <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 <body>
+<div class="row">
 <div class="col-md-2">
 <jsp:include page="/WEB-INF/views/big/sideMenu.jsp"></jsp:include>
 </div>
@@ -127,6 +130,7 @@ ul{
          <button type="button" class="glyphicon glyphicon-calendar btn btn-info btn-lg " onclick="javascript:location.href='/lee/srBook.ju';">&nbsp;예약하기</button>
       </div>
    </div>
+</div>
 </div>
 </body>
 </html>
