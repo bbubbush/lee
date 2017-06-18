@@ -376,80 +376,90 @@
 </head>
 <body>
 
-	<br><br><br><br>
-	<form action="elibList.ju" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="el_idx">
-		<table class="table">
-			<tbody>
-				<tr>
-					<th>책 이름</th>
-					<td><input type="text" class="form-control" placeholder="책이름" name="el_subject"></td>
-				</tr>
-				<tr>
-					<th>저자</th>
-					<td><input type="text" class="form-control" placeholder="저자" name="el_writer"></td>
-				</tr>
-				<tr>
-					<th>출판사</th>
-					<td><input type="text" class="form-control" placeholder="출판사" name="el_pub"></td>
-				</tr>
-				<tr>
-					<td colspan="2" class="text-center">
-						<label class="checkbox-inline">
-							<input type="radio" name="group" value="7"> 전자도서
-						</label>
-						<label class="checkbox-inline">
-							<input type="radio" name="group" value="8"> 전자잡지
-						</label>
-						<label class="checkbox-inline">
-							<input type="radio" name="group" value="9"> E-교육
-						</label>
-					</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td><select id="cateMd" name="cateMd" class="form-control"></select></td>
-				</tr>
-				<tr>
-					<th>책 정보</th>
-					<td><textarea class="form-control" rows="3" name="el_info"></textarea></td>
-				</tr>
-				<tr>
-					<th>표지</th>
-					<td>
-						<button type="button" class="btn btn-success">메인 이미지</button>
-						<input type="file" name="cover" accept=".gif, .jpg, .png" onChange="mainCover(this)">
-						<br>
-						<div id="coverDiv">
-							<img id="imgCover" style="width: 150px;">
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<span class="btn btn-success fileinput-button">
-							<i	class="glyphicon glyphicon-plus"></i> <span>파일 추가</span> 
-						</span>
-						<input type="file" name="files" accept=".gif, .jpg, .png" multiple="multiple" onchange="addFiles(this)">
-						<button type="button" class="btn btn-primary start" onClick="allUpload()">
-							<i class="glyphicon glyphicon-upload"></i> <span>전부 업로드</span>
-						</button>
-						<button type="button" class="btn btn-warning cancel" onClick="allCancel()">
-							<i class="glyphicon glyphicon-ban-circle"></i> <span>전부 취소</span>
-						</button>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</form>
+	<!-- 헤더 -->
 	
-	<table role="presentation" class="table table-striped">
-		<tbody class="files">
-		</tbody>
-	</table>
+	<div class="row">
+		<div class="col-md-3">
+			<!-- 사이드바 부분 -->
+		</div>
 	
-	<div class="text-center">
-		<button type="button" class="btn btn-default" id="formSubmit">도서 만들기</button>
-	</div>
+		<div class="col-md-8">
+			<form action="elibList.ju" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="el_idx">
+				<table class="table">
+					<tbody>
+						<tr>
+							<th class="col-md-2">책 이름</th>
+							<td class="col-md-4"><input type="text" class="form-control" placeholder="책이름" name="el_subject"></td>
+						</tr>
+						<tr>
+							<th class="col-md-2">저자</th>
+							<td class="col-md-4"><input type="text" class="form-control" placeholder="저자" name="el_writer"></td>
+						</tr>
+						<tr>
+							<th class="col-md-2">출판사</th>
+							<td class="col-md-4"><input type="text" class="form-control" placeholder="출판사" name="el_pub"></td>
+						</tr>
+						<tr>
+							<td colspan="2" class="text-center">
+								<label class="checkbox-inline">
+									<input type="radio" name="group" value="7"> 전자도서
+								</label>
+								<label class="checkbox-inline">
+									<input type="radio" name="group" value="8"> 전자잡지
+								</label>
+								<label class="checkbox-inline">
+									<input type="radio" name="group" value="9"> E-교육
+								</label>
+							</td>
+						</tr>
+						<tr>
+							<td class="col-md-2"></td>
+							<td class="col-md-4"><select id="cateMd" name="cateMd" class="form-control"></select></td>
+						</tr>
+						<tr>
+							<th class="col-md-2">책 정보</th>
+							<td class="col-md-4"><textarea class="form-control" rows="3" name="el_info"></textarea></td>
+						</tr>
+						<tr>
+							<th class="col-md-2">표지</th>
+							<td class="col-md-4">
+								<button type="button" class="btn btn-success">메인 이미지</button>
+								<input type="file" name="cover" accept=".gif, .jpg, .png" onChange="mainCover(this)">
+								<br>
+								<div id="coverDiv">
+									<img id="imgCover" style="width: 150px;">
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<span class="btn btn-success fileinput-button">
+									<i	class="glyphicon glyphicon-plus"></i> <span>파일 추가</span> 
+								</span>
+								<input type="file" name="files" accept=".gif, .jpg, .png" multiple="multiple" onchange="addFiles(this)">
+								<button type="button" class="btn btn-primary start" onClick="allUpload()">
+									<i class="glyphicon glyphicon-upload"></i> <span>전부 업로드</span>
+								</button>
+								<button type="button" class="btn btn-warning cancel" onClick="allCancel()">
+									<i class="glyphicon glyphicon-ban-circle"></i> <span>전부 취소</span>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+			
+			<table role="presentation" class="table table-striped">
+				<tbody class="files">
+				</tbody>
+			</table>
+			
+			<div class="text-center">
+				<button type="button" class="btn btn-default" id="formSubmit">도서 만들기</button>
+			</div>
+		</div> <!-- col-md-8 -->
+	</div> <!-- row -->
+
 </body>
 </html>

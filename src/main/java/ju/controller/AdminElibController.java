@@ -259,7 +259,6 @@ public class AdminElibController {
 			if(!"".equals(where)){
 				where="WHERE "+where;
 			}
-			System.out.println(where);
 			
 			int startNum=(page-1)*ElibPaging.CONTENTSIZE+1;
 			int endNum=startNum+ElibPaging.CONTENTSIZE-1;

@@ -50,7 +50,7 @@ public class EbookViewerController{
 		}
 		else if(el_idx.indexOf("EB")==0){
 			int resultCount=0;
-			if(mem_idx.indexOf("MB")!=0){ resultCount=1; }
+			if(mem_idx.indexOf("MB")!=0){ resultCount=99; }
 			else{
 				resultCount=loandao.elibLoanCheck(el_idx, mem_idx);
 			}
@@ -61,15 +61,20 @@ public class EbookViewerController{
 				return mav;
 			}
 			else if(resultCount>0) {
-				loanArr=loandao.elibLoanInfo(el_idx, mem_idx); // 빌린 책 정보
-				mav.addObject("loanArr", loanArr.get(0));
-				String[] bk=loanArr.get(0).getLb_etc().split("~");
-				String bkArr="";
-				for(int i=1 ; i<bk.length ; i++){
-					bkArr+=bk[i]+"~";
+				if(resultCount!=99){
+					loanArr=loandao.elibLoanInfo(el_idx, mem_idx); // 빌린 책 정보
+					mav.addObject("loanArr", loanArr.get(0));
+					String[] bk=loanArr.get(0).getLb_etc().split("~");
+					String bkArr="";
+					for(int i=1 ; i<bk.length ; i++){
+						bkArr+=bk[i]+"~";
+					}
+					mav.addObject("beforeRead", bk[0]);
+					mav.addObject("bkArr", bkArr);
 				}
-				mav.addObject("beforeRead", bk[0]);
-				mav.addObject("bkArr", bkArr);
+				else{
+					mav.addObject("beforeRead", "#/page/1");
+				}
 				elibArr=elibDAO.elibViewer(el_idx);
 				path+="eBook\\"+elibArr.get(0).getEl_idx()+"\\";
 				viewImgPath+="eBook\\";

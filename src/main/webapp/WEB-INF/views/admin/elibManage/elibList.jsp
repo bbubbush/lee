@@ -869,80 +869,90 @@
 </head>
 <body>
 	
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th class="text-center" colspan="2">전자 도서 검색</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<th>제목</th>
-				<td>
-					<input type="text" class="form-control" placeholder="제목" name="el_subject">
-				</td>
-			</tr>
-			<tr>
-				<th>저자</th>
-				<td>
-					<input type="text" class="form-control" placeholder="저자" name="el_writer">
-				</td>
-			</tr>
-			<tr>
-				<th>출판사</th>
-				<td>
-					<input type="text" class="form-control" placeholder="출판사" name="el_pub">
-				</td>
-			</tr>
-			<tr>
-				<th>구분</th>
-				<td>
-					<label class="checkbox-inline">
-						<input type="radio" name="group"  value="0"> 전체
-					</label>
-					<label class="checkbox-inline">
-						<input type="radio" name="group"  value="7"> 전자도서
-					</label>
-					<label class="checkbox-inline">
-						<input type="radio" name="group" value="8"> 전자잡지
-					</label>
-					<label class="checkbox-inline">
-						<input	type="radio" name="group" value="9"> e-교육
-					</label>
-				</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>
-					<select id="cateMd" name="cateMd" class="form-control"></select>
-				</td>
-			</tr>
-			<tr>
-				<th>정렬</th>
-				<td>
-					<label class="checkbox-inline">
-						<input type="radio" name="order"  checked="checked"  value="new"> 등록순
-					</label>
-					<label class="checkbox-inline">
-						<input type="radio" name="order" value="recommend"> 추천순
-					</label>
-				</td>
-			</tr>
-		</tbody>
-		<tfoot>
-			<tr>
-				<th class="text-center" colspan="2">
-					<button type="button" class="btn btn-default" id="searchButton">검색</button>
-				</th>
-			</tr>
-		</tfoot>
-	</table>
-
-	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-	</div> <!-- 아코디언 -->
+	<!-- 헤더 -->
 	
-	<div class="text-center" id="pagingDiv">
-	</div>
+	<div class="row">
+		<div class="col-md-3">
+			<!-- 사이드바 부분 -->
+		</div>
+	
+		<div class="col-md-8">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th class="text-center" colspan="2">전자 도서 검색</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th class="col-md-2">제목</th>
+						<td class="col-md-4">
+							<input type="text" class="form-control" placeholder="제목" name="el_subject">
+						</td>
+					</tr>
+					<tr>
+						<th class="col-md-2">저자</th>
+						<td class="col-md-4">
+							<input type="text" class="form-control" placeholder="저자" name="el_writer">
+						</td>
+					</tr>
+					<tr>
+						<th class="col-md-2">출판사</th>
+						<td class="col-md-4">
+							<input type="text" class="form-control" placeholder="출판사" name="el_pub">
+						</td>
+					</tr>
+					<tr>
+						<th class="col-md-2">구분</th>
+						<td class="col-md-4">
+							<label class="checkbox-inline">
+								<input type="radio" name="group"  value="0"> 전체
+							</label>
+							<label class="checkbox-inline">
+								<input type="radio" name="group"  value="7"> 전자도서
+							</label>
+							<label class="checkbox-inline">
+								<input type="radio" name="group" value="8"> 전자잡지
+							</label>
+							<label class="checkbox-inline">
+								<input	type="radio" name="group" value="9"> e-교육
+							</label>
+						</td>
+					</tr>
+					<tr>
+						<td class="col-md-2"></td>
+						<td class="col-md-4">
+							<select id="cateMd" name="cateMd" class="form-control"></select>
+						</td>
+					</tr>
+					<tr>
+						<th class="col-md-2">정렬</th>
+						<td class="col-md-4">
+							<label class="checkbox-inline">
+								<input type="radio" name="order"  checked="checked"  value="new"> 등록순
+							</label>
+							<label class="checkbox-inline">
+								<input type="radio" name="order" value="recommend"> 추천순
+							</label>
+						</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<th class="text-center" colspan="2">
+							<button type="button" class="btn btn-default" id="searchButton">검색</button>
+						</th>
+					</tr>
+				</tfoot>
+			</table>
+		
+			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+			</div> <!-- 아코디언 -->
+			
+			<div class="text-center" id="pagingDiv">
+			</div>
+		</div> <!-- col-md-8 -->
+	</div> <!-- row -->
 	
 </body>
 </html>
