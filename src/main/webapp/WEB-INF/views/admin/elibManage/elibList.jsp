@@ -26,6 +26,9 @@
 	
 	<script type="text/javascript">
 	$(function() {
+		$("#bkList").addClass("open").children("ul").show();
+		$("#bkList3").addClass("open").children("ul").show();
+		
 		var el_subject="";
 		var el_writer="";
 		var el_pub="";
@@ -871,18 +874,18 @@
 </head>
 <body>
 	
-	<!-- 헤더 -->
+	<jsp:include page="/WEB-INF/views/admin/adminHeader.jsp"></jsp:include>
 	
 	<div class="row">
 		<div class="col-md-3">
-			<!-- 사이드바 부분 -->
+			<jsp:include page="/WEB-INF/views/admin/adminSideMenu.jsp"></jsp:include>
 		</div>
 	
 		<div class="col-md-8">
 			<table class="table table-striped">
 				<thead>
 					<tr>
-						<th class="text-center" colspan="2">전자 도서 검색</th>
+						<th class="text-center" colspan="2" style="font-size: x-large;">전자 도서 검색</th>
 					</tr>
 				</thead>
 				<tbody>
