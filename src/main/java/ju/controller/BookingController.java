@@ -79,5 +79,9 @@ public class BookingController {
 	}
 
 	//대원 0613화 추가
-
+	
+	@RequestMapping("/getHolidaySrBookMJ.ju")
+	public ModelAndView getHolidaySrBookMJ(String start){
+		return new ModelAndView("juJson","ghsbMJ",bigdao.bigGetHoliday(start));
+	}
 }

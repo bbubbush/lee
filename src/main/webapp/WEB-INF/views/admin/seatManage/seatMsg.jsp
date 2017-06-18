@@ -6,7 +6,7 @@
 <script>
 function loadMsg(){
 	alertify.alert("NOTICE", "${msg}", function() {
-		location.href = "${url}";
+		location.href = "/lee/seatIndex.ju";
 	});
 }
 </script>
