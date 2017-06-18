@@ -4,18 +4,21 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <mapper namespace="ju.dto">
+	<!-- mp3 info insert -->
 	<insert id="abINSaudio" parameterType="ju.dto.ElibDTO">
   		INSERT INTO elib VALUES(#{el_idx},#{el_lg},#{el_md},#{el_subject},#{el_writer},#{el_pub},#{el_info},#{el_path},#{el_recommend},#{el_recocount})
   	</insert>
-  	
+  	<!-- ab info update -->
   	<update id="abUPupdate" parameterType="ju.dto.ElibDTO">
   		UPDATE elib SET el_lg=#{el_lg}, el_md=#{el_md}, el_subject=#{el_subject}, el_writer=#{el_writer}, el_pub=#{el_pub}, el_info=#{el_info} where el_idx=#{el_idx}
   	</update>
   	
+  	<!-- ab recommend -->
   	<update id="abUPrecommend" parameterType="ju.dto.ElibDTO">
   		UPDATE elib set el_recocount=el_recocount+1, el_recommend=#{mem_idx} where el_idx like 'AB%' and el_idx=#{el_idx}
   	</update>
   	
+  	<!-- ab all list  -->
   	<select id="abSELlist" parameterType="String" resultType="ju.dto.ElibDTO">
   		SELECT * FROM elib WHERE el_idx like 'AB%'
   	</select>
@@ -30,6 +33,7 @@
 		]]>	
   	</select>
   	
+  	<!-- content ab -->
   	<select id="abSELcon" parameterType="String" resultType="ju.dto.ElibDTO">
   		SELECT * FROM elib WHERE el_idx = #{el_idx} order by el_idx desc
   	</select>
@@ -44,6 +48,7 @@
 		]]>	
   	</select>
 	
+	<!-- idx 에 맞는 mp3 리스트 뽑아오기  -->
 	<select id="abSELmp" parameterType="String" resultType="ju.dto.ElibDTO">
   		SELECT el_idx FROM elib WHERE el_idx = #{el_idx}
   	</select>
@@ -53,15 +58,22 @@
 	  	<![CDATA[
   			select * from 
 			(select rownum as rnum, a.* from 
-			(select * from elib where el_idx like 'AB%' AND LOWER(el_subject) LIKE LOWER('%${simpleSerchText}%') ORDER BY ${orderName} )a)b 
+			(select * from elib where el_idx like 'AB%' AND ${simpleSerchText} ORDER BY ${orderName} )a)b 
 			where rnum>=(#{cp} -1) * #{ls} +1 and rnum <= #{cp} * #{ls}
 		]]>	
   	</select>
   	
+  	<!-- first page page cnt -->
   	<select id="abSELcnt" resultType="Integer">
   		select count(*) from elib where el_idx like 'AB%'
   	</select>
   	
+  	<!-- simple search cnt -->
+  	<select id="abSELcntsimple" resultType="Integer" parameterType="String" >
+	  		select count(*) from elib where el_idx like 'AB%' AND ${sst}
+  	</select>
+  	
+  	<!-- detail search cnt -->
   	<select id="abSELcntdetail" resultType="Integer" parameterType="String" >
 	  		select count(*) from elib where el_idx like 'AB%' ${where}
   	</select>

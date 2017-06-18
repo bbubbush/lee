@@ -82,13 +82,13 @@ $(function() {
   };
 
   function fireCommand(string) {
-	  console.log("음성 들어감?");
     if (string.endsWith('재생')) {
+    	console.log("음성 들어감?");
     	$('.play').click();
  	} 
   }
 		
-		textToSpeech('재생을 원하신다면, 재.생. 이라 말씀해주세요.');
+	textToSpeech('재생을 원하신다면, 재.생. 이라 말씀해주세요.');
 	
 
   recognition.onerror = function(event) {

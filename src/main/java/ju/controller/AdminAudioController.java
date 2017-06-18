@@ -141,20 +141,7 @@ public class AdminAudioController {
 			return mav;
 		}
 		
-		
-		
-		/*/////////
-		@RequestMapping(value="updateList.ju")
-		public ModelAndView audioFirst(){
-			ModelAndView mav=new ModelAndView();
-			
-			List<ElibDTO> list = audioDao.selectList();
-			
-			mav.addObject("abArr", list);
-			mav.setViewName("juJson");
-			return mav;
-		}*/
-		
+
 		//오디오 관리용 목록으로..
 		@RequestMapping(value="eAudioListAdmin.ju")
 		public ModelAndView eAudioListAdmin(){

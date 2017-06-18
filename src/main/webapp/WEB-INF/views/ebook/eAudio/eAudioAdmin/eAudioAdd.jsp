@@ -123,7 +123,7 @@ $(document).ready(function(){
 				<h3>책표지 업로드</h3>
 			</th>
 			<td>
-				<input type="file" class="abimgs" name="abimg" required="required"/>
+				<input type="file" class="abimgs" name="abimg" />
 			</td>
 		</tr>
 		<tr>
@@ -131,7 +131,7 @@ $(document).ready(function(){
 				<h3>오디오 업로드</h3>
 			</th>
 			<td>
-				<input type="file" class="afile3" multiple="multiple" name="audio" required="required"/>
+				<input type="file" class="afile3" multiple="multiple" name="audio"/>
 			</td>
 		</tr>
 		<tr>

@@ -59,7 +59,7 @@ public class AudioController {
 		
 		int totalCnt = audioDao.totalCnt();
 		
-		int listSize = 3; 
+		int listSize = 5; 
 		int pageSize = 2;
 		
 		String pagNum = ju.audio.module.ModulePage.guestPageMake("eAudio.ju", totalCnt, page, pageSize, listSize);
@@ -163,7 +163,7 @@ public class AudioController {
 		
 		 
 		int totalCnt = audioDao.totalCntDetail(where);
-		int listSize = 3; 
+		int listSize = 5; 
 		int pageSize = 2;
 		String pagNum = ju.audio.module.ModulePage.guestPageMake("eAudio.ju", totalCnt, page, pageSize, listSize);
 		mav.addObject("pagelist",pagNum);
@@ -185,16 +185,18 @@ public class AudioController {
 	/**단순 검색*/
 	@RequestMapping(value="audioSimpleSearch.ju")
 	public ModelAndView audioSimpleSearch(
-		@RequestParam(value="simpleSearchText", defaultValue="0" )String simpleSearchText
+		@RequestParam(value="simpleSearchText", defaultValue="" )String simpleSearchText
 		, @RequestParam(value="page", defaultValue="1" )int page
 		, @RequestParam(value="orderName", defaultValue="new" )String orderName
 		) {
 		
-
+		simpleSearchText="".equals(simpleSearchText)?"":"LOWER(el_subject) LIKE LOWER('%" + simpleSearchText + "%') ";
 		orderName="new".equals(orderName)?"el_idx DESC":"el_recocount DESC, el_idx DESC";
 		ModelAndView mav=new ModelAndView();
-		int totalCnt = audioDao.totalCnt();
-		int listSize = 3; 
+		
+		int totalCnt = audioDao.totalCntSimple(simpleSearchText);
+		
+		int listSize = 5; 
 		int pageSize = 2;
 		
 		String pagNum = ju.audio.module.ModulePage.guestPageMake("eAudio.ju", totalCnt, page, pageSize, listSize);

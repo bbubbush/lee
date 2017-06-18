@@ -13,11 +13,11 @@
 		<script type="text/javascript" src="/lee/resources/bootstrapk/js/bootstrap.min.js"></script>
 
 		<!-- 음성 인식 JS CSS -->
-		<script src="/lee/resources/audio/voice/audioMain/js/mainAudio.js?ver=1.1"></script>
+		<script src="/lee/resources/audio/voice/audioMain/js/mainAudio.js?ver=1.2"></script>
 		<script src="/lee/resources/audio/voice/audioMain/js/highlight.min.js"></script>
 		<script src="/lee/resources/audio/voice/audioMain/js/DetectRTC.js"></script>
 		<script src="/lee/resources/audio/voice/audioMain/js/global.js?ver=1.0"></script>
-		
+		<!-- 경고창 JS CSS -->
 		<script type="text/javascript" src="/lee/resources/js/alertifyjs/alertify.min.js"></script>
 		<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/alertify.min.css">
 		<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/themes/default.min.css">
@@ -304,6 +304,7 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 						$("#contentTbody").html(intoHTML);
 						
 						$("#pagingNav").html(data.pagelist);
+						$("#pagingNav").removeClass().addClass("detail");
 						contentClick();
 						$("#pagingNav>ul>li").removeClass("active");
 						var pagingLength=$("#pagingNav>ul>li").length;
@@ -596,9 +597,9 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 				, dataType : "json"
 				, success: function(data){
 					if(data.dupl){
-							alertify.alert("", data.dupl);
+							alertify.alert("추천", data.dupl);
 					}else{
-							alertify.alert("", data.recommend);
+							alertify.alert("추천", data.recommend);
 					}
 					$(".reCount").text(data.recoCount);
 				}
@@ -728,8 +729,8 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 						</tr>
 					</tfoot>
 				</table>
-			<!-- 	<div><a href="/lee/eAudioAdd.ju">임시 오디오 관리</a></div>
-				<div><a href="/lee/eAudioVoice.ju">임시 오디오 인식</a></div>
+			<!--	<div><a href="/lee/eAudioAdd.ju">임시 오디오 관리</a></div>
+			 	<div><a href="/lee/eAudioVoice.ju">임시 오디오 인식</a></div>
 				<div><a href="/lee/eAudioListAdmin.ju">임시 오디오 수정 관리</a></div>
 				<div><a href="/lee/alertTest.ju">임시 오디오 alert 테스트</a></div> -->
 			</div>

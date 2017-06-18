@@ -21,6 +21,8 @@ public interface AudioDAO {
 
 	public int totalCnt();
 	
+	public int totalCntSimple(String simpleSearchText);
+	
 	public int totalCntDetail(String where);
 
 	public int upAudioInfo(ElibDTO dto);

@@ -38,8 +38,6 @@ public class AudioDAOImple implements AudioDAO {
 		HashMap<String, String> map = new HashMap<String, String>();
 		String cp = Integer.toString(page);
 		String ls = Integer.toString(listSize);
-		System.out.println("DAOcp:" + cp);
-		System.out.println("DAPls:" + ls);
 		map.put("where", where);
 		map.put("orderName", orderName);
 		map.put("cp", cp);
@@ -55,7 +53,6 @@ public class AudioDAOImple implements AudioDAO {
 
 	public List<ElibDTO> simpleSerch(String simpleSearchText, String orderName, int page, int listSize) {
 		HashMap<String, String> map = new HashMap<String, String>();
-
 		String cp = Integer.toString(page);
 		String ls = Integer.toString(listSize);
 
@@ -72,19 +69,22 @@ public class AudioDAOImple implements AudioDAO {
 		return totalCnt;
 	}
 	
+	public int totalCntSimple(String simpleSearchText) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("sst", simpleSearchText);
+		int cntSimple = sqlMap.selectOne("abSELcntsimple", map);
+		return cntSimple;
+	}
+	
 	public int totalCntDetail(String where) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("where", where);
-		System.out.println("DAOwhere :"+where);
 		int cntDetail = sqlMap.selectOne("abSELcntdetail", map);
-		System.out.println(cntDetail);
 		return cntDetail;
 	}
 
 	public int upAudioInfo(ElibDTO adto) {
 		int up = sqlMap.update("abUPupdate", adto);
-
-		System.out.println("수정확인??" + up);
 		return up;
 	}
 
@@ -108,7 +108,6 @@ public class AudioDAOImple implements AudioDAO {
 		map.put("cp", page);
 		map.put("ls", listSize);
 		List<ElibDTO> list = sqlMap.selectList("abSELrecolist",map);
-		System.out.println(list.get(0).getEl_recocount());
 		return list;
 	}
 
