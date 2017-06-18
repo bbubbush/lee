@@ -15,6 +15,7 @@ public class ModulePage {
 		int start = userGroup*pageSize+1;   
 		int end = userGroup*pageSize+pageSize;
 		
+		page.append("<ul class='pagination'>");
 		if(userGroup!=0){ 
 			page.append("<li data-page='before'><a href='#'");  
 			page.append("onclick='return false' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a>");
@@ -32,6 +33,7 @@ public class ModulePage {
 			page.append("<li data-page='after'><a href='#'");  
 			page.append("onclick='return false' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a>");
 		}
+		page.append("</ul>");
 		return page.toString(); 
 	}
 	

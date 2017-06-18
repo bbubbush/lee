@@ -72,13 +72,9 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 					detailWrite="";
 					detailPub="";
 					cateLg=$(event.target).eq(0).data("lg");
-					cateMd="";
-					
+					cateMd='99';
 					$(".order>span").eq(1).click();
 					audioDetailAjax(detailSubject, detailWrite, detailPub, cateLg, cateMd, 1, orderName);
-					$("#pagingNav").removeClass().addClass("detail");
-					$("#pagingNav>ul>li").removeClass("active");
-					$("#pagingNav>ul>li").eq(1).addClass("active");
 				}
 			);
 			$("#abList>ul>li>ul>li>a").click(
@@ -115,7 +111,6 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 							, dataType : "json"
 							, success: function(data){
 								var cateMdArr=data.cateMd;
-								console.log(cateMdArr);
 								var cateMdOption="<optgroup><option value='99'>전체</option></optgroup><optgroup>"
 								for(var i=0 ; i<cateMdArr.length ; i++){
 									cateMdOption+="<option value='" + i + "'>" + cateMdArr[i] + "</option>";
@@ -128,10 +123,9 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 			});
 			$("#cateLg").change();
 			
-			/*처음 Ajax 실행*/
-			audioListFirst(1, orderName);
 			
 			var simpleSearchText="";
+			
 			/*단순 검색 Ajax*/
 			function audioSearchAjax(simpleSearchText, page, orderName) {
 				$.ajax({
@@ -141,10 +135,12 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 					, dataType : "json"
 					, success : function(data){
 						var pageHTML="";
-						var page=data.page;
+						//var page=data.page;
 						var arr=data.ebArr;
 						var intoHTML="";
 						if(arr.length==0){
+							$("nav").css("display", "none");
+							$(".order").css("display", "none");
 							intoHTML+='<tr>';
 							intoHTML+='	<td class="text-center">';
 							intoHTML+='		검색 결과가 없습니다.';
@@ -161,8 +157,8 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 							intoHTML+='			<div class="media-body">';
 							intoHTML+='				<h4 class="media-heading">' + arr[i].el_subject + '</h4>';
 							intoHTML+='				<div class="row">';
-							intoHTML+='					<div class="col-md-2">저자</div>';
-							intoHTML+='						<div class="col-md-8">편집부 저</div>';
+							intoHTML+='					<div class="col-md-4">저자 '+arr[i].el_writer+'</div>';
+							intoHTML+='						<div class="col-md-8">편집부 저 '+arr[i].el_pub+'</div>';
 							intoHTML+='				</div>';
 							intoHTML+='				<div class="row info">';
 							intoHTML+='					<div class="col-md-12">';
@@ -179,13 +175,15 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 							intoHTML+='	</td>';
 							intoHTML+='</tr>';
 						}
-						pageHTML+=page;
-						$("#pagingNav").html(data.paging);
 						$("#contentTbody").html(intoHTML);
+						if(arr.length=!0){
+							$("#pagingNav").html(data.pagelist);
+						}
+						$("#pagingNav").removeClass().addClass("simple");
 						contentClick();
-						
 						$("#pagingNav>ul>li").removeClass("active");
 						var pagingLength=$("#pagingNav>ul>li").length;
+						
 						for(var i=0 ; i<pagingLength ; i++){
 							if( $("#pagingNav>ul>li").eq(i).data("page")==page ){
 								$("#pagingNav>ul>li").eq(i).addClass("active");
@@ -195,10 +193,7 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 						$("#pagingNav>ul>li").click(
 							function() {
 								var page=$(this).data("page");
-								/*해당 버튼 사용 불가*/
-								if($(this).hasClass("disabled")==true || $(this).hasClass("active")==true){
-									return null;
-								}
+								
 								$("body").scrollTop(0);
 								/*<< >> 판단*/
 								if( page=="before" || page=="after" ){
@@ -210,13 +205,14 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 									$(this).addClass("active");
 								}
 								/*어떤 검색인지 표기*/
-								audioSearchAjax(simpleSearchText, page, orderName);
+									audioSearchAjax(simpleSearchText, page, orderName);
 							} // click function
 						); // click
 						
 					}
 				});
 			}
+			
 			/*단순 검색 Ajax 실행*/
 			$("#simpleSearchText").keypress(
 				function(e) {
@@ -235,6 +231,9 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 				}
 			);
 			
+			/*처음 Ajax 실행*/
+			audioListFirst(1, orderName);
+			
 			var detailSubject="";
 			var detailWrite="";
 			var detailPub="";
@@ -249,10 +248,11 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 					, dataType : "json"
 					, success: function(data){
 						var pageHTML="";
-						var page=data.page;
 						var arr=data.ebArr;
 						var intoHTML="";
 						if(arr.length==0){
+							$("nav").css("display", "none");
+							$(".order").css("display", "none");
 							intoHTML+='<tr>';
 							intoHTML+='	<td class="text-center">';
 							intoHTML+='		검색 결과가 없습니다.';
@@ -269,8 +269,8 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 							intoHTML+='			<div class="media-body">';
 							intoHTML+='				<h4 class="media-heading">' + arr[i].el_subject + '</h4>';
 							intoHTML+='				<div class="row">';
-							intoHTML+='					<div class="col-md-2">저자</div>';
-							intoHTML+='					<div class="col-md-8">편집부 저</div>';
+							intoHTML+='					<div class="col-md-4">저자 '+arr[i].el_writer+'</div>';
+							intoHTML+='					<div class="col-md-8">편집부 저 '+arr[i].el_pub+'</div>';
 							intoHTML+='				</div>';
 							intoHTML+='				<div class="row info">';
 							intoHTML+='					<div class="col-md-12">';
@@ -287,12 +287,13 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 							intoHTML+='	</td>';
 							intoHTML+='</tr>';
 						}
-						pageHTML+=page;
-						$("#pagingNav").html(data.paging);
 						$("#contentTbody").html(intoHTML);
+						
+						$("#pagingNav").html(data.pagelist);
 						contentClick();
 						$("#pagingNav>ul>li").removeClass("active");
 						var pagingLength=$("#pagingNav>ul>li").length;
+						
 						for(var i=0 ; i<pagingLength ; i++){
 							if( $("#pagingNav>ul>li").eq(i).data("page")==page ){
 								$("#pagingNav>ul>li").eq(i).addClass("active");
@@ -302,10 +303,7 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 						$("#pagingNav>ul>li").click(
 							function() {
 								var page=$(this).data("page");
-								/*해당 버튼 사용 불가*/
-								if($(this).hasClass("disabled")==true || $(this).hasClass("active")==true){
-									return null;
-								}
+								
 								$("body").scrollTop(0);
 								/*<< >> 판단*/
 								if( page=="before" || page=="after" ){
@@ -337,7 +335,6 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 					}
 					else{
 						cateMd=$("#cateMd").val();
-						console.log(cateMd);
 					}
 					audioDetailAjax(detailSubject, detailWrite, detailPub, cateLg, cateMd, 1, orderName);
 					$("#pagingNav").removeClass().addClass("detail");
@@ -387,10 +384,11 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 				, dataType : "json"
 				, success: function(data){
 					var pageHTML="";
-					var page=data.page;
 					var arr=data.ebArr;
 					var intoHTML="";
 					if(arr.length==0){
+						$("nav").css("display", "none");
+						$(".order").css("display", "none");
 						intoHTML+='<tr>';
 						intoHTML+='	<td class="text-center">';
 						intoHTML+='		검색 결과가 없습니다.';
@@ -407,7 +405,7 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 						intoHTML+='			<div class="media-body">';
 						intoHTML+='				<h4 class="media-heading">' + arr[i].el_subject + '</h4>';
 						intoHTML+='				<div class="row">';
-						intoHTML+='					<div class="col-md-2">저자 '+arr[i].el_writer+'</div>';
+						intoHTML+='					<div class="col-md-4">저자 '+arr[i].el_writer+'</div>';
 						intoHTML+='					<div class="col-md-8">편집부 저 '+arr[i].el_pub+'</div>';
 						intoHTML+='				</div>';
 						intoHTML+='				<div class="row info">';
@@ -425,13 +423,8 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 						intoHTML+='	</td>';
 						intoHTML+='</tr>';
 					}
-					
-					pageHTML+=page;
-					$("#pagingNav").html(data.paging);
-					$(".pagination").html(pageHTML);
 					$("#contentTbody").html(intoHTML);
-					/* $("#pagingNav>ul>li").removeClass("active");
-					$("#pagingNav>ul>li").eq(page).addClass("active"); */
+					$("#pagingNav").html(data.pagelist);
 					contentClick();
 					
 					$("#pagingNav>ul>li").removeClass("active");
@@ -445,10 +438,6 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 					$("#pagingNav>ul>li").click(
 						function() {
 							var page=$(this).data("page");
-							/*해당 버튼 사용 불가*/
-							if($(this).hasClass("disabled")==true || $(this).hasClass("active")==true){
-								return null;
-							}
 							$("body").scrollTop(0);
 							/*<< >> 판단*/
 							if( page=="before" || page=="after" ){
@@ -484,7 +473,7 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 							
 							var intoHeaderHTML="";
 							intoHeaderHTML+='<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
-							intoHeaderHTML+='<h4 class="modal-title" id="myModalLabel">' + data.ebArr.el_idx + '</h4>';
+							intoHeaderHTML+='<h4 class="modal-title" id="myModalLabel">' + data.ebArr.el_subject + '</h4>';
 							
 							var intoBodyHTML="";
 							if(data.mem_idx==null){
@@ -503,12 +492,12 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 							intoBodyHTML+='					</div>';
 							intoBodyHTML+='				</div>';
 							intoBodyHTML+='				<div class="col-md-12 text-right">';
-							intoBodyHTML+='				<span id="ttip" data-toggle="tooltip" data-placement="top" title="로그인 하셔야 합니다.">';
-							intoBodyHTML+='					<button type="button" id="ttip" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Tooltip on top" disabled="disabled">추천하기</button>';
-							intoBodyHTML+='				</span>';
-							intoBodyHTML+='				<span  data-toggle="tooltip" data-placement="top" title="로그인 하셔야 합니다.">';
-							intoBodyHTML+='					<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Tooltip on top" disabled="disabled">재생하기</button>';
-							intoBodyHTML+='				</span>';
+							intoBodyHTML+='					<span data-toggle="tooltip" data-placement="top" title="로그인 하셔야 합니다.">';
+							intoBodyHTML+='						<button type="button" id="ttip" class="btn btn-default" disabled="disabled">추천하기</button>';
+							intoBodyHTML+='					</span>';
+							intoBodyHTML+='					<span  data-toggle="tooltip" data-placement="top" title="로그인 하셔야 합니다.">';
+							intoBodyHTML+='						<button type="button" id="ttip" class="btn btn-default" disabled="disabled">재생하기</button>';
+							intoBodyHTML+='					</span>';
 							intoBodyHTML+='				</div>';
 							intoBodyHTML+='			</div>';
 							intoBodyHTML+='		</div>';
@@ -525,6 +514,7 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 							intoBodyHTML+='	</table>';
 							intoBodyHTML+='</div>';
 							$(".modal-body").html(intoBodyHTML);
+							$('#ttip').parent().tooltip();
 						}else if(data.mem_idx){
 							intoBodyHTML+='<div class="panel panel-default" >';
 							intoBodyHTML+='	<div class="row">';
@@ -569,7 +559,7 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 			);
 		}
 
-		/*추천*/
+		//추천하기
 		function eAudioRecommend(el_idx) {
 			$.ajax({
 				type : "GET"
@@ -587,18 +577,6 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 			})
 		}
 		
-/* 		function audioPaging(page){
-			$.ajax({
-				type: "GET"
-				, url : "audioPaing.ju"
-				, data:{page : page}
-				, dataType:"json"
-				, success: function(data){
-					
-				}
-			})
-		} */
-		
 	</script>
 
 </head>
@@ -615,7 +593,7 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 		<div class="col-md-8">
 
 			<!-- 검색바 -->
-			<div class="row" style="background: #3cdbde; padding: 80px 0;">
+			<div class="row" style="background: url('/lee/resources/elib/ABback.jpg'); background-size : cover;  padding: 80px 0;">
 				<div class="input-group">
 					<input type="text" class="form-control" placeholder="책 검색..."
 						name="simpleSearchText" id="simpleSearchText"> <span
@@ -715,27 +693,7 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 					<tfoot class="text-center">
 						<tr>
 							<td>
-
 								<nav id="pagingNav" class="noSearch">
-									<div id="content">
-										<p class="loading">
-											<img src="" alt="">
-										</p>
-									</div>
-									<ul class="pagination">
-									<!-- 	 <li data-page="before">
-											<a href="#" onclick="return false" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
-										</li>
-										<li data-page="1"><a href="#" onclick="return false">1</a></li>
-										<li data-page="2"><a href="#" onclick="return false">2</a></li>
-										<li data-page="3"><a href="#" onclick="return false">3</a></li>
-										<li data-page="4"><a href="#" onclick="return false">4</a></li>
-										<li data-page="5"><a href="#" onclick="return false">5</a></li>
-										<li data-page="after"><a href="#" onclick="return false"
-											aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
-										</li> -->
-							<!-- <div class="testPage">페이징 부분</div> -->
-									</ul>
 								</nav>
 							</td>
 						</tr>

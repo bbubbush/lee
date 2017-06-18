@@ -70,7 +70,7 @@ function updateGo(idx){
 					detailWrite="";
 					detailPub="";
 					cateLg=$(event.target).eq(0).data("lg");
-					cateMd="";
+					cateMd="99";
 					
 					$(".order>span").eq(1).click();
 					audioDetailAjax(detailSubject, detailWrite, detailPub, cateLg, cateMd, 1, orderName);
@@ -113,7 +113,6 @@ function updateGo(idx){
 							, dataType : "json"
 							, success: function(data){
 								var cateMdArr=data.cateMd;
-								console.log(cateMdArr);
 								var cateMdOption="<optgroup><option value='99'>전체</option></optgroup><optgroup>"
 								for(var i=0 ; i<cateMdArr.length ; i++){
 									cateMdOption+="<option value='" + i + "'>" + cateMdArr[i] + "</option>";
@@ -139,10 +138,11 @@ function updateGo(idx){
 					, dataType : "json"
 					, success : function(data){
 						var pageHTML="";
-						var page=data.page;
 						var arr=data.ebArr;
 						var intoHTML="";
 						if(arr.length==0){
+							$("nav").css("display", "none");
+							$(".order").css("display", "none");
 							intoHTML+='<tr>';
 							intoHTML+='	<td class="text-center">';
 							intoHTML+='		검색 결과가 없습니다.';
@@ -177,8 +177,7 @@ function updateGo(idx){
 							intoHTML+='	</td>';
 							intoHTML+='</tr>';
 						}
-						pageHTML+=page;
-						$("#pagingNav").html(data.paging);
+						$("#pagingNav").html(data.pagelist);
 						$("#contentTbody").html(intoHTML);
 						contentClick();
 						
@@ -193,10 +192,6 @@ function updateGo(idx){
 						$("#pagingNav>ul>li").click(
 							function() {
 								var page=$(this).data("page");
-								/*해당 버튼 사용 불가*/
-								if($(this).hasClass("disabled")==true || $(this).hasClass("active")==true){
-									return null;
-								}
 								$("body").scrollTop(0);
 								/*<< >> 판단*/
 								if( page=="before" || page=="after" ){
@@ -247,10 +242,11 @@ function updateGo(idx){
 					, dataType : "json"
 					, success: function(data){
 						var pageHTML="";
-						var page=data.page;
 						var arr=data.ebArr;
 						var intoHTML="";
 						if(arr.length==0){
+							$("nav").css("display", "none");
+							$(".order").css("display", "none");
 							intoHTML+='<tr>';
 							intoHTML+='	<td class="text-center">';
 							intoHTML+='		검색 결과가 없습니다.';
@@ -285,8 +281,7 @@ function updateGo(idx){
 							intoHTML+='	</td>';
 							intoHTML+='</tr>';
 						}
-						pageHTML+=page;
-						$("#pagingNav").html(data.paging);
+						$("#pagingNav").html(data.pagelist);
 						$("#contentTbody").html(intoHTML);
 						contentClick();
 						$("#pagingNav>ul>li").removeClass("active");
@@ -300,10 +295,6 @@ function updateGo(idx){
 						$("#pagingNav>ul>li").click(
 							function() {
 								var page=$(this).data("page");
-								/*해당 버튼 사용 불가*/
-								if($(this).hasClass("disabled")==true || $(this).hasClass("active")==true){
-									return null;
-								}
 								$("body").scrollTop(0);
 								/*<< >> 판단*/
 								if( page=="before" || page=="after" ){
@@ -335,7 +326,6 @@ function updateGo(idx){
 					}
 					else{
 						cateMd=$("#cateMd").val();
-						console.log(cateMd);
 					}
 					audioDetailAjax(detailSubject, detailWrite, detailPub, cateLg, cateMd, 1, orderName);
 					$("#pagingNav").removeClass().addClass("detail");
@@ -385,10 +375,11 @@ function updateGo(idx){
 				, dataType : "json"
 				, success: function(data){
 					var pageHTML="";
-					var page=data.page;
 					var arr=data.ebArr;
 					var intoHTML="";
 					if(arr.length==0){
+						$("nav").css("display", "none");
+						$(".order").css("display", "none");
 						intoHTML+='<tr>';
 						intoHTML+='	<td class="text-center">';
 						intoHTML+='		검색 결과가 없습니다.';
@@ -423,13 +414,8 @@ function updateGo(idx){
 						intoHTML+='	</td>';
 						intoHTML+='</tr>';
 					}
-					
-					pageHTML+=page;
-					$("#pagingNav").html(data.paging);
-					$(".pagination").html(pageHTML);
 					$("#contentTbody").html(intoHTML);
-					/* $("#pagingNav>ul>li").removeClass("active");
-					$("#pagingNav>ul>li").eq(page).addClass("active"); */
+					$("#pagingNav").html(data.pagelist);
 					contentClick();
 					
 					$("#pagingNav>ul>li").removeClass("active");
@@ -443,10 +429,6 @@ function updateGo(idx){
 					$("#pagingNav>ul>li").click(
 						function() {
 							var page=$(this).data("page");
-							/*해당 버튼 사용 불가*/
-							if($(this).hasClass("disabled")==true || $(this).hasClass("active")==true){
-								return null;
-							}
 							$("body").scrollTop(0);
 							/*<< >> 판단*/
 							if( page=="before" || page=="after" ){
@@ -525,31 +507,7 @@ function updateGo(idx){
 			);
 		}
 		
-
-
-		/*추천*/
-		function ebookRecommend(el_idx) {
-			$.ajax({
-				type : "GET"
-				, url : "ebookRecommend.ju"
-				, data : {el_idx : el_idx}
-				, dataType : "json"
-				, success: function(data){
-					alert(data.recommend);
-				}
-			})
-		}
-		function audioPaging(page){
-			$.ajax({
-				type: "GET"
-				, url : "audioPaing.ju"
-				, data:{page : page}
-				, dataType:"json"
-				, success: function(data){
-					
-				}
-			})
-		}
+		
 		
 	</script>
 </head>
@@ -558,7 +516,7 @@ function updateGo(idx){
 	<!-- 사이드바+컨텐츠 -->
 	<div class="row">
 		<div class="col-md-3">
-			<jsp:include page="/WEB-INF/views/ebook/elibSide.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/views/ebook/eAudio/eAudioAdmin/audioUpdateSide.jsp"></jsp:include>
 		</div>
 
 		<!-- 컨텐츠 -->
@@ -665,27 +623,7 @@ function updateGo(idx){
 					<tfoot class="text-center">
 						<tr>
 							<td>
-
 								<nav id="pagingNav" class="noSearch">
-									<div id="content">
-										<p class="loading">
-											<img src="" alt="">
-										</p>
-									</div>
-									<ul class="pagination">
-									<!-- 	 <li data-page="before">
-											<a href="#" onclick="return false" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
-										</li>
-										<li data-page="1"><a href="#" onclick="return false">1</a></li>
-										<li data-page="2"><a href="#" onclick="return false">2</a></li>
-										<li data-page="3"><a href="#" onclick="return false">3</a></li>
-										<li data-page="4"><a href="#" onclick="return false">4</a></li>
-										<li data-page="5"><a href="#" onclick="return false">5</a></li>
-										<li data-page="after"><a href="#" onclick="return false"
-											aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
-										</li> -->
-							<!-- <div class="testPage">페이징 부분</div> -->
-									</ul>
 								</nav>
 							</td>
 						</tr>
