@@ -72,6 +72,10 @@
 .rrSub{
 	font-size: 400%
 }
+.rrbtn{
+	width:120%;
+	height:120%;
+}
 </style>
 <script type="text/javascript" src="/lee/resources/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="/lee/resources/bootstrapk/js/bootstrap.min.js"></script>

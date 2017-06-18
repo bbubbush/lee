@@ -74,8 +74,19 @@
 	height: 200px;
 }
 
-.rrbtn {
-	width: 50px;
+#r1tab>tbody>tr>td>.rrbtn {
+	width: 250px;
+	height:50px;
+}
+.blank{
+	height: 50px;
+}
+#r2tab>tbody>tr>td>.rrbtn {
+	width: 130px;
+	height:100px;
+}
+.blank2{
+	width: 32px;
 }
 </style>
 </head>
@@ -110,7 +121,7 @@
 											<c:choose>
 												<c:when test="${(row mod 3) eq 0}">
 													<c:forEach var="col" begin="1" step="1" end="5">
-														<td>&nbsp;&nbsp;</td>
+														<td class="blank">&nbsp;&nbsp;</td>
 													</c:forEach>
 												</c:when>
 												<c:otherwise>
@@ -133,7 +144,7 @@
 											<c:forEach var="col" begin="1" step="1" end="11">
 												<c:choose>
 													<c:when test="${(col mod 3) eq 0}">
-														<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+														<td class="blank2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 													</c:when>
 													<c:otherwise>
 														<td id="rrtd" class="${row }${col}">

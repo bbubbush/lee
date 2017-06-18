@@ -280,6 +280,8 @@
 </style>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
+<div class="row">
 <div class="col-md-2">
    <jsp:include page="/WEB-INF/views/big/sideMenu.jsp"></jsp:include>
 </div>
@@ -427,5 +429,6 @@
    </div>
 </div>
 </form>
+</div>
 </body>
 </html>
