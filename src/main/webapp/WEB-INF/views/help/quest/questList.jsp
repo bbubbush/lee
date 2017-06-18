@@ -25,24 +25,20 @@
 	</div>
 	<div class="row">
 		<div class="col-md-3">
-			<jsp:include page="/WEB-INF/views/service/elibSide.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/views/help/helpSide.jsp"></jsp:include>
 		</div>
 		<div class="col-md-9">
 			<div class="row">
 				<div class="col-md-7">
 					<h2>QnA 게시판</h2>
 				</div>
-				<div class="col-md-3" style="text-align: center;">
-<<<<<<< HEAD
-					<a class="btn btn-default" type="submit" href="questWrite.ju">
-						<span class="glyphicon glyphicon-pencil" aria-hidden="true">질문하기</span>
-=======
-					<a class="btn btn-default" type="submit" href="noticeWrite.ju">
-						<span class="glyphicon glyphicon-pencil" aria-hidden="true">
-							질문하기</span>
->>>>>>> master-merge
-					</a>
-				</div>
+				<c:if test="${chk}">
+					<div class="col-md-3" style="text-align: center;">
+						<a class="btn btn-default" type="submit" href="questWrite.ju">
+							<span class="glyphicon glyphicon-pencil" aria-hidden="true"> 질문하기</span>
+						</a>
+					</div>
+				</c:if>
 			</div>
 			<div class="row">
 				<div class="col-md-10">
@@ -63,10 +59,23 @@
 									<td colspan="6" align="left">등록된 quest가 없습니다.</td>
 								</c:if>
 							</tr>
-							<c:forEach var="dto" items="${list}">
+							<c:forEach var="dto" items="${list}" varStatus="i">
 								<tr>
-									<td>${dto.qu_idx}</td>
-									<td>${dto.qu_cate}</td>
+									<td>${(page-1)*10+i.index+1}</td>
+									<c:choose>
+										<c:when test="${dto.qu_cate==0}">
+											<td>도서관</td>
+										</c:when>
+										<c:when test="${dto.qu_cate==1}">
+											<td>전자책</td>
+										</c:when>
+										<c:when test="${dto.qu_cate==2}">
+											<td>열람실/세미나실</td>
+										</c:when>
+										<c:when test="${dto.qu_cate==3}">
+											<td>홈페이지</td>
+										</c:when>
+									</c:choose>
 									<td><a href="questContent.ju?qu_idx=${dto.qu_idx}">${dto.qu_subject}</a></td>
 									<td>${dto.mem_idx}</td>
 									<td>${dto.qu_date}</td>

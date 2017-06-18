@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -156,7 +157,8 @@ width: 1030px;
 					 	
 					 	
 					 	
-					 	<td>${list.qu_date }</td>
+					 	<td>대출일 : <fmt:formatDate pattern = "yyyy-MM-dd" value = "${list.qu_date}" /><br>
+						</td>
 				<c:choose>	
 	           		<c:when test="${empty list.qu_qcontent}">
 	           			<td>미답변</td>	
@@ -202,9 +204,7 @@ width: 1030px;
 
 		</div>
 	</div>
-	<div class="col-md-12">
-	<%@include file="../footer.jsp"%>
-	</div>
+
 
 </body>
 </html>

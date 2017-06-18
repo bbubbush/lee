@@ -31,14 +31,14 @@
 		SELECT * FROM (
 								SELECT rownum rnum, data.*  FROM 
 																				(
-																				SELECT * FROM elib WHERE el_idx LIKE '${idxParam}%' AND el_subject LIKE '%${simpleSearchText}%' ORDER BY ${orderName}
+																				SELECT * FROM elib WHERE el_idx LIKE '${idxParam}%' AND UPPER(el_subject) LIKE UPPER('%${simpleSearchText}%') ORDER BY ${orderName}
 																				)data
 								)
 								WHERE rnum BETWEEN ${startNum} AND ${endNum}
 	</select>
 	
 	<select id="elibSELsimpleCount" parameterType="String" resultType="int">
-		SELECT COUNT(*) FROM elib WHERE el_idx LIKE '${idxParam}%' AND el_subject LIKE '%${simpleSearchText}%' ORDER BY ${orderName}
+		SELECT COUNT(*) FROM elib WHERE el_idx LIKE '${idxParam}%' AND UPPER(el_subject) LIKE UPPER('%${simpleSearchText}%') ORDER BY ${orderName}
 	</select>
 	
 	<select id="elibSELdetail" parameterType="String" resultType="ju.dto.ElibDTO">

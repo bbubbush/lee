@@ -137,19 +137,20 @@ $(function(){
        data:{elIdx :elIdx},
        //보내기전 validation check가 필요할경우
        beforeSubmit: function (data, frm, opt) {
-	       alert("전송중");
+    	   alertify.alert("", "전송중");
            return true;
        },
        //submit이후의 처리
        success: function(data){
     	   
-    	   alert("전송성공!!");
+    	   alertify.alert("", "전송 성공");
            console.log(data); //응답받은 데이터 콘솔로 출력         
            location.href='eAudioListAdmin.ju';
            output(data); //받은 정보를 화면 출력하는 함수 호출
        },
        //ajax error
        error: function(e){
+    	   alertify.alert("", "전송 실패");
            console.log(e);
        }                               
 	});

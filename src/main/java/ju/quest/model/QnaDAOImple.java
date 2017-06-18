@@ -64,4 +64,15 @@ public class QnaDAOImple implements QnaDAO{
 		QnaDTO dto = sqlMap.selectOne("qnaNextInfo", qna_idx);
 		return dto;
 	}
+	public List<QnaDTO> topTenQna(String sql) {
+		// TODO Auto-generated method stub
+		Map<String , Object> map = new HashMap<String, Object>();
+		map.put("sql", sql);
+		List<QnaDTO> list=sqlMap.selectList("topTenQna", map); 
+		return list;
+	}
+	public int qnaRead(String qna_idx) {
+		int count = sqlMap.update("qnaRead", qna_idx);
+		return count;
+	}
 }

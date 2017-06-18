@@ -67,7 +67,7 @@
 			           result = responseData;
 			            
 			            if(!result){
-			            	alert("데이터를 받지 못함");
+			            	alertify.alert("","데이터를 받지 못함");
 			            }else{
 			            	
 				            
@@ -97,14 +97,14 @@
 								$("#jumin2").val(birth[1]);
 								
 				            }else{
-				            	alert('암호가 일치하지 않습니다.');
+				            	alertify.alert("",'암호가 일치하지 않습니다.');
 				            }
 			            }
 			           	
 			        },
 			        error: function(request,status,error){
 			        	
-			        	 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error); 
+			        	alertify.alert("","code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error); 
 			        }
 		   		 });
 		
@@ -531,9 +531,7 @@
 	      가입신청</button>
  </form>
 
-	<div class="col-md-12" style="padding: 0px">
-		<%@include file="../footer.jsp"%>
-	</div>
+	
 
 </body>
 </html>

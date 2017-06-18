@@ -2,8 +2,8 @@ package ju.modul;
 
 public class ElibPaging {
 	
-	public static final int CONTENTSIZE=2;
-	public static final int PAGESIZE=3;
+	public static final int CONTENTSIZE=5;
+	public static final int PAGESIZE=5;
 	
 	public ElibPaging() {
 	}

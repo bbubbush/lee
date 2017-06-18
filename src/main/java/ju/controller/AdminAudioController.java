@@ -157,7 +157,7 @@ public class AdminAudioController {
 		
 		//오디오 관리용 목록으로..
 		@RequestMapping(value="eAudioListAdmin.ju")
-		public ModelAndView eAudio(){
+		public ModelAndView eAudioListAdmin(){
 			BookCateModul bcm=new BookCateModul();
 			String cate = bcm.BookLgSelect(0, 7, true);
 			ModelAndView mav = new ModelAndView();

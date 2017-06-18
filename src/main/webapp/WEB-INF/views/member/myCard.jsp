@@ -16,6 +16,11 @@
 	<script type="text/javascript" src="/lee/resources/bootstrapk/js/bootstrap.min.js"></script>
 	<script type="text/javascript"
 	src="/lee/resources/sideMenu/sideScript.js"></script>
+	<!-- 하위 3개를 적어야 가능, JQ, 부트스트랩 밑에 작성 할 것 -->
+	<script type="text/javascript" src="/lee/resources/js/alertifyjs/alertify.min.js"></script>
+	<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/alertify.min.css">
+	<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/themes/default.min.css">
+	<link rel="stylesheet" href="/lee/resources/index/index.css">
 	<!-- 바코드 생성기 시작 -->
 <link rel="stylesheet" href="/lee/resources/member/barcode2/code128.css" type="text/css">
 <script src="/lee/resources/member/barcode2/base2-jsb-fp.js" type="text/javascript" charset="utf-8"></script>
@@ -26,9 +31,9 @@
 
 $("body").ready(function(){
 	var sidx = "${sessionScope.sidx}";
-	var idxcode = sidx.substr(2);
+	/* var idxcode = sidx.substr(2); */
 	
-	$("#barcode_input").val(idxcode);
+	$("#barcode_input").val(sidx);
 });
 
 
@@ -106,7 +111,7 @@ if(qs.barcode) {
 	}
 	#memberIdcardDiv{
 	margin:150px;
-	width: 550px;
+	width: 730px;
 	height:350px;
 	padding-left: 93px;
 	border: 1px solid grey;
@@ -136,7 +141,7 @@ if(qs.barcode) {
 		
 	}
 	#memberIdcard{
-		width: 450px;
+		width: 730px;
 	}
 	#displaybarcode{
 		margin-bottom:200px;
@@ -204,8 +209,6 @@ if(qs.barcode) {
 		</div>
 	</div>
 	
-	<div class="col-md-12">
-	<%@include file="../footer.jsp"%>
-	</div>
+	
 </body>
 </html>

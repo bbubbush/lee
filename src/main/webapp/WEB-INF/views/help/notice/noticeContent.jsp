@@ -28,7 +28,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-3">
-			<jsp:include page="/WEB-INF/views/service/elibSide.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/views/help/helpSide.jsp"></jsp:include>
 		</div>
 		<div class="col-md-9">
 			<div class="row">
@@ -38,43 +38,53 @@
 				</div>
 			</div>
 			<div class="col-md-11">
-				<table class="table table-striped table table-hover" border="1">
-					<tr>
-						<td colspan="2">${dto.nt_subject}</td>
-						<td>${dto.nt_idx}</td>
-						<td>${dto.nt_date}</td>
-					</tr>
-					<tr>
-						<td colspan="2">첨부</td>
-						<td>${dto.mem_idx}</td>
-						<td>5</td>
-					</tr>
-					<tr>
-						<td colspan="4"><div class="col-md-12">
-								${dto.nt_content}
-							</div></td>
-					</tr>
-					<tr>
-						<td colspan="2">댓글 0개</td>
-						<td><a href="noticeChange.ju?nt_idx=${dto.nt_idx}">수정</a></td>
-						<td><a href="noticeDelete.ju?nt_idx=${dto.nt_idx}">삭제</a></td>
-					</tr>
-					<tr>
-						<td colspan="4">댓글 쭉 나오게 함</td>
-					</tr>
-					<tr>
-						<td colspan="3">△이전글 제목</td>
-						<td>이전글 작성자</td>
-					</tr>
-					<tr>
-						<td colspan="4">현재글 제목</td>
-					</tr>
-					<tr>
-						<td colspan="3">▽다음글 제목</td>
-						<td>다음글 작성자</td>
-					</tr>
-
-				</table>
+				            <table class="table table-condensed">
+               <tr>
+                  <td><div class="col-md-8"><strong>제목 : ${dto.nt_subject}</strong></div>
+                     <div class="col-md-4">작성자 : ${dto.mem_idx}</div></td>
+               </tr>
+               <tr>
+                  <td>
+                     <div class="row">
+                        <div class="col-md-4">작성일 : ${dto.nt_date}</div>
+                        <div class="col-md-4">조회수 : ${dto.nt_readnum}</div>
+                        <c:if test="${chk}">
+	                        <div class="col-md-2">
+	                           <a href="noticeChange.ju?nt_idx=${dto.nt_idx}">글 수정</a>
+	                        </div>
+	                        <div class="col-md-2">
+	                           <a href="noticeDelete.ju?nt_idx=${dto.nt_idx}">글 삭제</a>
+	                        </div>
+                        </c:if>
+                     </div>
+                  </td>
+               </tr>
+               <tr>
+                  <td>
+                     <div class="row">
+                        <div class="col-md-8"><strong>${dto.nt_content}</strong></div>
+                     </div>
+                  </td>
+               </tr>
+            </table>
+            
+               <fieldset disabled>
+                  <table class="table table-striped table table-hover">
+					<c:if test="${!empty next }">
+						<tr>
+							<td colspan="3"><a href="noticeContent.ju?nt_idx=${next.nt_idx}">△${next.nt_subject}</a></td>
+							<td>${next.mem_idx}</td>
+						</tr>
+					</c:if>
+					<c:if test="${!empty pre }">
+						<tr>
+							<td colspan="3"><a href="noticeContent.ju?nt_idx=${pre.nt_idx}">▽${pre.nt_subject}</a></td>
+							<td>${pre.mem_idx}</td>
+						</tr>
+					</c:if>
+                  </table>
+               </fieldset>
+            
 			</div>
 		</div>
 	</div>

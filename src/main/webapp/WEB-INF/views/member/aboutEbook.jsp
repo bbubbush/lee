@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+    <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +32,7 @@
 	}
 	
 	</style>
-
+    
 <script type="text/javascript">
 	
 	
@@ -66,6 +69,25 @@
 	
 }
 </style>
+<script>
+function elibViwer(el_idx) {
+    var popupWidth=screen.availWidth;
+    var popupHeight=screen.availHeight;
+    var popupSize="width=" + popupWidth + "px,height=" + popupHeight + "px";
+    window.open("/lee/eViewer.ju?el_idx="+el_idx, "eViewer", popupSize);
+ }
+
+function elibViwer2(el_idx) {
+	
+	var spt = el_idx.split('#');
+    var popupWidth=screen.availWidth;
+    var popupHeight=screen.availHeight;
+    var popupSize="width=" + popupWidth + "px,height=" + popupHeight + "px";
+    /* alert("/lee/eViewer.ju?el_idx="+spt[0]+"#"+spt[1]); */
+    window.open("/lee/eViewer.ju?el_idx="+spt[0]+"#"+spt[1], "eViewer", popupSize);
+ }
+
+</script>
 </head>
 <body>
 	<%@include file="../header.jsp"%>
@@ -87,13 +109,14 @@
 				<h3>E-book</h3>
 				<!-- 전자책 -->
 				<div class="row" id="loanbook">
-<c:set var="eblist" value="${eblist}"/>					  
+<c:set var="eblist" value="${eblist}"/>
+<c:set var="bookmark" value="${bookmark}"/>						  
 						     <c:choose>
 							    <c:when test="${empty eblist}">
-							        대출하신 e-book이 없습니다.    
+							      <div style="width:400px; height:400px;text-align:center;">대출하신 e-book이 없습니다.</div>      
 							    </c:when>
 							    <c:when test="${eblist ne null}">
-							            <c:forEach items="${eblist}" var="list">
+							            <c:forEach items="${eblist}" var="list" varStatus="status">
 							           			 <div class="col-sm-6 col-md-4">
 												     <div class="thumbnail ">
 												     <div class="text-center" style="margin:auto; width:100%;height:200px;" id="imgpannel">
@@ -103,15 +126,28 @@
 												      <div class="caption ">
 												        <h3>${list.el_subject}</h3>
 												        <p>
-												        대출일 : ${list.lb_sd}<br>
-												        반납예정일 : ${list.lb_ed}<br>
-												        기타사항 : ${list.lb_etc }<br>
+												        대출일 : <fmt:formatDate pattern = "yyyy-MM-dd" value = "${list.lb_sd}" /><br>
+												        반납예정일 : <fmt:formatDate pattern = "yyyy-MM-dd" value = "${list.lb_ed}" /><br>
 												        연장횟수 : ${list.lb_delay}<br>
 												        </p>
-												        <p><a href="#" class="btn btn-primary" role="button">대출연장</a></p>
+												        <p><a class="btn btn-primary" role="button" onclick="elibViwer('${list.el_idx}')">뷰어로 연결</a>
+												        </p>
 												      </div>
 												    </div>
 												  </div>
+												  <div class="col-md-5">
+												  	<div class="thumbnail ">
+												     <h3>북마크</h3>
+												      <div class="caption ">
+												     <c:if test="${bookmark[status.index] ne null}"> 
+												     	<c:forEach items="${bookmark[status.index]}" var="bklist">
+												     		${bklist}
+												     	</c:forEach>
+												     </c:if>
+												      </div>
+												    </div>
+												  </div>
+												  
 							        	</c:forEach>
 							    </c:when>
 							    
@@ -124,9 +160,7 @@
 
 		</div>
 	</div>
-	<div class="col-md-12">
-	<%@include file="../footer.jsp"%>
-	</div>
+	
 </div>
 </body>
 </html>

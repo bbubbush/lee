@@ -1,5 +1,6 @@
 package ju.booking.model;
 
+import ju.dto.HolidayDTO;
 import ju.dto.MemberDTO;
 import ju.dto.RefRoomDTO;
 import ju.dto.StudyRoomDTO;
@@ -40,4 +41,6 @@ public interface BookingDAO {
 	public int adminRoomDisabled(StudyRoomDTO dto);
 	
 	public StudyRoomDTO adminRoomInfo(int roomno, int time, String resdate);
+	
+	public List<HolidayDTO> bigGetHoliday(String solar_date);
 }

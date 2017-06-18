@@ -120,10 +120,9 @@
 				bookMakerDelet();
 			}
 			
-			//수정?
 			var param=document.location.search.split("=");
 			var idxName=param[1].slice(0, 2).toUpperCase();
-			if(idxName!="EB"){
+			if(idxName!="EB" || $("body").data("loan")==""){
 				$("#bookmarker").parent().remove();
 				$("#bookMarkUl").remove();
 			}
@@ -233,6 +232,7 @@
 			$("#pagegoSub").click(
 				function() {
 					var page=$("#pagego").val();
+					$("#pagego").val("");
 					if(page%2==0){
 						page=parseInt(page)+1;
 					}

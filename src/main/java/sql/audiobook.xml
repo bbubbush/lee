@@ -20,6 +20,7 @@
   		SELECT * FROM elib WHERE el_idx like 'AB%'
   	</select>
   	
+  	<!-- first -->
   	<select id="abSELaudio" resultType="ju.dto.ElibDTO">
   		<![CDATA[
 			select * from 
@@ -33,6 +34,7 @@
   		SELECT * FROM elib WHERE el_idx = #{el_idx} order by el_idx desc
   	</select>
 	
+	<!-- detail -->
 	<select id="abSELdetail" resultType="ju.dto.ElibDTO">
   		<![CDATA[
   			select * from 
@@ -46,6 +48,7 @@
   		SELECT el_idx FROM elib WHERE el_idx = #{el_idx}
   	</select>
   	
+  	<!-- simple -->
   	<select id="abSELsimple" parameterType="String" resultType="ju.dto.ElibDTO">
 	  	<![CDATA[
   			select * from 
@@ -59,6 +62,11 @@
   		select count(*) from elib where el_idx like 'AB%'
   	</select>
   	
+  	<select id="abSELcntdetail" resultType="Integer" parameterType="String" >
+	  		select count(*) from elib where el_idx like 'AB%' ${where}
+  	</select>
+  	
+  	<!-- recommend -->
   	<select id="abSELrecolist" resultType="ju.dto.ElibDTO">
   		<![CDATA[
   			select * from 

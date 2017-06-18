@@ -50,7 +50,7 @@ public class EbookViewerController{
 		}
 		else if(el_idx.indexOf("EB")==0){
 			int resultCount=0;
-			if(mem_idx.indexOf("MB")!=0){ resultCount=1; }
+			if(mem_idx.indexOf("MB")!=0){ resultCount=99; }
 			else{
 				resultCount=loandao.elibLoanCheck(el_idx, mem_idx);
 			}
@@ -61,15 +61,20 @@ public class EbookViewerController{
 				return mav;
 			}
 			else if(resultCount>0) {
-				loanArr=loandao.elibLoanInfo(el_idx, mem_idx); // 빌린 책 정보
-				mav.addObject("loanArr", loanArr.get(0));
-				String[] bk=loanArr.get(0).getLb_etc().split("~");
-				String bkArr="";
-				for(int i=1 ; i<bk.length ; i++){
-					bkArr+=bk[i]+"~";
+				if(resultCount!=99){
+					loanArr=loandao.elibLoanInfo(el_idx, mem_idx); // 빌린 책 정보
+					mav.addObject("loanArr", loanArr.get(0));
+					String[] bk=loanArr.get(0).getLb_etc().split("~");
+					String bkArr="";
+					for(int i=1 ; i<bk.length ; i++){
+						bkArr+=bk[i]+"~";
+					}
+					mav.addObject("beforeRead", bk[0]);
+					mav.addObject("bkArr", bkArr);
 				}
-				mav.addObject("beforeRead", bk[0]);
-				mav.addObject("bkArr", bkArr);
+				else{
+					mav.addObject("beforeRead", "#/page/1");
+				}
 				elibArr=elibDAO.elibViewer(el_idx);
 				path+="eBook\\"+elibArr.get(0).getEl_idx()+"\\";
 				viewImgPath+="eBook\\";
@@ -170,10 +175,6 @@ public class EbookViewerController{
 		) {
 		HttpSession session=request.getSession();
 		String mem_idx=(String) session.getAttribute("sidx");
-		System.out.println("mem_idx : " + mem_idx);
-		System.out.println("endPage : " + endPage);
-		System.out.println("el_idx : " + el_idx);
-		System.out.println("lb_idx : " + lb_idx);
 		if(mem_idx==null){
 			mem_idx="";
 		}
@@ -183,7 +184,7 @@ public class EbookViewerController{
 			List<OriginalLoanDTO> loanArr=loandao.loanInfo(lb_idx);
 			if(loanArr.get(0).getLb_etc().indexOf("~")!=-1){
 				String[] etcArr=loanArr.get(0).getLb_etc().split("~");
-				lb_etc=etcArr[0];
+				lb_etc=endPage;
 				for(int i=1 ; i<etcArr.length ; i++){
 					lb_etc+="~"+etcArr[i];
 				}
@@ -191,6 +192,7 @@ public class EbookViewerController{
 			else{
 				lb_etc=endPage;
 			}
+			System.out.println(lb_etc);
 			resultCount=loandao.loanBookMarkUp(lb_idx, lb_etc);
 		} // 아닌경우는 필요없음
 		ModelAndView mav=new ModelAndView();

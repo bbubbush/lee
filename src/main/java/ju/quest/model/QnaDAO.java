@@ -13,7 +13,10 @@ public interface QnaDAO {
 	public QnaDTO qnaChange(String qna_idx);
 	public int qnaChangeOk(QnaDTO dto);
 	public int qnaTotalCount();
+	public int qnaRead(String qna_idx);
 	public String makeIdx(String tableName);
 	public QnaDTO qnaPreInfo(String qna_idx);
 	public QnaDTO qnaNextInfo(String qna_idx);
+	public List<QnaDTO> topTenQna(String sql);
+	
 }

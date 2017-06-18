@@ -20,6 +20,8 @@ public interface AudioDAO {
 	public List<ElibDTO> simpleSerch(String simpleSearchText, String orderName, int page, int listSize);
 
 	public int totalCnt();
+	
+	public int totalCntDetail(String where);
 
 	public int upAudioInfo(ElibDTO dto);
 

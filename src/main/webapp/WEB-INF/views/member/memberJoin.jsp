@@ -10,6 +10,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="/lee/resources/bootstrapk/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/lee/resources/bootstrapk/css/bootstrap.min.css">
+	<!-- 하위 3개를 적어야 가능, JQ, 부트스트랩 밑에 작성 할 것 -->
+	<script type="text/javascript" src="/lee/resources/js/alertifyjs/alertify.min.js"></script>
+	<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/alertify.min.css">
+	<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/themes/default.min.css">
+	<link rel="stylesheet" href="/lee/resources/index/index.css">
+	<!-- 바코드 생성기 시작 -->
 	<style type="text/css">
 	.btn-primary{
 		background-color:#0BD392;
@@ -109,14 +115,14 @@
 		            $("#ajax").remove();
 		            var data = JSON.parse(responseData);
 		            if(data){
-		            	alert("이미 존재하는 ID입니다");
+		            	alertify.alert("","이미 존재하는 ID입니다");
 		                return false;
 		            }
 		            
 		            var htmlString = "<span class='glyphicon glyphicon-ok' aria-hidden='true'></span>";
 		            $('#idcheckSuc').html(htmlString);
 		            $('#idid').attr('readonly','readonly');
-		           	alert('사용가능한 아이디 입니다.');
+		            alertify.alert("",'사용가능한 아이디 입니다.');
 		           	
 		        }
 		    });
@@ -134,7 +140,7 @@
 			            $("#ajax").remove();
 			            var data = JSON.parse(responseData);
 			            if(data){
-			            	alert("이미 존재하는 번호입니다");
+			            	alertify.alert("","이미 존재하는 번호입니다");
 			                return false;
 			            }
 			            
@@ -143,7 +149,7 @@
 			            
 			            $('#pwpw').attr('readonly','readonly');
 			            $('#pwpw2').attr('readonly','readonly');
-			           	alert('사용가능한 번호 입니다.');
+			            alertify.alert("",'사용가능한 번호 입니다.');
 			           	
 			        }
 			    });
@@ -169,13 +175,13 @@
 				            var data = responseData;
 				            
 				            if(!data){
-				            	alert("인증번호 발급실패 인증번호 버튼을 다시한번 눌러주세요.");
+				            	alertify.alert("","인증번호 발급실패 인증번호 버튼을 다시한번 눌러주세요.");
 				            }else{
 					            console.log(data);
 					            emailcode = data;
 					            code = data;
-					            alert('인증코드가 전송되었습니다. 메일을 확인하세요.');
-					            alert(data);
+					            alertify.alert("",'인증코드가 전송되었습니다. 메일을 확인하세요.');
+					            
 				            }
 				           	
 				        },
@@ -188,11 +194,11 @@
 		var emailid =document.getElementById('emailid').value;
 	
 		if(emailid==emailcode){
-			alert(emailcode+'/이메일 인증완료');
+			alertify.alert("",emailcode+'/이메일 인증완료');
 			$('#memberJoin').css('display','block');
 			
 		}else{
-			alert('이메일 인증실패. 정확한 인증코드를 입력해 주세요.');
+			alertify.alert("",'이메일 인증실패. 정확한 인증코드를 입력해 주세요.');
 			
 		}
 		
@@ -262,7 +268,7 @@
     			 
     		    if($(this).prop('required') && $(this).val()==''){
     		    	pan= false;
-    		    	alert('가입 양식을 모두 입력해 주세요');
+    		    	alertify.alert("",'가입 양식을 모두 입력해 주세요');
     		       this.focus();
     		       
     		       return false;
@@ -481,7 +487,9 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 <div style="text-align:center;">
 	<div style="display: inline-block;">
-<img src="/lee/resources/index/logo2.png" style="width:500px;height:;"><br>
+	<a href="index.ju">
+<img src="/lee/resources/index/logo2.png" style="width:500px;height:;">
+</a><br>
 	</div>
 </div>
 <h1 style="color:#6f6f6f;">회원가입</h1>
@@ -864,7 +872,7 @@
         	
         	<label class="col-md-12" for="sel1">비밀번호 힌트</label>
 			<div class="col-md-4"> 
-			<select class="form-control" id="pwdhint">
+			<select class="form-control" id="pwdhint" name="mem_hint">
 				<option value="0">나의 첫사랑 이름은 ?</option>
 				<option value="1">내가 다녔던 초등학교는 ?</option>
 				<option value="2">나에게 영감을 주는 사람은 ?</option>
@@ -880,7 +888,7 @@
         	
        		<label class="col-md-12" for="sel1">비밀번호 답변</label>
        		<div class="col-md-4">
-			<input type="text" id="pwdanswer"class="form-control" aria-describedby="sizing-addon2" >
+			<input type="text" id="pwdanswer"class="form-control" aria-describedby="sizing-addon2" name="mem_answer">
 			</div>
 		</div>
         <br>

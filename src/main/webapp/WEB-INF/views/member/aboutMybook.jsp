@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +18,7 @@
 	<script type="text/javascript" src="/lee/resources/bootstrapk/js/bootstrap.min.js"></script>
 	<script type="text/javascript"
 	src="/lee/resources/sideMenu/sideScript.js"></script>
+	
 	
 <link rel="stylesheet" href="/lee/resources/sideMenu/css/sideStyle.css">
 <style type="text/css">
@@ -67,14 +69,14 @@
 	
 }
 
-#tarrow {
+/* #tarrow {
   animation-duration: 2s;
   animation-name: slidein;
   animation-iteration-count: infinite;
   animation-direction: reverse;
-}
+} */
 
-@keyframes slidein {
+/* @keyframes slidein {
   from {
     padding-left:400px;
     padding-right:0px;
@@ -83,18 +85,22 @@
   to {
     padding-left:0px;
     padding-right:400px;
-  }
+  } */
 }
 </style>
+
 <script>
+
+
 var tbx;
 var tdetail ="";
+var pt;
 function trackbook(tcode){
 	
 	$.ajax({
 		url:"http://tracking.sweettracker.net/tracking",
 		type:"get",
-		data:{"t_key":"lEe3wbrNRikejA5XajFc0A","t_code":"08","t_invoice":"103169729913"},
+		data:{"t_key":"lEe3wbrNRikejA5XajFc0A","t_code":"08","t_invoice":tcode},
 		dataType:"xml",
 		success: function(xmldata){
 			if(xmldata){
@@ -103,7 +109,8 @@ function trackbook(tcode){
 				var tlevelarr = tbx.getElementsByTagName('level');
 				var tlevel = parseInt(tlevelarr[0].innerHTML)*16 + 4;
 				tdetail = tbx.getElementsByTagName('tracking_details');
-				$("#tprogresspt").text("배송진행률 : "+tlevel + "%");
+				pt = tlevel*4+70;
+				$("#tprogresspt").html("<h3>배송진행률 : "+tlevel + "%</h3>");
 				$("#tprogress").css("width",tlevel+"%");
 				
 				var thtml ="";
@@ -121,6 +128,13 @@ function trackbook(tcode){
 					
 				}
 				$("#tracking-info").html(thtml);
+				$(function() {
+				    function swing() {
+				        $('#tarrow').animate({'padding-left':'70px'},600).animate({'padding-left':pt+'px'},1000,swing);
+				        $('#tarrow').css('padding-left','70px');
+				    }
+				    swing();
+				});
 			}
 			else{
 				console.log('값 못받아옴....ㅠㅜ');
@@ -143,28 +157,61 @@ function trackbook(tcode){
         <h1 class="modal-title" id="myModalLabel">배송추적</h1>
         <h1>
         
-        <span class="glyphicon glyphicon-gift" aria-hidden="true"></span>
-      <span class="glyphicon glyphicon-arrow-right" id="tarrow" aria-hidden="true" style="padding-left:200px;padding-right:200px;"></span>
-      <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-gift" aria-hidden="true"style="left:40px;position:absolute;top:83px;"></span>
+      <span class="glyphicon glyphicon-arrow-right" id="tarrow" aria-hidden="true"></span>
+      
+      <span class="glyphicon glyphicon-home" aria-hidden="true" style="right:30px;position:absolute;top:83px;"></span>
       
       	</h1>
         	<div id="tprogresspt"></div>
-	        <div class="progress">
-			  <div class="progress-bar progress-bar-success progress-bar-striped active" id="tprogress" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
-			    <span class="sr-only"></span>
+	        
+      </div>
+      <!-- 상세정보 아코디언 -->
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+			  <div class="panel panel-default">
+			    <div class="panel-heading" role="tab" id="headingOne" >
+			      <h4 class="panel-title">
+			        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+			        	  <h3> <span class="glyphicon glyphicon glyphicon-zoom-in" aria-hidden="true"></span> 상세정보</h3>
+			        </a>
+			      </h4>
+			    </div>
+			    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+			      <div class="panel-body" style="overflow:scroll;height:400px;">
+			        	<div class="progress">
+						  <div class="progress-bar progress-bar-success progress-bar-striped active" id="tprogress" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+						    <span class="sr-only"></span>
+						  </div>
+						</div>
+			        <div class="modal-body" id="tracking-info">
+			      </div>
+			      </div>
+			    </div>
 			  </div>
-			</div>
-      </div>
-      <h3> <span class="glyphicon glyphicon glyphicon-zoom-in" aria-hidden="true"></span> 상세정보</h3>
-      <div class="modal-body" id="tracking-info">
-      </div>
+</div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    
+      
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
 </div>
+
 
 	<%@include file="../header.jsp"%>
 	<div class="row">
@@ -189,7 +236,7 @@ function trackbook(tcode){
 <div class="row" id="loanbook">
 <c:choose>
     <c:when test="${empty loanlist}">
-        대출하신 책이 없습니다.    
+        <div style="width:400px; height:400px;text-align:center;">대출하신 책이 없습니다.</div>
     </c:when>
     <c:when test="${loanlist ne null}">
             <c:forEach items="${loanlist}" var="list">
@@ -202,8 +249,8 @@ function trackbook(tcode){
 					      <div class="caption ">
 					        <h3>${list.bk_subject}</h3>
 					        <p>
-					        대출일 : ${list.lb_sd}<br>
-					        반납예정일 : ${list.lb_ed}<br>
+					        대출일 : <fmt:formatDate pattern = "yyyy-MM-dd" value = "${list.lb_sd}" /> <br>
+					        반납예정일 : <fmt:formatDate pattern = "yyyy-MM-dd" value = "${list.lb_ed}" /> <br>
 					        기타사항 : ${list.lb_etc }<br>
 					        연장횟수 : ${list.lb_delay}<br>
 					        </p>
@@ -216,7 +263,7 @@ function trackbook(tcode){
     
 </c:choose>
 </div>
-
+<hr>
 
 <!-- 택배대출 -->
 		<h3>택배대출</h3>
@@ -224,7 +271,7 @@ function trackbook(tcode){
 <div class="row" id="fedexbook">
 <c:choose>
    <c:when test="${empty fedexlist}">
-        대출하신 책이 없습니다.    
+        <div style="width:400px; height:400px;text-align:center;">택배대출하신 책이 없습니다.</div>
    </c:when>
     <c:when test="${fedexlist ne null}">
             <c:forEach items="${fedexlist}" var="list">
@@ -236,11 +283,11 @@ function trackbook(tcode){
 					     </div>
 					      <div class="caption">
 					        <h3>책제목 대출2</h3>
-					       
+ 
 					        	<c:if test="${empty list.fedex_num}">
 						        		 <p>
-									       	대출일 : ${list.lb_sd}<br>
-									        반납예정일 : ${list.lb_ed}<br>
+									       	대출일 : <fmt:formatDate pattern = "yyyy-MM-dd" value = "${list.lb_sd}" /><br>
+									        반납예정일 : <fmt:formatDate pattern = "yyyy-MM-dd" value = "${list.lb_ed}" /><br>
 									        기타사항 : ${list.lb_etc }<br>
 									        연장횟수 : ${list.lb_delay}<br>
 						       
@@ -251,20 +298,20 @@ function trackbook(tcode){
 					        	</c:if>
 					       		<c:if test="${list.fedex_num ne null}">
 							       		 <p>
-										       	대출일 : ${list.lb_sd}<br>
-										        반납예정일 : ${list.lb_ed}<br>
+										       	대출일 : <fmt:formatDate pattern = "yyyy-MM-dd" value = "${list.lb_sd}" /><br>
+									       		반납예정일 : <fmt:formatDate pattern = "yyyy-MM-dd" value = "${list.lb_ed}" /><br>
 										        기타사항 : ${list.lb_etc }<br>
 										        연장횟수 : ${list.lb_delay}<br>
 										        운송장번호 : ${list.fedex_num}<br>
 							        	</p>
 							        	<p>
-							       			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick='trackbook(${list.fedex_num})'>
+										<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick='trackbook(${list.fedex_num})'>
 		  									배송추적
-											</button>
+										</button>
 										</p>
 					       		</c:if>
 					        	
-					        
+					       
 					        </div>
 					    </div>
 					  </div>
@@ -282,7 +329,8 @@ function trackbook(tcode){
 <div class="row" id="yeyakbook">
 <c:choose>
    <c:when test="${empty yylist}">
-        대출하신 책이 없습니다.    
+   <div style="width:400px; height:400px;text-align:center;">예약하신 책이 없습니다.    </div>  
+        
    </c:when>
    <c:when test="${yylist ne null}">
 	   <c:forEach items="${yylist}" var="list">
@@ -333,9 +381,7 @@ function trackbook(tcode){
 	
 		</div>
 	</div>
-	<div class="col-md-12">
-	<%@include file="../footer.jsp"%>
-	</div>
+	
 </div>
 </body>
 </html>

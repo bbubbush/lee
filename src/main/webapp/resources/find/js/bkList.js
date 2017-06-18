@@ -20,6 +20,8 @@ function detailSearch(){
 
 function bkView(){
 	$('#tbody>tr>td').click(function (){
+		result = 0;
+		result2 = 0;
 		var selectNum=$("#tbody>tr>td").index(this);
 		var bk_subject=$("#tbody>tr>td").eq(selectNum).data("subject");
 		$('#mbody').html("");
@@ -347,10 +349,9 @@ function bkRefresh(){
 function bkYeyak(){
 	var bk_subject = $('#media-heading').html();
 	if(result==1){
-		alert('대출가능 도서입니다. 도서관에 방문하시거나 택배대출기능을 이용해주세요');
+		alertify.alert("예약실패", "대출가능 도서입니다. 도서관에 방문하시거나 택배대출기능을 이용해주세요");
 	}else if(result==0){
-		alert('대출가능여부를 확인해주세요');
-		
+		alertify.alert("예약실패", "대출가능여부를 확인해주세요");
 	}else if(result==3){
 		$.ajax({
 			type: "GET",
@@ -360,16 +361,17 @@ function bkYeyak(){
 			dataType: "json",
 			success: function(list){
 				if(list.count==1){
-					alert('대출예약이 되었습니다 순번 : ' + list.ye_sunbun);
+					alertify.alert("예약성공", '대출예약이 되었습니다 순번 : ' + list.ye_sunbun, alertify.success("예약 성공"));
 				}else if(list.count==80){
-					alert('예약 회원이 많아 예약이 불가합니다');
-//					$('#refreshSpan_1').text('예약실패');
+					alertify.alert("예약실패", '예약 회원이 많아 예약이 불가합니다');
 				}else if(list.count==90){
-					alert('이미 예약한 도서입니다');
+					alertify.alert("예약실패", '이미 예약한 도서입니다');
 				}else if(list.count==70){
-					alert('예약은 총 3권 까지만 가능합니다. 마이페이지에서 확인 바랍니다');
+					alertify.alert("예약실패", '예약은 총 3권 까지만 가능합니다. 마이페이지에서 확인 바랍니다');
+				}else if(list.count==99){
+					alertify.alert("예약실패", '로그인 후 사용 가능합니다');
 				}else{
-					alert('오류가 발생했습니다. 관리자에게 문의 바랍니다');
+					alertify.alert("예약실패", '오류가 발생했습니다. 관리자에게 문의 바랍니다');
 				}
 			}
 		});
@@ -388,28 +390,26 @@ function bkFedex(){
 			dataType: "json",
 			success: function(list){
 				if(list.count==1){
-					alert('택배대출신청했습니다. 마이페이지에서 현황을 확인해주세요');
+					alertify.alert("예약성공", '택배대출신청했습니다. 마이페이지에서 현황을 확인해주세요', alertify.success("예약 성공"));
 					result2 = 1;
 				}else if(list.count==0){
-					alert('오류가 발생했습니다. 관리자에게 문의 바랍니다.');
+					alertify.alert("예약실패", '오류가 발생했습니다. 관리자에게 문의 바랍니다');
 				}else if(list.count==90){
-					alert('이미 대출하신 도서가 3권 이상입니다');
+					alertify.alert("예약실패", '이미 대출하신 도서가 3권 이상입니다');
 				}else if(list.count==80){
-					alert('대출된 도서');
+					alertify.alert("예약실패", '대출된 도서입니다');
 				}else if(list.count==70){
-					alert('이미 신청하셨습니다');
-					
+					alertify.alert("예약실패", '이미 신청한 도서입니다');
+				}else if(list.count==99){
+					alertify.alert("예약실패", '로그인 후 사용 가능합니다');
 				}
 			}
 		});
 		
 	}else if(result==0){
-		alert('대출가능여부를 확인해주세요');
+		alertify.alert("예약실패", '대출가능여부를 확인해주세요');
 	}else if(result==3){
-		alert('대출중인 도서입니다. 대출이 가능하면 신청해주세요');
-	}else if(result2==1){
-		alert('이미 예약하셨습니다. 마이페이지에서 확인 바랍니다');
-		
+		alertify.alert("예약실패", '대출할 수 있는 도서가 없습니다. 대출이 가능하면 신청해주세요');
 	}
 }
 

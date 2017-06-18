@@ -9,7 +9,7 @@
 		VALUES(
 			#{sr_idx},
 			#{sr_roomno},
-			'testmj',
+			#{mem_idx},
 			sysdate,
 			#{sr_resdate},
 			#{sr_time},
@@ -52,5 +52,11 @@
 		WHERE sr_roomno = ${sr_roomno}
 		AND sr_time = ${sr_time}
 		AND sr_resdate = '${sr_resdate}'
+	</select>
+	<select id="bigSELgetHoliday" resultType="ju.dto.HolidayDTO" parameterType="String">
+		SELECT memo
+		FROM holiday
+		WHERE solar_date = TO_DATE(#{solarDate},'YYYY-MM-DD')
+		AND memo IS NOT NULL
 	</select>
 </mapper>

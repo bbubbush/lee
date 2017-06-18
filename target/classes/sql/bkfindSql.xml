@@ -55,15 +55,15 @@
   	</select>
   	
   	<select id="getTotalCountLoan2" parameterType="String" resultType="Integer">
-  		select count(*)a from loanbook where mem_idx =(select mem_idx from member where mem_id=#{mem_id}) and lb_return = 0
+  		select count(*)a from loanbook where mem_idx =(select mem_idx from member where mem_id=#{mem_id}) and lb_return = 1
   	</select>
   	
   	<select id="chkLoanbook" parameterType="String" resultType="Integer">
-  		SELECT count(*) FROM loanbook where book_idx=#{bk_idx} and lb_return = 0
+  		SELECT count(*) FROM loanbook where book_idx=#{bk_idx} and lb_return = 1
   	</select>
   	
-  	<select id="chkFedexbook" parameterType="String" resultType="Integer">
-  		SELECT count(*) FROM fedex where bk_idx=#{bk_idx}
+  	<select id="chkFedexbook" parameterType="java.util.Map" resultType="Integer">
+  		SELECT count(*) FROM fedex where bk_idx=#{bk_idx} and mem_idx=(select mem_idx from member where mem_id = #{mem_id})
   	</select>
   	
   	<insert id="bkFedex" parameterType="java.util.Map">

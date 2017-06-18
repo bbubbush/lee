@@ -59,6 +59,31 @@
 	where
 	mem_idx = #{mem_idx}
 </update>
+<select id="memSELidfind" resultType="ju.dto.MemberDTO" parameterType="ju.dto.MemberDTO">
+	select *
+	from member
+	where
+	mem_name = #{mem_name}
+	and
+	mem_hp = #{mem_hp}
+</select>
+<select id="memSELpwfindck" parameterType="ju.dto.MemberDTO" resultType="int">
+	select count(*)
+	from member
+	where
+	mem_id=#{mem_id}
+	and
+	mem_hint=#{mem_hint}
+	and
+	mem_answer=#{mem_answer}
+</select>
+<update id="memUPDpwfind" parameterType="ju.dto.MemberDTO">
+	update member
+	set
+	mem_pwd=#{mem_pwd}
+	where
+	mem_id=#{mem_id}
+</update>
 <select id="memSELaboutmybookLoan" parameterType="String" resultType="ju.dto.AboutMyBookDTO">
 select a.*, b.*
 from

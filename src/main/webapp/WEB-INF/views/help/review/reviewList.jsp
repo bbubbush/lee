@@ -1,25 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Insert title here</title>
-
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="/lee/resources/bootstrapk/css/bootstrap.min.css">
-<style type="text/css">
-</style>
-
-<script type="text/javascript"
-	src="/lee/resources/js/jquery-3.2.1.min.js"></script>
-<script type="text/javascript"
-	src="/lee/resources/bootstrapk/js/bootstrap.min.js"></script>
-<script type="text/javascript">
+	<title>Insert title here</title>
 	
-</script>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/lee/resources/bootstrapk/css/bootstrap.min.css">
+	<style type="text/css">
+	</style>
+    
+	<script type="text/javascript" src="/lee/resources/js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="/lee/resources/bootstrapk/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	</script>
 </head>
 
 <body>
@@ -28,19 +25,20 @@
 	</div>
 	<div class="row">
 		<div class="col-md-3">
-			<jsp:include page="/WEB-INF/views/service/elibSide.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/views/help/helpSide.jsp"></jsp:include>
 		</div>
 		<div class="col-md-9">
 			<div class="row">
 				<div class="col-md-7">
-					<h2>책추천및 감상평 게시판</h2>
+					<h2>책추천 및 감상평 게시판</h2>
 				</div>
-				<div class="col-md-3" style="text-align: center;">
-					<a class="btn btn-default" type="submit" href="noticeWrite.ju">
-						<span class="glyphicon glyphicon-pencil" aria-hidden="true">
-							책신청,감상평하기</span>
-					</a>
-				</div>
+				<c:if test="${chk}">
+					<div class="col-md-3" style="text-align: center;">
+						<a class="btn btn-default" type="submit" href="reviewWrite.ju">
+							<span class="glyphicon glyphicon-pencil" aria-hidden="true"> 글쓰기</span>
+						</a>
+					</div>
+				</c:if>
 			</div>
 			<div class="row">
 				<div class="col-md-10">
@@ -53,76 +51,87 @@
 								<th>작성일</th>
 								<th>조회수</th>
 							</tr>
+						</thead>
+						<tbody>
 							<tr>
-								<td>철학</td>
-								<td>마법사의돌</td>
-								<td>관리자</td>
-								<td>2017-05-30</td>
-								<td>99999</td>
+								<c:if test="${empty list}">
+									<td colspan="6" align="left">등록된 글이 없습니다.</td>
+								</c:if>
 							</tr>
-							<tr>
-								<td>문학</td>
-								<td>비밀의방</td>
-								<td>관리자</td>
-								<td>2017-05-30</td>
-								<td>2</td>
-							</tr>
-							<tr>
-								<td>잡지</td>
-								<td>아즈카반의죄수</td>
-								<td>관리자</td>
-								<td>2017-05-30</td>
-								<td>2</td>
-							</tr>
-							<tr>
-								<td>언어</td>
-								<td>불의잔</td>
-								<td>관리자</td>
-								<td>2017-05-30</td>
-								<td>2</td>
-							</tr>
-							<tr>
-								<td>교육</td>
-								<td>불사조기사단</td>
-								<td>관리자</td>
-								<td>2017-05-30</td>
-								<td>2</td>
-							</tr>
+							<c:forEach var="dto" items="${list}">
+								<tr>
+									<c:choose>
+										<c:when test="${dto.review_cate==0}">
+											<td>책추천</td>
+										</c:when>
+										<c:when test="${dto.review_cate==1}">
+											<td>감상평</td>
+										</c:when>
+									</c:choose>
+									<td><a href="reviewContent.ju?review_idx=${dto.review_idx}">${dto.review_subject}</a></td>
+									<td>${dto.mem_idx}</td>
+									<td>${dto.review_date}</td>
+									<td>${dto.review_readnum}</td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 					<div class="row">
-						<div class="col-md-2">
-							<select class="form-control">
-								<option>전체</option>
-								<option>작성자</option>
-								<option>제목</option>
-							</select>
-						</div>
-						<div class="col-md-4 input-group">
-							<input type="text" class="form-control" placeholder="검색어를 입력하세요">
-							<span class="input-group-btn">
-								<button class="btn btn-default" type="button"
-									href="noticeFind.ju">Go!</button>
-							</span>
-						</div>
-						<div class="col-md-12" style="text-align: center">
-							<ul class="pagination pagination-sm">
-								<li class="disabled"><a href="#"><span
-										class="glyphicon glyphicon-chevron-left"></span></a></li>
-								<li><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li class="active"><a href="#">5</a></li>
-								<li><a href="#"><span
-										class="glyphicon glyphicon-chevron-right"></span></a>
-							</ul>
-						</div>
+					<form action="reviewList.ju" id="frm">
+							<div class="col-md-2">
+								<select class="form-control" name="type">
+									<option value="review_subject">전체</option>
+									<option value="mem_idx">작성자</option>
+									<option value="review_subject">제목</option>
+								</select>
+							</div>
+							<div class="col-md-4 input-group">
+								<input  type="text" class="form-control" placeholder="검색어를 입력하세요" name="query">
+								<span class="input-group-btn">
+									<button class="btn btn-default" type="button" onclick="submit()">Go!</button>
+								</span>
+							</div>
+							<div class="col-md-12" style="text-align: center">
+								<ul class="pagination pagination-sm">
+									<c:choose>
+										<c:when test="${page==1}">
+												<li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+											</c:when>
+											<c:otherwise>
+												<li><a href="reviewList.ju?page=${page-1}"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+											</c:otherwise>
+									</c:choose>
+									<c:forEach begin="${startPage}" end="${endPage}" var="i">
+										<c:choose>
+											<c:when test="${i eq page}">
+												<li class="active"><a href="reviewList.ju?page=${i}">${i}</a></li>
+											</c:when>
+											<c:otherwise>
+												<li><a href="reviewList.ju?page=${i}">${i}</a></li>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+									<c:choose>
+										<c:when test="${page==endPage}">
+												<li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a>
+											</c:when>
+											<c:otherwise>
+												<li><a href="reviewList.ju?page=${page+1}"><span class="glyphicon glyphicon-chevron-right"></span></a>
+											</c:otherwise>
+									</c:choose>
+								</ul>
+							</div>
+							<input type="hidden" name="page" value="${page}" />
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
+	<script type="text/javascript">
+	function submit(){
+		$('#frm').submit();
+	}
+	</script>
 </body>
 </html>

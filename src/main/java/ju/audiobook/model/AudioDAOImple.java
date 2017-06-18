@@ -69,8 +69,16 @@ public class AudioDAOImple implements AudioDAO {
 
 	public int totalCnt() {
 		int totalCnt = sqlMap.selectOne("abSELcnt");
-		System.out.println("tcDAO:" + totalCnt);
 		return totalCnt;
+	}
+	
+	public int totalCntDetail(String where) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("where", where);
+		System.out.println("DAOwhere :"+where);
+		int cntDetail = sqlMap.selectOne("abSELcntdetail", map);
+		System.out.println(cntDetail);
+		return cntDetail;
 	}
 
 	public int upAudioInfo(ElibDTO adto) {

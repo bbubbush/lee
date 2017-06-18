@@ -2,6 +2,7 @@ package ju.notice.model;
 
 import java.util.*;
 import ju.dto.NoticeDTO;
+import ju.dto.QnaDTO;
 
 public interface NoticeDAO {
 	
@@ -12,7 +13,9 @@ public interface NoticeDAO {
 	public int noticeDelete(String nt_idx);
 	public NoticeDTO noticeChange(String nt_idx);
 	public int noticeChangeOk(NoticeDTO dto);
-
+	public NoticeDTO noticePreInfo(String nt_idx);
+	public NoticeDTO noticeNextInfo(String nt_idx);
 	public int noticeTotalCount();
+	public int noticeRead(String nt_idx);
 
 }

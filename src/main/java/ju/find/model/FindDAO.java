@@ -21,6 +21,6 @@ public interface FindDAO {
 	public int sumBktake(String bk_subject);
 	public int countBkSubject(String bk_subject);
 	public int chkLoanbook(String bk_idx);
-	public int chkFedexbook(String bk_idx);
+	public int chkFedexbook(String bk_idx, String sid);
 	
 }
