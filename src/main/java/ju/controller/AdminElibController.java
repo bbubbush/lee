@@ -47,7 +47,7 @@ public class AdminElibController {
 		BookCateModul bcm=new BookCateModul();
 		String cateLg=null;
 		if(groupNum==7){
-			cateLg=bcm.BookLgSelect(0, 7, false);
+			cateLg=bcm.BookLgSelect(0, 7, true);
 		}
 		else{
 			cateLg=bcm.BookLgSelect(groupNum, groupNum, false);
