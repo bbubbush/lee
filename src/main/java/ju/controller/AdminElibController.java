@@ -43,11 +43,15 @@ public class AdminElibController {
 
 	/**그룹에 따른 대분류 가져오기 업로드용*/
 	@RequestMapping(value="elibGrupLg.ju")
-	public ModelAndView adminElibGrupLg(@RequestParam(value="groupNum", defaultValue="7")int groupNum){
+	public ModelAndView adminElibGrupLg(
+		@RequestParam(value="groupNum", defaultValue="7")int groupNum
+		, @RequestParam(value="admin", defaultValue="upload")String admin
+		){
 		BookCateModul bcm=new BookCateModul();
 		String cateLg=null;
 		if(groupNum==7){
-			cateLg=bcm.BookLgSelect(0, 7, false);
+			if("upload".equals(admin)){ cateLg=bcm.BookLgSelect(0, 7, false); }
+			else if("list".equals(admin)){ cateLg=bcm.BookLgSelect(0, 7, true); }
 		}
 		else{
 			cateLg=bcm.BookLgSelect(groupNum, groupNum, false);

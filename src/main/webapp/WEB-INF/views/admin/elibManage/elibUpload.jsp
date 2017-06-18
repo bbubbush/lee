@@ -316,7 +316,7 @@
 					$.ajax({
 						type : "GET"
 						, url : "elibGrupLg.ju"
-						, data : {groupNum : groupNum}
+						, data : {groupNum : groupNum, admin : "upload"}
 						, dataType : "json"
 						, success: function(data){
 							$("#cateMd").parent().parent().children("td").eq(0).html(data.cateLg);

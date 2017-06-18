@@ -60,7 +60,7 @@
 					$.ajax({
 						type : "GET"
 						, url : "elibGrupLg.ju"
-						, data : {groupNum : groupNum}
+						, data : {groupNum : groupNum, admin : "list"}
 						, dataType : "json"
 						, success: function(data){
 							$("#cateMd").parent().parent().children("td").eq(0).html(data.cateLg);
@@ -85,12 +85,14 @@
 					, success: function(data){
 						var cateMdArr=data.cateMd;
 						var cateMdOption="<optgroup><option value='99'>전체</option></optgroup><optgroup>"
-						for(var i=0 ; i<cateMdArr.length ; i++){
-							cateMdOption+="<option value='" + i + "'>" + cateMdArr[i] + "</option>";
-						}
-							cateMdOption+="</optgroup>";
+						if(cateMdArr!=null){
+							for(var i=0 ; i<cateMdArr.length ; i++){
+								cateMdOption+="<option value='" + i + "'>" + cateMdArr[i] + "</option>";
+							}
+						} // null if
+						cateMdOption+="</optgroup>";
 						$("#cateMd").html(cateMdOption);
-					}
+					} // success function
 				});
 			}
 		);
