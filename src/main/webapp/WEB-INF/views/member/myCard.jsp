@@ -105,12 +105,12 @@ if(qs.barcode) {
 		
 	}
 	#submenulabel{
-	width: 1030px;
+	width: 750px;
 	height: 276px;
 	padding:0px;
 	}
 	#memberIdcardDiv{
-	margin:150px;
+	margin:50px;
 	width: 730px;
 	height:350px;
 	padding-left: 93px;
@@ -156,8 +156,9 @@ if(qs.barcode) {
 <body>
 	<%@include file="../header.jsp"%>
 	<div class="row">
-	
-		<%@include file="sideMenu.jsp"%>
+		<div class="col-md-3">
+			<%@include file="sideMenu.jsp"%>
+		</div>
 
 		<div class="col-md-9" id="changeMeForm">
 			

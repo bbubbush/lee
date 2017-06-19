@@ -45,7 +45,7 @@
 		
 	}
 	#submenulabel{
-	width: 1030px;
+	width: 750px;
 	height: 276px;
 	}
 	
@@ -92,22 +92,24 @@ function elibViwer2(el_idx) {
 <body>
 	<%@include file="../header.jsp"%>
 	<div class="row">
-		<%@include file="sideMenu.jsp"%>
+		<div class="col-md-3">
+			<%@include file="sideMenu.jsp"%>
+		</div>
 
 		<div class="col-md-9" id="changeMeForm">
 			<div id="changeForm"
 				style="padding: 0px; background-color: ">
 						
-				<!— 컨텐츠 입력 —>
-				<!— 커넨츠 상단 바 —>
+				<!--  컨텐츠 입력 -->
+				<!--  커넨츠 상단 바 -->
 				<div id="submenulabel" style="background-image:url('/lee/resources/member/img/sul.png')">
 					<div style="width:100%; height:100%; margin:0px; padding:50px;  background-color: rgba(0, 0, 0, 0.3 );">
 						<h1 style="color:white;">전자도서</h1>
 					</div>
 				</div>		
-				<!— 컨텐츠 실영역 —>
+				<!-- 컨텐츠 실영역 -->
 				<h3>E-book</h3>
-				<!— 전자책 —>
+				<!-- 전자책 -->
 				<div class="row" id="loanbook">
 <c:set var="eblist" value="${eblist}"/>
 <c:set var="bookmark" value="${bookmark}"/>						  
@@ -118,7 +120,7 @@ function elibViwer2(el_idx) {
 							    <c:when test="${eblist ne null}">
 							            <c:forEach items="${eblist}" var="list" varStatus="status">
 							            <div class="row">
-							           			 <div class="col-sm-6 col-md-4">
+							           			 <div class="col-md-4 col-md-offset-2">
 												     <div class="thumbnail ">
 												     <div class="text-center" style="margin:auto; width:100%;height:200px;" id="imgpannel">
 												      <img src="${list.el_path}" style="width:200px;height:200px;">

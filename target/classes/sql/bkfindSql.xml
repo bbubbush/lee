@@ -59,8 +59,8 @@
   	</select>
   	
   	<select id="chkLoanbook" parameterType="String" resultType="Integer">
-  		SELECT count(*) FROM loanbook where book_idx=#{bk_idx} and lb_return = 1
-  	</select>
+        SELECT count(*) FROM loanbook where book_idx=#{bk_idx} and lb_return = 1 and book_idx like 'BK%'
+     </select>
   	
   	<select id="chkFedexbook" parameterType="java.util.Map" resultType="Integer">
   		SELECT count(*) FROM fedex where bk_idx=#{bk_idx} and mem_idx=(select mem_idx from member where mem_id = #{mem_id})

@@ -10,8 +10,6 @@
 }
 </style>
 
-<div>
-	<div class="col-md-2">
 		<div id='cssmenu'>
 			<ul>
 			   <li><a href='/lee/ebookMain.ju' class="mainGo">전자 도서관</a></li>
@@ -305,5 +303,3 @@
 			   </li>
 			</ul>
 		</div>
-	</div>
-</div>

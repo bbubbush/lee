@@ -25,11 +25,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-3">
-<<<<<<< HEAD
 			<jsp:include page="/WEB-INF/views/help/helpSide.jsp"></jsp:include>
-=======
-			<jsp:include page="/WEB-INF/views/service/elibSide.jsp"></jsp:include>
->>>>>>> 7a5c6140c7e2cd754c632f04abd7e83b4f64aa42
 		</div>
 		<div class="col-md-9">
 			<div class="row">
@@ -76,8 +72,4 @@
 	}
 	</script>
 </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> 7a5c6140c7e2cd754c632f04abd7e83b4f64aa42

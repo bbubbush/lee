@@ -66,6 +66,9 @@
 						var nowMonth = nowDate.substr(5,2);
 						var nowDay = nowDate.substr(8,2);
 						
+						$("#s1div").hide();
+						$("#s2div").hide();
+						
 						if(startMonth < nowMonth){
 							//선택한 날짜의 month가 현재시간 month보다 적은 경우
 							$("#srBooking").attr("disabled",true);
@@ -225,6 +228,7 @@
 	        //시간선택
 	        $("input:radio[name=sr_time]:input[value="+timeName+"]").attr("disabled",false);
 	        $("input:radio[name=sr_time]:input[value="+timeName+"]").attr("checked",true);
+	        $("input[type=radio]").prop("disabled",true);
 	        
 	        //방 선택
 	        $(".roomtab>tbody>tr>#"+roomName).css("background-color","#1AA4AC");
@@ -309,11 +313,11 @@
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 <div class="row">
-<div class="col-md-2">
+<div class="col-md-3">
    <jsp:include page="/WEB-INF/views/big/sideMenu.jsp"></jsp:include>
 </div>
 <form name="sr_form" action="srBook.ju" method="post">
-<div class="col-md-10">
+<div class="col-md-9">
    <div class="srRoomhead">
       <div id='calendar' class="col-md-5" style="width:50%;float:left"></div>
       <div class="col-md-1"></div>
@@ -331,28 +335,28 @@
             </thead>
             <tbody class="rt_check">
                <tr class="time1" id="timetr">
-                  <th>09~12시</th>
+                  <th>09~12</th>
                   <td class="room1">empty</td>
                   <td class="room2">empty</td>
                   <td class="room3">empty</td>
                   <td class="room4">empty</td>
                </tr>
                <tr class="time2" id="timetr">
-                  <th>12~15시</th>
+                  <th>12~15</th>
                   <td class="room1">empty</td>
                   <td class="room2">empty</td>
                   <td class="room3">empty</td>
                   <td class="room4">empty</td>
                </tr>
                <tr class="time3" id="timetr">
-                  <th>15~18시</th>
+                  <th>15~18</th>
                   <td class="room1">empty</td>
                   <td class="room2">empty</td>
                   <td class="room3">empty</td>
                   <td class="room4">empty</td>
                </tr>
                <tr class="time4" id="timetr">
-                  <th>18~21시</th>
+                  <th>18~21</th>
                   <td class="room1">empty</td>
                   <td class="room2">empty</td>
                   <td class="room3">empty</td>

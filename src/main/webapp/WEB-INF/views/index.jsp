@@ -789,7 +789,7 @@ table {
         <div class="caption">
 	        <p>세부일정</p>
 	       <div class="thumbnail">
-	        <div id="datepickerdetail" style="margin-top:0px;width:250px;height:;font-size:large;">
+	        <div class="text-center" id="datepickerdetail" style="margin-top:0px;height:;font-size:large;">
 	        </div>
 	       </div>
         </div>  
@@ -862,7 +862,7 @@ table {
     </div>
     
 	    <div class="col-sm-2" id="qnadiv">
-	      <h3>Q&A</h3>
+	      <h3>Q&amp;A</h3>
 	      <a href="/lee/questList.ju">
 	      <img src="/lee/resources/index/qbutton/bbs04.png" class="img-responsive" style="width:100%" alt="Image">
 	      </a>
@@ -973,7 +973,7 @@ table {
 		<c:when test="${eliblist ne null }">
 			<c:forEach items="${eliblist}" var="list" begin="0" end="0">
 						<div class="item active">
-							<img src="${list.el_path}" alt="" style="height:310px;">
+							<img src="${list.el_path}" alt="" style="height:310px; display: inline-block;">
 							<div class="carousel-caption" style="background-color: rgba(0,0,0,0.7);">
 							<h3>${list.el_subject}</h3>
    							<p>${list.el_writer}</p>

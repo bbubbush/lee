@@ -12,8 +12,7 @@
 </head>
 <body>
 <script>
-alertify.alert("안내", '${msg}');
-location.href='reviewList.ju';
+alertify.alert("안내",'${msg}',function(){location.href='reviewList.ju';});
 </script>
 </body>
 </HTML>

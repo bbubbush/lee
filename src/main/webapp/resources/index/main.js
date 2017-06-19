@@ -230,7 +230,7 @@ $(function() {
   			
 			$(function() {
 				var selectNum=$("#contentTbody>tr>td").index(1);
-				alert('두번째 실행'+selectNum);
+				
 				var el_idx=$("#contentTbody>tr").eq(1).data("idx");
 				$.ajax({
 					type : "GET"

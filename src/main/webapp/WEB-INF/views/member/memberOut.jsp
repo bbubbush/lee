@@ -32,6 +32,15 @@
 	</style>
 
 <script type="text/javascript">
+$(function() {
+	$("#input_pwd").keypress(
+			function(e) {
+				if(e.keyCode==13){
+					memOut();
+			    }
+			}
+		);
+})
 	function memOut(){
 		var input_pwd = $("#input_pwd").val();
 		var mem_idx = "${dto.mem_idx}";
@@ -90,7 +99,7 @@
 		
 	}
 	#submenulabel{
-	width: 1030px;
+	width: 750px;
 	height: 276px;
 	}
 	
@@ -124,8 +133,9 @@
 </c:if>
 	<%@include file="../header.jsp"%>
 	<div class="row">
-	
-		<%@include file="sideMenu.jsp"%>
+		<div class="col-md-3">
+			<%@include file="sideMenu.jsp"%>
+		</div>
 
 		<div class="col-md-9" id="changeMeForm">
 			<div id="changeForm"
@@ -146,11 +156,10 @@
 							<div class="modal-dialog">
 								<div class="modal-content">
 									<div class="modal-header">
-										</button>
 										<h4 class="modal-title" id="myModalLabel">회원탈퇴(비밀번호입력)</h4>
 									</div>
 									<div class="modal-body">
-										<input id="input_pwd" type="password" placeholder="비밀번호">
+										<input id="input_pwd" type="password" placeholder="비밀번호" class="form-control">
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-primary" onclick="memOut();">비밀번호

@@ -45,7 +45,7 @@
 		
 	}
 	#submenulabel{
-	width: 1030px;
+	width: 750px;
 	height: 276px;
 	}
 	
@@ -215,8 +215,10 @@ function trackbook(tcode){
 
 	<%@include file="../header.jsp"%>
 	<div class="row">
-	
-		<%@include file="sideMenu.jsp"%>
+		
+		<div class="col-md-3">
+			<%@include file="sideMenu.jsp"%>
+		</div>	
 
 		<div class="col-md-9" id="changeMeForm">
 			<div id="changeForm"

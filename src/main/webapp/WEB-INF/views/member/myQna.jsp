@@ -52,7 +52,7 @@
 		
 	}
 	#submenulabel{
-width: 1030px;
+width: 750px;
 	height: 276px;
 	}
 	
@@ -80,8 +80,9 @@ width: 1030px;
 <body>
 	<%@include file="../header.jsp"%>
 	<div class="row">
-	
-		<%@include file="sideMenu.jsp"%>
+		<div class="col-md-3">
+			<%@include file="sideMenu.jsp"%>
+		</div>
 
 		<div class="col-md-9" id="changeMeForm">
 			<div id="changeForm"
@@ -167,8 +168,6 @@ width: 1030px;
        					<td>답변</td>    
 	           		</c:when>
 	           	</c:choose>		 	
-					 	
-					 </tr>
 					 <tr>
 			            <td colspan="5">
 			              
@@ -204,6 +203,7 @@ width: 1030px;
 
 		</div>
 	</div>
+</div>
 
 
 </body>

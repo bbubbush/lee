@@ -13,34 +13,34 @@
 		<nav class="cbp-spmenu cbp-spmenu-horizontal cbp-spmenu-bottom"
 			id="cbp-spmenu-s4">
 			<div class="footerM">
-				<a href="#" id="fMhead">이용약관</a>
+				<a href="/lee/libGuide.ju" id="fMhead">이용약관</a>
 			</div>
 			<div class="footerM">
-				<a href="#" id="fMhead">CONTACT US</a>
+				<a href="/lee/questList.ju" id="fMhead">CONTACT US</a>
 				<ul>
 					<li>1544-9970</li>
 					<li>khmaster2017@gmail.com</li>
-					<li><a href="#">오시는 길</a></li>
+					<li><a href="/lee/libMap.ju">오시는 길</a></li>
 				</ul>
 			</div>
 			<div class="footerM">
-				<a href="#" id="fMhead">책 검색</a>
+				<a href="/lee/bkList.ju" id="fMhead">책 검색</a>
 			</div>
 			<div class="footerM">
-				<a href="#" id="fMhead">도서관 소개</a>
+				<a href="/lee/libMaster.ju" id="fMhead">도서관 소개</a>
 				<ul>
-					<li><a href="#">도서관장 인사말</a></li>
-					<li><a href="#">층별소개</a></li>
-					<li><a href="#">장서정보</a></li>
-					<li><a href="#">이용안내</a></li>
+					<li><a href="/lee/libMaster.ju">도서관장 인사말</a></li>
+					<li><a href="/lee/libInside.ju">층별소개</a></li>
+					<li><a href="/lee/libStatus.ju">장서정보</a></li>
+					<li><a href="/lee/libGuide.ju">이용안내</a></li>
 				</ul>
 			</div>
 			<div class="footerM">
-				<a href="#" id="fMhead">고객센터</a>
+				<a href="/lee/noticeList.ju" id="fMhead">고객센터</a>
 				<ul>
-					<li><a href="#">분실물센터</a></li>
-					<li><a href="#">Q&A</a></li>
-					<li><a href="#">FAQ</a></li>
+					<li><a href="/lee/missingList.ju">분실물센터</a></li>
+					<li><a href="/lee/questList.ju">Q&A</a></li>
+					<li><a href="/lee/faqList.ju">FAQ</a></li>
 				</ul>
 			</div>
 		</nav>
@@ -60,7 +60,6 @@
 			showBottom.onclick = function() {
 				classie.toggle(this, 'active');
 				classie.toggle(menuBottom, 'cbp-spmenu-open');
-				console.log('오버3');
 			}
 			
 			$(window).scroll(function(){

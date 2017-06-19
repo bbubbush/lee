@@ -6,7 +6,7 @@
 	@MEDIA (min-width: 768px){ /*데스크탑 대응*/
 		
 		body{
-			width:90%;
+			width:1024px;
 			margin: auto;
 		}
 		#imgg{
