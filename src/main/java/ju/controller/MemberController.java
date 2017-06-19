@@ -87,10 +87,10 @@ public class MemberController {
 			String bkmkstr = eblist.get(i).getLb_etc();
 			String bkmkarr[] = bkmkstr.split("#/");
 			String bkmktag="";
-			for(int j=1; j< bkmkarr.length; j++){
+			for(int j=2; j< bkmkarr.length; j++){
 				System.out.println(bkmkarr[j]);
 //				bkmktag += bkmkarr[j].toString().replaceAll("~", "").replaceAll("page/","북마크 "+j+" : ")+"페이지 "+"<a href='/lee/eViewer.ju?el_idx="+eblist.get(i).getEl_idx()+"#/"+bkmkarr[j].toString().replaceAll("~", "")+"' class='btn btn-primary' role='button' onClick='window.open(this.href);return false;'>북마크열기</a><br><br>";
-				bkmktag += bkmkarr[j].toString().replaceAll("~", "").replaceAll("page/","북마크 "+j+" : ")+"페이지 "+"<a href='#' class='btn btn-primary' role='button' onClick='elibViwer2(\""+eblist.get(i).getEl_idx()+"#"+bkmkarr[j].replaceFirst("~", "")+"\")'>북마크열기</a><br><br>";
+				bkmktag += bkmkarr[j].toString().replaceAll("~", "").replaceAll("page/","북마크 "+(j-1)+" : ")+"페이지 "+"<a href='#' class='btn btn-primary' role='button' onClick='elibViwer2(\""+eblist.get(i).getEl_idx()+"#/"+bkmkarr[j].replaceFirst("~", "")+"\")'>북마크열기</a><br><br>";
 			}
 			System.out.println("북마크 태그 ?"+bkmktag);
 			bkmk.add(bkmktag);

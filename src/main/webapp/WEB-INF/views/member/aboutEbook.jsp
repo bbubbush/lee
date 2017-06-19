@@ -117,6 +117,7 @@ function elibViwer2(el_idx) {
 							    </c:when>
 							    <c:when test="${eblist ne null}">
 							            <c:forEach items="${eblist}" var="list" varStatus="status">
+							            <div class="row">
 							           			 <div class="col-sm-6 col-md-4">
 												     <div class="thumbnail ">
 												     <div class="text-center" style="margin:auto; width:100%;height:200px;" id="imgpannel">
@@ -139,6 +140,9 @@ function elibViwer2(el_idx) {
 												  	<div class="thumbnail ">
 												     <h3>북마크</h3>
 												      <div class="caption ">
+												      <c:if test="${empty bookmark[status.index]}"> 
+												     	<p>북마크가 없습니다. 북마크를 등록해 주세요</p>
+												     </c:if>
 												     <c:if test="${bookmark[status.index] ne null}"> 
 												     	<c:forEach items="${bookmark[status.index]}" var="bklist">
 												     		${bklist}
@@ -147,7 +151,8 @@ function elibViwer2(el_idx) {
 												      </div>
 												    </div>
 												  </div>
-												  
+											</div>
+											<hr>	  
 							        	</c:forEach>
 							    </c:when>
 							    

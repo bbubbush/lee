@@ -373,7 +373,7 @@ table {
       #parallax_field #parallax_bg {
         position: absolute;
         top: -150px;
-        /* left: -20px; */
+        left: -50px;
         width: 120%;
         height: 150%;
         z-index: 1;
