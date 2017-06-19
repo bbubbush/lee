@@ -98,16 +98,16 @@ function elibViwer2(el_idx) {
 			<div id="changeForm"
 				style="padding: 0px; background-color: ">
 						
-				<!-- 컨텐츠 입력 -->
-				<!-- 커넨츠 상단 바 -->
+				<!— 컨텐츠 입력 —>
+				<!— 커넨츠 상단 바 —>
 				<div id="submenulabel" style="background-image:url('/lee/resources/member/img/sul.png')">
 					<div style="width:100%; height:100%; margin:0px; padding:50px;  background-color: rgba(0, 0, 0, 0.3 );">
 						<h1 style="color:white;">전자도서</h1>
 					</div>
 				</div>		
-				<!-- 컨텐츠 실영역 -->
+				<!— 컨텐츠 실영역 —>
 				<h3>E-book</h3>
-				<!-- 전자책 -->
+				<!— 전자책 —>
 				<div class="row" id="loanbook">
 <c:set var="eblist" value="${eblist}"/>
 <c:set var="bookmark" value="${bookmark}"/>						  
@@ -117,6 +117,7 @@ function elibViwer2(el_idx) {
 							    </c:when>
 							    <c:when test="${eblist ne null}">
 							            <c:forEach items="${eblist}" var="list" varStatus="status">
+							            <div class="row">
 							           			 <div class="col-sm-6 col-md-4">
 												     <div class="thumbnail ">
 												     <div class="text-center" style="margin:auto; width:100%;height:200px;" id="imgpannel">
@@ -139,6 +140,9 @@ function elibViwer2(el_idx) {
 												  	<div class="thumbnail ">
 												     <h3>북마크</h3>
 												      <div class="caption ">
+												      <c:if test="${empty bookmark[status.index]}"> 
+												     	<p>북마크가 없습니다. 북마크를 등록해 주세요</p>
+												     </c:if>
 												     <c:if test="${bookmark[status.index] ne null}"> 
 												     	<c:forEach items="${bookmark[status.index]}" var="bklist">
 												     		${bklist}
@@ -147,7 +151,8 @@ function elibViwer2(el_idx) {
 												      </div>
 												    </div>
 												  </div>
-												  
+											</div>
+											<hr>	  
 							        	</c:forEach>
 							    </c:when>
 							    
