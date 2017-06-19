@@ -47,7 +47,7 @@
 			           result = responseData;
 			            
 			            if(!result){
-			            	alert("데이터를 받지 못함");
+			            	alertify.alert("","데이터를 받지 못함");
 			            }else{
 			            	
 				            
@@ -68,14 +68,14 @@
 				    			}
 				    			
 				            }else{
-				            	alert('암호가 일치하지 않습니다.');
+				            	alertify.alert("",'암호가 일치하지 않습니다.');
 				            }
 			            }
 			           	
 			        },
 			        error: function(request,status,error){
 			        	
-			        	 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error); 
+			        	alertify.alert("","code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error); 
 			        }
 		   		 });
 		
@@ -90,8 +90,8 @@
 		
 	}
 	#submenulabel{
-	width: 675px;
-	height: 134px;
+	width: 1030px;
+	height: 276px;
 	}
 	
 	
@@ -118,7 +118,7 @@
 <body class='modal-open'>
 <c:if test="${list ne 0}">
 	<script>
-		alert("대출중인 도서가 있어 탈퇴가 불가능합니다.");
+		alertify.alert("","대출중인 도서가 있어 탈퇴가 불가능합니다.");
 		window.location.href="index.ju";
 	</script>
 </c:if>
@@ -132,9 +132,9 @@
 				style="padding: 0; background-color: ">
 						
 				<!-- 컨텐츠 입력 -->
-					<div  id="submenulabel" style="width:675px; height:134px;  background-image:url('/lee/resources/member/img/sul.png')">
-					<div style="width:100%; height:100%; margin:0px; padding:50px; background-color: rgba(26, 164, 172, 0.5 );">
-						<h2 style="color:white;">회원탈퇴</h2>
+					<div  id="submenulabel" style=" background-image:url('/lee/resources/member/img/sul.png')">
+					<div style="width:100%; height:100%; margin:0px; padding:50px;  background-color: rgba(0, 0, 0, 0.3);">
+						<h1 style="color:white;">회원탈퇴</h1>
 					</div>
 				</div>
 				
@@ -163,9 +163,7 @@
 
 			</div>
 		</div>
-	<div class="col-md-12">
-	<%@include file="../footer.jsp"%>
-	</div>
+
 	</div>
 </body>
 </html>

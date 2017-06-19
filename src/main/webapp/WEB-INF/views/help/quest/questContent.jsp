@@ -28,7 +28,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-3">
-			<jsp:include page="/WEB-INF/views/service/elibSide.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/views/help/helpSide.jsp"></jsp:include>
 		</div>
 		<div class="col-md-9">
 			<div class="row">
@@ -38,30 +38,84 @@
 				</div>
 			</div>
 			<div class="col-md-11">
-				<table class="table table-striped table table-hover" border="1">
+			<form action="questReplyWrite.ju">
+				<table class="table table-condensed">
 					<tr>
-						<td colspan="2">${dto.qu_subject}</td>
-						<td>${dto.qu_idx}</td>
-						<td>${dto.qu_date}</td>
+						<td><div class="col-md-8"> <strong> 제목 : ${dto.qu_subject}</strong></div>
+							<div class="col-md-4">작성자 : ${dto.mem_idx}</div></td>
 					</tr>
 					<tr>
-						<td colspan="2">첨부</td>
-						<td>${dto.mem_idx}</td>
-						<td>5</td>
+						<td>
+							<div class="row">
+								<div class="col-md-4">작성일 : ${dto.qu_date}</div>
+								<div class="col-md-4">조회수 : ${dto.qu_readnum}</div>
+								<c:if test="${chk}">
+									<div class="col-md-2">
+										<a href="questChange.ju?qu_idx=${dto.qu_idx}">글 수정</a>
+									</div>
+									<div class="col-md-2">
+										<a href="questDelete.ju?qu_idx=${dto.qu_idx}">글 삭제</a>
+									</div>
+								</c:if>
+							</div>
+						</td>
 					</tr>
 					<tr>
-						<td colspan="4"><div class="col-md-12">
-								${dto.qu_content}
-							</div></td>
+						<td>
+							<div class="row">
+								<div class="col-md-8"> <strong>${dto.qu_content}</strong> </div>
+							</div>
+						</td>
 					</tr>
+				</table>
+				<table class="table table-striped table table-hover">
+					<c:if test="${!empty sessionScope.sid }">
 					<tr>
-						<td colspan="2">댓글 0개</td>
-						<td><a href="questChange.ju?qu_idx=${dto.qu_idx}">수정</a></td>
-						<td><a href="questDelete.ju?qu_idx=${dto.qu_idx}">삭제</a></td>
+						<td>
+							<div class="row">
+								<div class="col-md-12">댓글 쓰기</div>
+							</div>
+						</td>
+						<td>
+							<div class="col-md-9">
+								<textarea rows="3" cols="70" placeholder="댓글을 입력하세요" name="reply_content"></textarea>
+							</div>
+						<td colspan="2">
+							<button type="submit">등록</button>
+						</td>
 					</tr>
-					<tr>
-						<td colspan="4">댓글 쭉 나오게 함</td>
-					</tr>
+					</c:if>
+					<c:choose>
+						<c:when test="${empty reply }">
+						<tr>
+							<td colspan="2">
+								<div class="row">
+									<div class="col-md-12">등록된 댓글이 없습니다</div>
+								</div>
+							</td>
+						</tr>
+						</c:when>
+						<c:otherwise>
+						<c:forEach var="re" items="${reply }">
+						<tr>
+							<td>
+								<div class="row">
+									<div class="col-md-12">${re.mem_idx}</div>
+								</div>
+							</td>
+							<td>
+								<div class="col-md-9">${re.reply_content}</div>
+							</td>
+							<td colspan="3">
+							<c:if test="${re.mem_idx eq sessionScope.sname }">
+								<a href="questReplyDelete.ju?reply_idx=${re.reply_idx}">삭제</a>
+							</c:if>
+							</td>
+							
+						</tr>
+						</c:forEach>
+						</c:otherwise>
+					</c:choose>
 					<c:if test="${!empty next }">
 						<tr>
 							<td colspan="3"><a href="questContent.ju?qu_idx=${next.qu_idx}">△${next.qu_subject}</a></td>
@@ -75,6 +129,9 @@
 						</tr>
 					</c:if>
 				</table>
+				<input type="hidden" name="reply_cate" value="${dto.qu_idx}"/>
+				<input type="hidden" name="mem_idx" value="${sessionScope.sidx}"/>
+				</form>
 			</div>
 		</div>
 	</div>

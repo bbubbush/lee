@@ -154,4 +154,8 @@ public class LoanDAOImple implements LoanDAO {
 		int resultCount=sqlMap.update("loanDEL", hmap);
 		return resultCount;
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/Daewon

@@ -23,6 +23,12 @@
 		.container-fluid bg-3 text-center{
 			height:500px;
 		}
+		#mycardimg{
+			display:none;
+		}
+		#mypageimg{
+			display:block;
+		}
 	}
 	@MEDIA (max-width: 767px){ /* 모바일 대응*/
 		body{
@@ -66,6 +72,12 @@
 		} 
 		#allbutton{ /* 버튼모음 */
 			margin-top: 100px;
+		}
+		#mycardimg{
+			display:block;
+		}
+		#mypageimg{
+			display:none;
 		}
 		
 	}

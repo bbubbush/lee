@@ -15,8 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ju.dto.ElibDTO;
 import ju.dto.FindDTO;
+import ju.dto.NoticeDTO;
 import ju.elib.model.ElibDAO;
 import ju.find.model.FindDAO;
+import ju.notice.model.NoticeDAO;
 
 @Controller
 public class IndexController {
@@ -26,16 +28,20 @@ public class IndexController {
 	FindDAO FindDao;
 	@Autowired
 	ElibDAO elibDAO;
+	@Autowired
+	private NoticeDAO noticeDao;
 	
 	@RequestMapping("/index.ju")
 	public ModelAndView index() {
 		ModelAndView mav = new ModelAndView();
 		String sql = "select * from book order by bk_idx desc";
+		String sql2 = "select * from notice order by nt_idx desc";
 		List<FindDTO> list = FindDao.bkList(sql);
 		List<ElibDTO> elibArr=elibDAO.elibFirst("EL_recocount", 1, 1, "EB");
-		
+		List<NoticeDTO> notilist = noticeDao.noticeList(sql2);
 		mav.addObject("bklist", list);
 		mav.addObject("eliblist", elibArr);
+		mav.addObject("notilist", notilist);
 		mav.setViewName("index");
 		return mav;
 	}

@@ -256,8 +256,23 @@ public class MemberDAOImple implements MemberDAO {
 			List<AboutMyQnaDTO> qnalist = sqlMap.selectList("memSELmyqnalist", mem_idx);
 		return qnalist;
 	}
+//아이디/비밃번호 찾기	
+	//아이디 찾기
+	public MemberDTO idFind(MemberDTO dto) {
+		MemberDTO result = sqlMap.selectOne("memSELidfind", dto);
+		return result;
+	}
+	//비밀번호 찾기 / 입력정보 맞는지 확인
+	public int pwFind(MemberDTO dto) {
+		int result = sqlMap.selectOne("memSELpwfindck", dto);
+		return result;
+	}
+	//발급한 임시비밀번호 저장
+	public int  pwFindSendemail(MemberDTO dto) {
+		int result = sqlMap.update("memUPDpwfind", dto);
+		return result;
+	}
 	
-
 	public List<HolidayDTO> getHoliday(int yr, int mon) {
 		String wh = "";
 		if(mon==12){

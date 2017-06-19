@@ -13,19 +13,32 @@
 		<script type="text/javascript" src="/lee/resources/bootstrapk/js/bootstrap.min.js"></script>
 
 		<!-- 음성 인식 JS CSS -->
+<<<<<<< HEAD
 		<script src="/lee/resources/audio/voice/audioMain/js/mainAudio.js?ver=1.1"></script>
 		<script src="/lee/resources/audio/voice/audioMain/js/highlight.min.js"></script>
 		<script src="/lee/resources/audio/voice/audioMain/js/DetectRTC.js"></script>
 		<script src="/lee/resources/audio/voice/audioMain/js/global.js?ver=1.0"></script>
+=======
+		<!-- <script src="/lee/resources/audio/voice/audioMain/js/mainAudio.js?ver=1.1"></script>
+		<script src="/lee/resources/audio/voice/audioMain/js/highlight.min.js"></script>
+		<script src="/lee/resources/audio/voice/audioMain/js/DetectRTC.js"></script>
+		<script src="/lee/resources/audio/voice/audioMain/js/global.js?ver=1.0"></script> -->
+>>>>>>> origin/Daewon
 		
 		<script type="text/javascript" src="/lee/resources/js/alertifyjs/alertify.min.js"></script>
 		<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/alertify.min.css">
 		<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/themes/default.min.css">
 	
 		<!-- <script src="/lee/resources/audio/voice/audioMain/js/aujquery.js?ver=1.0"></script> -->
+<<<<<<< HEAD
 		<link href="/lee/resources/audio/voice/audioMain/css/style.css" type="text/css" rel="stylesheet">
 		<link href="/lee/resources/audio/voice/audioMain/css/github-gist.css" type="text/css" rel="stylesheet">
 		<link href="/lee/resources/audio/voice/audioMain/css/main.css" rel="stylesheet" type="text/css" />
+=======
+		<!-- <link href="/lee/resources/audio/voice/audioMain/css/style.css" type="text/css" rel="stylesheet">
+		<link href="/lee/resources/audio/voice/audioMain/css/github-gist.css" type="text/css" rel="stylesheet">
+		<link href="/lee/resources/audio/voice/audioMain/css/main.css" rel="stylesheet" type="text/css" /> -->
+>>>>>>> origin/Daewon
 
 <link rel="stylesheet" href="/lee/resources/bootstrapk/css/bootstrap.min.css">
 <style type="text/css">
@@ -568,10 +581,17 @@ function aPlayer(el_idx){//오디오플레이어 팝업
 						//	intoBodyHTML+='		<span class="final" id="final_span"></span> ';
 						//	intoBodyHTML+='		<span class="interim" id="interim_span"></span>';
 						//	intoBodyHTML+='</div>';
+<<<<<<< HEAD
 							intoBodyHTML+='		<button id="btn-mic" class="off">';
 							intoBodyHTML+='		마이크 <span></span>';
 							intoBodyHTML+='		</button>';
 							intoBodyHTML+='</div>';
+=======
+						//	intoBodyHTML+='		<button id="btn-mic" class="off">';
+						//	intoBodyHTML+='		마이크 <span></span>';
+						//	intoBodyHTML+='		</button>';
+						//	intoBodyHTML+='</div>';
+>>>>>>> origin/Daewon
 							
 							$(".modal-body").html(intoBodyHTML);
 						}

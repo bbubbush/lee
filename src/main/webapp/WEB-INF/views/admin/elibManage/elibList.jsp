@@ -26,6 +26,9 @@
 	
 	<script type="text/javascript">
 	$(function() {
+		$("#bkList").addClass("open").children("ul").show();
+		$("#bkList3").addClass("open").children("ul").show();
+		
 		var el_subject="";
 		var el_writer="";
 		var el_pub="";
@@ -262,7 +265,6 @@
 						}
 					}
 				);
-
 				// 삭제 후 다시 자기 페이지로
 				$(".btn-danger").click(
 					function() {
@@ -375,7 +377,6 @@
 						var groupNum=$(".contentTable:eq("+num+")>tbody>tr>td:eq(5)>label>input[name=contentGroup_"+num+"]:checked").val();
 						var el_lg=$("#cateLg_"+num).val();
 						var el_md=$("#cateMd_"+num).val();
-
 						if(el_subject.length==0){
 							alertify.alert("Error", "제목을 입력하지 않으셨습니다."
 								, function() {
@@ -871,18 +872,30 @@
 </head>
 <body>
 	
+<<<<<<< HEAD
 	<!-- 헤더 -->
 	
 	<div class="row">
 		<div class="col-md-3">
 			<!-- 사이드바 부분 -->
+=======
+	<jsp:include page="/WEB-INF/views/admin/adminHeader.jsp"></jsp:include>
+	
+	<div class="row">
+		<div class="col-md-3">
+			<jsp:include page="/WEB-INF/views/admin/adminSideMenu.jsp"></jsp:include>
+>>>>>>> origin/Daewon
 		</div>
 	
 		<div class="col-md-8">
 			<table class="table table-striped">
 				<thead>
 					<tr>
+<<<<<<< HEAD
 						<th class="text-center" colspan="2">전자 도서 검색</th>
+=======
+						<th class="text-center" colspan="2" style="font-size: x-large;">전자 도서 검색</th>
+>>>>>>> origin/Daewon
 					</tr>
 				</thead>
 				<tbody>

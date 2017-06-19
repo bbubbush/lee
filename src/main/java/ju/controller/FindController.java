@@ -137,33 +137,40 @@ public class FindController {
 	@RequestMapping(value="/bkYeyak.ju")
 	public ModelAndView bkYeyak(@RequestParam(value="bk_subject")String bk_subject,
 			HttpSession session){
-		String sid = (String)session.getAttribute("sid");
-		int countYeyak = FindDao.getCountYeyak(sid);
+		System.out.println(session.getAttribute("sid"));
+		String sid = "";
 		int count = 0;
 		int ye_sunbun = 9;
-		if(countYeyak<3){
-			String ye_idx = FindDao.getIdx("ye");
-			List<String> chkBook = FindDao.chkBook(bk_subject);
-			
-			for (int i = 0; i < chkBook.size(); i++) {
-				int chkYeyak = FindDao.chkYeyak(sid, chkBook.get(i));
-				if(chkYeyak==0){// 해당 해원이 해당 도서를 예약한 적이 없어야함
-					ye_sunbun = FindDao.yeyakSunbun(chkBook.get(i));
-					if(ye_sunbun<6){
-						ye_sunbun++;
-						count = FindDao.bkYeyak(ye_idx , chkBook.get(i), sid, ye_sunbun);// count = 1 정상 예약
-						break;
-					}else{
-						count = 80;// 책 예약 횟수 초과
+		if( session.getAttribute("sid")!=null ){
+			 sid = (String)session.getAttribute("sid");
+			 int countYeyak = FindDao.getCountYeyak(sid);
+				if(countYeyak<3){
+					String ye_idx = FindDao.getIdx("ye");
+					List<String> chkBook = FindDao.chkBook(bk_subject);
+					
+					for (int i = 0; i < chkBook.size(); i++) {
+						int chkYeyak = FindDao.chkYeyak(sid, chkBook.get(i));
+						if(chkYeyak==0){// 해당 해원이 해당 도서를 예약한 적이 없어야함
+							ye_sunbun = FindDao.yeyakSunbun(chkBook.get(i));
+							if(ye_sunbun<6){
+								ye_sunbun++;
+								count = FindDao.bkYeyak(ye_idx , chkBook.get(i), sid, ye_sunbun);// count = 1 정상 예약
+								break;
+							}else{
+								count = 80;// 책 예약 횟수 초과
+							}
+						}else if(chkYeyak==1){
+							count = 90;// 이미 예약 함
+							break;
+						}
 					}
-				}else if(chkYeyak==1){
-					count = 90;// 이미 예약 함
-					break;
+				}else{
+					count = 70;//예약 횟수 초과
 				}
-			}
 		}else{
-			count = 70;//예약 횟수 초과
+			count = 99; // 비로그인
 		}
+		
 		
 		
 		ModelAndView mav = new ModelAndView();
@@ -176,33 +183,38 @@ public class FindController {
 	@RequestMapping(value="/bkFedex.ju")
 	public ModelAndView bkFedex(@RequestParam(value="bk_subject")String bk_subject,
 			HttpSession session){
-		String sid = (String)session.getAttribute("sid");
-		int getTotalCountLoan = FindDao.getTotalCountLoan(sid);
-		
+		String sid = "";
 		int count = 0;//실패
-		if(getTotalCountLoan<3){
-			String fedex_idx = FindDao.getIdx("fd");
-			List<String> chkBook = FindDao.chkBook(bk_subject);
-			for (int i = 0; i < chkBook.size(); i++) {
-				int chkFedex = FindDao.chkFedexbook(chkBook.get(i));
-				if(chkFedex!=1){
-					int chkLoanbook = FindDao.chkLoanbook(chkBook.get(i));
-					if(chkLoanbook==0){
-						int bkFedex = FindDao.bkFedex(fedex_idx, sid, chkBook.get(i));
-						count = bkFedex; //대출됨
-						break;
+		if( session.getAttribute("sid")!=null ){
+			sid = (String)session.getAttribute("sid");
+			int getTotalCountLoan = FindDao.getTotalCountLoan(sid);
+			
+			if(getTotalCountLoan<3){
+				String fedex_idx = FindDao.getIdx("fd");
+				List<String> chkBook = FindDao.chkBook(bk_subject);
+				for (int i = 0; i < chkBook.size(); i++) {
+					int chkFedex = FindDao.chkFedexbook(chkBook.get(i), sid);
+					if(chkFedex!=1){
+						int chkLoanbook = FindDao.chkLoanbook(chkBook.get(i));
+						if(chkLoanbook==0){
+							int bkFedex = FindDao.bkFedex(fedex_idx, sid, chkBook.get(i));
+							count = bkFedex; //대출됨
+							break;
+						}else{
+							count = 80;
+						}
 					}else{
-						count = 80;
+						count = 70;
+						break;
 					}
-				}else{
-					count = 70;
-					break;
+					
 				}
 				
+			}else{
+				count = 90;// 총 3권 넘게 대출함
 			}
-			
 		}else{
-			count = 90;// 총 3권 넘게 대출함
+			count = 99; // 비로그인
 		}
 		
 		ModelAndView mav = new ModelAndView();

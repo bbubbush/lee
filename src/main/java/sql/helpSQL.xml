@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -202,4 +203,350 @@
    
    
    
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="ju.help">
+
+   <select id="findName" parameterType="String" resultType="String">
+      select mem_name from member where mem_idx=#{mem_idx}
+   </select>
+
+<!-- notice -->
+   <select id="notiSELList" parameterType="java.util.Map" resultType="ju.dto.NoticeDTO">
+        ${sql}
+     </select>
+
+   <insert id="notiINSWrite" parameterType="ju.dto.NoticeDTO"> 
+      insert into notice values
+      (#{nt_idx},
+      0,
+      #{nt_subject},
+      #{nt_content},
+      sysdate,
+      '관리자',
+      0,0,0,0)
+   </insert>
+  
+   <select id="notiSELContent" parameterType="String" resultType="ju.dto.NoticeDTO">
+      select * from notice
+      where nt_idx=#{nt_idx}
+   </select>
+
+   <delete id="notiDELOut" parameterType="String">
+      delete from notice 
+      where nt_idx=#{nt_idx}
+   </delete>
+   
+   <select id="notiSELChange" parameterType="String" resultType="ju.dto.NoticeDTO">
+      select * from notice
+      where nt_idx=#{nt_idx}
+   </select>
+   
+   <update id="notiUPDChange" parameterType="ju.dto.NoticeDTO"> 
+      update notice set
+      nt_subject=#{nt_subject},
+      nt_content=#{nt_content} 
+      where nt_idx=#{nt_idx}
+   </update>
+   
+   <select id="noticeTotalCount" resultType="Integer">
+      select count(*) from notice
+   </select>
+   
+   <select id="noticePreInfo" parameterType="String" resultType="ju.dto.NoticeDTO">
+      <![CDATA[
+      select * from notice where nt_idx=(select max(nt_idx)as nt_idx from notice where nt_idx < #{nt_idx})
+      ]]>
+   </select>
+   
+   <select id="noticeNextInfo" parameterType="String" resultType="ju.dto.NoticeDTO">
+      <![CDATA[
+      select * from notice where nt_idx=(select min(nt_idx)as nt_idx from notice where nt_idx > #{nt_idx})
+      ]]>
+   </select>
+   
+   <update id="noticeRead" parameterType="String"> 
+      update notice set
+      nt_readnum = nt_readnum+1
+      where nt_idx=#{nt_idx}
+   </update>
+   
+   
+<!--    missing -->
+   <select id="missingList" parameterType="java.util.Map" resultType="ju.dto.MissingDTO">
+        ${sql}
+     </select>
+     
+   <select id="missingTotalCount" resultType="Integer">
+      select count(*) from missing
+   </select>
+     
+   <insert id="missingWrite" parameterType="ju.dto.MissingDTO"> 
+      insert into missing values
+      (#{missing_idx},
+      #{missing_cate},
+      #{missing_subject},
+      #{missing_content},
+      sysdate,
+      #{mem_idx},
+      0,0,0,0)
+   </insert>
+
+   <select id="missingContent" parameterType="String" resultType="ju.dto.MissingDTO">
+      select * from missing
+      where missing_idx=#{missing_idx}
+   </select>
+   
+   <select id="missingPreInfo" parameterType="String" resultType="ju.dto.MissingDTO">
+      <![CDATA[
+      select * from missing where missing_idx=(select max(missing_idx)as missing_idx from missing where missing_idx < #{missing_idx})
+      ]]>
+   </select>
+   
+   <select id="missingNextInfo" parameterType="String" resultType="ju.dto.MissingDTO">
+      <![CDATA[
+      select * from missing where missing_idx=(select min(missing_idx)as missing_idx from missing where missing_idx > #{missing_idx})
+      ]]>
+   </select>
+   
+   <delete id="missingDelete" parameterType="String">
+      delete from missing where missing_idx=#{missing_idx}
+   </delete>
+   
+   <select id="missingChange" parameterType="String" resultType="ju.dto.MissingDTO">
+      select * from missing where missing_idx=#{missing_idx}
+   </select>
+   
+   <update id="missingChangeOk" parameterType="ju.dto.MissingDTO"> 
+      update missing set
+      missing_subject=#{missing_subject},
+      missing_content=#{missing_content} 
+      where missing_idx=#{missing_idx}
+   </update>
+   
+   <update id="missingRead" parameterType="String"> 
+      update missing set
+      missing_readnum = missing_readnum+1
+      where missing_idx=#{missing_idx}
+   </update>
+   
+<!--    qna -->
+   <select id="qnaList" parameterType="java.util.Map" resultType="ju.dto.QnaDTO">
+        ${sql}
+   </select>
+     
+   <select id="qnaTotalCount" resultType="Integer">
+      select count(*) from quest
+   </select>
+     
+   <insert id="qnaWrite" parameterType="ju.dto.QnaDTO"> 
+      insert into quest values
+      (#{qu_idx},
+      '',
+      #{qu_cate},
+      #{qu_subject},
+      #{qu_content},
+      #{mem_idx},
+      sysdate,
+      0,0,0)
+   </insert>
+
+   <select id="qnaContent" parameterType="String" resultType="ju.dto.QnaDTO">
+      select * from quest
+      where qu_idx=#{qu_idx}
+   </select>
+
+   
+   <delete id="qnaDelete" parameterType="String">
+      delete from quest where qu_idx=#{qu_idx}
+   </delete>
+   
+   <select id="qnaChange" parameterType="String" resultType="ju.dto.QnaDTO">
+      select * from quest where qu_idx=#{qu_idx}
+   </select>
+   
+   <update id="qnaChangeOk" parameterType="ju.dto.QnaDTO"> 
+      update quest set
+      qu_subject=#{qu_subject},
+      qu_content=#{qu_content} 
+      where qu_idx=#{qu_idx}
+   </update>
+      
+   <select id="qnaPreInfo" parameterType="String" resultType="ju.dto.QnaDTO">
+      <![CDATA[
+      select * from quest where qu_idx=(select max(qu_idx)as qu_idx from quest where qu_idx < #{qu_idx})
+      ]]>
+   </select>
+   
+   <select id="qnaNextInfo" parameterType="String" resultType="ju.dto.QnaDTO">
+      <![CDATA[
+      select * from quest where qu_idx=(select min(qu_idx)as qu_idx from quest where qu_idx > #{qu_idx})
+      ]]>
+   </select>
+   
+   <update id="qnaRead" parameterType="String"> 
+      update quest set
+      qu_readnum = qu_readnum+1
+      where qu_idx=#{qu_idx}
+   </update>
+   
+   
+<!--    FAQ -->
+   <select id="topTenQna" parameterType="java.util.Map" resultType="ju.dto.QnaDTO">
+        ${sql}
+   </select>
+   
+   
+<!--    review -->
+   <select id="reviewList" parameterType="java.util.Map" resultType="ju.dto.ReviewDTO">
+        ${sql}
+   </select>
+   
+   <select id="reviewTotalCount" resultType="Integer">
+      select count(*) from review
+   </select>
+   
+   <insert id="reviewWrite" parameterType="ju.dto.ReviewDTO"> 
+      insert into review values
+      (#{review_idx},
+      #{review_cate},
+      #{review_subject},
+      #{review_content},
+      sysdate,
+      #{mem_idx},
+      0,0,0,0)
+   </insert>
+   
+   <select id="reviewContent" parameterType="String" resultType="ju.dto.ReviewDTO">
+      select * from review
+      where review_idx=#{review_idx}
+   </select>
+   
+   <select id="reviewPreInfo" parameterType="String" resultType="ju.dto.ReviewDTO">
+      <![CDATA[
+      select * from review where review_idx=(select max(review_idx)as review_idx from review where review_idx < #{review_idx})
+      ]]>
+   </select>
+   
+   <select id="reviewNextInfo" parameterType="String" resultType="ju.dto.ReviewDTO">
+      <![CDATA[
+      select * from review where review_idx=(select min(review_idx)as review_idx from review where review_idx > #{review_idx})
+      ]]>
+   </select>
+   
+   <delete id="reviewDelete" parameterType="String">
+      delete from review where review_idx=#{review_idx}
+   </delete>
+   
+   <select id="reviewChange" parameterType="String" resultType="ju.dto.ReviewDTO">
+      select * from review where review_idx=#{review_idx}
+   </select>
+   
+   <update id="reviewChangeOk" parameterType="ju.dto.ReviewDTO"> 
+      update review set
+      review_subject=#{review_subject},
+      review_content=#{review_content} 
+      where review_idx=#{review_idx}
+   </update>
+   
+   <update id="reviewRead" parameterType="String"> 
+      update review set
+      review_readnum = review_readnum+1
+      where review_idx=#{review_idx}
+   </update>
+   
+<!--    orderbook -->
+   <select id="orderbookList" parameterType="java.util.Map" resultType="ju.dto.OrderbookDTO">
+        ${sql}
+   </select>
+   
+   <select id="orderbookTotalCount" resultType="Integer">
+      select count(*) from orderbook
+   </select>
+   
+   <insert id="orderbookWrite" parameterType="ju.dto.OrderbookDTO"> 
+      insert into orderbook values
+      (#{orderbook_idx},
+      #{orderbook_cate},
+      #{orderbook_subject},
+      #{orderbook_content},
+      sysdate,
+      #{mem_idx},
+      0,0,0,0)
+   </insert>
+   
+   <select id="orderbookContent" parameterType="String" resultType="ju.dto.OrderbookDTO">
+      select * from orderbook
+      where orderbook_idx=#{orderbook_idx}
+   </select>
+   
+   <select id="orderbookPreInfo" parameterType="String" resultType="ju.dto.OrderbookDTO">
+      <![CDATA[
+      select * from orderbook where orderbook_idx=(select max(orderbook_idx)as orderbook_idx from orderbook where orderbook_idx < #{orderbook_idx})
+      ]]>
+   </select>
+   
+   <select id="orderbookNextInfo" parameterType="String" resultType="ju.dto.OrderbookDTO">
+      <![CDATA[
+      select * from orderbook where orderbook_idx=(select min(orderbook_idx)as orderbook_idx from orderbook where orderbook_idx > #{orderbook_idx})
+      ]]>
+   </select>
+   
+   <delete id="orderbookDelete" parameterType="String">
+      delete from orderbook where orderbook_idx=#{orderbook_idx}
+   </delete>
+   
+   <select id="orderbookChange" parameterType="String" resultType="ju.dto.OrderbookDTO">
+      select * from orderbook where orderbook_idx=#{orderbook_idx}
+   </select>
+   
+   <update id="orderbookChangeOk" parameterType="ju.dto.OrderbookDTO"> 
+      update orderbook set
+      orderbook_subject=#{orderbook_subject},
+      orderbook_content=#{orderbook_content} 
+      where orderbook_idx=#{orderbook_idx}
+   </update>
+   
+   <update id="orderbookRead" parameterType="String"> 
+      update orderbook set
+      orderbook_readnum = orderbook_readnum+1
+      where orderbook_idx=#{orderbook_idx}
+   </update>
+   
+<!--    Reply -->
+	<select id="replyList" parameterType="String" resultType="ju.dto.ReplyDTO">
+		select * from reply where reply_cate = #{idx} order by reply_idx desc
+  	</select>
+   
+   <insert id="replyWrite" parameterType="ju.dto.ReplyDTO"> 
+	   insert into reply values
+	   (#{reply_idx},
+	   #{mem_idx},
+	   #{reply_content},
+	   #{reply_cate})
+	</insert>
+	
+   <select id="totalCount" resultType="Integer">
+     select max(reply_idx) from reply
+   </select>
+   
+   <delete id="replyDelete" parameterType="String">
+      delete from reply where reply_idx=#{reply_idx}
+   </delete>
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+>>>>>>> origin/Daewon
 </mapper>

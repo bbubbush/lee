@@ -28,12 +28,20 @@
 	</div>
 	<div class="row">
 		<div class="col-md-3">
+<<<<<<< HEAD
 			<jsp:include page="/WEB-INF/views/service/elibSide.jsp"></jsp:include>
+=======
+			<jsp:include page="/WEB-INF/views/help/helpSide.jsp"></jsp:include>
+>>>>>>> origin/Daewon
 		</div>
 		<div class="col-md-9">
 			<div class="row">
 				<div class="col-md-7">
+<<<<<<< HEAD
 					<h2>분실물 게시판</h2>
+=======
+					<h2>QnA 게시판</h2>
+>>>>>>> origin/Daewon
 				</div>
 			</div>
 			<div class="col-md-10">
@@ -44,6 +52,7 @@
 							<td>${dto.qu_date}</td>
 						</tr>
 						<tr>
+<<<<<<< HEAD
 							<td>첨부</td>
 							<td><input type="text" name="qu_idx" value="${dto.qu_idx}" readonly="readonly"></td>
 							<td>${dto.qu_readnum}</td>
@@ -52,12 +61,24 @@
 							<td colspan="3"><div class="col-md-12">
 									<textarea class="form-control col-sm-5" rows="10" name="qu_content">${dto.qu_content}</textarea>
 								</div></td>
+=======
+							<td colspan="3"><div class="col-md-12">
+									<textarea class="form-control col-sm-5" rows="10" name="qu_content">${dto.qu_content}</textarea>
+								</div>
+								<input type="hidden" name="qu_idx" value="${dto.qu_idx}" />
+								
+								</td>
+>>>>>>> origin/Daewon
 						</tr>
 						<tr>
 							<td colspan="3">
 									<div class="form-group"></div>
 									<button type="submit" class="btn btn-default">수정</button>
+<<<<<<< HEAD
 									<button type="reset" class="btn btn-default">취소</button>
+=======
+									<button type="reset" class="btn btn-default">다시작성</button>
+>>>>>>> origin/Daewon
 							</td>
 						</tr>
 					</table>
@@ -66,4 +87,8 @@
 		</div>
 	</div>
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> origin/Daewon

@@ -40,7 +40,10 @@ public interface MemberDAO {
 
 		
 		public List<AboutMyQnaDTO> memQna(String mem_idx);
-
+		
+		public MemberDTO idFind(MemberDTO dto);
+		public int pwFind(MemberDTO dto);
+		public int pwFindSendemail(MemberDTO dto);
 	//캘린더 관련
 		public List<HolidayDTO> getHoliday(int yr, int mon);
 		

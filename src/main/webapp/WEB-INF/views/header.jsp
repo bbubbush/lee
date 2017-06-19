@@ -3,6 +3,19 @@
 <script type="text/javascript" src="/lee/resources/mainMenu/jquery.smartmenus.min.js"></script>
 <link rel="stylesheet" href="/lee/resources/mainMenu/css/sm-core-css.css">
 <link rel="stylesheet" href="/lee/resources/mainMenu/css/sm-clean/sm-clean.css">
+<!-- 하위 3개를 적어야 가능, JQ, 부트스트랩 밑에 작성 할 것 -->
+	<script type="text/javascript" src="/lee/resources/js/alertifyjs/alertify.min.js"></script>
+	<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/alertify.min.css">
+	<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/themes/default.min.css">
+	<link rel="stylesheet" href="/lee/resources/index/index.css">
+<!-- 음성인식 -->
+	<script src="/lee/resources/index/main.js"></script>
+	<link href="lee/resources/audio/voice/css/main.css" rel="stylesheet" type="text/css" />
+	
+    <script src="/lee/resources/audio/voice/js/highlight.min.js"></script>
+    <script src="/lee/resources/audio/voice/js/DetectRTC.js"></script>
+    <script src="/lee/resources/audio/voice/js/global.js"></script>
+    
 <style type="text/css">
 	body{
 		width: 90%;
@@ -108,28 +121,82 @@
 	.loginColor:HOVER {
 		color: #1aa4ac;
 	}
+	#btn-mic span {
+    display: inline-block;
+    margin: 1px 0 0 5px;
+    width: 10px;
+    height: 10px;
+    border: solid 1px #fff;
+    background: #bbb;
+    border-radius: 50%;
+	}
+	#btn-mic,#btn-tts {
+    margin: 0 0 1em 0;
+    padding: 0.4em 0.7em 0.5em 0.7em;
+    min-width: 100px;
+    background-color: #d84a38;
+    border: none;
+    border-radius: 2px;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em;
+    cursor: pointer;
+	}
+	#btn-mic.on span {
+    background: green;
+	}
 </style>
 
 <script type="text/javascript">
 	$(function() {
+		
+		startvoid();
+		
 		$('#main-menu').smartmenus(
 			{
 				mainMenuSubOffsetX: -1
 				, subMenusSubOffsetX: 10
 				, subMenusSubOffsetY: 0
 			}
-		);
-	});
+			);
+		
+	
+	
+	}); 
+	
+	function startvoid(){
+		var sid = "${sid}";
+		if(sid==null || sid==""){
+			$("#btn-mic").trigger('click');
+			$('#btn-mic').popover('show');
+			
+		}else{
+			$("#btn-mic").trigger('click');
+		}
+	}
 </script>
 
 <header>
 	
 	<div class="row">
-
 		<div id="mainImg" class="col-md-3"> 
-			<img src="/lee/resources/index/logo2.png" style=" width:250px;">
-
+		<a href="index.ju">
+			<img src="/lee/resources/index/logo2.png" style=" width:250px;" >
+		</a>
 		</div>
+					<div id="content">
+					  	<div class="wrap">
+					    	<div id="result">
+						      <span class="final" id="final_span"></span>
+						      <span class="interim" id="interim_span"></span>
+					    	</div>
+					    	
+					    <button type="button" id="btn-mic" class="btn off" data-container="body" data-toggle="popover" title="잠깐!"
+					    data-placement="bottom" data-content="장애인분들을 위한 배려입니다. 불편하시더라도 로그인 하시거나 혹은 마이크를 끄시거나 버튼을눌러 음성인식을 꺼주세요.">마이크 <span></span></button>
+					    <button class="btn" id="btn-tts" style="margin-top:15px;">Text to speech</button>
+					  </div>
+					</div>
+					
 		<div class="col-md-2 col-md-offset-7 loginClass">		
 				<c:set var="sid" value="${sessionScope.sid}"/>
 				<c:choose>

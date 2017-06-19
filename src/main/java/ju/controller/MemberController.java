@@ -10,14 +10,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -78,9 +81,24 @@ public class MemberController {
 		String mem_idx = (String)session.getAttribute("sidx");
 		List<AboutMyBookDTO> eblist =  memberDao.aboutEbookLoan(mem_idx);
 		
+		List<String> bkmk = new ArrayList<String>();
+		
+		for(int i=0 ; i < eblist.size(); i++){
+			String bkmkstr = eblist.get(i).getLb_etc();
+			String bkmkarr[] = bkmkstr.split("#/");
+			String bkmktag="";
+			for(int j=1; j< bkmkarr.length; j++){
+				System.out.println(bkmkarr[j]);
+//				bkmktag += bkmkarr[j].toString().replaceAll("~", "").replaceAll("page/","북마크 "+j+" : ")+"페이지 "+"<a href='/lee/eViewer.ju?el_idx="+eblist.get(i).getEl_idx()+"#/"+bkmkarr[j].toString().replaceAll("~", "")+"' class='btn btn-primary' role='button' onClick='window.open(this.href);return false;'>북마크열기</a><br><br>";
+				bkmktag += bkmkarr[j].toString().replaceAll("~", "").replaceAll("page/","북마크 "+j+" : ")+"페이지 "+"<a href='#' class='btn btn-primary' role='button' onClick='elibViwer2(\""+eblist.get(i).getEl_idx()+"#"+bkmkarr[j].replaceFirst("~", "")+"\")'>북마크열기</a><br><br>";
+			}
+			System.out.println("북마크 태그 ?"+bkmktag);
+			bkmk.add(bkmktag);
+		}
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("eblist", eblist);
+		mav.addObject("bookmark", bkmk);
 		
 		mav.setViewName("member/aboutEbook");
 		return mav;
@@ -165,9 +183,13 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 		if(result>0){
 			session.invalidate();
-			mav.setViewName("index");
+			mav.addObject("msg", "탈퇴성공!!");
+			mav.setViewName("member/msg");
+			
 		}else{
-			mav.setViewName("index");
+			mav.addObject("msg", "탈퇴실패..");
+			mav.setViewName("member/msg");
+			
 		}
 		return mav;
 		
@@ -273,13 +295,13 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/memberJoinOk.ju")
-	public String joinSubmit(MemberDTO dto) throws InterruptedException{
+	public ModelAndView joinSubmit(MemberDTO dto) throws InterruptedException{
         //client ip
 		HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
         String ip = req.getHeader("X-FORWARDED-FOR");
         if (ip == null)
             ip = req.getRemoteAddr();
-		
+		ModelAndView mav = new ModelAndView();
 		//log 넣는 부분
 		if( dto.getMem_id()!=null ){
 			//mail파싱
@@ -300,11 +322,14 @@ public class MemberController {
 		int result = memberDao.joinSubmit(dto);
 		if(result>0){
 			System.out.println("가입성공");
-			return "index";
+			mav.addObject("msg", "가입성공!!");
+			mav.setViewName("member/msg");
+			
 		}else{
-			return "member/memberJoin";
+			mav.addObject("msg", "가입실패..");
+			mav.setViewName("member/msg");
 		}
-		
+		return mav;
 		
 	}
 	
@@ -314,11 +339,12 @@ public class MemberController {
 		return "member/memberLogin";
 		
 	}
-	@RequestMapping(value="/memberLoginOk.ju")
+	@RequestMapping(value="/memberLoginOk.ju",method=RequestMethod.POST)
 	public ModelAndView loginOk(
 			@RequestParam(value="mem_id",defaultValue="")String mem_id,
 			@RequestParam(value="mem_pwd",defaultValue="")String mem_pwd,
-			HttpSession session){
+			@RequestParam(value="saveidck",defaultValue="")String saveidck,
+			HttpSession session, HttpServletResponse response){
 		//get client ip
 		HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
         String ip = req.getHeader("X-FORWARDED-FOR");
@@ -331,15 +357,26 @@ public class MemberController {
 		
 		if(dto==null || dto.getMem_name().equals("black")){
 			
-			mav.setViewName("member/memberLogin");
+			mav.addObject("msg", "로그인실풰..");
+			mav.setViewName("member/msg");
 			return mav;
 		}else{
+			if(saveidck.equals("save")){
+				Cookie cookie = new Cookie("saveidck", mem_id);
+				cookie.setMaxAge(7*24*60*60);
+				response.addCookie(cookie);
+			}else{
+				Cookie cookie = new Cookie("saveidck", null);
+				cookie.setMaxAge(0);
+				response.addCookie(cookie);
+			}
 			String s = "login{ip:"+ip+",id:"+dto.getMem_id()+"}";
 			log.info(s);
 			session.setAttribute("sid", dto.getMem_id());
 			session.setAttribute("sname", dto.getMem_name());
 			session.setAttribute("sidx", dto.getMem_idx());
-			mav.setViewName("index");
+			mav.addObject("msg", "로그인성공!");
+			mav.setViewName("member/msg");
 			return mav;
 			
 		}
@@ -352,12 +389,74 @@ public class MemberController {
 		
 		ModelAndView mav = new ModelAndView();
 		session.invalidate();
-		
-		mav.setViewName("index");
-		
+		mav.addObject("msg", "로그아웃 성공");
+		mav.setViewName("member/msg");
 		return mav;
 	}
 	
+	@RequestMapping(value="/idpwFindForm.ju")
+	public ModelAndView idFindForm(
+			){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("member/idpwFind");
+		
+		return mav;
+	}
+	@RequestMapping(value="/idFind.ju")
+	public ModelAndView idFind(
+			String mem_name,String phph0, String phph, String phph1){
+		
+		ModelAndView mav = new ModelAndView();
+		MemberDTO dto = new MemberDTO();
+		String mem_hp = phph0+"~"+phph+"~"+phph1;
+		System.out.println("넘어온 mem_name : "+mem_name);
+		System.out.println("넘어온 mem_hp : "+mem_hp);
+		dto.setMem_name(mem_name);
+		dto.setMem_hp(mem_hp);
+		MemberDTO resultdto = memberDao.idFind(dto);
+		System.out.println("받아온 mem_id : "+resultdto.getMem_id());
+		mav.addObject("mdto", resultdto);
+		mav.setViewName("member/idpwFind");
+		return mav;
+	}
+	@RequestMapping(value="/pwFind.ju")
+	public ModelAndView pwFind(
+			@RequestParam(value="mem_id",defaultValue="0")String mem_id,
+			@RequestParam(value="mem_hint",defaultValue="0")String mem_hint,
+			@RequestParam(value="mem_answer",defaultValue="0")String mem_answer){
+		ModelAndView mav = new ModelAndView();
+		MemberDTO dto = new MemberDTO();
+		
+		int hint = Integer.parseInt(mem_hint);
+		dto.setMem_id(mem_id);
+		dto.setMem_answer(mem_answer);
+		dto.setMem_hint(hint);
+		System.out.println("받아온 dto hint :"+dto.getMem_hint());
+		//패스워드 체크
+		int result = memberDao.pwFind(dto);
+		
+		//임시패스워드 이메일 전송
+		if(result > 0){
+			
+			String keylist="abcdefghijklmnopqrstuvwxyz123456789";
+	    	String code = "";
+	    	for(int i = 0 ; i < 8 ; i++){
+	    		code+= keylist.charAt((int)Math.floor(Math.random()*keylist.length()));
+	    	}
+			
+	    	
+	    	dto.setMem_pwd(code);
+			int result2 = memberDao.pwFindSendemail(dto);
+			
+			if(result2>0){
+				EmailDAO dao = new EmailDAO();
+				dao.sendEmail2(dto.getMem_id(), code);
+				mav.addObject("mdto2", dto);
+			}
+		}
+		mav.setViewName("member/idpwFind");
+		return mav;
+	}
 	
 	@RequestMapping(value="/getHoliday.ju")
 	public ModelAndView getHoliday(

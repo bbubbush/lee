@@ -49,6 +49,9 @@
 	
 	<script type="text/javascript">
 		$(function(){
+			$("#bkList").addClass("open").children("ul").show();
+			$("#bkList3").addClass("open").children("ul").show();
+			
 			$(".fileinput-button").click(
 				function() {
 					$("input[name=files]").click();
@@ -376,11 +379,19 @@
 </head>
 <body>
 
+<<<<<<< HEAD
 	<!-- 헤더 -->
 	
 	<div class="row">
 		<div class="col-md-3">
 			<!-- 사이드바 부분 -->
+=======
+	<jsp:include page="/WEB-INF/views/admin/adminHeader.jsp"></jsp:include>
+	
+	<div class="row">
+		<div class="col-md-3">
+			<jsp:include page="/WEB-INF/views/admin/adminSideMenu.jsp"></jsp:include>
+>>>>>>> origin/Daewon
 		</div>
 	
 		<div class="col-md-8">

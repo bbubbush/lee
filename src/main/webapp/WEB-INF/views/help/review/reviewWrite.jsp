@@ -27,7 +27,11 @@
 
 	<div class="row">
 		<div class="col-md-3">
+<<<<<<< HEAD
 			<jsp:include page="/WEB-INF/views/service/elibSide.jsp"></jsp:include>
+=======
+			<jsp:include page="/WEB-INF/views/help/helpSide.jsp"></jsp:include>
+>>>>>>> origin/Daewon
 		</div>
 		<div class="col-md-7">
 			<h2>책추천 및 감상평 게시판 쓰기</h2>
@@ -35,17 +39,29 @@
 				<form name="reviewWrite" action="reviewWriteOk.ju">
 					<table class="table table-striped table table-hover" border="1">
 						<tr>
+<<<<<<< HEAD
 							<th class="text-center">제목</th>
+=======
+							<th style="text-align: center; vertical-align: middle;">제목</th>
+>>>>>>> origin/Daewon
 							<td><input type="text" class="form-control"
 								name="review_subject" placeholder="제목을 입력하세요"></td>
 
 						</tr>
 						<tr>
+<<<<<<< HEAD
 							<th class="text-center">작성자</th>
 							<td class="text-center">${sid}</td>
 						</tr>
 						<tr>
 							<th class="text-center">카테고리</th>
+=======
+							<th style="text-align: center; vertical-align: middle;">작성자</th>
+							<td class="text-center">${sid}</td>
+						</tr>
+						<tr>
+							<th style="text-align: center; vertical-align: middle;">카테고리</th>
+>>>>>>> origin/Daewon
 							<td>
 								<div class="radio">
 									<label><input type="radio" name="review_cate" value="0" checked> 책추천 </label> 
@@ -56,7 +72,11 @@
 						</tr>
 
 						<tr>
+<<<<<<< HEAD
 							<th class="text-center">내용</th>
+=======
+							<th style="text-align: center; vertical-align: middle;">내용</th>
+>>>>>>> origin/Daewon
 							<td><textarea class="form-control" rows="10"
 									name="review_content" placeholder="내용을 입력하세요"></textarea></td>
 						</tr>
@@ -75,4 +95,8 @@
 	</div>
 
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> origin/Daewon
