@@ -25,10 +25,6 @@ public class MemberDAOImple implements MemberDAO {
 		this.sqlMap = sqlMap;
 	}
 
-
-
-
-	
 	public List<MemberDTO> memberList(int cp, int ls){
 		int startnum=(cp-1)*ls+1;
 		int endnum = cp*ls;
@@ -55,21 +51,21 @@ public class MemberDAOImple implements MemberDAO {
 		Map map = new HashMap();
 		map.put("startnum", startnum);
 		map.put("endnum", endnum);
-		map.put("mem_name", mem_name+"%");
+		map.put("mem_name", "%"+mem_name+"%");
 		List<MemberDTO> list = sqlMap.selectList("memSELSearch",map);
 		return list;
 	}
 	
-	/*public List<BanDTO> memberBanListSearch(int cp, int ls,String mem_name){
+	public List<BanDTO> memberBanListSearch(int cp, int ls,String mem_name){
 		int startnum=(cp-1)*ls+1;
 		int endnum = cp*ls;
 		Map map = new HashMap();
 		map.put("startnum", startnum);
 		map.put("endnum", endnum);
-		map.put("mem_name", mem_name+"%");
+		map.put("mem_name", "%"+mem_name+"%");
 		List<BanDTO> list = sqlMap.selectList("banSELSearch",map);
 		return list;
-	}*/
+	}
 	
 	public MemberDTO memberInfo(String mem_idx){
 		MemberDTO dto = sqlMap.selectOne("memSELInfo",mem_idx);
@@ -81,13 +77,25 @@ public class MemberDAOImple implements MemberDAO {
 		return count;
 	}
 	
-	public int getTotlaCnt(){
+	public int getTotalCnt(){
 		int result = sqlMap.selectOne("memtotalCnt");
 		return result;
 	}
 	
-	public int getTotlaCntBan(){
+	public int getTotalCntSearch(String mem_name){
+		String name = "%"+mem_name+"%";
+		int result = sqlMap.selectOne("memtotalCntSearch",name);
+		return result;
+	}
+	
+	public int getTotalCntBan(){
 		int result = sqlMap.selectOne("memtotalCntBan");
+		return result;
+	}
+	
+	public int getTotalCntBanSearch(String mem_name){
+		String name = "%"+mem_name+"%";
+		int result = sqlMap.selectOne("memtotalCntBanSearch",name);
 		return result;
 	}
 	

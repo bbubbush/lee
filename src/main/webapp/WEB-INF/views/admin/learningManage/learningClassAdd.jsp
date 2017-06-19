@@ -88,14 +88,14 @@
                
                <th>최대 수강인원</th>
                <td>
-               	<input type="radio" name="rd" id="rd-5" value="5">5
-               	<input type="radio" name="rd" id="rd-10" value="10">10
-               	<input type="radio" name="rd" id="rd-15" value="15">15
-               	<input type="radio" name="rd" id="rd-20" value="20">20<br>
-               	<input type="radio" name="rd" id="rd-5" value="25">25
-               	<input type="radio" name="rd" id="rd-10" value="30">30
-               	<input type="radio" name="rd" id="rd-15" value="35">35
-               	<input type="radio" name="rd" id="rd-20" value="40">40
+               	<label><input type="radio" name="sj_max" id="rd-5" value="5">5</label>&nbsp;&nbsp;
+               	<label><input type="radio" name="sj_max" id="rd-10" value="10">10</label>&nbsp;&nbsp;
+               	<label><input type="radio" name="sj_max" id="rd-15" value="15">15</label>&nbsp;&nbsp;
+               	<label><input type="radio" name="sj_max" id="rd-20" value="20">20</label><br>
+               	<label><input type="radio" name="sj_max" id="rd-5" value="25">25</label>&nbsp;&nbsp;
+               	<label><input type="radio" name="sj_max" id="rd-10" value="30">30</label>&nbsp;&nbsp;
+               	<label><input type="radio" name="sj_max" id="rd-15" value="35">35</label>&nbsp;&nbsp;
+               	<label><input type="radio" name="sj_max" id="rd-20" value="40">40</label>&nbsp;&nbsp;
                </td>
             </tr>
          </table>

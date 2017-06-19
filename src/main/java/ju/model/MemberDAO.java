@@ -7,7 +7,7 @@ public interface MemberDAO {
 	public List<MemberDTO> memberList(int cp, int ls);
 	public List<BanDTO> memberBanList(int cp, int ls);
 	public List<MemberDTO> memberListSearch(int cp, int ls,String mem_name);
-	/*public List<BanDTO> memberBanListSearch(int cp, int ls,String mem_name);*/
+	public List<BanDTO> memberBanListSearch(int cp, int ls,String mem_name);
 	public MemberDTO memberInfo(String mem_idx);
 	public int banAdd(BanDTO dto, int ban_period);
 	public BanDTO memberBanInfo(String mem_idx);
@@ -16,10 +16,11 @@ public interface MemberDAO {
 	public int banCount(String mem_idx);
 	public List<LoanDTO> memberLoan(String mem_idx);
 	public int memberDel(String mem_idx);
-	public int getTotlaCnt();
+	public int getTotalCnt();
+	public int getTotalCntSearch(String mem_name);
 
-	public int getTotlaCntBan();
-	
+	public int getTotalCntBan();
+	public int getTotalCntBanSearch(String mem_name);
 
 	
 	//대원 추가 6월 11일 일 시작
@@ -51,6 +52,7 @@ public interface MemberDAO {
 		
 		public int delHoliday(String memo, String solarDate);
 		public int moveHoliday(String memo, String beforeDate, String afterDate);
+		
 	//대원 추가 6월 11일 일 끝
 }
 

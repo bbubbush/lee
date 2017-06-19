@@ -13,6 +13,7 @@ public class LoanDTO {
 	private int lb_return;
 	private int lb_delay;
 	private String mem_name;
+	
 	private String bk_subject;
 	private String mem_id;
 	private String bk_idx;
@@ -21,16 +22,15 @@ public class LoanDTO {
 	private String lb_returnStr;
 	private String lb_sday;
 	private String lb_eday;
+	private int bk_small;
 	
 	public LoanDTO() {
 		super();
 	}
 
-	
-
 	public LoanDTO(String lb_idx, String mem_idx, String book_idx, Date lb_sd, Date lb_ed, String lb_etc, int lb_return,
 			int lb_delay, String mem_name, String bk_subject, String mem_id, String bk_idx, String bk_isbn,
-			int bk_yeyak, String lb_returnStr, String lb_sday, String lb_eday) {
+			int bk_yeyak, String lb_returnStr, String lb_sday, String lb_eday, int bk_small) {
 		super();
 		this.lb_idx = lb_idx;
 		this.mem_idx = mem_idx;
@@ -49,9 +49,8 @@ public class LoanDTO {
 		this.lb_returnStr = lb_returnStr;
 		this.lb_sday = lb_sday;
 		this.lb_eday = lb_eday;
+		this.bk_small = bk_small;
 	}
-
-
 
 	public String getLb_idx() {
 		return lb_idx;
@@ -117,20 +116,20 @@ public class LoanDTO {
 		this.lb_delay = lb_delay;
 	}
 
-	public String getBk_subject() {
-		return bk_subject;
-	}
-
-	public void setBk_subject(String bk_subject) {
-		this.bk_subject = bk_subject;
-	}
-
 	public String getMem_name() {
 		return mem_name;
 	}
 
 	public void setMem_name(String mem_name) {
 		this.mem_name = mem_name;
+	}
+
+	public String getBk_subject() {
+		return bk_subject;
+	}
+
+	public void setBk_subject(String bk_subject) {
+		this.bk_subject = bk_subject;
 	}
 
 	public String getMem_id() {
@@ -173,28 +172,32 @@ public class LoanDTO {
 		this.lb_returnStr = lb_returnStr;
 	}
 
-
-
 	public String getLb_sday() {
 		return lb_sday;
 	}
-
-
 
 	public void setLb_sday(String lb_sday) {
 		this.lb_sday = lb_sday;
 	}
 
-
-
 	public String getLb_eday() {
 		return lb_eday;
 	}
 
-
-
 	public void setLb_eday(String lb_eday) {
 		this.lb_eday = lb_eday;
 	}
+
+	public int getBk_small() {
+		return bk_small;
+	}
+
+	public void setBk_small(int bk_small) {
+		this.bk_small = bk_small;
+	}
+
+	
+
+	
 	
 }

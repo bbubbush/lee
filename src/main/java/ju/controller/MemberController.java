@@ -539,5 +539,26 @@ public class MemberController {
 		return "Etc";
 	}// end method
 	
+	
+	@RequestMapping(value="/moveHolidayFC.ju")
+	public void moveHoliday(
+			@RequestParam(value="memo",defaultValue="")String memo,
+			@RequestParam(value="beforedate",defaultValue="")String beforeDate,
+			@RequestParam(value="afterdate",defaultValue="")String afterDate,
+			HttpServletResponse response){
+		
+		int result = memberDao.moveHoliday(memo, beforeDate, afterDate);
+		
+		try{
+			
+			if(result > 0){
+				response.getWriter().print("삭제성공");
+			}else{
+				response.getWriter().print("삭제실패");
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
 

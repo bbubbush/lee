@@ -48,7 +48,7 @@ public class AdminAudioController {
 			String cate = bcm.BookLgSelect(0, 7, false);
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("cateLg",cate);
-			mav.setViewName("ebook/eAudio/eAudioAdmin/eAudioAdd");
+			mav.setViewName("admin/elibManage/eAudioAdd");
 			return mav;
 		}
 	
@@ -176,7 +176,7 @@ public class AdminAudioController {
 			String cate = bcm.BookLgSelect(0, 7, false);
 			mav.addObject("ablist",ablist);
 			mav.addObject("cateLg",cate);
-			mav.setViewName("ebook/eAudio/eAudioAdmin/audioUpdate");
+			mav.setViewName("admin/elibManage/audioUpdate");
 			return mav;
 		}
 		

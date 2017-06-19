@@ -18,6 +18,7 @@ public class FedexDTO {
 	private String lb_sday;
 	private String lb_eday;
 	
+	
 	public FedexDTO() {
 		super();
 	}

@@ -8,14 +8,25 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="resources/js/jquery-3.2.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/lee/resources/js/alertifyjs/alertify.min.js"></script>
+   <link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/alertify.min.css">
+   <link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/themes/default.min.css">
 </head>
 <style>
 p{
 	font-size : 130%;
 	color : red; 
 }
-table th{
+table>thead>tr>th{
+	font-size: 140%;
 	text-align: center;
+}
+table>tbody>tr>th{
+	font-size: 140%;
+	text-align: center;
+}
+table>tbody>tr>td{
+	font-size: 113%;
 }
 
 </style>
@@ -110,15 +121,14 @@ table th{
 		<fieldset>
 			<legend>${dto.mem_name}님 대출중인 책</legend>
 			<form name="loanList">
-				<table class="table" style = width:800px;>
+				<table class="table table-hover" style = width:800px;>
 				<thead>
 					<tr>
 						<th>도서코드</th>
 						<th>도서명</th>
 						<th>대출일</th>
 						<th>반납예정일</th>
-						<th>연장횟수</th>
-						<th>반납여부</th>
+						<th>대출종류</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -131,18 +141,53 @@ table th{
 					</c:if>
 					<c:forEach var="dto" items="${list}">
 						<tr>
-							<td>${dto.book_idx}</td>
+							<td align="center">${dto.book_idx}</td>
 							<td>${dto.bk_subject}</td>
-							<td>${dto.lb_sday}</td>
-							<td>${dto.lb_eday}</td>
-							<td>${dto.lb_delay}</td>
-							<td>${dto.lb_returnStr}</td>
+							<td align="center">${dto.lb_sday}</td>
+							<td align="center">${dto.lb_eday}</td>
+							<td align="center">${dto.lb_returnStr}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 				</table>	
 				</form>
 		</fieldset>
+		
+		<fieldset>
+			<legend>${dto.mem_name}님 반납한 책</legend>
+			<form name="loanList">
+				<table class="table table-hover" style = width:800px;>
+				<thead>
+					<tr>
+						<th>도서코드</th>
+						<th>도서명</th>
+						<th>대출일</th>
+						<th>반납예정일</th>
+						<th>반납여부</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:if test="${empty list3}">
+						<tr>
+							<td colspan="6" align="center">
+								반납한 도서가 없습니다.
+							</td>
+						</tr>
+					</c:if>
+					<c:forEach var="dto3" items="${list3}">
+						<tr>
+							<td align="center">${dto3.book_idx}</td>
+							<td>${dto3.bk_subject}</td>
+							<td align="center">${dto3.lb_sday}</td>
+							<td align="center">${dto3.lb_eday}</td>
+							<td align="center">${dto3.lb_returnStr}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+				</table>	
+				</form>
+		</fieldset>
+		
 			<h3><span id="banDay"></span></h3><p>${count}회 정지</p><br>
 		<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="btBan" disabled="disabled">회원정지하기</button> &nbsp;
 		<input type="button" class="btn btn-info btn-lg" data-toggle="modal" value="회원정지풀기" id="btUnBan" disabled="disabled" onclick="unban()"> &nbsp;
@@ -154,10 +199,16 @@ $("#memberList").addClass('open').children('ul').show();
 $("#memberList2").addClass('open').children('ul').show();
 
 function memDel(){
-	if(confirm('강제탈퇴 시키시겠습니까?')){
+	alertify.confirm("안내", "강제탈퇴 시키시겠습니까?",
+			  function(){
 		var idx = document.getElementById('mem_idx').value;
 		location.href="memDel.ju?mem_idx="+idx;
-	}
+			  }, // ok function
+			  function(){
+				  console.log("취소함");
+			  } // cancel function
+	);
+	
 }
 
 var dayday = ${dto2.ban_day};
@@ -172,16 +223,21 @@ var dayday = ${dto2.ban_day};
 	}
 	
 function unban(){
-	if(confirm('정지를 해제 하시겠습니까?')){
-		var idx = document.getElementById('mem_idx').value;
-		location.href="banDel.ju?mem_idx="+idx;
-	}
+	alertify.confirm("안내", "정지를 해제 하시겠습니까?",
+			  function(){
+				var idx = document.getElementById('mem_idx').value;
+				location.href="banDel.ju?mem_idx="+idx;
+			  }, // ok function
+			  function(){
+				  console.log("취소함");
+			  } // cancel function
+	);
+	
 }
 
 function banGo(){
 	var idx = document.getElementById('mem_idx').value;
 	var day = document.getElementById('banDate').value;
-	alert(day);
 	
 	if(day=="no"){
 		alert('정지 이유를 선택해주세요');

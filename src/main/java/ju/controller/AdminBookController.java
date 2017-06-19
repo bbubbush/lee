@@ -77,7 +77,7 @@ public class AdminBookController {
 		totalCnt = totalCnt==0?1:totalCnt; // 0이면 1을 반환해주도록 검증
 		int listSize = 10;
 		int pageSize = 5;
-		String pageStr = ju.page.PageModule.pageMake("bookSelList.ju", totalCnt, listSize, pageSize, cp); // 페이징을 위해 저장
+		String pageStr = ju.page.PageModule.pageMakeValueSearch("bookSelList.ju",value, totalCnt, listSize, pageSize, cp); // 페이징을 위해 저장
 		List<BookDTO> list = null;
 		switch(value){
 		case 0: list = bookDao.bookList(cp, listSize); break;

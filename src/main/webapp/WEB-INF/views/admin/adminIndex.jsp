@@ -22,7 +22,7 @@ h2{
 	<tr>
 		<td><a href="memberList.ju"><img src="resources/img/member.png" width="100px"><br>회원관리</a></td>
 		<td><a href="bookList.ju"><img src="resources/img/book.png" width="100px"><br>일반도서관리</a></td>
-		<td><a><img src="resources/img/ebook.png" width="100px"><br>전자도서관리</a></td>
+		<td><a href="elibList.ju"><img src="resources/img/ebook.png" width="100px"><br>전자도서관리</a></td>
 	</tr>
 	<tr>
 		<td><a href="loanbookList.ju"><img src="resources/img/loan.png" width="100px"><br>대출도서관리</a></td>

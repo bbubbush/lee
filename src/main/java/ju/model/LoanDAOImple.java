@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -20,18 +21,73 @@ public class LoanDAOImple implements LoanDAO {
 		this.sqlMap = sqlMap;
 	}
 	
-	public List<LoanDTO> loanList() {
-		List<LoanDTO> list = sqlMap.selectList("loanSELList");
+	public List<LoanDTO> loanList(int cp, int ls) {
+		int startnum=(cp-1)*ls+1;
+		int endnum = cp*ls;
+		Map map = new HashMap();
+		map.put("startnum", startnum);
+		map.put("endnum", endnum);
+		List<LoanDTO> list = sqlMap.selectList("loanSELList",map);
 		return list;
 	}
 	
-	public List<LoanDTO> loanListAfter() {
-		List<LoanDTO> list = sqlMap.selectList("loanSELAfter");
+	public List<LoanDTO> loanListFedex(int cp, int ls) {
+		int startnum=(cp-1)*ls+1;
+		int endnum = cp*ls;
+		Map map = new HashMap();
+		map.put("startnum", startnum);
+		map.put("endnum", endnum);
+		List<LoanDTO> list = sqlMap.selectList("loanSELFedex",map);
 		return list;
+	}
+	
+	public List<LoanDTO> loanListBook(int cp, int ls) {
+		int startnum=(cp-1)*ls+1;
+		int endnum = cp*ls;
+		Map map = new HashMap();
+		map.put("startnum", startnum);
+		map.put("endnum", endnum);
+		List<LoanDTO> list = sqlMap.selectList("loanSELBook",map);
+		return list;
+	}
+	
+	public List<LoanDTO> loanListAfter(int cp, int ls) {
+		int startnum=(cp-1)*ls+1;
+		int endnum = cp*ls;
+		Map map = new HashMap();
+		map.put("startnum", startnum);
+		map.put("endnum", endnum);
+		List<LoanDTO> list = sqlMap.selectList("loanSELAfter",map);
+		return list;
+	}
+	
+	public int getTotalCnt(){
+		int result = sqlMap.selectOne("getTotalCnt");
+		return result;
+	}
+	
+	public int getTotalCntReturn(){
+		int result = sqlMap.selectOne("getTotalCntReturn");
+		return result;
+	}
+	
+	public int getTotalCntBook(){
+		int result = sqlMap.selectOne("getTotalCntBook");
+		return result;
+	}
+	
+	public int getTotalCntFedex(){
+		int result = sqlMap.selectOne("getTotalCntFedex");
+		return result;
 	}
 	
 	public List<LoanDTO> loanList(String mem_idx) {
 		List<LoanDTO> list = sqlMap.selectList("loanSELListmem",mem_idx);
+		return list;
+	}
+	
+	public List<LoanDTO> loanReList(String mem_idx) {
+		List<LoanDTO> list = sqlMap.selectList("loanSELListRemem",mem_idx);
 		return list;
 	}
 	

@@ -24,6 +24,16 @@ private SqlSessionTemplate sqlMap;
 		return list;
 	}
 	
+	public List<SubjectDTO> classList(int cp, int ls){
+		int startnum=(cp-1)*ls+1;
+		int endnum = cp*ls;
+		Map map = new HashMap();
+		map.put("startnum", startnum);
+		map.put("endnum", endnum);
+		List<SubjectDTO> list = sqlMap.selectList("classSELClassP",map);
+		return list;
+	}
+	
 	public List<SubjectDTO> memberCheck(String sj_idx){
 		List<SubjectDTO> list = sqlMap.selectList("classSELMember",sj_idx);
 		return list;
@@ -32,6 +42,11 @@ private SqlSessionTemplate sqlMap;
 	public List<SubjectDTO> teacherInfo(String tc_idx){
 		List<SubjectDTO> list = sqlMap.selectList("classSELInfo",tc_idx);
 		return list;
+	}
+	
+	public int classtotalCnt(){
+		int count = sqlMap.selectOne("classtotalCnt");
+		return count;
 	}
 	
 	public int classNum(String tc_idx){

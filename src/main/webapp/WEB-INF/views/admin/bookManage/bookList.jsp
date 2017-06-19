@@ -19,7 +19,7 @@ table>thead>tr>th{
 	text-align: center;
 }
 table>tbody>tr>td{
-	font-size: 120%;
+	font-size: 113%;
 }
 </style>
 <script type="text/javascript" src="resources/js/jquery-3.2.1.min.js"></script>
@@ -33,7 +33,7 @@ table>tbody>tr>td{
 	
 	<div class="col-md-9" >
 		<h2>도서관리 페이지</h2>
-		<span style="margin-left:83em">
+		<span style="margin-left:82em">
 		<select name="bk_tag" id="bk_tag">
 			<option>====선택====</option>
 			<option value="0">등록순</option>
@@ -43,15 +43,16 @@ table>tbody>tr>td{
 		</span>
 		
 		<form name="listForm">
-		<table cellspacing="0" class="table table-hover" width="1000px">
+		<table cellspacing="0" class="table table-hover">
 		<thead>
 			<tr>
+				<th width="5%">표지</th>
 				<th width="13%">도서코드</th>
-				<th width="25%">도서명</th>
-				<th width="30%">저자명</th>
+				<th width="35%">도서명</th>
+				<th width="17%">저자명</th>
 				<th width="12%">출판사</th>
-				<th width="10%">출간일</th>
-				<th width="10%">파손상태</th>
+				<th width="9%">출간일</th>
+				<th width="9%">파손상태</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -64,12 +65,13 @@ table>tbody>tr>td{
 			</c:if>
 			<c:forEach var="dto" items="${list}">
 				<tr>
-					<td>${dto.bk_idx}</td>
-					<td><a href="bookInfo.ju?bk_idx=${dto.bk_idx}">${dto.bk_subject}</a></td>
+					<td><img src="${dto.bk_url}" width="50px" height="50x"></td>
+					<td align="center">${dto.bk_idx}</td>
+					<td><a href="bookInfo.ju?bk_idx=${dto.bk_idx}">${dto.bk_subject} (${dto.bk_small})</a></td>
 					<td>${dto.bk_writer}</td>
 					<td>${dto.bk_publisher}</td>
-					<td>${dto.bk_writedate}</td>
-					<td id="bk_break">${dto.bk_breakStr}
+					<td align="center">${dto.bk_writedate}</td>
+					<td id="bk_break" align="center">${dto.bk_breakStr}
 					</td>
 				</tr>
 			</c:forEach>
@@ -108,6 +110,7 @@ table>tbody>tr>td{
 <script>
 $("#bkList").addClass('open').children('ul').show();
 $("#bkList2").addClass('open').children('ul').show();
+
 $(document).on('change','#bk_tag',function() {
 	var params = new Object();
 	params.tagNum = document.getElementById('bk_tag').value;

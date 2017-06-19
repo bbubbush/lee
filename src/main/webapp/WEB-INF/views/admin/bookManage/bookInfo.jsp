@@ -89,13 +89,17 @@ table>tbody>tr>td{
 		<form name="bookInfo">
 		<table class="table table-striped">
 			<tr>
-				<td rowspan="6" width="300px"><img src="${dto.bk_url}" width="300px"></td>
+				<td rowspan="7" width="300px"><img src="${dto.bk_url}" width="300px"></td>
+				<th>ISBN</th>
+				<td>${dto.bk_isbn}</td>				
+			</tr>
+			<tr>
 				<th>도서코드</th>
 				<td>${dto.bk_idx}<input type="hidden" name="barcode" id="barcode_input" value="${dto.bk_idx}"></td>
 			</tr>
 			<tr>
 				<th>도서명</th>
-				<td>${dto.bk_subject}</td>
+				<td><b>${dto.bk_subject} (${dto.bk_small})</b></td>
 			</tr>
 			<tr>
 				<th>저자명</th>

@@ -43,7 +43,11 @@
 	<script type="text/javascript" src="/lee/resources/js/jquery.form.js"></script>
 	<script type="text/javascript" src="/lee/resources/js/jquery.ajax-progress.js"></script>
 	<script type="text/javascript">
+	
+	
 		$(function(){
+			$("#bkList").addClass('open').children('ul').show();
+			$("#bkList3").addClass('open').children('ul').show();
 			$(".fileinput-button").click(
 				function() {
 					$("input[name=files]").click();
@@ -354,7 +358,14 @@
 	
 </head>
 <body>
+<%@include file="/WEB-INF/views/admin/adminHeader.jsp" %>
 
+<div class="row">
+	<div class="col-md-2">
+		<%@include file="/WEB-INF/views/admin/adminSideMenu.jsp"%>
+	</div>
+	
+	<div class="col-md-9" >
 	<br><br><br><br>
 	<form action="elibList.ju" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="el_idx">
@@ -430,5 +441,7 @@
 	<div class="text-center">
 		<button type="button" class="btn btn-default" id="formSubmit">도서 만들기</button>
 	</div>
+	</div>
+</div>
 </body>
 </html>

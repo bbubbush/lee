@@ -7,13 +7,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-<table>
+<table class="table">
 	<thead>
     	<tr>
     		<th>이름</th>
     		<th>강의실</th>
     		<th>시작날짜</th>
     		<th>끝나는날짜</th>
+    		<th>수업상태</th>
     	</tr>
     </thead>
     <tbody>
@@ -30,6 +31,7 @@
 				<td>${dto.sj_loc}</td>
 				<td>${dto.sj_sday}</td>
 				<td>${dto.sj_eday}</td>
+				<td>${dto.cStr}</td>
 			</tr>
 		</c:forEach>
     </tbody>

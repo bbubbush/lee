@@ -24,6 +24,8 @@ public class SubjectDTO {
 	private String mem_birth;
 	private String mem_id;
 	private String mem_hp;
+	private int cday;
+	private String cStr;
 	
 	public SubjectDTO() {
 		super();
@@ -31,7 +33,7 @@ public class SubjectDTO {
 
 	public SubjectDTO(String sj_idx, String sj_sum, String tc_idx, String sj_max, String sj_loc, String sj_sday,
 			String sj_eday, String sj_st, String sj_et, String sj_name, String tc_name, String sj_num, Date sj_sd,
-			Date sj_ed, String mem_name, String mem_birth, String mem_id, String mem_hp) {
+			Date sj_ed, String mem_name, String mem_birth, String mem_id, String mem_hp, int cday, String cStr) {
 		super();
 		this.sj_idx = sj_idx;
 		this.sj_sum = sj_sum;
@@ -51,6 +53,8 @@ public class SubjectDTO {
 		this.mem_birth = mem_birth;
 		this.mem_id = mem_id;
 		this.mem_hp = mem_hp;
+		this.cday = cday;
+		this.cStr = cStr;
 	}
 
 	public String getSj_idx() {
@@ -197,7 +201,21 @@ public class SubjectDTO {
 		this.mem_hp = mem_hp;
 	}
 
-	
+	public int getCday() {
+		return cday;
+	}
+
+	public void setCday(int cday) {
+		this.cday = cday;
+	}
+
+	public String getcStr() {
+		return cStr;
+	}
+
+	public void setcStr(String cStr) {
+		this.cStr = cStr;
+	}
 
 	
 	

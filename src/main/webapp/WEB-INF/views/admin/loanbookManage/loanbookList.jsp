@@ -12,12 +12,16 @@
 body{
 	width:90%;
 }
+table>thead>tr>th{
+	font-size: 140%;
+	text-align: center;
+}
 table>tbody>tr>td{
 	font-size: 120%;
 }
 </style>
 </head>
-<body>
+<body id="lbBody">
 
 <div class="container" id="modalForm">
   <!-- Modal -->
@@ -48,7 +52,14 @@ table>tbody>tr>td{
 	
 	<div class="col-md-9" >
 		<h2>대출중인 도서 리스트</h2>
-		
+		<span style="margin-left:82em">
+		<select name="lb_tag" id="lb_tag">
+			<option>====선택====</option>
+			<option value="0">가까운 반납일 순</option>
+			<option value="1">일반대출만</option>
+			<option value="2">택배대출만</option>
+		</select>
+		</span>
 		
 		<form name="loanList">
 		<table id="t1" class="table">
@@ -60,8 +71,7 @@ table>tbody>tr>td{
 				<th>대출자</th>
 				<th>대출일</th>
 				<th>반납예정일</th>
-				<th>연장횟수</th>
-				<th>반납여부</th>
+				<th>대출종류</th>
 				<th>예약자 수</th>
 				<th>예약자 관리</th>
 			</tr>
@@ -69,26 +79,46 @@ table>tbody>tr>td{
 		<tbody>
 			<c:if test="${empty list}">
 				<tr>
-					<td colspan="8" align="center">
+					<td colspan="9" align="center">
 						등록된 도서가 없습니다.
 					</td>
 				</tr>
 			</c:if>
 			<c:forEach var="dto" items="${list}">
 				<tr>
-					<td><input type="checkbox" name="cb" id="cb" value="${dto.mem_id}"><input type="hidden" name="mem_id" value="${dto.mem_id}"></td>
-					<td>${dto.book_idx}<input type="hidden" id="bk_isbn" value="${dto.bk_isbn}"></td>
-					<td>${dto.bk_subject}</td>
-					<td>${dto.mem_name}</td>
-					<td>${dto.lb_sday}</td>
-					<td>${dto.lb_eday}</td>
-					<td>${dto.lb_delay}</td>
-					<td>${dto.lb_returnStr}</td>
-					<td>${dto.bk_yeyak}</td>
-					<td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onclick="modalOpen('${dto.bk_isbn}')" id="yeyakInfo">정보 확인</button></td>
+					<td align="center"><input type="checkbox" name="cb" id="cb" value="${dto.mem_id}"><input type="hidden" name="mem_id" value="${dto.mem_id}"></td>
+					<td align="center">${dto.book_idx}<input type="hidden" id="bk_isbn" value="${dto.bk_isbn}"></td>
+					<td><a href="bookInfo.ju?bk_idx=${dto.book_idx}">${dto.bk_subject} (${dto.bk_small})</a></td>
+					<td align="center">${dto.mem_name}</td>
+					<td align="center">${dto.lb_sday}</td>
+					<td align="center">${dto.lb_eday}</td>
+					<td align="center">${dto.lb_returnStr}</td>
+					<td align="center">${dto.bk_yeyak}</td>
+					<td align="center"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" onclick="modalOpen('${dto.bk_isbn}')" id="yeyakInfo">정보 확인</button></td>
 				</tr>
 			</c:forEach>
 		</tbody>
+		<tfoot align="center">
+			<tr>
+				<td colspan="9">
+				<nav>
+				  <ul class="pagination">
+				    <li>
+				      <a href="#" aria-label="Previous">
+				        <span aria-hidden="true">&laquo;</span>
+				      </a>
+				    </li>
+				    ${pageStr}
+				    <li>
+				      <a href="#" aria-label="Next">
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				    </li>
+				  </ul>
+				</nav>
+				</td>
+			</tr>
+		</tfoot>
 		</table>	
 		<input type="button" value="메일보내기" onclick="mailSend('${dto.mem_id}')" class="btn btn-primary btn-lg">
 		</form>
@@ -103,7 +133,6 @@ table>tbody>tr>td{
 				<th>대출자</th>
 				<th>대출일</th>
 				<th>반납일</th>
-				<th>연장횟수</th>
 				<th>반납여부</th>
 			</tr>
 		</thead>
@@ -117,16 +146,36 @@ table>tbody>tr>td{
 			</c:if>
 			<c:forEach var="dto" items="${list2}">
 				<tr>
-					<td>${dto.book_idx}<input type="hidden" name="mem_id" value="${dto.mem_id}"></td>
-					<td>${dto.bk_subject}</td>
-					<td>${dto.mem_name}</td>
-					<td>${dto.lb_sday}</td>
-					<td>${dto.lb_eday}</td>
-					<td>${dto.lb_delay}</td>
-					<td>${dto.lb_returnStr}</td>
+					<td align="center">${dto.book_idx}<input type="hidden" name="mem_id" value="${dto.mem_id}"></td>
+					<td><a href="bookInfo.ju?bk_idx=${dto.book_idx}">${dto.bk_subject} (${dto.bk_small})</a></td>
+					<td align="center">${dto.mem_name}</td>
+					<td align="center">${dto.lb_sday}</td>
+					<td align="center">${dto.lb_eday}</td>
+					<td align="center">${dto.lb_returnStr}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
+		<tfoot align="center">
+			<tr>
+				<td colspan="7">
+				<nav>
+				  <ul class="pagination">
+				    <li>
+				      <a href="#" aria-label="Previous">
+				        <span aria-hidden="true">&laquo;</span>
+				      </a>
+				    </li>
+				    ${pageStr2}
+				    <li>
+				      <a href="#" aria-label="Next">
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				    </li>
+				  </ul>
+				</nav>
+				</td>
+			</tr>
+		</tfoot>
 		</table>
 		</div>
 	</div>
@@ -144,6 +193,19 @@ function modalOpen(k){
 		}
 	})
 }
+
+$(document).on('change','#lb_tag',function() {
+	var params = new Object();
+	params.tagNum = document.getElementById('lb_tag').value;
+	$.ajax({
+		type : "GET",
+		url : "loanBookSelList.ju",
+		data : params,
+		success : function(args) {
+			document.getElementById("lbBody").innerHTML = args;
+		}
+	});
+});
 
 function mailSend(i){
 	

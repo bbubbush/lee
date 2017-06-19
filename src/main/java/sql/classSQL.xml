@@ -12,6 +12,13 @@
  		SELECT * FROM TEACHER
  	</select>
  	
+ 	<select id="classSELTeacherP" resultType="ju.dto.TeacherDTO">
+ 		SELECT * FROM
+		(SELECT rownum as rnum,a.*from
+ 		(SELECT * FROM TEACHER)a)b
+ 		where rnum<![CDATA[>=]]>#{startnum} and rnum<![CDATA[<=]]>#{endnum}
+ 	</select>
+ 	
  	<insert id="classINSClass" parameterType="ju.dto.SubjectDTO">
  		INSERT INTO SUBJECT VALUES(#{sj_idx},#{sj_sum},#{tc_idx},#{sj_max},#{sj_loc},#{sj_sd},#{sj_ed},#{sj_st},#{sj_et},#{sj_name})
  	</insert>
@@ -24,15 +31,33 @@
 		WHERE SUBJECT.tc_idx=TEACHER.tc_idx AND SUBJECT.sj_idx=A.sj_idx
  	</select>
  	
+ 	<select id="classSELClassP" resultType="ju.dto.SubjectDTO">
+ 		SELECT * FROM
+		(SELECT rownum as rnum,b.*from
+ 		(SELECT SUBJECT.*,A.MEMBERNUM AS sj_num, TEACHER.tc_name
+		FROM SUBJECT,TEACHER,(SELECT STUDENT.sj_idx,COUNT(MEMNUM) AS MEMBERNUM
+		FROM (SELECT * FROM SUBJECT LEFT JOIN (SELECT sj_idx AS MEMNUM FROM REGIST)A ON SUBJECT.sj_idx=A.MEMNUM)STUDENT
+		GROUP BY SJ_IDX)A
+		WHERE SUBJECT.tc_idx=TEACHER.tc_idx AND SUBJECT.sj_idx=A.sj_idx)b)c
+		where rnum<![CDATA[>=]]>#{startnum} and rnum<![CDATA[<=]]>#{endnum}
+ 	</select>
+ 	
  	<select id="classSELMember" resultType="ju.dto.SubjectDTO">
  		select distinct a.sj_idx,mem_hp,mem_name,mem_id,mem_birth
 		from member, (select * from regist where sj_idx=#{sj_idx})a
 		where member.mem_idx=a.mem_idx
  	</select>
 
+	<select id="classtotalCnt" resultType="int">
+		SELECT COUNT(*) AS totalCnt FROM subject
+	</select>
+	
+	<select id="teatotalCnt" resultType="int">
+		SELECT COUNT(*) AS totalCnt FROM teacher
+	</select>
  	
  	<select id="classSELInfo" resultType="ju.dto.SubjectDTO" parameterType="String">
- 		select subject.sj_name, subject.sj_loc, subject.sj_sd, subject.sj_ed from
+ 		select subject.sj_name, subject.sj_loc, subject.sj_sd, subject.sj_ed, sj_ed-SYSDATE as cday from
 		(select * from teacher where teacher.tc_idx=#{tc_idx})a, subject where subject.tc_idx = a.tc_idx
  	</select>
  	

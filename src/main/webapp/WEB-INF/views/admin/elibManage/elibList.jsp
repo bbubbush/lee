@@ -20,7 +20,12 @@
 	<script type="text/javascript" src="/lee/resources/js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="/lee/resources/bootstrapk/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
+
+	
 	$(function() {
+		$("#bkList").addClass('open').children('ul').show();
+		$("#bkList3").addClass('open').children('ul').show();	
+		
 		var el_subject="";
 		var el_writer="";
 		var el_pub="";
@@ -729,10 +734,19 @@
 		var popupSize="width=" + popupWidth + "px,height=" + popupHeight + "px";
 		window.open("/lee/eViewer.ju?el_idx="+el_idx, "eViewer", popupSize);
 	}
+	
+	
 	</script>
 	
 </head>
 <body>
+<%@include file="/WEB-INF/views/admin/adminHeader.jsp" %>
+<div class="row">
+	<div class="col-md-2">
+		<%@include file="/WEB-INF/views/admin/adminSideMenu.jsp"%>
+	</div>
+	
+	<div class="col-md-9" >
 	
 	<table class="table table-striped">
 		<thead>
@@ -808,6 +822,8 @@
 	
 	<div class="text-center" id="pagingDiv">
 	</div>
+	</div>
+</div>
 	
 </body>
 </html>

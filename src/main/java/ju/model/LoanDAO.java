@@ -6,14 +6,20 @@ import ju.dto.OriginalLoanDTO;
 
 public interface LoanDAO {
 
-	public List<LoanDTO> loanList();
-	public List<LoanDTO> loanListAfter();
+	public List<LoanDTO> loanList(int cp, int ls);
+	public List<LoanDTO> loanListFedex(int cp, int ls);
+	public List<LoanDTO> loanListBook(int cp, int ls);
+	public List<LoanDTO> loanListAfter(int cp, int ls);
 	public List<LoanDTO> loanList(String mem_idx);
+	public List<LoanDTO> loanReList(String mem_idx);
 	public int yeyakNum(String bk_isbn);
 	public int loanOne(String bk_idx);
 	public int checkOutGo(LoanDTO dto);
 	public int checkInGo(String bk_idx);
-	
+	public int getTotalCnt();
+	public int getTotalCntReturn();
+	public int getTotalCntBook();
+	public int getTotalCntFedex();
 	/**정보 가져오기*/
 	public List<OriginalLoanDTO> loanInfo(String lb_idx);
 	/**마지막 읽은 쪽 북마크 등록&삭제*/

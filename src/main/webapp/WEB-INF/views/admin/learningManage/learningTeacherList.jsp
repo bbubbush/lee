@@ -92,26 +92,47 @@ table>tbody>tr>td{
 		<tbody>
 			<c:if test="${empty list}">
 				<tr>
-					<td colspan="5" align="center">
+					<td colspan="8" align="center">
 						등록된 강사가 없습니다.
 					</td>
 				</tr>
 			</c:if>
 			<c:forEach var="dto" items="${list}">
 				<tr>
-					<td>${dto.tc_name}<input type="hidden" id="tc_idx" value="${dto.tc_idx}"></td>
-					<td>${dto.tc_birth}</td>
-					<td>${dto.tc_hp}</td>
+					<td align="center">${dto.tc_name}<input type="hidden" id="tc_idx" value="${dto.tc_idx}"></td>
+					<td align="center">${dto.tc_birth}</td>
+					<td align="center">${dto.tc_hp}</td>
 					<td>${dto.tc_addr}</td>
 					<td>${dto.tc_sum}</td>
-					<td>${dto.tc_num}</td>
-					<td>${dto.tc_end}</td>
-					<td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onclick="modalOpen('${dto.tc_idx}')" id="classInfo">수업 확인</button></td>
+					<td align="center">${dto.tc_num}</td>
+					<td align="center">${dto.tc_end}</td>
+					<td align="center"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" onclick="modalOpen('${dto.tc_idx}')" id="classInfo">수업 확인</button></td>
 				</tr>
 			</c:forEach>
 		</tbody>
+		<tfoot align="center">
+			<tr>
+				<td colspan="8">
+				<nav>
+				  <ul class="pagination">
+				    <li>
+				      <a href="#" aria-label="Previous">
+				        <span aria-hidden="true">&laquo;</span>
+				      </a>
+				    </li>
+				    ${pageStr}
+				    <li>
+				      <a href="#" aria-label="Next">
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				    </li>
+				  </ul>
+				</nav>
+				</td>
+			</tr>
+		</tfoot>
 		</table>
-		<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalB" onclick="modalBdd()">강사등록</button>
+		<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalB" onclick="modalBdd()">강사등록</button>
 		</form>
 		</div>
 	</div>
@@ -141,6 +162,8 @@ function modalBdd(){
 		}
 	})
 }
+
+
 
 </script>
 </body>

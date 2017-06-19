@@ -9,9 +9,9 @@
 <!-- jQuery import -->
 <script src="/lee/resources/js/jquery-3.2.1.min.js"></script>
 <!-- jQuery Form Plugin import -->
-<script src="/lee/resources/audio/js/jquery.form.min.js"></script>
-<!-- jQuery MultiFile Plugin import -->
-<script src="/lee/resources/audio/js/jquery.MultiFile.js"></script>
+<!-- <script src="/lee/resources/audio/js/jquery.form.min.js"></script>
+jQuery MultiFile Plugin import
+<script src="/lee/resources/audio/js/jquery.MultiFile.js"></script> -->
 
 <script>
 $(document).ready(function(){
@@ -82,7 +82,14 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-
+<%@include file="/WEB-INF/views/admin/adminHeader.jsp" %>
+<div class="row">
+	<div class="col-md-2">
+		<%@include file="/WEB-INF/views/admin/adminSideMenu.jsp"%>
+	</div>
+	
+	<div class="col-md-9" >
+	
 <h3>오디오 파일 업로드</h3>
 <form name="multiform" id="multiform" action="eAudioAdd2.ju" method="post" enctype="multipart/form-data">
 	<!-- 책 정보 입력 -->
@@ -124,10 +131,12 @@ $(document).ready(function(){
  	<div id="afile3-list" style="border:2px solid #c9c9c9; min-height:50px"></div> 
 	
 	<input type="submit" id="btnSubmit" value="전송" /><br/>
-</form>	
-
+	</form>	
+	</div>
+</div>
 <script>
-
+$("#bkList").addClass('open').children('ul').show();
+$("#bkList3").addClass('open').children('ul').show();	
 /*jQuery form 플러그인을 사용하여 폼데이터를 ajax로 전송*/
 
 var downGroupCnt =0; //다운로드그룹 개수카운트

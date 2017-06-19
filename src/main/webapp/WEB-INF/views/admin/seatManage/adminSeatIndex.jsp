@@ -9,7 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="stylesheet" href="/lee/resources/bootstrapk/css/bootstrap.min.css">
+ <script type="text/javascript" src="/lee/resources/mainMenu/jquery.smartmenus.min.js"></script>
 <style type="text/css">
+container{
+	width: 100px;
+}
 </style>
 <script type="text/javascript" src="/lee/resources/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="/lee/resources/bootstrapk/js/bootstrap.min.js"></script>
@@ -36,25 +40,25 @@
 	<div class="managediv">
 	<div class="col-md-3">
 	<img src="/lee/resources/img/seat1.jpg" width="400px" height="250px">
-		<div class="mrbdiv">
-			<%@include file="manageRrBook.jsp" %>
+		<div class="row" align="center">
+			<div class="col-md-12"><%@include file="manageRrBook.jsp" %></div>
 		</div>
 	</div>
 	<div class="col-md-3" >
 	<img src="/lee/resources/img/seat2.jpg" width="400px" height="250px">
-		<div class="mcbdiv">
-			<%@include file="manageCrBook.jsp" %>
+		<div class="row" align="center">
+			<div class="col-md-12"><%@include file="manageCrBook.jsp" %></div>
 		</div>
 	</div>
-	<div class="col-md-2" >
+	<div class="col-md-3" >
 	<img src="/lee/resources/img/seat3.jpg" width="400px" height="250px">
-		<div class="mrbdiv">
-		<div class="container">
-			<h2>스터디룸 관리</h2>
-			<button type="button" class="btn btn-info btn-lg" onclick="javascript:location.href='adminSrManage.ju';">관리하기</button>
+		<div class="row" align="center">
+			<div class="col-md-12" align="center"><h2>스터디룸 관리</h2>
+					<button type="button" class="btn btn-info btn-lg" onclick="javascript:location.href='adminSrManage.ju';">관리하기</button></div>
 		</div>
-		</div>
+	</div>	
 	</div>
-	</div>
+	
+	
 	</div>
 </body>

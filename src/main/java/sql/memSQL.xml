@@ -18,13 +18,13 @@
 		where rnum<![CDATA[>=]]>#{startnum} and rnum<![CDATA[<=]]>#{endnum}
  	</select>
  	
- 	<!-- <select id="banSELSearch" resultType="ju.dto.BanDTO">
+ 	<select id="banSELSearch" resultType="ju.dto.BanDTO">
  		select * from
 		(select rownum as rnum,b.*from
-		(select a.*, member.mem_name from
+		(select a.*, member.mem_name, member.mem_id, ban_end-sysdate as ban_day from
 		(select * from banlist)a, member where member.mem_idx = a.mem_idx and member.mem_name like #{mem_name} order by ban_start desc)b)c
 		where rnum<![CDATA[>=]]>#{startnum} and rnum<![CDATA[<=]]>#{endnum}
- 	</select> -->
+ 	</select>
  	
  	<select id="memSELInfo" resultType="ju.dto.MemberDTO" parameterType="String">
  		SELECT * FROM MEMBER where mem_idx=#{mem_idx}
@@ -34,8 +34,17 @@
 		SELECT COUNT(*) AS totalCnt FROM MEMBER
 	</select>
 	
+	<select id="memtotalCntSearch" resultType="int" parameterType="String">
+		SELECT COUNT(*) AS totalCnt FROM MEMBER where mem_name like #{mem_name}
+	</select>
+	
 	<select id="memtotalCntBan" resultType="int">
 		SELECT COUNT(*) AS totalCnt FROM BANLIST
+	</select>
+	
+	<select id="memtotalCntBanSearch" resultType="int" parameterType="String">
+		SELECT count(*) from		
+		(select * from banlist)a, member where member.mem_name like #{mem_name} and member.mem_idx = a.mem_idx
 	</select>
 	
 	<select id="banSELList" resultType="ju.dto.BanDTO">

@@ -16,15 +16,7 @@ public class AdminCalendarController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/calex.ju",method=RequestMethod.POST)
-	public ModelAndView calex(String start,String end,String title){
-		System.out.println("startDate:"+start);
-		System.out.println("title:"+title);
-		System.out.println("endDate:"+end);
-		ModelAndView mav=new ModelAndView("admin/calendarManage/calendar");
-		
-		return mav;
-	}
+	
 	
 	
 }

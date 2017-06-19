@@ -160,7 +160,7 @@
 		<input type="hidden" name="mem_idx" id="rrmem_idx" value="${sessionScope.normalMember}">
 		<input type="hidden" name="rr_start_str" id="rr_start">
 		<input type="hidden" name="rr_end_str" id="rr_end">
-		<div class="container">
+		<div>
 			<h2>열람실 관리</h2>
 			<!-- Trigger the modal with a button -->
 			<button type="button" class="btn btn-info btn-lg" data-toggle="modal"
@@ -203,9 +203,9 @@
 							</div>
 							<div id="r2div" style="display: none;" class="rdiv">
 								<table class="tab" id="r2tab">
-									<c:forEach var="row" begin="1" step="1" end="5">
+									<c:forEach var="row" begin="1" step="1" end="8">
 										<tr>
-											<c:forEach var="col" begin="1" step="1" end="11">
+											<c:forEach var="col" begin="1" step="1" end="8">
 												<c:choose>
 													<c:when test="${(col mod 3) eq 0}">
 														<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>

@@ -100,7 +100,7 @@
 		<input type="hidden" name="rr_seatno" id="cr_seatno">
 		<input type="hidden" name="mem_idx" id="crmem_idx" value="${sessionScope.normalMember}">
 		<input type="hidden" name="rr_cate" value="3">
-		<div class="container">
+		<div>
 			<h2>자료실 관리</h2>
 			<!-- Trigger the modal with a button -->
 			<button type="button" class="btn btn-info btn-lg" data-toggle="modal"

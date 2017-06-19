@@ -40,14 +40,29 @@ public class AdminLoanBookController {
 	public FedexDAO fedexDao;
 	
 	@Autowired
-public MemberDAO memberDao;
+	public MemberDAO memberDao;
 
 	
 	// 대출관리 메인페이지로 이동
 		@RequestMapping("/loanbookList.ju")
-		public ModelAndView loanbookList(){
-			List<LoanDTO> list = loanDao.loanList();
-			List<LoanDTO> list2 = loanDao.loanListAfter();
+		public ModelAndView loanbookList(
+				@RequestParam(value="cp",defaultValue="1")int cp,
+				@RequestParam(value="cp2",defaultValue="1")int cp2,
+				@RequestParam(value="tagNum",defaultValue="0")int value){
+			int totalCnt = 0;
+			switch(value){
+			case 0: totalCnt = loanDao.getTotalCnt(); ; break;
+			case 1: totalCnt = loanDao.getTotalCntBook(); break;
+			case 2: totalCnt = loanDao.getTotalCntFedex(); break;
+			}
+			int totalCnt2 = loanDao.getTotalCntReturn();
+			totalCnt = totalCnt==0?1:totalCnt; // 0이면 1을 반환해주도록 검증
+			int listSize = 5;
+			int pageSize = 5;
+			String pageStr = ju.page.PageModule.pageMakeValueSearch("loanbookList.ju",value, totalCnt, listSize, pageSize, cp); // 페이징을 위해 저장
+			String pageStr2 = ju.page.PageModule.pageMake2("loanbookList.ju", totalCnt2, listSize, pageSize, cp2); // 페이징을 위해 저장
+			List<LoanDTO> list = loanDao.loanList(cp, listSize);
+			List<LoanDTO> list2 = loanDao.loanListAfter(cp2, listSize);
 			String dateFormat="yyyy-MM-dd";
 			SimpleDateFormat sdf=new SimpleDateFormat(dateFormat);
 			for(int i=0; i<list.size(); i++){
@@ -55,23 +70,17 @@ public MemberDAO memberDao;
 				list.get(i).setLb_sday(sdDay);
 				String edDay = sdf.format(list.get(i).getLb_ed());
 				list.get(i).setLb_eday(edDay);
-			}
-			
-			for(int i=0; i<list.size(); i++){
+				
 				String bk_isbn = list.get(i).getBk_isbn();
 				System.out.println(bk_isbn);
 				int count = loanDao.yeyakNum(bk_isbn);
 				System.out.println(count);
 				list.get(i).setBk_yeyak(count);
-			}
-			
-			for(int i=0; i<list.size(); i++){
 				int info = list.get(i).getLb_return();
 				
 				switch(info){
-				case 0: list.get(i).setLb_returnStr("반납됨"); break;
-				case 1: list.get(i).setLb_returnStr("일반대출중"); break;
-				case 2: list.get(i).setLb_returnStr("택배대출중"); break;
+				case 1: list.get(i).setLb_returnStr("일반대출"); break;
+				case 2: list.get(i).setLb_returnStr("택배대출"); break;
 				}
 			}
 			
@@ -80,25 +89,89 @@ public MemberDAO memberDao;
 				
 				switch(info){
 				case 0: list2.get(i).setLb_returnStr("반납됨"); break;
-				case 1: list2.get(i).setLb_returnStr("일반대출중"); break;
-				case 2: list2.get(i).setLb_returnStr("택배대출중"); break;
 				}
-			}
-			List<String> sdList2 = new ArrayList<String>();
-			for(int i=0; i<list2.size(); i++){
+				
 				String sdDay = sdf.format(list2.get(i).getLb_sd());
 				list2.get(i).setLb_sday(sdDay);
-			}
-			List<String> edList2 = new ArrayList<String>();
-			for(int i=0; i<list2.size(); i++){
 				String edDay = sdf.format(list2.get(i).getLb_ed());
 				list2.get(i).setLb_eday(edDay);
 			}
 			
 			ModelAndView mav = new ModelAndView("admin/loanbookManage/loanbookList","list",list);
 			mav.addObject("list2",list2);
+			mav.addObject("pageStr",pageStr);
+			mav.addObject("pageStr2",pageStr2);
 			return mav;
 		}
+		
+	// 대출관리 서치박스 메인페이지로 이동
+			@RequestMapping("/loanBookSelList.ju")
+			public ModelAndView loanbookSelList(
+					@RequestParam(value="cp",defaultValue="1")int cp,
+					@RequestParam(value="cp2",defaultValue="1")int cp2,
+					@RequestParam(value="tagNum",defaultValue="0")int value){
+				int totalCnt = 0;
+				switch(value){
+				case 0: totalCnt = loanDao.getTotalCnt(); ; break;
+				case 1: totalCnt = loanDao.getTotalCntBook(); break;
+				case 2: totalCnt = loanDao.getTotalCntFedex(); break;
+				}
+				System.out.println(value);
+				System.out.println(totalCnt);
+				 // 페이징을 위해
+				totalCnt = totalCnt==0?1:totalCnt; // 0이면 1을 반환해주도록 검증
+				int totalCnt2 = loanDao.getTotalCntReturn();
+				int listSize = 5;
+				int pageSize = 5;
+				List<LoanDTO> list = null;
+				switch(value){
+				case 0: list = loanDao.loanList(cp, listSize); break;
+				case 1: list = loanDao.loanListBook(cp, listSize); break;
+				case 2: list = loanDao.loanListFedex(cp, listSize); break;
+				}
+				String pageStr = ju.page.PageModule.pageMakeValueSearch("loanBookSelList.ju",value, totalCnt, listSize, pageSize, cp); // 페이징을 위해 저장
+				String pageStr2 = ju.page.PageModule.pageMake2("loanbookList.ju", totalCnt2, listSize, pageSize, cp2); // 페이징을 위해 저장
+				List<LoanDTO> list2 = loanDao.loanListAfter(cp2, listSize);
+				String dateFormat="yyyy-MM-dd";
+				SimpleDateFormat sdf=new SimpleDateFormat(dateFormat);
+				for(int i=0; i<list.size(); i++){
+					String sdDay = sdf.format(list.get(i).getLb_sd());
+					list.get(i).setLb_sday(sdDay);
+					String edDay = sdf.format(list.get(i).getLb_ed());
+					list.get(i).setLb_eday(edDay);
+					
+					String bk_isbn = list.get(i).getBk_isbn();
+					System.out.println(bk_isbn);
+					int count = loanDao.yeyakNum(bk_isbn);
+					System.out.println(count);
+					list.get(i).setBk_yeyak(count);
+					int info = list.get(i).getLb_return();
+						
+					switch(info){
+					case 1: list.get(i).setLb_returnStr("일반대출"); break;
+					case 2: list.get(i).setLb_returnStr("택배대출"); break;
+					}
+				}
+				
+				for(int i=0; i<list2.size(); i++){
+					int info = list2.get(i).getLb_return();
+						
+					switch(info){
+					case 0: list2.get(i).setLb_returnStr("반납됨"); break;
+					}
+					
+					String sdDay = sdf.format(list2.get(i).getLb_sd());
+					list2.get(i).setLb_sday(sdDay);
+					String edDay = sdf.format(list2.get(i).getLb_ed());
+					list2.get(i).setLb_eday(edDay);
+				}
+					
+				ModelAndView mav = new ModelAndView("admin/loanbookManage/loanbookList","list",list);
+				mav.addObject("list2",list2);
+				mav.addObject("pageStr",pageStr);
+				mav.addObject("pageStr2",pageStr2);
+				return mav;
+			}
 		
 	// 반납페이지로 이동
 		@RequestMapping(value="/checkIn.ju",method=RequestMethod.GET)
@@ -115,7 +188,6 @@ public MemberDAO memberDao;
 			mav.setViewName("admin/loanbookManage/checkOut");
 			return mav;
 		}
-		
 		
 	// 반납도서 정보페이지로 이동
 		@RequestMapping(value="/loanbookInfo2.ju",method=RequestMethod.GET)
@@ -228,7 +300,12 @@ public MemberDAO memberDao;
 		public ModelAndView yeyakList(
 				@RequestParam(value="bk_isbn",defaultValue="0")String bk_isbn){
 			List<YeyakDTO> list = yeyakDao.yeyakList(bk_isbn);
-			System.out.println(list.size());
+			String dateFormat="yyyy-MM-dd";
+			SimpleDateFormat sdf=new SimpleDateFormat(dateFormat);
+			for(int i=0; i<list.size(); i++){
+				String sdDay = sdf.format(list.get(i).getYe_date());
+				list.get(i).setYe_day(sdDay);
+			}
 			ModelAndView mav = new ModelAndView("admin/loanbookManage/yeyakList","list",list);
 			return mav;
 		}

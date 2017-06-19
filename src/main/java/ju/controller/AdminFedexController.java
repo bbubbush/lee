@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.SimpleDateFormat;
@@ -18,7 +19,7 @@ public class AdminFedexController {
 	public FedexDAO fedexDao;
 	
 	@Autowired
-public MemberDAO memberDao;
+	public MemberDAO memberDao;
 
 
 	
@@ -28,24 +29,33 @@ public MemberDAO memberDao;
 	@Autowired
 	public LoanDAO loanDao;
 
+	// 택배대출 메인페이지
 	@RequestMapping("/fedexList.ju")
-	public ModelAndView fedexList(){
-		List<FedexDTO> list = fedexDao.fedexBeforeList();
-		List<FedexDTO> list2 = fedexDao.fedexAfterList();
+	public ModelAndView fedexList(
+			@RequestParam(value="cp",defaultValue="1")int cp,
+			@RequestParam(value="cp2",defaultValue="1")int cp2){
+		int totalCnt = fedexDao.beforeCnt();
+		int totalCnt2 = fedexDao.afterCnt();
+		totalCnt = totalCnt==0?1:totalCnt; // 0이면 1을 반환해주도록 검증
+		int listSize = 5;
+		int pageSize = 5;
+		String pageStr = ju.page.PageModule.pageMake("fedexList.ju", totalCnt, listSize, pageSize, cp); // 페이징을 위해 저장
+		String pageStr2 = ju.page.PageModule.pageMake2("fedexList.ju", totalCnt2, listSize, pageSize, cp2); // 페이징을 위해 저장
+		List<FedexDTO> list = fedexDao.fedexBeforeList(cp, listSize);
+		List<FedexDTO> list2 = fedexDao.fedexAfterList(cp2, listSize);
 		String dateFormat="yyyy-MM-dd";
 		SimpleDateFormat sdf=new SimpleDateFormat(dateFormat);
-		List<String> sdList = new ArrayList<String>();
+		
 		for(int i=0; i<list2.size(); i++){
 			String sdDay = sdf.format(list2.get(i).getLb_sd());
 			list2.get(i).setLb_sday(sdDay);
-		}
-		List<String> edList = new ArrayList<String>();
-		for(int i=0; i<list2.size(); i++){
 			String edDay = sdf.format(list2.get(i).getLb_ed());
 			list2.get(i).setLb_eday(edDay);
 		}
 		ModelAndView mav = new ModelAndView("admin/fedexManage/fedexList","list",list);
 		mav.addObject("list2",list2);
+		mav.addObject("pageStr",pageStr);
+		mav.addObject("pageStr2",pageStr2);
 		return mav;
 	}
 	

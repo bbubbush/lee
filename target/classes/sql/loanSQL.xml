@@ -5,21 +5,81 @@
   
  <mapper namespace="ju.loan">
  	<select id="loanSELList" resultType="ju.dto.LoanDTO">
- 		select distinct a.*, member.mem_name,member.mem_id,book.bk_subject, book.bk_isbn from
+ 		select * from
+		(select rownum as rnum,b.*from
+		(select distinct a.*, member.mem_name,member.mem_id,book.bk_subject, book.bk_isbn, book.bk_small from
 		(select * from loanbook where lb_return!=0)a,member,book 
-		where member.mem_idx=a.mem_idx and book.bk_idx=a.book_idx
+		where member.mem_idx=a.mem_idx and book.bk_idx=a.book_idx order by lb_ed asc)b)c
+		where rnum<![CDATA[>=]]>#{startnum} and rnum<![CDATA[<=]]>#{endnum}
+ 	</select>
+ 	
+ 	<select id="loanSELFedex" resultType="ju.dto.LoanDTO">
+ 		select * from
+		(select rownum as rnum,b.*from
+ 		(select distinct a.*, member.mem_name,member.mem_id,book.bk_subject, book.bk_isbn, book.bk_small from
+		(select * from loanbook where lb_return=2)a,member,book 
+		where member.mem_idx=a.mem_idx and book.bk_idx=a.book_idx order by lb_ed asc)b)c
+		where rnum<![CDATA[>=]]>#{startnum} and rnum<![CDATA[<=]]>#{endnum}
+ 	</select>
+
+ 	<select id="loanSELBook" resultType="ju.dto.LoanDTO">
+ 		select * from
+		(select rownum as rnum,b.*from
+ 		(select distinct a.*, member.mem_name,member.mem_id,book.bk_subject, book.bk_isbn, book.bk_small from
+		(select * from loanbook where lb_return=1)a,member,book 
+		where member.mem_idx=a.mem_idx and book.bk_idx=a.book_idx order by lb_ed asc)b)c
+		where rnum<![CDATA[>=]]>#{startnum} and rnum<![CDATA[<=]]>#{endnum}
  	</select>
  	
  	<select id="loanSELAfter" resultType="ju.dto.LoanDTO">
- 		select distinct a.*, member.mem_name,member.mem_id,book.bk_subject from
-		(select * from loanbook where lb_return=0 order by lb_ed desc)a,member,book 
-		where member.mem_idx=a.mem_idx and book.bk_idx=a.book_idx
+ 		select * from
+		(select rownum as rnum,b.*from
+ 		(select distinct a.*, member.mem_name,member.mem_id,book.bk_subject, book.bk_small from
+		(select * from loanbook where lb_return=0 order by lb_ed desc)a,member,book
+		where member.mem_idx=a.mem_idx and book.bk_idx=a.book_idx)b)c
+		where rnum<![CDATA[>=]]>#{startnum} and rnum<![CDATA[<=]]>#{endnum}
+ 	</select>
+ 		
+ 	<select id="getTotalCnt" resultType="int">
+ 		select count(*) from
+ 		(select * from loanbook where lb_ed>SYSDATE)a,book where book.bk_idx = a.book_idx
+ 	</select>
+ 	
+ 	<select id="getTotalCntReturn" resultType="int">
+ 		select count(*) from
+ 		(select * from loanbook where SYSDATE>lb_ed)a,book where book.bk_idx = a.book_idx
+ 	</select>
+ 	
+ 	<select id="getTotalCntBook" resultType="int">
+ 		select count(*) from
+ 		(select * from loanbook where lb_ed>SYSDATE and lb_return=1)a,book where book.bk_idx = a.book_idx
+ 	</select>
+ 	
+ 	<select id="getTotalCntFedex" resultType="int">
+ 		select count(*) from
+ 		(select * from loanbook where lb_ed>SYSDATE and lb_return=2)a,book where book.bk_idx = a.book_idx
+ 	</select>
+ 	
+ 	<select id="beforeCnt" resultType="int">
+ 		select count(*) from fedex where fedex_num=9
+ 	</select>
+ 	
+ 	<select id="afterCnt" resultType="int">
+ 		select count(*) from
+ 		(select * from fedex where fedex_num!=0)a, loanbook
+ 		where loanbook.lb_idx = a.lb_idx 		 
  	</select>
  		
 	<select id="loanSELListmem" resultType="ju.dto.LoanDTO">
  		select distinct a.*, member.mem_name, book.bk_subject from
 		(select * from loanbook where mem_idx=#{mem_idx} order by lb_ed asc)a,member,book
-		where a.mem_idx = member.mem_idx and book.bk_idx=a.book_idx
+		where a.mem_idx = member.mem_idx and book.bk_idx=a.book_idx and lb_return=1
+ 	</select>
+ 	
+ 	<select id="loanSELListRemem" resultType="ju.dto.LoanDTO">
+ 		select distinct a.*, member.mem_name, book.bk_subject from
+		(select * from loanbook where mem_idx=#{mem_idx} order by lb_ed asc)a,member,book
+		where a.mem_idx = member.mem_idx and book.bk_idx=a.book_idx and lb_return=0
  	</select>
  	
  	<select id="yeSELSun" resultType="int" parameterType="String">
@@ -31,7 +91,7 @@
  	</select>
  	
  	<select id="yeSELList" resultType="ju.dto.YeyakDTO" parameterType="String">
- 		select a.ye_sunbun, member.mem_name,a.mem_idx, a.ye_date from
+ 		SELECT a.ye_sunbun, member.mem_name,a.mem_idx, a.bk_isbn, a.ye_date from
 		(select * from yeyakbook where bk_isbn=#{bk_isbn} and ye_sunbun>0 order by ye_sunbun asc)a, member where member.mem_idx = a.mem_idx
  	</select>
  	

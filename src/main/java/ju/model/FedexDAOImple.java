@@ -17,20 +17,37 @@ private SqlSessionTemplate sqlMap;
 		this.sqlMap = sqlMap;
 	}
 
-	public List<FedexDTO> fedexBeforeList() {
-		List<FedexDTO> list = sqlMap.selectList("fdSELBefore");
+	public List<FedexDTO> fedexBeforeList(int cp, int ls) {
+		int startnum=(cp-1)*ls+1;
+		int endnum = cp*ls;
+		Map map = new HashMap();
+		map.put("startnum", startnum);
+		map.put("endnum", endnum);
+		List<FedexDTO> list = sqlMap.selectList("fdSELBefore",map);
 		return list;
 	}
 	
-	public List<FedexDTO> fedexAfterList() {
-		List<FedexDTO> list = sqlMap.selectList("fdSELAfter");
+	public List<FedexDTO> fedexAfterList(int cp, int ls) {
+		int startnum=(cp-1)*ls+1;
+		int endnum = cp*ls;
+		Map map = new HashMap();
+		map.put("startnum", startnum);
+		map.put("endnum", endnum);
+		List<FedexDTO> list = sqlMap.selectList("fdSELAfter",map);
 		return list;
+	}
+	
+	public int beforeCnt(){
+		int count = sqlMap.selectOne("beforeCnt");
+		return count;
+	}
+	
+	public int afterCnt(){
+		int count = sqlMap.selectOne("afterCnt");
+		return count;
 	}
 	
 	public int fedexCheckOut(FedexDTO dto, String fedex_idx){
-		System.out.println("임플정보"+dto.getBk_idx());
-		System.out.println("임플정보"+dto.getMem_idx());
-		System.out.println("임플정보"+dto.getLb_idx());
 		Map<String,Object> fdMap=new HashMap<String,Object>();
 		fdMap.put("dto", dto);
 		fdMap.put("fedex_idx",fedex_idx);

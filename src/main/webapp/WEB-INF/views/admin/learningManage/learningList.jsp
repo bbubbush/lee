@@ -80,19 +80,40 @@ table>tbody>tr>td{
          <c:forEach var="dto" items="${list}">
             <tr>
                <td>${dto.sj_name}</td>
-               <td>${dto.tc_name}</td>
-               <td>${dto.sj_loc}</td>
-               <td>${dto.sj_sday}</td>
-               <td>${dto.sj_eday}</td>
-               <td>${dto.sj_st}</td>
-               <td>${dto.sj_et}</td>
-               <td>${dto.sj_num} / ${dto.sj_max}</td>
-               <td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onclick="modalOpen('${dto.sj_idx}')">명단확인</button></td>
+               <td align="center">${dto.tc_name}</td>
+               <td align="center">${dto.sj_loc}</td>
+               <td align="center">${dto.sj_sday}</td>
+               <td align="center">${dto.sj_eday}</td>
+               <td align="center">${dto.sj_st}</td>
+               <td align="center">${dto.sj_et}</td>
+               <td align="center">${dto.sj_num} / ${dto.sj_max}</td>
+               <td align="center"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" onclick="modalOpen('${dto.sj_idx}')">명단확인</button></td>
             </tr>
          </c:forEach>
       </tbody>
+      <tfoot align="center">
+			<tr>
+				<td colspan="9">
+				<nav>
+				  <ul class="pagination">
+				    <li>
+				      <a href="#" aria-label="Previous">
+				        <span aria-hidden="true">&laquo;</span>
+				      </a>
+				    </li>
+				    ${pageStr}
+				    <li>
+				      <a href="#" aria-label="Next">
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				    </li>
+				  </ul>
+				</nav>
+				</td>
+			</tr>
+		</tfoot>
       </table>
-      <input type="button" value="수업 등록" onclick="classAdd()">
+      <input type="button" value="수업 등록" onclick="classAdd()" class="btn btn-primary btn-lg">
       </form>
       </div>
    </div>

@@ -11,6 +11,7 @@
 <table class="table">
 	<thead>
 		<tr>
+			<th>ISBN</th>
 			<th>순번</th>
 			<th>예약자</th>
 			<th>예약날짜</th>
@@ -26,9 +27,10 @@
 		</c:if>
 		<c:forEach var="dto" items="${list}">
 			<tr>
+				<td>${dto.bk_isbn}</td>
 				<td>${dto.ye_sunbun}<input type="hidden" id="bk_isbn" value="${dto.bk_isbn}"></td>
 				<td>${dto.mem_name}<input type="hidden" id="mem_idx" value="${dto.mem_idx}"></td>
-				<td>${dto.ye_date}</td>
+				<td>${dto.ye_day}</td>
 			</tr>
 		</c:forEach>
 	</tbody>

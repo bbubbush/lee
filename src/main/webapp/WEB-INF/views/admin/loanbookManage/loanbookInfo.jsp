@@ -15,7 +15,7 @@
 				</tr>
 				<tr>
 					<th>도서명</th>
-					<td>${dto.bk_subject}<input type="hidden" name="bk_isbn" id="bk_isbn" value="${dto.bk_isbn}"></td>
+					<td>${dto.bk_subject} (${dto.bk_small})<input type="hidden" name="bk_isbn" id="bk_isbn" value="${dto.bk_isbn}"></td>
 				</tr>
 				<tr>
 					<th>저자명</th>

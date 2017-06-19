@@ -56,29 +56,50 @@ table>tbody>tr>td{
 			<table class="table">
 			<thead>
 				<tr>
-					<th>신청자</th>
-					<th>도서명</th>
-					<th>택배요청지</th>
-					<th>연락처</th>
-					<th>대출확인</th>
+					<th width="10%">신청자</th>
+					<th width="35%">도서명</th>
+					<th width="35%">택배요청지</th>
+					<th width="10%">연락처</th>
+					<th width="10%">대출확인</th>
 				</tr>
 			<thead>
 			<tbody>
 				<c:if test="${empty list}">
 					<tr>
-						<td colspan="4">요청된 택배대출도서가 없습니다.</td>
+						<td colspan="5">요청된 택배대출도서가 없습니다.</td>
 					</tr>
 				</c:if>
 				<c:forEach var="dto" items="${list}">
 					<tr>
-						<td>${dto.mem_name}<input type="hidden" id="memIdx" value="${dto.mem_idx}"></td>
+						<td align="center">${dto.mem_name}<input type="hidden" id="memIdx" value="${dto.mem_idx}"></td>
 						<td>${dto.bk_subject}<input type="hidden" id="bkIdx" value="${dto.bk_idx}"></td>
 						<td>${dto.mem_addr}<input type="hidden" id="fdIdx" value="${dto.fedex_idx}"></td>
-						<td>${dto.mem_hp}</td>
-						<td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" onclick="modalOpen('${dto.bk_idx}')" id="fedexInfo">정보 확인</button></td>
+						<td align="center">${dto.mem_hp}</td>
+						<td align="center"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" onclick="modalOpen('${dto.bk_idx}')" id="fedexInfo">정보 확인</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>
+			<tfoot align="center">
+			<tr>
+				<td colspan="5">
+				<nav>
+				  <ul class="pagination">
+				    <li>
+				      <a href="#" aria-label="Previous">
+				        <span aria-hidden="true">&laquo;</span>
+				      </a>
+				    </li>
+				    ${pageStr}
+				    <li>
+				      <a href="#" aria-label="Next">
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				    </li>
+				  </ul>
+				</nav>
+				</td>
+			</tr>
+		</tfoot>
 			</table>
 		</form>
 		<hr>
@@ -87,7 +108,7 @@ table>tbody>tr>td{
 			<table class="table">
 			<thead>
 				<tr>
-					<th>신청자</th>
+					<th>대출자</th>
 					<th>도서명</th>
 					<th>택배지</th>
 					<th>연락처</th>
@@ -103,15 +124,36 @@ table>tbody>tr>td{
 				</c:if>
 				<c:forEach var="dto2" items="${list2}">
 					<tr>
-						<td>${dto2.mem_name}</td>
+						<td align="center">${dto2.mem_name}</td>
 						<td>${dto2.bk_subject}</td>
 						<td>${dto2.mem_addr}</td>
-						<td>${dto2.mem_hp}</td>
-						<td>${dto2.lb_sday}</td>
-						<td>${dto2.lb_eday}</td>
+						<td align="center">${dto2.mem_hp}</td>
+						<td align="center">${dto2.lb_sday}</td>
+						<td align="center">${dto2.lb_eday}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
+			<tfoot align="center">
+			<tr>
+				<td colspan="6">
+				<nav>
+				  <ul class="pagination">
+				    <li>
+				      <a href="#" aria-label="Previous">
+				        <span aria-hidden="true">&laquo;</span>
+				      </a>
+				    </li>
+				    ${pageStr2}
+				    <li>
+				      <a href="#" aria-label="Next">
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				    </li>
+				  </ul>
+				</nav>
+				</td>
+			</tr>
+		</tfoot>
 			</table>
 		</div>
 	</div>

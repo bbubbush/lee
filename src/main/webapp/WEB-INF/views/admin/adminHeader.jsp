@@ -8,6 +8,10 @@
 <script type="text/javascript" src="/lee/resources/mainMenu/jquery.smartmenus.min.js"></script>
 <link rel="stylesheet" href="/lee/resources/mainMenu/css/sm-core-css.css">
 <link rel="stylesheet" href="/lee/resources/mainMenu/css/sm-clean/sm-clean.css">
+<!-- jQuery Form Plugin import -->
+<script src="/lee/resources/audio/js/jquery.form.min.js"></script>
+<!-- jQuery MultiFile Plugin import -->
+<script src="/lee/resources/audio/js/jquery.MultiFile.js"></script>
 <style type="text/css">
 	body{
 		width: 90%;

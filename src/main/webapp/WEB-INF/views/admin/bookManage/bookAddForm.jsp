@@ -14,18 +14,30 @@
 <!-- 부가적인 테마 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 </head>
+<style>
+body{
+	width:90%;
+}
+table>tbody>tr>th{
+	font-size: 140%;
+	text-align: center;
+}
+table>tbody>tr>td{
+	font-size: 120%;
+}
+</style>
 <%@include file="/WEB-INF/views/admin/adminHeader.jsp" %>
 <body onload="doOnLoad()">
 <div class="row">
-	<div class="col-md-3">
+	<div class="col-md-2">
 		<%@include file="/WEB-INF/views/admin/adminSideMenu.jsp"%>
 	</div>
 	
-	<div class="col-md-7">
+	<div class="col-md-9" align="center">
 
 <h2>책 등록 페이지</h2>
 <form name="bookAddForm" action="bookAdd.ju" method="post">
-          	<table cellspacing="1" class="table" style="width: 800px">
+          	<table cellspacing="1" class="table">
           		<tr>
 					<td rowspan="8" width="300px">
 						<img src="${image}" width="300px" height="300px">
@@ -69,13 +81,13 @@
 			        </td>
 				</tr>
           	</table>
-          	<table width="800px">
+          	<table class="table">
           		<tr>
           			<th width="10%">책 설명</th>
           			<td width="90%">${description}<input type="hidden" name="bk_info" value="${description}"></td>
           		</tr>
           	</table>
-			<input type="submit" value="책 등록">
+			<input type="submit" value="책 등록" class="btn btn-default btn-lg">
 		</form>
 		</div>
 	</div>

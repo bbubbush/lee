@@ -56,15 +56,15 @@ function updateGo(idx){
 		$(function() {
 			
 			/*사이드바*/
-			$("#emList").removeClass("has-sub");
+			/* $("#emList").removeClass("has-sub");
 			$("#emList>ul").remove();
 			$("#ebList").removeClass("has-sub");
 			$("#ebList>ul").remove();
 			$("#eduList").removeClass("has-sub");
-			$("#eduList>ul").remove();
+			$("#eduList>ul").remove(); */
 			
 			/*사이드바 메뉴 클릭*/
-			$("#abList>ul>li>a").click(
+			/* $("#abList>ul>li>a").click(
 				function(event) {
 					detailSubject="";
 					detailWrite="";
@@ -78,8 +78,8 @@ function updateGo(idx){
 					$("#pagingNav>ul>li").removeClass("active");
 					$("#pagingNav>ul>li").eq(1).addClass("active");
 				}
-			);
-			$("#abList>ul>li>ul>li>a").click(
+			); */
+			/* $("#abList>ul>li>ul>li>a").click(
 				function(event) {
 					detailSubject="";
 					detailWrite="";
@@ -93,7 +93,7 @@ function updateGo(idx){
 					$("#pagingNav>ul>li").removeClass("active");
 					$("#pagingNav>ul>li").eq(1).addClass("active");
 				}
-			);
+			); */
 			
 
 			$("#abList").addClass('open').children('ul').show();
@@ -556,10 +556,11 @@ function updateGo(idx){
 <body>
 <h2>오디오 정보 관리 페이지</h2>
 	<!-- 사이드바+컨텐츠 -->
+	<%@include file="/WEB-INF/views/admin/adminHeader.jsp" %>
 	<div class="row">
-		<div class="col-md-3">
-			<jsp:include page="/WEB-INF/views/ebook/elibSide.jsp"></jsp:include>
-		</div>
+		<div class="col-md-2">
+			<%@include file="/WEB-INF/views/admin/adminSideMenu.jsp"%>
+	</div>
 
 		<!-- 컨텐츠 -->
 		<div class="col-md-8">

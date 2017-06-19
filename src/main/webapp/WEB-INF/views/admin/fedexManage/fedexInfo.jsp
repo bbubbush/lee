@@ -6,40 +6,49 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+table>thead>tr>th{
+	font-size: 140%;
+	text-align: center;
+}
+table>tbody>tr>th{
+	font-size: 140%;
+	text-align: center;
+}
+table>tbody>tr>td{
+	font-size: 113%;
+}
+</style>
 <body>
 <c:set var="dto" value="${dto}"></c:set>
-<h3>${dto.mem_name}님 회원정보</h3>
+<h3 align="center">${dto.mem_name}님 회원정보</h3>
 
 <form name="fedexForm">
 <table class="table">
 	<tr>
 		<th>회원코드</th>
-		<td colspan="3">${dto.mem_idx}<input type="hidden" id="mem_idx" value="${dto.mem_idx}"></td>
-	</tr>
-	<tr>
-		<th>회원ID</th>
-		<td>${dto.mem_id}<input type="hidden" id="mem_name" value="${dto.mem_name}"></td>
+		<td>${dto.mem_idx}<input type="hidden" id="mem_idx" value="${dto.mem_idx}"></td>
 		<th>성별</th>
 		<td><span id="mem_birth"></span></td>
 	</tr>
 	<tr>
+		<th>회원ID</th>
+		<td>${dto.mem_id}<input type="hidden" id="mem_name" value="${dto.mem_name}"></td>
 		<th>전화번호</th>
 		<td>${dto.mem_hp}<input type="hidden" id="mem_hp" value="${dto.mem_hp}"></td>
-		<th>관심사</th>
-		<td>${dto.mem_like}<input type="hidden" id="fedex_idx" value="${fedex_idx}"></td>
 	</tr>
 	<tr>
 		<th>주소</th>
 		<td colspan="3">${dto.mem_addr}<input type="hidden" id="mem_addr" value="${dto.mem_addr}"></td>
 	</tr>
 </table>
-<h2>도서정보</h2>
+<h3 align="center">도서정보</h3>
 <c:set var="dto2" value="${dto2}"></c:set>
 <table class="table">
 	<tr>
 		<td rowspan="6" width="200px"><img src="${dto2.bk_url}" width="200px"></td>
-		<th>도서코드</th>
-		<td>${dto2.bk_idx}<input type="hidden" id="bk_idx" value="${dto2.bk_idx}"></td>
+		<th width="20%">도서코드</th>
+		<td width="50%">${dto2.bk_idx}<input type="hidden" id="bk_idx" value="${dto2.bk_idx}"></td>
 	</tr>
 	<tr>
 		<th>도서명</th>

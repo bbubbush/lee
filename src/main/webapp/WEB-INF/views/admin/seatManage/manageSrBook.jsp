@@ -181,82 +181,225 @@
 .roompath{
 	background-color: black;
 }
+body{
+		width: 90%;
+		margin: auto;
+	}
+	@media (max-width: 768px) {
+		body{
+			width: auto;
+			margin: 0 10%;
+		}
+	}
+	#mainImg{
+		height: 100px;
+		background: yellow;
+	}
+	
+	.main-menu-btn {
+		position: relative;
+		display: inline-block;
+		width: 28px;
+		height: 28px;
+		text-indent: 28px;
+		white-space: nowrap;
+		overflow: hidden;
+		cursor: pointer;
+		-webkit-tap-highlight-color: rgba(0,0,0,0);
+	}
+	/* hamburger icon */
+	.main-menu-btn-icon, .main-menu-btn-icon:before, .main-menu-btn-icon:after {
+		position: absolute;
+		top: 50%;
+		left: 2px;
+		height: 2px;
+		width: 24px;
+		background: #bbb;
+		-webkit-transition: all 0.25s;
+		transition: all 0.25s;
+	}
+	.main-menu-btn-icon:before {
+		content: '';
+		top: -7px;
+		left: 0;
+	}
+	.main-menu-btn-icon:after {
+		content: '';
+		top: 7px;
+		left: 0;
+	}
+	/* x icon */
+	#main-menu-state:checked ~ .main-menu-btn .main-menu-btn-icon {
+		height: 0;
+		background: transparent;
+	}
+	#main-menu-state:checked ~ .main-menu-btn .main-menu-btn-icon:before {
+		top: 0;
+		-webkit-transform: rotate(-45deg);
+		transform: rotate(-45deg);
+	}
+	#main-menu-state:checked ~ .main-menu-btn .main-menu-btn-icon:after {
+		top: 0;
+		-webkit-transform: rotate(45deg);
+		transform: rotate(45deg);
+	}
+	/* hide menu state checkbox (keep it visible to screen readers) */
+	#main-menu-state {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		margin: -1px;
+		border: 0;
+		padding: 0;
+		overflow: hidden;
+		clip: rect(1px,1px,1px,1px);
+	}
+	/* hide the menu in mobile view */
+	#main-menu-state:not(:checked) ~ #main-menu {
+		display: none;
+	}
+	#main-menu-state:checked ~ #main-menu {
+		display: block;
+	}
+	@media (min-width: 768px) {
+		/* hide the button in desktop view */
+		.main-menu-btn {
+			position: absolute;
+			top: -99999px;
+		}
+		/* always show the menu in desktop view */
+		#main-menu-state:not(:checked) ~ #main-menu {
+			display: block;
+		}
+	}
+	
+	@media (min-width: 768px) {
+		#main-menu > li {
+			float: none;
+			display: table-cell;
+			width: 1%;
+			text-align: center;
+		}
+	}
+	
+	.loginColor{
+		color : #0bd392;
+	}
+	.loginColor:HOVER {
+		color: #1aa4ac;
+	}
 </style>
 </head>
 <body>
-<%@include file="/WEB-INF/views/admin/adminHeader.jsp" %>
-
-	<form name="sr_form" action="adminRoomDisabled.ju" method="post">
-	<input type="hidden" name="sr_roomno" id="sr_roomno">
-	<input type="hidden" name="resdate" id="resdate" value="">
-	<div id='calendar' style="width:50%;"></div>
-	<div style="width:40%;">
-
-
-		<h2 id="selectedDate"></h2>
-		<table class="table" border="1" id="roomStatus" style="display:none;">
-			<thead>
-				<tr>
-					<th>&nbsp;</th>
-					<th id="throom1" class="throom">1번방</th>
-					<th id="throom2" class="throom">2번방</th>
-					<th id="throom3" class="throom">3번방</th>
-					<th id="throom4" class="throom">4번방</th>
-				</tr>
-			</thead>
-			<tbody class="rt_check">
-				<tr class="time1" id="timetr">
-					<th>09~12시</th>
-					<td class="room1">empty</td>
-					<td class="room2">empty</td>
-					<td class="room3">empty</td>
-					<td class="room4">empty</td>
-				</tr>
-				<tr class="time2" id="timetr">
-					<th>12~15시</th>
-					<td class="room1">empty</td>
-					<td class="room2">empty</td>
-					<td class="room3">empty</td>
-					<td class="room4">empty</td>
-				</tr>
-				<tr class="time3" id="timetr">
-					<th>15~18시</th>
-					<td class="room1">empty</td>
-					<td class="room2">empty</td>
-					<td class="room3">empty</td>
-					<td class="room4">empty</td>
-				</tr>
-				<tr class="time4" id="timetr">
-					<th>18~21시</th>
-					<td class="room1">empty</td>
-					<td class="room2">empty</td>
-					<td class="room3">empty</td>
-					<td class="room4">empty</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	<div id="s1div" class="sdiv" style="display:none;">
-		<fieldset>
-			<legend>방 정보</legend>
-			<ul>
-				<li>
-					<label>회원번호 : </label>
-					<span id="midx"></span>
-				</li>
-				<li>
-					<label>방번호 : </label>
-					<span id="rno"></span>
-				</li>
-				<li>
-					<label>시간 : </label>
-					<span id="tno"></span>
-				</li>
+<header>
+<p class="text-left"/>
+	<img src="/lee/resources/img/adlogo.png" style=" width:250px;">
+	
+<div class="row">
+		<nav id="main-nav" role="navigation">
+			<input id="main-menu-state" type="checkbox" />
+			<label class="main-menu-btn" for="main-menu-state">
+			  <span class="main-menu-btn-icon"></span> Toggle main menu visibility
+			</label>
+			<ul id="main-menu" class="sm sm-clean">
+				<li><a href="adminIndex.ju"><img src="resources/img/home.png" height="40px"><br>관리자 홈으로</a></li>
+				<li><a href="index.ju"><img src="resources/img/lib.png" height="40px"><br>도서관 홈으로</a></li>
+				<li><a href="memberList.ju"><img src="resources/img/member.png" height="40px"><br>회원관리</a></li>
+				<li><a href="bookList.ju"><img src="resources/img/book.png" height="40px"><br>일반도서관리</a></li>
+				<li><a href="elibList.ju"><img src="resources/img/ebook.png" height="40px"><br>전자도서관리</a></li>
+				<li><a href="loanbookList.ju"><img src="resources/img/loan.png" height="40px"><br>대출도서관리</a></li>
+				<li><a href="adminSeatManage.ju"><img src="resources/img/seat.png" height="40px"><br>이용시설관리</a></li>
+				<li><a href="learningList.ju"><img src="resources/img/learn.png" height="40px"><br>교육관리</a></li>
+				<li><a href="fedexList.ju"><img src="resources/img/fedex.png" height="40px"><br>택배대출관리</a></li>
+				<li><a href="calendar.ju"><img src="resources/img/calendar.png" height="40px"><br>캘린더관리</a></li>
 			</ul>
-		</fieldset>
+		</nav>
+</div> 
+</header>
+
+<div class="row">
+	<div class="col-md-2">
+		<%@include file="/WEB-INF/views/admin/adminSideMenu.jsp"%>
 	</div>
-	<button type="submit" class="btn btn-success" id="srBooking" disabled="disabled">예약 정지하기</button>
-	<button type="button" class="btn btn-danger" id="srCancel" style="display:none;">예약 취소하기</button>
-	</form>
+		<div class="col-md-5">
+		
+		<div id='calendar' ></div>
+		</div>
+		<div class="col-md-4">
+		<form name="sr_form" action="adminRoomDisabled.ju" method="post">
+		<input type="hidden" name="sr_roomno" id="sr_roomno">
+		<input type="hidden" name="resdate" id="resdate" value="">
+		
+		<div>
+	
+	
+			<h2 id="selectedDate"></h2>
+			<table class="table" border="1" id="roomStatus" style="display:none;">
+				<thead>
+					<tr>
+						<th>&nbsp;</th>
+						<th id="throom1" class="throom">1번방</th>
+						<th id="throom2" class="throom">2번방</th>
+						<th id="throom3" class="throom">3번방</th>
+						<th id="throom4" class="throom">4번방</th>
+					</tr>
+				</thead>
+				<tbody class="rt_check">
+					<tr class="time1" id="timetr">
+						<th>09~12시</th>
+						<td class="room1">empty</td>
+						<td class="room2">empty</td>
+						<td class="room3">empty</td>
+						<td class="room4">empty</td>
+					</tr>
+					<tr class="time2" id="timetr">
+						<th>12~15시</th>
+						<td class="room1">empty</td>
+						<td class="room2">empty</td>
+						<td class="room3">empty</td>
+						<td class="room4">empty</td>
+					</tr>
+					<tr class="time3" id="timetr">
+						<th>15~18시</th>
+						<td class="room1">empty</td>
+						<td class="room2">empty</td>
+						<td class="room3">empty</td>
+						<td class="room4">empty</td>
+					</tr>
+					<tr class="time4" id="timetr">
+						<th>18~21시</th>
+						<td class="room1">empty</td>
+						<td class="room2">empty</td>
+						<td class="room3">empty</td>
+						<td class="room4">empty</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div id="s1div" class="sdiv" style="display:none;">
+			<fieldset>
+				<legend>방 정보</legend>
+				<ul>
+					<li>
+						<label>회원번호 : </label>
+						<span id="midx"></span>
+					</li>
+					<li>
+						<label>방번호 : </label>
+						<span id="rno"></span>
+					</li>
+					<li>
+						<label>시간 : </label>
+						<span id="tno"></span>
+					</li>
+				</ul>
+			</fieldset>
+		</div>
+		<button type="submit" class="btn btn-success" id="srBooking" disabled="disabled">예약 정지하기</button>
+		<button type="button" class="btn btn-danger" id="srCancel" style="display:none;">예약 취소하기</button>
+		</form>
+		</div>
+		</div>
+
 </body>
 </html>

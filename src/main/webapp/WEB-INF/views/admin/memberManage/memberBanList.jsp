@@ -101,8 +101,8 @@ $(document).on('click','#mem_search',function() {
 	var params = new Object();
 	params.mem_name = document.getElementById('mem_name').value;
 	$.ajax({
-		type : "POST",
-		url : "memberBanList.ju",
+		type : "GET",
+		url : "memberBanSearchList.ju",
 		data : params,
 		success : function(args) {
 			document.getElementById("memBanList").innerHTML=args;

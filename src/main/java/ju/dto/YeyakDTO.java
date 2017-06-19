@@ -9,6 +9,7 @@ public class YeyakDTO {
 	private Date ye_date;
 	private int ye_sunbun;
 	private String mem_name;
+	private String ye_day;
 	
 	public YeyakDTO() {
 		super();
@@ -22,6 +23,7 @@ public class YeyakDTO {
 		this.ye_date = ye_date;
 		this.ye_sunbun = ye_sunbun;
 		this.mem_name = mem_name;
+		this.ye_day = ye_day;
 	}
 
 	public String getYe_idx() {
@@ -70,6 +72,14 @@ public class YeyakDTO {
 
 	public void setMem_name(String mem_name) {
 		this.mem_name = mem_name;
+	}
+
+	public String getYe_day() {
+		return ye_day;
+	}
+
+	public void setYe_day(String ye_day) {
+		this.ye_day = ye_day;
 	}
 	
 	
