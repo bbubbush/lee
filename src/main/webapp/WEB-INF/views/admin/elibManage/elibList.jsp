@@ -26,6 +26,9 @@
 	
 	<script type="text/javascript">
 	$(function() {
+		$("#bkList").addClass("open").children("ul").show();
+		$("#bkList3").addClass("open").children("ul").show();
+		
 		var el_subject="";
 		var el_writer="";
 		var el_pub="";
@@ -186,13 +189,8 @@
 					intoHTML+='							</td>';
 					intoHTML+='						</tr>';
 					intoHTML+='						<tr>';
-<<<<<<< HEAD
 					intoHTML+='							<th class="col-md-3">추천인 IDX</th>';
 					intoHTML+='							<td class="col-md-8">' + elibArr[i].el_recommend.split("~").join("<br>") + '</td>';
-=======
-					intoHTML+='							<th>추천인 IDX</th>';
-					intoHTML+='							<td>' + elibArr[i].el_recommend.split("~").join("<br>") + '</td>';
->>>>>>> 7a5c6140c7e2cd754c632f04abd7e83b4f64aa42
 					intoHTML+='						</tr>';
 					intoHTML+='						<tr>';
 					intoHTML+='							<th class="col-md-3">추천수</th>';
@@ -201,10 +199,6 @@
 					intoHTML+='						<tr>';
 					intoHTML+='							<th class="col-md-3">대여 회원 IDX</th>';
 					intoHTML+='							<td class="col-md-8">' + members[i].split("~").join("<br>") + '</td>';
-					intoHTML+='						</tr>';
-					intoHTML+='						<tr>';
-					intoHTML+='							<th>대여 회원 IDX</th>';
-					intoHTML+='							<td>' + members[i].split("~").join("<br>") + '</td>';
 					intoHTML+='						</tr>';
 					intoHTML+='					</table>';
 					intoHTML+='				</div> <!-- table 위 div -->';
@@ -271,7 +265,6 @@
 						}
 					}
 				);
-
 				// 삭제 후 다시 자기 페이지로
 				$(".btn-danger").click(
 					function() {
@@ -384,7 +377,6 @@
 						var groupNum=$(".contentTable:eq("+num+")>tbody>tr>td:eq(5)>label>input[name=contentGroup_"+num+"]:checked").val();
 						var el_lg=$("#cateLg_"+num).val();
 						var el_md=$("#cateMd_"+num).val();
-
 						if(el_subject.length==0){
 							alertify.alert("Error", "제목을 입력하지 않으셨습니다."
 								, function() {
@@ -439,12 +431,9 @@
 								$("#cateMd_"+num).prop("disabled", "disabled");
 								$("#tdLg_"+num).data("md", data.elibArr.el_md);
 								$("#tdMd_"+num).data("md", data.elibArr.el_md);
-<<<<<<< HEAD
 								
 								$(".contentTable:eq("+num+")>tbody>tr>td:eq(10)").html(data.members);
 								
-=======
->>>>>>> 7a5c6140c7e2cd754c632f04abd7e83b4f64aa42
 								cateLg=$("#tdLg_"+num).html();
 								cateMd=$("#tdMd_"+num).html();
 								
@@ -883,18 +872,18 @@
 </head>
 <body>
 	
-	<!-- 헤더 -->
+	<jsp:include page="/WEB-INF/views/admin/adminHeader.jsp"></jsp:include>
 	
 	<div class="row">
 		<div class="col-md-3">
-			<!-- 사이드바 부분 -->
+			<jsp:include page="/WEB-INF/views/admin/adminSideMenu.jsp"></jsp:include>
 		</div>
 	
 		<div class="col-md-8">
 			<table class="table table-striped">
 				<thead>
 					<tr>
-						<th class="text-center" colspan="2">전자 도서 검색</th>
+						<th class="text-center" colspan="2" style="font-size: x-large;">전자 도서 검색</th>
 					</tr>
 				</thead>
 				<tbody>

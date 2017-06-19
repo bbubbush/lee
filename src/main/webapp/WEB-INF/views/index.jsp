@@ -22,8 +22,8 @@
 	<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/alertify.min.css">
 	<link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/themes/default.min.css">
 	<link rel="stylesheet" href="/lee/resources/index/index.css">
-
-	
+	<!-- 상훈이꺼 검색 관련 -->
+	<script type="text/javascript" src="/lee/resources/find/js/bkList.js"></script>
     
   <script>
   $(function(){
@@ -310,6 +310,19 @@
         	
         	
         });
+        
+        function gopage(){ 
+        	 var input = $("#search-input").val();
+        		alert(input+'과 엔터입력!'); 
+        	 if(input==null || input==""){
+        		 alert('검색어를 입력해 주세요!');
+        	 }else{
+        		 bkDetailSearch1(input, 99, "", "", "", 1);
+        	 }
+        }
+        
+
+        	
    
         </script>
   <style>
@@ -484,7 +497,7 @@ table {
 				 	 <span class="input-group-addon" id="sizing-addon1">
 					 	 <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
 					 	 </span>
-				 	 <input id="search-input" type="text" class="form-control" placeholder="검색어 입력" aria-describedby="sizing-addon1">
+				 	 <input id="search-input" type="text" class="form-control" placeholder="검색어 입력후 엔터!" aria-describedby="sizing-addon1" onkeypress="javascript:if(event.keyCode==13){gopage(); return false;}">
 				 	 <span id="search-statusBar">
 				 	 	<span id="search-status" class="glyphicon glyphicon-search btn-lg"></span>
 				 	 </span> 
@@ -495,7 +508,16 @@ table {
  </div>
  
 </div>
-  
+ <div class="row">
+ 	<div class="col-md-12" id="searchresult">
+ 		<!-- 일반도서 검색결과 -->
+ 		<table class="table table-hover">
+			<tbody id="tbody">
+			
+			</tbody>
+		</table>
+ 	</div>
+ </div>
   <!-- 첫번째줄 -->
 <div class="container-fluid bg-3 text-center">    
   <!-- <h3>Some of my Work</h3><br> -->

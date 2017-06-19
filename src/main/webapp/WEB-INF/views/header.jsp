@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="/lee/resources/index/index.css">
 <!-- 음성인식 -->
 	<script src="/lee/resources/index/main.js"></script>
-	<link href="lee/resources/audio/void/css/main.css" rel="stylesheet" type="text/css" />
+	<link href="lee/resources/audio/voice/css/main.css" rel="stylesheet" type="text/css" />
 	
     <script src="/lee/resources/audio/voice/js/highlight.min.js"></script>
     <script src="/lee/resources/audio/voice/js/DetectRTC.js"></script>
