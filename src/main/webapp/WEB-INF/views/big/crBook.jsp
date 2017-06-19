@@ -69,7 +69,6 @@
 </head>
 <body>
    <form name="cr_form">
-      <div class="container">
          <h2>자료실 현황</h2>
          <!-- Trigger the modal with a button -->
          <button type="button" class="glyphicon glyphicon-search btn btn-info btn-lg" data-toggle="modal"
@@ -149,7 +148,6 @@
             </div>
          </div>
 
-      </div>
    </form>
 </body>
 </html>

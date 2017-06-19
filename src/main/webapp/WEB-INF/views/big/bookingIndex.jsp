@@ -125,7 +125,7 @@ ul{
       <div class="crBook col-md-3">
          <%@include file="crBook.jsp" %>
       </div>
-      <div class="srBook container col-md-4">
+      <div class="srBook col-md-4">
          <h2>스터디룸 예약 이용</h2>
          <button type="button" class="glyphicon glyphicon-calendar btn btn-info btn-lg " onclick="javascript:location.href='/lee/srBook.ju';">&nbsp;예약하기</button>
       </div>

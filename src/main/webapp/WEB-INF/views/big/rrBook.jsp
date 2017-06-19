@@ -109,7 +109,6 @@
 </head>
 <body>
    <form name="rr_form">
-      <div class="container">
          <h2>열람실 현황</h2>
          <!-- Trigger the modal with a button -->
          <button type="button" class="glyphicon glyphicon-search btn btn-info btn-lg" data-toggle="modal"
@@ -242,7 +241,6 @@
             </div>
          </div>
 
-      </div>
    </form>
 </body>
 </html>

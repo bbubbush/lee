@@ -165,6 +165,7 @@ $.ajax({
 		
 		
 		$('#tbody').html(str);
+		alert("tbody에 넣어지는 구문 실행됨!");
 		bkView();
 	}
 });

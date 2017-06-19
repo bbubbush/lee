@@ -41,6 +41,7 @@ public class FindController {
 			@RequestParam(value="bk_writer", defaultValue="")String bk_writer,
 			@RequestParam(value="bk_publisher", defaultValue="")String bk_publisher,
 			@RequestParam(value="page", defaultValue="1")int page){
+		System.out.println("껀뜨롤러 드러왔네욥~~~~");
 		if( !("".equals(query)) ){
 			log.info(query+"/");
 		}

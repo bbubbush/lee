@@ -311,13 +311,207 @@
         	
         });
         
+        function bkDetailSearch2(query, bk_lg, bk_md, bk_publisher, bk_writer, page){
+        	$('#tbody').html("");
+        	$.ajax({
+        		type: "GET",
+        		url: "bkDetailSearch.ju",
+        		data: {'query' : query, 'page' : page, 'bk_lg' : bk_lg, 'bk_md' : bk_md, 'bk_writer' : bk_writer, 'bk_publisher' : bk_publisher},
+        		dataType: "json",
+        		success: function(list){
+        			var values = list.list;
+        			var str = "";
+        			str+='<tr><td><h4>일반도서 검색결과</h4></td></tr>';
+        				if(values.length==0){
+        					str+='<tr data-idx="none">';
+    						str+='	<td class="text-center" style="text-align:center;">';
+    						str+='		<div class="alert alert-warning" role="alert">검색 결과가 없습니다.</div>';
+    						str+='	</td>';
+    						str+='</tr>';
+        				}else{
+        					$.each(values, function(index, value){
+        						str+='<tr>'
+        							+'<td data-subject="'+value.bk_subject+'">'
+        							+'<div class="media padding1">'
+        							+'		<div class="media-left media-middle">'
+        							+'				<img class="media-object" src="'+value.bk_url+'" alt="책이미지" width="100px" height="130">'
+        							+'	</div>'
+        							+'	<div class="media-body">'
+        							+'		<h4 class="media-heading">'+value.bk_subject+'</h4>'
+        							+'		<div class="row">'
+        							+'			<div class="col-md-2">글쓴이</div>'
+        							+'			<div class="col-md-10">'+value.bk_writer+'</div>'
+        							+'			<div class="col-md-2">출판사</div>'
+        							+'			<div class="col-md-10">'+value.bk_publisher+'</div>'
+        							+'				<div class="col-md-12 ">간략소개</div>'
+        							+'			<dl class="col-md-12 dl-horizontal"> '
+        							+'				<dt>'+value.bk_info+'</dt>'
+        							+'			</dl>'
+        							+'		</div>'
+        							+'	</div>'
+        							+'</div>'
+        							+'</td>'
+        							+'</tr>';
+        					})
+        					str+='<tr>'
+        						+'<td class="text-center">'
+        						+'<nav>'
+        						+'  <ul class="pagination">';
+        					if(list.page<=1){
+        						str+='<li class="disabled">'
+        							+'      <a  aria-label="Previous">'
+        							+'        <span aria-hidden="true">&laquo;</span>'
+        							+'      </a>'
+        							+'    </li>';
+        					}else{
+        						str+='  <li>'
+        							+'      <a  aria-label="Previous" onclick="pageMove('+(list.page-1)+')">'
+        							+'        <span aria-hidden="true">&laquo;</span>'
+        							+'      </a>'
+        							+'    </li>';
+        					}
+        					
+        					for(i=list.startPage; i<= list.endPage; i=i+1){
+        						if(i==list.page){
+        							str += '<li class="active"><a>'+i+'</a></li>';
+        						}else{
+        							str+='    			<li><a  onclick="pageMove('+i+')">'+i+'</a></li>';
+        						}
+        					}
+        					
+        					if(list.page>=list.endPage){
+        						str+='    <li class="disabled">'
+        							+'      <a  aria-label="Next">'
+        							+'        <span aria-hidden="true">&raquo;</span>'
+        							+'      </a>'
+        							+'    </li>';
+        					}else{
+        						str+='  	<li>'
+        							+'      <a  aria-label="Next" onclick="pageMove('+(list.page+1)+')">'
+        							+'        <span aria-hidden="true">&raquo;</span>'
+        							+'      </a>'
+        							+'    </li>';
+        					}
+        					str+='  </ul>'
+        						+'						</nav>'
+        						+'</td>'
+        						+'</tr>';
+        					
+        				} //else 
+        			
+        			
+        			$('#tbody').html(str);
+        			
+        			bkView();
+        		},
+		        error: function(request,status,error){
+		        	
+		        	alertify.alert("","code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		        	 
+		        }
+        	});
+        	}
+        
+        var simpleSearchText="";
+		/*단순 검색 Ajax*/
+		function elibSearchAjax(simpleSearchText, page, orderName){
+			$.ajax({
+				type : "GET"
+				, url : "elibSimpleSearch.ju"
+				, data : {simpleSearchText : simpleSearchText, page : page, orderName : orderName, idxParam : "EB"}
+				, dataType : "json"
+				, success : function(data){
+					var arr=data.elibArr;
+					var intoHTML="";
+					intoHTML+='<tr><td><h4>전자도서 검색결과</h4></td></tr>';
+					if(arr.length==0){
+						intoHTML+='<tr data-idx="none">';
+						intoHTML+='	<td class="text-center" style="text-align:center;">';
+						intoHTML+='		<div class="alert alert-warning" role="alert">검색 결과가 없습니다.</div>';
+						intoHTML+='	</td>';
+						intoHTML+='</tr>';
+					}
+					for(var i=0 ; i<arr.length ; i++){
+						intoHTML+='<tr data-idx=' + arr[i].el_idx + '>';
+						intoHTML+='	<td>';
+						intoHTML+='		<div class="media">';
+						intoHTML+='			<div class="media-left media-middle text-center">';
+						intoHTML+='				<img class="media-object" src=" ' + arr[i].el_path + ' " style="width: 97px; height: 110px;"><br>';
+						intoHTML+='			</div>';
+						intoHTML+='			<div class="media-body">';
+						intoHTML+='				<h4 class="media-heading"> ' + arr[i].el_subject + ' </h4>';
+						intoHTML+='				<div class="row">';
+						intoHTML+='					<div class="col-md-2">저자</div>';
+						intoHTML+='					<div class="col-md-10"> ' + arr[i].el_writer + ' </div>';
+						intoHTML+='					<div class="col-md-2">추천 수</div>';
+						intoHTML+='					<div class="col-md-10"> ' + arr[i].el_recocount + ' </div>';
+						intoHTML+='				</div>';
+						intoHTML+='				<div class="row info">';
+						intoHTML+='					<div class="col-md-12">';
+						intoHTML+='						<dl>';
+						intoHTML+='							<dt>간략소개</dt>';
+						intoHTML+='							<dd>';
+						intoHTML+= arr[i].el_info;
+						intoHTML+='							</dd>';
+						intoHTML+='						</dl>';
+						intoHTML+='					</div>';
+						intoHTML+='				</div><!-- class info -->';
+						intoHTML+='			</div><!-- class media-body -->';
+						intoHTML+='		</div><!-- class media -->';
+						intoHTML+='	</td>';
+						intoHTML+='</tr>';
+					}
+					$("#contentTbody").html(intoHTML);
+					$("#pagingNav").html(data.paging);
+					$("#pagingNav").removeClass().addClass("simple");
+					if($("#contentTbody>tr").eq(0).data("idx")!="none"){
+						/* contentClick(); */
+					}
+					
+					$("#pagingNav>ul>li").removeClass("active");
+					var pagingLength=$("#pagingNav>ul>li").length;
+					for(var i=0 ; i<pagingLength ; i++){
+						
+						if( $("#pagingNav>ul>li").eq(i).data("page")==page ){
+							$("#pagingNav>ul>li").eq(i).addClass("active");
+						}
+					}
+					
+					$("#pagingNav>ul>li").click(
+						function() {
+							var page=$(this).data("page");
+							/*해당 버튼 사용 불가*/
+							if($(this).hasClass("disabled")==true || $(this).hasClass("active")==true){
+								return null;
+							}
+							$("body").scrollTop(0);
+							/*<< >> 판단*/
+							if( page=="before" || page=="after" ){
+								if( page=="before" ){ page=$(this).next().data("page")-1; }
+								else if( page=="after" ){ page=$(this).prev().data("page")+1; }
+							}
+							else{
+								$("#pagingNav>ul>li").removeClass("active");
+								$(this).addClass("active");
+							}
+							/*어떤 검색인지 표기*/
+							elibSearchAjax(simpleSearchText, page, orderName);
+						} // click function
+					); // click
+					
+				} // success function
+			});
+		}
+        
         function gopage(){ 
         	 var input = $("#search-input").val();
         		alert(input+'과 엔터입력!'); 
         	 if(input==null || input==""){
         		 alert('검색어를 입력해 주세요!');
         	 }else{
-        		 bkDetailSearch1(input, 99, "", "", "", 1);
+        		 bkDetailSearch2(input, 99, 99, "", "", 1);
+        		 elibSearchAjax(input, 1, "new");
+        		 /* $("#pagingNav>ul>li"). */
         	 }
         }
         
@@ -512,10 +706,25 @@ table {
  	<div class="col-md-12" id="searchresult">
  		<!-- 일반도서 검색결과 -->
  		<table class="table table-hover">
+ 			<thead>
+ 				
+ 			</thead>
 			<tbody id="tbody">
 			
 			</tbody>
 		</table>
+		<table class="table table-hover">
+			<thead>
+ 				
+ 			</thead>
+				<tbody id="contentTbody">
+					
+				</tbody>
+				<tfoot id="pagingNav" style="text-align:center">
+				
+				</tfoot>
+		</table>
+		<!-- 전자도서 검색결과 -->
  	</div>
  </div>
   <!-- 첫번째줄 -->

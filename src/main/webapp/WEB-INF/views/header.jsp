@@ -18,7 +18,7 @@
     
 <style type="text/css">
 	body{
-		width: 90%;
+		width: 1024px;
 		margin: auto;
 		overflow-y: scroll; 
 	}
@@ -243,9 +243,7 @@
 				</li>
 				<li><a href="/lee/bookingIndex.ju">이용예약</a>
 					<ul>
-						<li><a href="/lee/rrBook.ju">열람실</a></li>
-						<li><a href="/lee/srBook.ju">스터디룸</a></li>
-						<li><a href="/lee/crBook.ju">자료실예약</a></li>
+						<li><a href="/lee/srBook.ju">스터디룸 예약</a></li>
 					</ul>
 				</li>
 				<li><a href="/lee/learningIndex.ju">평생교육</a></li>
@@ -255,7 +253,7 @@
 						<li><a href="/lee/missingList.ju">분실물</a></li>
 						<li><a href="/lee/faqList.ju">FAQ</a></li>
 						<li><a href="/lee/questList.ju">QnA</a></li>
-						<li><a href="/lee/orderBkList.ju">희망도서신청</a></li>
+						<li><a href="/lee/orderbookList.ju">희망도서신청</a></li>
 						<li><a href="/lee/reviewList.ju">책추천 및 감상평</a></li>
 					</ul>
 				</li>

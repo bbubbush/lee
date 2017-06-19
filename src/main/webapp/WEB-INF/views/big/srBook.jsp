@@ -44,6 +44,7 @@
 		defaultDate: moment().format('YYYY-MM-DD'),
 		selectable: true,
 		selectHelper: true,
+		height: 450,
 		select: function(start) {
 			var eventData = {start:start.format('YYYY-MM-DD')};
 			var startDate = start.format("YYYY-MM-DD");
@@ -242,6 +243,32 @@
 
 </script>
 <style type="text/css">
+@media ( min-width :769px) {
+   #changeForm {
+      width: 100%;
+   }
+   #submenulabel {
+      width: 675px;
+      height: 134px;
+   }
+}
+
+@media ( max-width :1250px) {
+	#cssmenu {
+		width: 100%;
+	}
+	#changeForm {
+		width: 100%;
+	}
+	#guideTable {
+		width: 100%;
+		height: 134px;
+	}
+	.srRoomhead{
+		width: 100%;
+		height: 120px;
+	}
+}
 .modal-body {
    width: 350px;
    height: 400px;
