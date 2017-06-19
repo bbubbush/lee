@@ -70,8 +70,6 @@ public class adminLearnigController {
 			Long unixTime=System.currentTimeMillis();
 			String sj_idx="SJ"+unixTime;
 			dto.setSj_idx(sj_idx);
-			System.out.println("dto.getSj_sd()"+dto.getSj_sd());
-			System.out.println("dto.getSj_ed()"+dto.getSj_ed());
 			int result = subjectDao.classAdd(dto);
 			String msg = result>0?"수업 등록":"수업 등록 실패";
 			ModelAndView mav = new ModelAndView("admin/adminMsg","msg",msg);
