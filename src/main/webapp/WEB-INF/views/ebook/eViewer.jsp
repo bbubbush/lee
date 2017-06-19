@@ -57,6 +57,14 @@
 		$(function() {
 			window.moveTo(0,0);
 			
+			var getURL=document.location.href.split("#");
+			var getBookMark="#"+getURL[getURL.length-1];
+			var starPage=1;
+			if(getBookMark.indexOf("h")!=1){
+				var starPages=getBookMark.split("/");
+				starPage=starPages[starPages.length-1];
+			}
+			
 			//single book
 			$('#mybook').booklet(
 				{
@@ -75,7 +83,7 @@
 					, play: "#customPlay"
 					, pause: "#customPause"
 					, delay: 1000
-					/* , startingPage : 10 시작 페이지*/
+					, startingPage : starPage
 				}
 			);
 			$("#customPause").click().css("display", "none");
