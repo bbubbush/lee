@@ -19,12 +19,13 @@ public class PageModule {
 		if(cp%pageSize==0) userGroup--;
 		
 		if(userGroup!=0){
-			sb.append("<li><a href='");
+			
+			sb.append("<li aria-label='Previous'><a href='");
 			sb.append(pageName);
 			sb.append("?cp=");
 			int temp =(userGroup-1)*pageSize+pageSize;
 			sb.append(temp);
-			sb.append("'>&lt;&lt;</a></li>");
+			sb.append("'>&laquo;</a></li>");
 		}
 		
 		for(int i=(userGroup*pageSize+1); i<=(userGroup*pageSize+pageSize); i++){
@@ -40,12 +41,12 @@ public class PageModule {
 		}
 		
 		if(userGroup!=(totalPage/pageSize-(totalPage%pageSize==0?1:0))){
-			sb.append("<li><a href='");
+			sb.append("<li aria-label='Next'><a href='");
 			sb.append(pageName);
 			sb.append("?cp=");
 			int temp = (userGroup+1)*pageSize+1;
 			sb.append(temp);
-			sb.append("'>&gt;&gt;</a></li>");
+			sb.append("'>&raquo;</a></li>");
 		}
 		return sb.toString();
 	}

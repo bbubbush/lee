@@ -3,10 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <c:set var="rrdto" value="${sessionScope.rrdto }"/>
-<<<<<<< HEAD
-=======
 <c:set var="time" value="${sessionScope.checkTime }"/>
->>>>>>> youngju
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,25 +32,28 @@
 			<h2>좌석 이용 시스템</h2>
 		</div>
 		<div class="rrBookGuide">
-			열람실 예약 이용규칙<br>
+			<h4>열람실 예약 이용규칙</h4><br>
 			당일 예약 1회에 2시간씩<br>
 			연장가능<br>
 			07~23시<br>
 		</div>
 		<div class="crBookGuide">
-			멀티미디어실 예약 이용규칙<br>
+			<h4>멀티미디어실 예약 이용규칙</h4><br>
 			당일예약 1회에 1시간씩<br>
 			연장 불가능<br>
 			09~18시<br>
 		</div>
 		<div class="srBookGuide">
-			스터디룸 예약 이용규칙<br>
+			<h4>스터디룸 예약 이용규칙</h4><br>
 			사용 2주전부터 예약 가능 4시간단위로 하루에 3파트<br>
 			연장 불가능<br>
 			09시~21시<br>
 			주말 이용불가, 1일 1회<br>
 		</div>
 	</div>
+	
+	<img src="/lee/resources/img/seatIndex.jpg" width="500px">
+	
 	<c:set var="sid" value="${sid }" />
 	<c:choose>
 		<c:when test="${empty normalMember }">
@@ -113,11 +114,9 @@
 					</c:choose>
 					</label><br>
 					<label class="seatno">이용 좌석번호 : ${rrdto.getRr_seatno() }</label><br>
-<<<<<<< HEAD
-=======
 					<label class="start">이용 시작시간 : ${time.startTime }</label><br>
 					<label class="end">이용 마감시간 : ${time.endTime }</label><br>
->>>>>>> youngju
+
 					<label class="addTime"> 연장가능여부 : 
 					<c:choose>
 						<c:when test="${rrdto.getRr_add() eq '0' }">

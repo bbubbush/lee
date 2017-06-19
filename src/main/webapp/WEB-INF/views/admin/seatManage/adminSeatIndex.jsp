@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<script type="text/javascript" src="/lee/resources/js/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet" href="/lee/resources/bootstrapk/css/bootstrap.min.css">
  <script type="text/javascript" src="/lee/resources/mainMenu/jquery.smartmenus.min.js"></script>
 <style type="text/css">
@@ -15,7 +16,6 @@ container{
 	width: 100px;
 }
 </style>
-<script type="text/javascript" src="/lee/resources/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="/lee/resources/bootstrapk/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	

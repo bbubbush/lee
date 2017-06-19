@@ -90,7 +90,6 @@ $(document).ready(function(){
 	
 	<div class="col-md-9" >
 	
-<h3>오디오 파일 업로드</h3>
 <form name="multiform" id="multiform" action="eAudioAdd2.ju" method="post" enctype="multipart/form-data">
 	<!-- 책 정보 입력 -->
 	<table class="table">

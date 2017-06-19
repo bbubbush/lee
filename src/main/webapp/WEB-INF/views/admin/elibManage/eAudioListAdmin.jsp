@@ -55,6 +55,9 @@ function updateGo(idx){
 
 		$(function() {
 			
+			$("#bkList").addClass('open').children('ul').show();
+			$("#bkList3").addClass('open').children('ul').show();	
+			
 			/*사이드바*/
 			/* $("#emList").removeClass("has-sub");
 			$("#emList>ul").remove();
@@ -554,7 +557,6 @@ function updateGo(idx){
 	</script>
 </head>
 <body>
-<h2>오디오 정보 관리 페이지</h2>
 	<!-- 사이드바+컨텐츠 -->
 	<%@include file="/WEB-INF/views/admin/adminHeader.jsp" %>
 	<div class="row">
@@ -563,7 +565,7 @@ function updateGo(idx){
 	</div>
 
 		<!-- 컨텐츠 -->
-		<div class="col-md-8">
+		<div class="col-md-9">
 
 			<!-- 검색바 -->
 			<div class="row" style="background: #3cdbde; padding: 80px 0;">
