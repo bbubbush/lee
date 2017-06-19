@@ -484,7 +484,7 @@
 							if($(this).hasClass("disabled")==true || $(this).hasClass("active")==true){
 								return null;
 							}
-							$("body").scrollTop(0);
+							
 							/*<< >> 판단*/
 							if( page=="before" || page=="after" ){
 								if( page=="before" ){ page=$(this).next().data("page")-1; }
@@ -505,9 +505,9 @@
         
         function gopage(){ 
         	 var input = $("#search-input").val();
-        		alert(input+'과 엔터입력!'); 
+        		 
         	 if(input==null || input==""){
-        		 alert('검색어를 입력해 주세요!');
+        		 alertify.alert('','검색어를 입력해 주세요!');
         	 }else{
         		 bkDetailSearch2(input, 99, 99, "", "", 1);
         		 elibSearchAjax(input, 1, "new");
