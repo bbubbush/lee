@@ -27,10 +27,10 @@
 		</c:if>
 		<c:forEach var="dto" items="${list}">
 			<tr>
-				<td>${dto.bk_isbn}</td>
-				<td>${dto.ye_sunbun}<input type="hidden" id="bk_isbn" value="${dto.bk_isbn}"></td>
-				<td>${dto.mem_name}<input type="hidden" id="mem_idx" value="${dto.mem_idx}"></td>
-				<td>${dto.ye_day}</td>
+				<td align="center">${dto.bk_isbn}</td>
+				<td align="center">${dto.ye_sunbun}<input type="hidden" id="bk_isbn" value="${dto.bk_isbn}"></td>
+				<td align="center">${dto.mem_name}<input type="hidden" id="mem_idx" value="${dto.mem_idx}"></td>
+				<td align="center">${dto.ye_day}</td>
 			</tr>
 		</c:forEach>
 	</tbody>

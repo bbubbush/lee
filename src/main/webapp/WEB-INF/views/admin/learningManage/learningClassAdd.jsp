@@ -77,10 +77,10 @@
             </tr>
             <tr>
                <th>개강날짜</th>
-               <td style="position:relative; height:10px;" id="calen"><input type="text" id="cal_1" name="sj_sd"></td>
+               <td style="position:relative; height:10px;" id="calen"><input type="text" id="cal_1" name="sj_sd_s"></td>
 
                <th>종강날짜</th>
-               <td style="position:relative; height:10px;" id="calen2"><input type="text" id="cal_2" name="sj_ed"></td> 
+               <td style="position:relative; height:10px;" id="calen2"><input type="text" id="cal_2" name="sj_ed_s"></td> 
             </tr>
             <tr>
                <th>수업설명</th>

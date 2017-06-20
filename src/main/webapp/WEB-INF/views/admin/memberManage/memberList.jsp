@@ -54,7 +54,7 @@ table>tbody>tr>td{
 				<c:forEach var="dto" items="${list}"> 
 					<tr>
 						<td align="center">${dto.mem_idx}</td>
-						<td><a href="memberInfo.ju?mem_idx=${dto.mem_idx}">${dto.mem_name}</a></td>
+						<td align="center"><a href="memberInfo.ju?mem_idx=${dto.mem_idx}">${dto.mem_name}</a></td>
 						<td align="center">${dto.mem_birth}</td>
 						<td>${dto.mem_id}</td>
 						<td align="center">${dto.mem_hp}</td>

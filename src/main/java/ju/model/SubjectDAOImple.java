@@ -19,6 +19,11 @@ private SqlSessionTemplate sqlMap;
 		return result;
 	}
 	
+	public int classDel(String sj_idx){
+		int result = sqlMap.delete("classDEL",sj_idx);
+		return result;
+	}
+	
 	public List<SubjectDTO> classList(){
 		List<SubjectDTO> list = sqlMap.selectList("classSELClass");
 		return list;

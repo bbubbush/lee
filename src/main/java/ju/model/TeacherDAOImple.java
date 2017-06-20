@@ -19,6 +19,11 @@ public class TeacherDAOImple implements TeacherDAO {
 		return result;
 	}
 	
+	public int teacherDel(String tc_idx){
+		int result = sqlMap.delete("teacherDEL",tc_idx);
+		return result;
+	}
+	
 	public List<TeacherDTO> teacherList(){
 		List<TeacherDTO> list = sqlMap.selectList("classSELTeacher");
 		return list;

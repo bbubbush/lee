@@ -76,7 +76,7 @@ public class AdminLearnigController {
 		@RequestMapping(value="/learningClassAdd.ju",method=RequestMethod.GET)
 		public ModelAndView classAddForm(){
 			List<TeacherDTO> list = teacherDao.teacherList();
-			ModelAndView mav = new ModelAndView("admin/learningManage/learningAdd","list",list);
+			ModelAndView mav = new ModelAndView("admin/learningManage/learningClassAdd","list",list);
 			return mav;
 		}
 		
@@ -110,7 +110,28 @@ public class AdminLearnigController {
 			ModelAndView mav = new ModelAndView("admin/learningManage/learningTeacherAdd");
 			return mav;
 		}
-	
+		
+	// 수업삭제
+		@RequestMapping("/classDel.ju")
+		public ModelAndView classDel(String sj_idx){
+			System.out.println(sj_idx);
+			int result = subjectDao.classDel(sj_idx);
+			String msg = result>0? "수업삭제":"수업삭제실패";
+			ModelAndView mav = new ModelAndView("admin/adminMsg","msg",msg);
+			mav.addObject("page","learningList.ju");
+			return mav;
+		}	
+		
+		// 강사삭제
+		@RequestMapping("/teacherDel.ju")
+		public ModelAndView teacherDel(String tc_idx){
+			System.out.println(tc_idx);
+			int result = teacherDao.teacherDel(tc_idx);
+			String msg = result>0? "강사 삭제":"강사 삭제실패";
+			ModelAndView mav = new ModelAndView("admin/adminMsg","msg",msg);
+			mav.addObject("page","learningTeacherList.ju");
+			return mav;
+		}	
 		
 	// 강사 등록하기
 		@RequestMapping(value="/learningTeacherAdd.ju",method=RequestMethod.POST)
@@ -122,7 +143,7 @@ public class AdminLearnigController {
 			int result = teacherDao.teacherAdd(dto);
 			String msg = result>0?"강사 등록":"강사 등록 실패";
 			ModelAndView mav = new ModelAndView("admin/adminMsg","msg",msg);
-			mav.addObject("page","/admin/learningManage/learningTeacherList.ju");
+			mav.addObject("page","learningTeacherList.ju");
 			return mav;
 		}
 		
@@ -135,7 +156,7 @@ public class AdminLearnigController {
 				list.get(i).setMem_birth(birth);
 			}
 			ModelAndView mav = new ModelAndView("admin/learningManage/learningInfo","list",list);
-			
+			mav.addObject("sub_idx",sj_idx);
 			return mav;
 		}
 	
@@ -160,6 +181,7 @@ public class AdminLearnigController {
 			}
 			
 			ModelAndView mav = new ModelAndView("admin/learningManage/learningTeacherInfo","list",list);
+			mav.addObject("tea_idx",tc_idx);
 			return mav;
 		}
 }

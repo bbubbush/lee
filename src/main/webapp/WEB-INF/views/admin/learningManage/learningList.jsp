@@ -51,7 +51,7 @@ table>tbody>tr>td{
       <%@include file="/WEB-INF/views/admin/adminSideMenu.jsp"%>
    </div>
    
-   <div class="col-md-9" >
+   <div class="col-md-9" align="center">
 
       <h2>수업 리스트</h2>
       <form name="classList" action="learningClassAdd.ju" method="get">
@@ -66,7 +66,7 @@ table>tbody>tr>td{
             <th>시작시간</th>
             <th>끝나는시간</th>
             <th>수강인원</th>
-            <th>수강인원 명단</th>
+            <th>수강정보</th>
          </tr>
       </thead>
       <tbody>
@@ -87,7 +87,7 @@ table>tbody>tr>td{
                <td align="center">${dto.sj_st}</td>
                <td align="center">${dto.sj_et}</td>
                <td align="center">${dto.sj_num} / ${dto.sj_max}</td>
-               <td align="center"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" onclick="modalOpen('${dto.sj_idx}')">명단확인</button></td>
+               <td align="center"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" onclick="modalOpen('${dto.sj_idx}')">정보 확인</button></td>
             </tr>
          </c:forEach>
       </tbody>

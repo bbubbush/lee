@@ -8,6 +8,14 @@
  		INSERT INTO TEACHER VALUES(#{tc_idx},#{tc_name},#{tc_sum},#{tc_addr},#{tc_hp},#{tc_birth})
  	</insert>
  	
+ 	<delete id="classDEL" parameterType="String">
+ 		DELETE SUBJECT WHERE SJ_IDX = #{sj_idx}
+ 	</delete>
+ 	
+ 	<delete id="teacherDEL" parameterType="String">
+ 		DELETE TEACHER WHERE TC_IDX = #{tc_idx}
+ 	</delete>
+ 	
  	<select id="classSELTeacher" resultType="ju.dto.TeacherDTO">
  		SELECT * FROM TEACHER
  	</select>

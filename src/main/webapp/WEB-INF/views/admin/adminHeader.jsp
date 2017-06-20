@@ -4,7 +4,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/lee/resources/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="/lee/resources/mainMenu/jquery.smartmenus.min.js"></script>
 <link rel="stylesheet" href="/lee/resources/mainMenu/css/sm-core-css.css">
 <link rel="stylesheet" href="/lee/resources/mainMenu/css/sm-clean/sm-clean.css">

@@ -47,6 +47,12 @@
 <script type="text/javascript"
 	src="/lee/resources/bootstrapk/js/bootstrap.min.js"></script>
 <script type="text/javascript">
+//오디오플레이어 팝업
+function aPlayer(el_idx){
+	var popURL = "aPlayer.ju?el_idx="+el_idx+"";
+	var popOption = "width=480, height=360, resizable=no, scrollbars=yes, status=no;";
+	window.open(popURL,"",popOption);
+}
 
 //오디오 정보 수정 페이지 이동
 function updateGo(idx){
@@ -59,15 +65,15 @@ function updateGo(idx){
 			$("#bkList3").addClass('open').children('ul').show();	
 			
 			/*사이드바*/
-			/* $("#emList").removeClass("has-sub");
+			$("#emList").removeClass("has-sub");
 			$("#emList>ul").remove();
 			$("#ebList").removeClass("has-sub");
 			$("#ebList>ul").remove();
 			$("#eduList").removeClass("has-sub");
-			$("#eduList>ul").remove(); */
+			$("#eduList>ul").remove(); 
 			
 			/*사이드바 메뉴 클릭*/
-			/* $("#abList>ul>li>a").click(
+			$("#abList>ul>li>a").click(
 				function(event) {
 					detailSubject="";
 					detailWrite="";
@@ -81,8 +87,8 @@ function updateGo(idx){
 					$("#pagingNav>ul>li").removeClass("active");
 					$("#pagingNav>ul>li").eq(1).addClass("active");
 				}
-			); */
-			/* $("#abList>ul>li>ul>li>a").click(
+			);
+			$("#abList>ul>li>ul>li>a").click(
 				function(event) {
 					detailSubject="";
 					detailWrite="";
@@ -96,7 +102,7 @@ function updateGo(idx){
 					$("#pagingNav>ul>li").removeClass("active");
 					$("#pagingNav>ul>li").eq(1).addClass("active");
 				}
-			); */
+			);
 			
 
 			$("#abList").addClass('open').children('ul').show();
@@ -482,7 +488,7 @@ function updateGo(idx){
 						, dataType : "json"
 						, success: function(data){
 							
-							var test = data.ebArr.el_idx;
+							var idx = data.ebArr.el_idx;
 							var intoHeaderHTML="";
 							intoHeaderHTML+='<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
 							intoHeaderHTML+='<h4 class="modal-title" id="myModalLabel">서울역' + data.ebArr.el_idx + '</h4>';
@@ -503,7 +509,8 @@ function updateGo(idx){
 							intoBodyHTML+='					</div>';
 							intoBodyHTML+='				</div>';
 							intoBodyHTML+='				<div class="col-md-12 text-right">';
-							intoBodyHTML+='					<input class="btn btn-default" type="button" onClick="updateGo(\''+test+'\')" value="수정하기">';
+							intoBodyHTML+='					<input class="btn btn-default" type="button" onClick="updateGo(\''+idx+'\')" value="수정하기">';
+							intoBodyHTML+='					<input class="btn btn-default" type="button" onClick="aPlayer(\''+idx+'\')" value="재생하기">';
 							intoBodyHTML+='				</div>';
 							intoBodyHTML+='			</div>';
 							intoBodyHTML+='		</div>';

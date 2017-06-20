@@ -5,6 +5,7 @@ import ju.dto.*;
 public interface SubjectDAO {
 
 	public int classAdd(SubjectDTO dto);
+	public int classDel(String sj_idx);
 	public List<SubjectDTO> classList();
 	public List<SubjectDTO> classList(int cp, int ls);
 	public List<SubjectDTO> memberCheck(String sj_idx);

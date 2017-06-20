@@ -70,7 +70,7 @@ table>tbody>tr>td{
 		<%@include file="/WEB-INF/views/admin/adminSideMenu.jsp"%>
 	</div>
 	
-	<div class="col-md-9" >
+	<div class="col-md-9" align="center">
 
 		<h2>선생님 리스트</h2>
 		
@@ -86,7 +86,7 @@ table>tbody>tr>td{
 				<th>강사 설명</th>
 				<th>진행중인 수업 수</th>
 				<th>끝난 수업 수</th>
-				<th>수업 정보</th>
+				<th>강사 정보</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -106,7 +106,7 @@ table>tbody>tr>td{
 					<td>${dto.tc_sum}</td>
 					<td align="center">${dto.tc_num}</td>
 					<td align="center">${dto.tc_end}</td>
-					<td align="center"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" onclick="modalOpen('${dto.tc_idx}')" id="classInfo">수업 확인</button></td>
+					<td align="center"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" onclick="modalOpen('${dto.tc_idx}')" id="classInfo">정보 확인</button></td>
 				</tr>
 			</c:forEach>
 		</tbody>

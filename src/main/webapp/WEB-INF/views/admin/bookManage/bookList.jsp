@@ -31,7 +31,7 @@ table>tbody>tr>td{
 		<%@include file="/WEB-INF/views/admin/adminSideMenu.jsp"%>
 	</div>
 	
-	<div class="col-md-9" >
+	<div class="col-md-9" align="center">
 		<h2>도서관리 페이지</h2>
 		<span style="margin-left:82em">
 		<select name="bk_tag" id="bk_tag">
@@ -58,7 +58,7 @@ table>tbody>tr>td{
 		<tbody>
 			<c:if test="${empty list}">
 					<tr>
-						<td colspan="6" align="center">
+						<td colspan="7" align="center">
 							등록된 도서가 없습니다.
 						</td>
 					</tr>
@@ -78,7 +78,7 @@ table>tbody>tr>td{
 		</tbody>
 		<tfoot align="center">
 			<tr>
-				<td colspan="6">
+				<td colspan="7">
 				<nav>
 				  <ul class="pagination">
 				    <li>

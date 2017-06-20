@@ -50,7 +50,7 @@ table>tbody>tr>td{
 		<%@include file="/WEB-INF/views/admin/adminSideMenu.jsp"%>
 	</div>
 	
-	<div class="col-md-9" >
+	<div class="col-md-9" align="center">
 		<h2>대출중인 도서 리스트</h2>
 		<span style="margin-left:82em">
 		<select name="lb_tag" id="lb_tag">
@@ -153,15 +153,7 @@ table>tbody>tr>td{
 				<nav>
 				  <ul class="pagination">
 				    <li>
-				      <a href="#" aria-label="Previous">
-				        <span aria-hidden="true">&laquo;</span>
-				      </a>
-				    </li>
 				    ${pageStr2}
-				    <li>
-				      <a href="#" aria-label="Next">
-				        <span aria-hidden="true">&raquo;</span>
-				      </a>
 				    </li>
 				  </ul>
 				</nav>
