@@ -36,6 +36,10 @@
 		where rnum<![CDATA[>=]]>#{startnum} and rnum<![CDATA[<=]]>#{endnum}
 	</select>
 	
+	<select id="bkTake" resultType="int" parameterType="String">
+		SELECT bk_take from book where bk_idx=#{bk_idx}
+	</select>
+	
 	<select id="bktotalCnt" resultType="int">
 		SELECT COUNT(*) AS totalCnt FROM BOOK
 	</select>

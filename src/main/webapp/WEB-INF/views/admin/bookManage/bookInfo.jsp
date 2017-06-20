@@ -13,6 +13,9 @@
 <script src="/lee/resources/member/barcode2/base2-jsb-fp.js" type="text/javascript" charset="utf-8"></script>
 <script src="/lee/resources/member/barcode2/code128-base2.js" type="text/javascript"></script>
 <script src="/lee/resources/member/barcode2/get.js" type="text/javascript"></script>
+<script type="text/javascript" src="/lee/resources/js/alertifyjs/alertify.min.js"></script>
+   <link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/alertify.min.css">
+   <link rel="stylesheet" href="/lee/resources/js/alertifyjs/css/themes/default.min.css">
 </head>
 <style>
 table>tbody>tr>th{
@@ -172,7 +175,14 @@ if(idx) {
 
 
 function bookDel(i){
-	location.href="bookDel.ju?bk_idx="+i;
+	alertify.confirm("안내", "도서삭제 하시겠습니까?",
+			  function(){
+		location.href="bookDel.ju?bk_idx="+i;
+			  }, // ok function
+			  function(){
+				  console.log("취소함");
+			  } // cancel function
+	);
 }
 
 var breakState = null;

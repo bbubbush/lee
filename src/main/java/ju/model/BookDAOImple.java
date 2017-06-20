@@ -45,6 +45,11 @@ public class BookDAOImple implements BookDAO {
 		List<BookDTO> list = sqlMap.selectList("bkSELTagDown",map);
 		return list;
 	}
+	
+	public int bookTake(String bk_idx){
+		int count = sqlMap.selectOne("bkTake",bk_idx);
+		return count;
+	}
 
 	public BookDTO bookInfo(String bk_idx,String mem_idx){
 		BookDTO dto = sqlMap.selectOne("bkSELInfo",bk_idx);

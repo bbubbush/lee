@@ -132,10 +132,18 @@ public class AdminBookController {
 	// 일반도서 삭제
 	@RequestMapping("/bookDel.ju")
 	public ModelAndView bookDel(String bk_idx){
-		int result = bookDao.bookDel(bk_idx);
-		String msg = result>0?"도서 삭제":"도서 삭제 실패";
-		ModelAndView mav = new ModelAndView("admin/adminMsg","msg",msg);
-		mav.addObject("page","bookList.ju");
+		int count = bookDao.bookTake(bk_idx);
+		ModelAndView mav = null;
+		if(count==0){
+			int result = bookDao.bookDel(bk_idx);
+			String msg = result>0?"도서 삭제":"도서 삭제 실패";
+			mav = new ModelAndView("admin/adminMsg","msg",msg);
+			mav.addObject("page","bookList.ju");
+		}else{
+			String msg = "대출중인 책입니다";
+			mav = new ModelAndView("admin/adminMsg","msg",msg);
+			mav.addObject("page","bookList.ju");
+		}
 		return mav;
 	}
 	

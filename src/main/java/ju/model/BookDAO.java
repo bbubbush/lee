@@ -10,6 +10,7 @@ public interface BookDAO {
 	public BookDTO bookInfo(String bk_idx, String mem_idx); // 일반도서 정보
 	public BookDTO bookInfo(String bk_idx);
 	public BookDTO bookReInfo(String bk_idx);
+	public int bookTake(String bk_idx);
 	public int getTotlaCnt();
 	public int bookDuple(BookDTO dto);
 	public int bookInfoUpdate(int bk_break,String bk_idx);
