@@ -52,7 +52,7 @@ table>tbody>tr>td{
 	</tr>
 	<tr>
 		<th>도서명</th>
-		<td>${dto2.bk_subject}<input type="hidden" id="bk_idx" value="${dto2.bk_subject}"></td>
+		<td>${dto2.bk_subject}<input type="hidden" id="fedex_idx" value="${fedex_idx}"></td>
 	</tr>
 	<tr>
 		<th>저자명</th>

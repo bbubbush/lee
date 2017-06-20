@@ -100,12 +100,12 @@ table>tbody>tr>td{
 			<table class="table">
 			<thead>
 				<tr>
-					<th>대출자</th>
-					<th>도서명</th>
-					<th>택배지</th>
-					<th>연락처</th>
-					<th>대출일</th>
-					<th>반납예정일</th>
+					<th width="10%">대출자</th>
+					<th width="35%">도서명</th>
+					<th width="25%">택배지</th>
+					<th width="10%">연락처</th>
+					<th width="10%">대출일</th>
+					<th width="10%">반납예정일</th>
 				</tr>
 			<thead>
 			<tbody>
